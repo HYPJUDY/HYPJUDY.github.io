@@ -1,0 +1,760 @@
+<!doctype html>
+
+
+
+  
+
+
+<html class="theme-next mist use-motion" lang="en">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
+
+
+
+
+  
+  
+  
+  
+
+  
+    
+    
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+    
+    
+    <link href="//fonts.googleapis.com/css?family=Lato:300,300italic,400,400italic,700,700italic&subset=latin,latin-ext" rel="stylesheet" type="text/css">
+  
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=5.1.0" rel="stylesheet" type="text/css" />
+
+
+  <meta name="keywords" content="Hexo, NexT" />
+
+
+
+
+
+
+
+
+  <link rel="shortcut icon" type="image/x-icon" href="/favicon.png?v=5.1.0" />
+
+
+
+
+
+
+<meta name="description" content="Notes of Programming Languages, Part A by Dan Grossman, University of Washington in Coursera.">
+<meta property="og:type" content="article">
+<meta property="og:title" content="[Notes] Programming Languages">
+<meta property="og:url" content="http://yoursite.com/2017/02/20/notes-programming-languages/index.html">
+<meta property="og:site_name" content="HYPJUDY">
+<meta property="og:description" content="Notes of Programming Languages, Part A by Dan Grossman, University of Washington in Coursera.">
+<meta property="og:image" content="http://yoursite.com/images/notes-programming-languages/hw1_100.jpg">
+<meta property="og:updated_time" content="2017-03-08T10:58:18.488Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="[Notes] Programming Languages">
+<meta name="twitter:description" content="Notes of Programming Languages, Part A by Dan Grossman, University of Washington in Coursera.">
+<meta name="twitter:image" content="http://yoursite.com/images/notes-programming-languages/hw1_100.jpg">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Mist',
+    sidebar: {"position":"left","display":"hide","offset":12,"offset_float":0,"b2t":false,"scrollpercent":false},
+    fancybox: true,
+    motion: true,
+    duoshuo: {
+      userId: '0',
+      author: 'Author'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="http://yoursite.com/2017/02/20/notes-programming-languages/"/>
+
+
+
+
+
+  <title> [Notes] Programming Languages | HYPJUDY </title>
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="en">
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+    
+  
+
+  <div class="container one-collumn sidebar-position-left page-post-detail ">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/"  class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">HYPJUDY</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle">What I cannot create, I do not understand.</p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
+            
+            Home
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
+            
+            Archives
+          </a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2017/02/20/notes-programming-languages/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="HYPJUDY">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.png">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="HYPJUDY">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                [Notes] Programming Languages
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Posted on</span>
+              
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2017-02-20T13:00:00+08:00">
+                2017-02-20
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+
+          
+            
+              <span class="post-comments-count">
+                <span class="post-meta-divider">|</span>
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-comment-o"></i>
+                </span>
+                <a href="/2017/02/20/notes-programming-languages/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count ds-thread-count" data-thread-key="2017/02/20/notes-programming-languages/" itemprop="commentCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <p><img src="/images/notes-programming-languages/hw1_100.jpg" alt="cute dog" style="width: 50%; margin: auto;"></p>
+<p>Notes of Programming Languages, Part A by Dan Grossman, University of Washington in Coursera.<br><a id="more"></a></p>
+<h2 id="command"><a href="#command" class="headerlink" title="command"></a>command</h2><ul>
+<li>C-x C-f: find file</li>
+<li>C-x C-s: save</li>
+<li>C-c C-s Enter, use “foo.sml” (Its type is unit and its result is () (the only value of type unit), but its effect is to include all the bindings in the file “foo.sml”)</li>
+<li>not reusing <code>use</code> on a file without restarting the ERPL</li>
+<li>C-d: exit</li>
+<li>The REPL: Read-Eval-Print-Loop</li>
+</ul>
+<h2 id="Basic"><a href="#Basic" class="headerlink" title="Basic"></a>Basic</h2><ul>
+<li><a href="http://www.cs.cornell.edu/courses/cs312/2006fa/handouts/style.htm" target="_blank" rel="external"><strong>SML Style Guide</strong></a></li>
+<li><a href="https://www.coursera.org/learn/programming-languages/supplement/mi5oU/part-a-software-installation-and-use-sml-and-emacs" target="_blank" rel="external"><strong>The most important commands in Emacs</strong></a></li>
+<li>definitions for expressions: <strong>syntax</strong>, <strong>type-checking rules</strong>, <strong>evaluation rules</strong></li>
+<li><strong>Variables are Immutable</strong> Bindings are <em>immutable</em>. Given <code>val x = 8+9;</code> we produce a dynamic environment where x maps to 17. In this environment, x will always map to 17; there is no “assignment statement” in ML for changing what x maps to. You can have another binding later, say <code>val x = 19</code>;, but that just creates a different environment where the later binding for x <em>shadows</em> the earlier one.</li>
+<li>minus5: ~5</li>
+<li>divide: x div y</li>
+<li><code>Real.fromInt 2;</code>: int -&gt; real</li>
+<li><code>=</code> <code>&lt;&gt;</code> can be used with any “equality type” but not with <code>real</code></li>
+<li>Evaluation: <strong>A function is a value!</strong></li>
+<li>Pairs and Other Tuples</li>
+</ul>
+<h2 id="Lists"><a href="#Lists" class="headerlink" title="Lists"></a>Lists</h2><h3 id="Usages"><a href="#Usages" class="headerlink" title="Usages"></a>Usages</h3><ul>
+<li>[] can have type <code>t list</code> list for any type<ul>
+<li>SML uses type <code>&#39;a list</code> to indicate this (“quote a” or “alpha”)</li>
+</ul>
+</li>
+<li><code>e1::e2</code></li>
+<li><code>null e</code> evalueates to <em>true</em> if and only if e evaluates to []<ul>
+<li><code>null : &#39;a list -&gt; bool</code></li>
+</ul>
+</li>
+<li>If e evaluetes to [v1, v2,…, vn] then <code>hd e</code> evaluates to v1<ul>
+<li><code>&#39;hd : &#39;a list -&gt; &#39;a</code></li>
+<li>(raise exception if e evalutes to [])</li>
+</ul>
+</li>
+<li>If e evaluetes to [v1, v2,…, vn] then <code>tl e</code> evaluates to [v2, …, vn]<ul>
+<li><code>tl : &#39;a list -&gt; &#39;a list</code></li>
+<li>(raise exception if e evaluates to [])</li>
+<li>Notice result is a list</li>
+</ul>
+</li>
+</ul>
+<h3 id="List-Functions"><a href="#List-Functions" class="headerlink" title="List Functions"></a>List Functions</h3><p>use <strong>recursion</strong><br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div></pre></td><td class="code"><pre><div class="line">fun sum_list(xs : int list) =</div><div class="line">  if null xs</div><div class="line">  then 0</div><div class="line">  else hd xs + sum_list(tl xs);</div><div class="line"></div><div class="line">fun countdown(x : int) = (* [5,4,3,2,1] *)</div><div class="line">  if x=0</div><div class="line">  then []</div><div class="line">  else x::countdown(x-1);</div><div class="line"></div><div class="line">fun append(xs : int list, ys : int list) =</div><div class="line">  if null xs</div><div class="line">  then ys</div><div class="line">  else (hd xs)::append((tl xs), ys);</div><div class="line"></div><div class="line">fun firsts(xs : (int * int) list) = (* [(3,4),(5,6)] -&gt; [3,5] *)</div><div class="line">  if null xs</div><div class="line">  then []</div><div class="line">  else (#1 (hd xs))::firsts(tl xs);</div><div class="line"></div><div class="line">(* [Reference](http://www3.cs.stonybrook.edu/~leo/CSE215/cse215FctProgramming.pdf) *)</div><div class="line">(* return a list without element xs *)</div><div class="line">fun remove(xs : int, ys : int list) =</div><div class="line">  if null ys then []</div><div class="line">  else if xs = hd ys then remove(xs, tl ys)</div><div class="line">  else hd ys :: remove(xs, tl ys);</div><div class="line"></div><div class="line">(* return a list without duplicate element *)</div><div class="line">fun remove_duplicate(pr : int list) =</div><div class="line">  if null pr then []</div><div class="line">  else hd pr :: remove(hd pr, remove_duplicate(tl pr));</div></pre></td></tr></table></figure></p>
+<h2 id="Let-Expression"><a href="#Let-Expression" class="headerlink" title="Let Expression"></a>Let Expression</h2><p><code>let b1 b2 ... bn in e end</code></p>
+<p>Local <code>val</code> definitions need to be between <code>let</code> and <code>in</code></p>
+<h3 id="Nested-Functions"><a href="#Nested-Functions" class="headerlink" title="Nested Functions"></a>Nested Functions</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div></pre></td><td class="code"><pre><div class="line">(* [1,2,3,4,5] *)</div><div class="line">fun countup_from1_better(x : int) =</div><div class="line">  let fun count(from : int) =</div><div class="line">    if from = x</div><div class="line">    then x::[]</div><div class="line">    else from:: count(from+1)</div><div class="line">  in</div><div class="line">      count 1</div><div class="line">  end;</div></pre></td></tr></table></figure>
+<p>Functions can use bindings in the environment where they are defined:</p>
+<ul>
+<li>Binding from “outer” environments such as parameters to the outer function</li>
+<li>Earlier bindings in the let-expression</li>
+</ul>
+<p><strong>Avoid Repeated Computation</strong>: Saving recursive results in local bindings is essential<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div></pre></td><td class="code"><pre><div class="line">fun max(xs : int list) = </div><div class="line">    if null xs</div><div class="line">    then 0 (* horrible style *)</div><div class="line">    else if null(tl xs)</div><div class="line">    then hd xs</div><div class="line">    else</div><div class="line">        let val tl_ans = max(tl xs)</div><div class="line">        in</div><div class="line">            if hd xs &gt; tl_ans</div><div class="line">            then hd xs</div><div class="line">            else tl_ans</div><div class="line">        end</div></pre></td></tr></table></figure></p>
+<h2 id="Options"><a href="#Options" class="headerlink" title="Options"></a>Options</h2><ul>
+<li><strong>Motivating Options</strong> Having <code>max</code> return 0 for the empty list is really awful<ul>
+<li>Could raise an exception</li>
+<li>Could return a zero-element or one-element list</li>
+</ul>
+</li>
+<li><code>t option</code> is a type for any type t</li>
+<li><strong>Building</strong><ul>
+<li><code>NONE</code> has type <code>&#39;a option</code></li>
+<li><code>SOME e</code> has type <code>t option</code> if e has type t</li>
+</ul>
+</li>
+<li><strong>Accessing</strong><ul>
+<li><code>isSome</code> has type <code>a option -&gt; bool</code></li>
+<li>‘valOf’ has type <code>&#39;a option -&gt; &#39;a</code> (exception if given <code>NONE</code>)</li>
+</ul>
+</li>
+</ul>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div></pre></td><td class="code"><pre><div class="line">(* better: returns an int option *)</div><div class="line">(* fn: int list -&gt; int option *)</div><div class="line">fun max (xs : int list) = </div><div class="line">    if null xs</div><div class="line">    then NONE</div><div class="line">    else</div><div class="line">        let val tl_ans = max(tl xs)</div><div class="line">        in if isSome tl_ans andalso valOf tl_ans &gt; hd xs</div><div class="line">            then tl_ans</div><div class="line">            else SOME (hd xs)</div><div class="line">        end</div></pre></td></tr></table></figure>
+<p>In the above function, we call <code>isSome tl_ans</code> checking for none every time but none case is only for the empty list. The following version is a little cleaner.<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div></pre></td><td class="code"><pre><div class="line">fun max (xs : int list) = </div><div class="line">    if null xs</div><div class="line">    then NONE</div><div class="line">    else let (* fine to assume argument nonempty because it is local *)</div><div class="line">            (* int list -&gt; int *)</div><div class="line">            fun max_nonempty (xs : int list) = </div><div class="line">                if null (tl xs) (* xs better not be [] *)</div><div class="line">                then hd xs</div><div class="line">                else let val tl_ans = max_nonempty(tl xs)</div><div class="line">                    in</div><div class="line">                        if hd xs &gt; tl_ans</div><div class="line">                        then hd xs</div><div class="line">                        else tl_ans</div><div class="line">                    end</div><div class="line">        in</div><div class="line">            SOME (max_nonempty xs)</div><div class="line">        end</div></pre></td></tr></table></figure></p>
+<p>run:<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line">- max [3,7,5];</div><div class="line">val it = SOME 7 : int option</div><div class="line">- max [];</div><div class="line">val it = NONE : int option</div></pre></td></tr></table></figure></p>
+<h2 id="Lack-of-Mutation-and-Benefits-Thereof"><a href="#Lack-of-Mutation-and-Benefits-Thereof" class="headerlink" title="Lack of Mutation and Benefits Thereof"></a>Lack of Mutation and Benefits Thereof</h2><ul>
+<li>In ML, there is no way to change the contents of a binding, a tuple, or a list. If x maps to some value like the list of pairs [(3,4),(7,9)] in some environment, then x will forever map to that list in that environment. There is no assignment statement that changes x to map to a different list.</li>
+<li>Having immutable data is probably the most important “non-feature” a anguage can have, and it is one of the main contributions of functional programming.</li>
+<li>A big advantages to immutable data: <em>it makes sharing and aliasing irrelevant</em></li>
+</ul>
+<h2 id="The-Pieces-of-a-Programming-Language"><a href="#The-Pieces-of-a-Programming-Language" class="headerlink" title="The Pieces of a Programming Language"></a>The Pieces of a Programming Language</h2><p><strong>Five different things</strong></p>
+<ul>
+<li><em>Syntax</em>: How do you write language constructs?</li>
+<li><strong>Semantics</strong>: What do programs mean? (Evaluation rules)</li>
+<li><strong>Idioms</strong>: What are typical patterns for using language features to express your computation?</li>
+<li><em>Libraries</em>: What facilities does the language(or a well-known project) provide “standard”:</li>
+<li><em>Tools</em>: What do language implementations provide to make your job easier?</li>
+</ul>
+
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+
+    <footer class="post-footer">
+      
+
+      
+        
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2017/02/04/markdown-usage/" rel="next" title="[Tips] Markdown Usage">
+                <i class="fa fa-chevron-left"></i> [Tips] Markdown Usage
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2017/02/26/guides-by-andrej-karpathy/" rel="prev" title="[NOTES] Guides by Andrej Karpathy">
+                [NOTES] Guides by Andrej Karpathy <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+          
+          </div>
+          
+
+
+          
+  <div class="comments" id="comments">
+    
+      <div class="ds-thread" data-thread-key="2017/02/20/notes-programming-languages/"
+           data-title="[Notes] Programming Languages" data-url="http://yoursite.com/2017/02/20/notes-programming-languages/">
+      </div>
+    
+  </div>
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap" >
+            Table of Contents
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview">
+            Overview
+          </li>
+        </ul>
+      
+
+      <section class="site-overview sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+          <img class="site-author-image" itemprop="image"
+               src="/images/avatar.png"
+               alt="HYPJUDY" />
+          <p class="site-author-name" itemprop="name">HYPJUDY</p>
+           
+              <p class="site-description motion-element" itemprop="description">What I cannot create, I do not understand.</p>
+          
+        </div>
+        <nav class="site-state motion-element">
+        
+          
+            <div class="site-state-item site-state-posts">
+              <a href="/archives">
+                <span class="site-state-item-count">7</span>
+                <span class="site-state-item-name">posts</span>
+              </a>
+            </div>
+          
+
+          
+
+          
+
+        </nav>
+
+        
+
+        <div class="links-of-author motion-element">
+          
+            
+              <span class="links-of-author-item">
+                <a href="https://github.com/hypjudy" target="_blank" title="GitHub">
+                  
+                    <i class="fa fa-fw fa-github"></i>
+                  
+                  GitHub
+                </a>
+              </span>
+            
+          
+        </div>
+
+        
+        
+
+        
+        
+
+        
+
+
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#command"><span class="nav-number">1.</span> <span class="nav-text">command</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Basic"><span class="nav-number">2.</span> <span class="nav-text">Basic</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Lists"><span class="nav-number">3.</span> <span class="nav-text">Lists</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#Usages"><span class="nav-number">3.1.</span> <span class="nav-text">Usages</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#List-Functions"><span class="nav-number">3.2.</span> <span class="nav-text">List Functions</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Let-Expression"><span class="nav-number">4.</span> <span class="nav-text">Let Expression</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#Nested-Functions"><span class="nav-number">4.1.</span> <span class="nav-text">Nested Functions</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Options"><span class="nav-number">5.</span> <span class="nav-text">Options</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Lack-of-Mutation-and-Benefits-Thereof"><span class="nav-number">6.</span> <span class="nav-text">Lack of Mutation and Benefits Thereof</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#The-Pieces-of-a-Programming-Language"><span class="nav-number">7.</span> <span class="nav-text">The Pieces of a Programming Language</span></a></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright" >
+  
+  &copy;  2016 - 
+  <span itemprop="copyrightYear">2017</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">HYPJUDY</span>
+</div>
+
+
+<div class="powered-by">
+  Powered by <a class="theme-link" href="https://hexo.io">Hexo</a>
+</div>
+
+<div class="theme-info">
+  Theme -
+  <a class="theme-link" href="https://github.com/iissnan/hexo-theme-next">
+    NexT.Mist
+  </a>
+</div>
+
+
+        
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+    
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+  
+  <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+
+  
+  <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+
+  
+  <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+
+  
+  <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.0"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.0"></script>
+
+
+
+  
+  
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.0"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.0"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.0"></script>
+
+
+
+  
+
+  
+    
+  
+
+  <script type="text/javascript">
+    var duoshuoQuery = {short_name:"hypjudy"};
+    (function() {
+      var ds = document.createElement('script');
+      ds.type = 'text/javascript';ds.async = true;
+      ds.id = 'duoshuo-script';
+      ds.src = (document.location.protocol == 'https:' ? 'https:' : 'http:') + '//static.duoshuo.com/embed.js';
+      ds.charset = 'UTF-8';
+      (document.getElementsByTagName('head')[0]
+      || document.getElementsByTagName('body')[0]).appendChild(ds);
+    })();
+  </script>
+
+  
+    
+    
+    <script src="/lib/ua-parser-js/dist/ua-parser.min.js?v=0.7.9"></script>
+    <script src="/js/src/hook-duoshuo.js"></script>
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+
+  
+  
+
+
+  
+
+  
+
+  
+
+
+  
+
+</body>
+</html>

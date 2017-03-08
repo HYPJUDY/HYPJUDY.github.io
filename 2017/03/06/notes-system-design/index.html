@@ -1,0 +1,973 @@
+<!doctype html>
+
+
+
+  
+
+
+<html class="theme-next mist use-motion" lang="en">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
+
+
+
+
+  
+  
+  
+  
+
+  
+    
+    
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+    
+    
+    <link href="//fonts.googleapis.com/css?family=Lato:300,300italic,400,400italic,700,700italic&subset=latin,latin-ext" rel="stylesheet" type="text/css">
+  
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=5.1.0" rel="stylesheet" type="text/css" />
+
+
+  <meta name="keywords" content="Hexo, NexT" />
+
+
+
+
+
+
+
+
+  <link rel="shortcut icon" type="image/x-icon" href="/favicon.png?v=5.1.0" />
+
+
+
+
+
+
+<meta name="description" content="1 - Introduction of SE &amp;amp; OOAD2 - UP Unified Process and Agile">
+<meta property="og:type" content="article">
+<meta property="og:title" content="[NOTES] Software System Analysis and Design">
+<meta property="og:url" content="http://yoursite.com/2017/03/06/notes-system-design/index.html">
+<meta property="og:site_name" content="HYPJUDY">
+<meta property="og:description" content="1 - Introduction of SE &amp;amp; OOAD2 - UP Unified Process and Agile">
+<meta property="og:image" content="http://yoursite.com/images/notes-system-design/CMMI.jpg">
+<meta property="og:image" content="http://yoursite.com/images/notes-system-design/CMMI_en.png">
+<meta property="og:image" content="http://yoursite.com/images/notes-system-design/2-1迭代和进化式开发.png">
+<meta property="og:image" content="http://yoursite.com/images/notes-system-design/RUP-use-case.png">
+<meta property="og:image" content="http://yoursite.com/images/notes-system-design/RUP-system-structure.png">
+<meta property="og:image" content="http://yoursite.com/images/notes-system-design/RUP-increment.png">
+<meta property="og:updated_time" content="2017-03-08T08:05:04.732Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="[NOTES] Software System Analysis and Design">
+<meta name="twitter:description" content="1 - Introduction of SE &amp;amp; OOAD2 - UP Unified Process and Agile">
+<meta name="twitter:image" content="http://yoursite.com/images/notes-system-design/CMMI.jpg">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Mist',
+    sidebar: {"position":"left","display":"hide","offset":12,"offset_float":0,"b2t":false,"scrollpercent":false},
+    fancybox: true,
+    motion: true,
+    duoshuo: {
+      userId: '0',
+      author: 'Author'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="http://yoursite.com/2017/03/06/notes-system-design/"/>
+
+
+
+
+
+  <title> [NOTES] Software System Analysis and Design | HYPJUDY </title>
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="en">
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+    
+  
+
+  <div class="container one-collumn sidebar-position-left page-post-detail ">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/"  class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">HYPJUDY</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle">What I cannot create, I do not understand.</p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
+            
+            Home
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
+            
+            Archives
+          </a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2017/03/06/notes-system-design/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="HYPJUDY">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.png">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="HYPJUDY">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                [NOTES] Software System Analysis and Design
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Posted on</span>
+              
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2017-03-06T13:30:09+08:00">
+                2017-03-06
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+
+          
+            
+              <span class="post-comments-count">
+                <span class="post-meta-divider">|</span>
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-comment-o"></i>
+                </span>
+                <a href="/2017/03/06/notes-system-design/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count ds-thread-count" data-thread-key="2017/03/06/notes-system-design/" itemprop="commentCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <p>1 - Introduction of SE &amp; OOAD<br>2 - UP Unified Process and Agile<br><a id="more"></a></p>
+<h1 id="1-Introduction-of-SE-amp-OOAD"><a href="#1-Introduction-of-SE-amp-OOAD" class="headerlink" title="1 - Introduction of SE &amp; OOAD"></a>1 - Introduction of SE &amp; OOAD</h1><h2 id="Courseware"><a href="#Courseware" class="headerlink" title="Courseware"></a>Courseware</h2><p><a href="http://ss.sysu.edu.cn/~pml/se305/2015sp/slides/00-SoftwareEngineeringReview.pdf" target="_blank" rel="external">软件工程概述</a><br><a href="http://ss.sysu.edu.cn/~pml/se305/2015sp/slides/LarmanOOAD_Part1_C01.pdf" target="_blank" rel="external">OOAD Introduction</a></p>
+<h2 id="Key-Point-of-Software-Engineering★"><a href="#Key-Point-of-Software-Engineering★" class="headerlink" title="Key Point of Software Engineering★"></a>Key Point of Software Engineering<font color="#FF0000">★</font></h2><h3 id="Software-Engineering-Definition-★★★"><a href="#Software-Engineering-Definition-★★★" class="headerlink" title="Software Engineering Definition ★★★"></a>Software Engineering Definition <font color="#FF0000">★★★</font></h3><ul>
+<li>(1) the application of a <strong>systematic</strong>, <strong>disciplined</strong>, <strong>quantifiable</strong>   approach to the development, operation, and maintenance of software, that is, the application of engineering to software. (2) the study of approaches as in (1) – IEEE Standard 610.12</li>
+<li>软件工程：(1)将<strong>系统化</strong>、<strong>规范化</strong>、<strong>可度量</strong>的方法应用于软件的开发、运行和维护的过程，即将工程化应用于软件中。(2)对(1)中所述方法的研究。——IEEE[IEE93]</li>
+<li>软件工程：是指导计算机软件开发和维护的工程学科。采用工程的概念、原理、技术和方法来开发与维护软件，把经过实践考验而证明正确的管理技术和当前能够得到的最好的技术方法结合起来，这就是软件工程。</li>
+</ul>
+<h3 id="History-of-Software-Engineering"><a href="#History-of-Software-Engineering" class="headerlink" title="History of Software Engineering"></a><a href="https://en.wikipedia.org/wiki/Software_engineering" target="_blank" rel="external">History of Software Engineering</a></h3><p><strong>software crisis</strong> The widespread lack of best practices for software at the time was perceived as a “software crisis”. 六十年代以来，随着计算机应用需求的驱动，系统软件和应用软件有很大的发展，如操作系统，编译系统和大型应用软件等。由于软件生产的复杂性和高成本，使大型软件的生产出现了很大的困难，即出现软件危机。软件工程正是为克服软件危机而提出的一种概念，并在实践中不断地探索它的原理，技术和方法。在此过程中，人们研究和借鉴了工程学的某些原理和方法，并形成了一门新的学科─软件工程学。</p>
+<p><strong>The Constructive Cost Model (<a href="http://blog.sina.com.cn/s/blog_8db4afb90101doui.html" target="_blank" rel="external">COCOMO</a>)</strong> is a procedural software cost estimation model developed by Barry W. Boehm. The model parameters are derived from fitting a regression formula using data from historical projects.</p>
+<h3 id="Software-Engineering-Body-of-Knowledge"><a href="#Software-Engineering-Body-of-Knowledge" class="headerlink" title="Software Engineering Body of Knowledge"></a><a href="https://en.wikipedia.org/wiki/Software_Engineering_Body_of_Knowledge" target="_blank" rel="external">Software Engineering Body of Knowledge</a></h3><p>必须知道<strong>本课程涉及的KA</strong><font color="#FF0000">==</font> </p>
+<h3 id="Software-LifeCycle"><a href="#Software-LifeCycle" class="headerlink" title="Software LifeCycle"></a><a href="https://en.wikipedia.org/wiki/Software_development_process" target="_blank" rel="external">Software LifeCycle</a></h3><p><strong>软件生命周期</strong> 从时间角度，把整个周期划分为若干个阶段。划分的原则：各阶段的任务彼此间尽可能相对独立，同一个阶段各项任务的性质尽可能相同，从而降低每个阶段任务的复杂性，简化不同阶段之间的联系，有利于软件开发过程的组织管理。受软件规模、性质、种类、开发方法等因素的影响。<br>典型划分GB8567（4个时期7个阶段）：</p>
+<ul>
+<li>软件分析时期：问题定义、可行性研究、需求分析</li>
+<li>软件设计时期：总体设计、详细设计</li>
+<li>编码与测试时期：编码、测试</li>
+<li>运行与维护时期</li>
+</ul>
+<p>必须了解三个过程的特点，流程<br><strong>Waterfall development</strong> The waterfall model is a sequential development approach, in which development is seen as flowing steadily downwards (like a waterfall) through several phases, typically:</p>
+<ul>
+<li>Requirements analysis resulting in a software requirements specification</li>
+<li>Software design</li>
+<li>Implementation</li>
+<li>Testing</li>
+<li>Integration, if there are multiple subsystems</li>
+<li>Deployment (or Installation)</li>
+<li>Maintenance</li>
+</ul>
+<p><strong>Iterative and incremental development</strong> Iterative development prescribes the construction of initially small but ever-larger portions of a software project to help all those involved to uncover important issues early before problems or faulty assumptions can lead to disaster.</p>
+<p><strong>Agile development</strong> refers to a group of software development methodologies based on iterative development, where requirements and solutions evolve via collaboration between self-organizing cross-functional teams. The term was coined in the year 2001 when the Agile Manifesto was formulated.</p>
+<p>Agile software development uses iterative development as a basis but advocates a lighter and more people-centric viewpoint than traditional approaches. Agile processes fundamentally incorporate iteration and the continuous feedback that it provides to successively refine and deliver a software system.<br>There are many agile methodologies, including:</p>
+<ul>
+<li>Dynamic systems development method (DSDM)</li>
+<li>Kanban</li>
+<li>Scrum</li>
+</ul>
+<h3 id="Software-Process-Improvement-for-Enterprise"><a href="#Software-Process-Improvement-for-Enterprise" class="headerlink" title="Software Process Improvement for Enterprise"></a>Software Process Improvement for Enterprise</h3><p>Also see : Capability Maturity Model Integration (<a href="https://en.wikipedia.org/wiki/Capability_Maturity_Model_Integration" target="_blank" rel="external">CMMI</a>)要点：给企业一个明确的 5 级分类指标， 推动企业在在软件工程各个 KPA 向上爬！<br>见第二课</p>
+<p>Also see : <a href="http://blog.sina.com.cn/s/blog_5e98ca2b01019aou.html" target="_blank" rel="external">软件工程国家标准</a> 其中，<em>计算机软件产品开发文件编制指南GB／T 8567－2006</em>最重要。否则政府项目无法验收！</p>
+<h2 id="Key-Point-of-Courseware"><a href="#Key-Point-of-Courseware" class="headerlink" title="Key Point of Courseware"></a>Key Point of Courseware</h2><h3 id="Software-Quality-amp-Custom-Experience"><a href="#Software-Quality-amp-Custom-Experience" class="headerlink" title="Software Quality &amp; Custom Experience"></a>Software Quality &amp; Custom Experience</h3><ol>
+<li>分析设计的目标就是生产高品质且满足客户需求的软件产品</li>
+<li>软件质量属性划分与度量却是一个复杂话题<ul>
+<li>简单划分：功能需求、非功能需求</li>
+<li><a href="https://en.wikipedia.org/wiki/ISO/IEC_9126" target="_blank" rel="external">ISO 9126-3</a></li>
+<li><a href="http://iso25000.com/index.php/en/iso-25000-standards" target="_blank" rel="external">ISO/IEC 25000-2014:</a> 系统和软件工程–系统和软件质量要求和评估(SQuaRE)</li>
+<li><a href="https://en.wikipedia.org/wiki/Software_quality" target="_blank" rel="external">Consortium for IT Software Quality (CISQ)</a></li>
+</ul>
+</li>
+<li>Software Quality != Custom Experience</li>
+<li>Custom Experience != 用户数量（流量）</li>
+<li>用户数量 <em> 单用户价值 </em> 社会责任</li>
+</ol>
+<h3 id="Analysis-vs-design"><a href="#Analysis-vs-design" class="headerlink" title="Analysis vs. design"></a>Analysis vs. design</h3><font color="#FF0000">==</font> 
+
+<h3 id="Object-vs-Class"><a href="#Object-vs-Class" class="headerlink" title="Object vs. Class"></a>Object vs. Class</h3><font color="#FF0000">==</font> 
+
+<h3 id="Object-oriented-Analysis-and-Design"><a href="#Object-oriented-Analysis-and-Design" class="headerlink" title="Object-oriented Analysis and Design"></a>Object-oriented Analysis and Design</h3><font color="#FF0000">==</font> 
+
+<h3 id="UML"><a href="#UML" class="headerlink" title="UML"></a>UML</h3><font color="#FF0000">==</font> 
+
+<h1 id="2-UP-Unified-Process-and-Agile"><a href="#2-UP-Unified-Process-and-Agile" class="headerlink" title="2 - UP Unified Process and Agile"></a>2 - UP Unified Process and Agile</h1><h2 id="Courseware-1"><a href="#Courseware-1" class="headerlink" title="Courseware"></a>Courseware</h2><p><a href="http://ss.sysu.edu.cn/~pml/se305/2015sp/slides/LarmanOOAD_Part1_C02.pdf" target="_blank" rel="external">Unified Process</a><br>Reference: </p>
+<ol>
+<li>Cai, SYSU, Software Testing: Methods &amp; Technologies</li>
+<li><a href="http://course.pku.edu.cn/bbcswebdav/courses/JPK100319001/%E6%8E%88%E8%AF%BE%E6%95%99%E6%A1%88/RUPjianjie1.pdf" target="_blank" rel="external">统一软件开发过程(RUP)简介-王立福</a></li>
+</ol>
+<h2 id="软件团队管理基础"><a href="#软件团队管理基础" class="headerlink" title="软件团队管理基础"></a>软件团队管理基础</h2><ul>
+<li>软件团队是软件生产的基本单元，承担30-100个人月工作量的项目。</li>
+<li>软件过程在软件管理过程中的重要性。</li>
+<li>现代软件过程是怎么组织的？</li>
+<li>项目： 围着特定目标进行的一次性的生产活动.</li>
+<li>项目管理的基础：人</li>
+</ul>
+<h2 id="知识分子的管理要点与艺术"><a href="#知识分子的管理要点与艺术" class="headerlink" title="知识分子的管理要点与艺术"></a>知识分子的管理要点与艺术</h2><p>经典阅读：[美] 彼得·德鲁克 《卓有成效的管理者》，<a href="https://book.douban.com/subject/4020857/" target="_blank" rel="external">豆瓣</a><br><strong>领导者</strong> 在现代企业组织里，每个知识工作者依靠地位和知识都可能成为”管理者”，他可能会被推上负责的岗位，并能为改善机构的运作能力和获得成果作出自己的贡献。</p>
+<p>团队的领导者：按技术特长和项目需要设置管理者，他们是平等的，仅是分工不同。常见职位：项目经理，技术经理，产品经理，测试经理，架构师，配置与质量保证经理。</p>
+<p><strong>时间管理</strong> 掌握自己的时间。每个知识分子应能自己记录时间、管理时间、统一安排可以自由支配的时间，使自己的工作卓有成效。团队规模越大，你需要做许多影响他人的决策，自己可掌握的时间越少，知识工作者效率越低。</p>
+<p>团队的大小：6-8人，多数时间各人自己支配。自我组织，自我管理是现代软件团队的特点。</p>
+<p><strong>重视贡献</strong> 注重绩效与结果。管理者必须承偌贡献的有效性，并在一个合理端的时间内呈现成果。</p>
+<p>团队的绩效：必须在一个<em>短周期</em>内呈现，以免错误决策导致最终结果。记住，项目经理是无法确定技术经理决定对错的，必须在<em>一个开发周期结束评估结果和贡献</em>，带领团队和个人持续改进。必须是<em>可度量</em>的。包括：工作量、创新性（技术、管理）、时效性、质量</p>
+<p><strong>发挥所长</strong> 充分发挥各自优势就是机构存在的唯一目的。</p>
+<p>团队的构成：必须是一群能力互补的团队，不是一堆能干活（编程）的。</p>
+<p><strong>要事优先</strong> 善于集中精力。卓有成效的管理者总是把重要的事情放在前面先做（first things first），一次做好一桩事情（do onething at a time）。</p>
+<p>软件团队：了解软件开发包含哪些阶段，必须要达成的目标，最重要的工作是什么，常见的风险、问题与缺陷是什么！</p>
+<p>需求分析设计：就是教你如何发现要是，并做好关键任务的教程！！！</p>
+<h2 id="目标管理"><a href="#目标管理" class="headerlink" title="目标管理"></a><a href="http://baike.baidu.com/link?url=feaABNkSe3PTkrkmmC8vbKhuczj4sXKj8Vf3v-8Ri5nwVZlmqZwAVrhRO2IneWcv" target="_blank" rel="external">目标管理</a></h2><p>先有目标才能确定工作，所以“企业的使命和任务，必须转化为目标”。</p>
+<h2 id="软件团队组织模型"><a href="#软件团队组织模型" class="headerlink" title="软件团队组织模型"></a>软件团队组织模型</h2><p>开发团队人员比例：1:1:1 = 项目（客户）经理：技术：测试<br>围绕高品质产品，各施其职：</p>
+<ul>
+<li>客户喜欢（用户体验好），乐于使用并产生价值（带来更多经济或社会或个人价值）。</li>
+<li>技术优雅，可持续支持软件的发展与进化。</li>
+<li>产品定位清晰，资料完善，无明显使用缺陷。</li>
+</ul>
+<h2 id="软件开发过程模型"><a href="#软件开发过程模型" class="headerlink" title="软件开发过程模型"></a>软件开发过程模型</h2><p><strong>CMMI五个级别</strong>：</p>
+<ul>
+<li>初始级：无序，自发生产模式。</li>
+<li>可管理级：项目管理，过程纪律</li>
+<li>已定义级：标准化</li>
+<li>量化管理级：量化，可控</li>
+<li>优化管理级：持续改进</li>
+</ul>
+<p><img src="/images/notes-system-design/CMMI.jpg" alt="CMMI Model" title="Credit: Baidu Baike" style="width: 85%; margin: auto;"></p>
+<ul>
+<li>Level 1 – Initial: unpredictable, reactive</li>
+<li>Level 2 – Managed: characterized, reactive</li>
+<li>Level 3 – Defined: characterized, proactive</li>
+<li>Level 4 – Quantitatively Managed: measured, controlled</li>
+<li>Level 5 – Optimizing: process improvement<br><img src="/images/notes-system-design/CMMI_en.png" alt="CMMI Model" title="Credit: Wikipedia" style="margin: auto;"></li>
+</ul>
+<p><strong>Waterfall Model 瀑布模型</strong><font color="#FF0000">★</font>  Idea-&gt;Analysis-&gt;Design-&gt;Development-&gt;Test-&gt;Final Product</p>
+<ul>
+<li><em>假设：</em> 需求是明确的，在短期内可获取每个阶段是无差错的</li>
+<li><em>优势：</em>定义了软件开发基本流程与活动</li>
+<li><em>劣势：</em><ul>
+<li>依赖问题：前面需求模糊，后面工作…</li>
+<li>容错问题：在后期发现需求问题，工作量难接受</li>
+<li>资源调配问题：知识技能需求不同、人员数量要求不同</li>
+</ul>
+</li>
+<li><em>现象：</em>延期，项目不可控</li>
+</ul>
+<p><strong>增量模型</strong> </p>
+<ul>
+<li><em>假设：</em>需求明确</li>
+<li><em>解决问题：</em>项目控制、团队组织</li>
+</ul>
+<p><strong>原型与螺旋模型</strong></p>
+<ul>
+<li><em>假设：</em>需求随用户评估进化</li>
+<li><em>新问题：</em>迭代次数？不适合大团队。无法确定发布日期</li>
+</ul>
+<p><strong>迭代、敏捷开发</strong></p>
+<h2 id="Applying-UML-and-Patterns"><a href="#Applying-UML-and-Patterns" class="headerlink" title="Applying UML and Patterns"></a>Applying UML and Patterns</h2><p><strong>Unified Process</strong><font color="#FF0000">★</font>  统一过程 </p>
+<ul>
+<li>The process is <strong>scalable</strong>.</li>
+<li>The process is <strong>effective</strong>.</li>
+<li>Improves <strong>productivity</strong> through use of practical methods that you’ve probably used already (but didn’t know it).</li>
+<li>Iterative and incremental approach <strong>allows start of work with incomplete, imperfect knowledge.</strong></li>
+</ul>
+<p><strong>Unified Process Workflows</strong><font color="#FF0000">★★</font> </p>
+<ul>
+<li>Business Modeling.业务模型</li>
+<li>Requirements Analysis</li>
+<li>Design</li>
+<li>Implementation</li>
+<li>Test and Integration</li>
+</ul>
+<p><strong>Use-Case-Driven</strong><font color="#FF0000">★★</font> means the development team employs the use cases from requirements gathering through code and test.</p>
+<ul>
+<li>A prose representation of a <em>sequence of actions</em></li>
+<li>Actions are performed by one or more actors <em>(human or nonhuman)<br>and the system</em> itself</li>
+<li>These actions lead to <em>valuable results</em> for one or more of the<br>actors—helping the actors <em>to achieve their goals</em></li>
+</ul>
+<p><strong>Architecture Centric:</strong><font color="#FF0000">★★</font> software architecture provides the central point around which all other development evolves. Software architecture captures decisions about:</p>
+<ul>
+<li>The overall structure of the software system</li>
+<li>The structural elements of the system and their interfaces</li>
+<li>The collaborations among these structural elements and their expected behavior</li>
+</ul>
+<p><strong>Iterative and Evolutionary</strong><font color="#FF0000">★★</font> </p>
+<ul>
+<li>An iterative and evolutionary approach allows start of development with <strong>incomplete, imperfect knowledge</strong></li>
+<li>Iterative and evolutionary the following advantages<ul>
+<li>Logical <strong>progress</strong> toward a robust architecture（逐步趋向稳定）</li>
+<li>Effective management of changing requirements（有效管理需求变化）</li>
+<li>Continuous integration（持续集成）</li>
+<li>Early understanding of the system (‘Hello world!’ effect)（尽早接触整个系统）</li>
+<li>Ongoing risk assessment（在线风险评估）</li>
+</ul>
+</li>
+</ul>
+<p>Iterations are fixed in length, or timeboxed.（固定周期）量化管理的需求</p>
+<p><img src="/images/notes-system-design/2-1迭代和进化式开发.png" alt="2-1 迭代和进化式开发" title="Credit: 《UML和模式识别》" style="width: 95%; margin: auto;"></p>
+<p><strong>Agile Methods and Attitudes</strong></p>
+<ul>
+<li>The Agile Manifesto <font color="#FF0000">★</font> <ul>
+<li>Individuals and interactions over processes and tools</li>
+<li>Working software over comprehensive documentation</li>
+<li>Customer collaboration over contract negotiation</li>
+<li>Responding to change over following a plan</li>
+</ul>
+</li>
+<li>The Agile Principles<ul>
+<li>Our highest priority is to satisfy the customer through early and continuous delivery of valuable software. <font color="#FF0000">★</font> </li>
+<li>Welcome changing requirements, even late in development <font color="#FF0000">★</font></li>
+</ul>
+</li>
+</ul>
+<p><strong>Agile Modeling</strong></p>
+<ul>
+<li>Adopting an agile method does not mean avoiding any modeling <font color="#FF0000">★</font></li>
+<li>The purpose of modeling and models is primarily to support understanding and communication, not documentation. <font color="#FF0000">★</font></li>
+<li>Don’t model or apply the UML to all or most of the software design. <font color="#FF0000">★</font></li>
+<li>Know that all models will be inaccurate, and the final code or design different sometimes dramatically different than the model. <font color="#FF0000">★</font></li>
+</ul>
+<p><strong>Artifacts, Workers, and Activities</strong></p>
+<ul>
+<li>An artifact is a piece of information that is used as input to, changed by, or output from a process <font color="#FF0000">★</font> </li>
+<li>Examples include: <font color="#FF0000">★</font> <ul>
+<li>Models — use-case, domain, and design</li>
+<li>Model elements—use case, domain class, design class</li>
+<li>Diagrams and documents</li>
+<li>Source code</li>
+<li>Executable elements</li>
+</ul>
+</li>
+<li>Some important distinctions:<ul>
+<li>Workers participate in the development of the system <font color="#FF0000">★</font> </li>
+<li>Actors are outside the system and have usage relationships with the system <font color="#FF0000">★</font></li>
+<li>Stakeholders encompass both actors and workers, as well as others involved with the project <font color="#FF0000">★</font></li>
+</ul>
+</li>
+</ul>
+<h3 id="Summary"><a href="#Summary" class="headerlink" title="Summary =="></a>Summary <font color="#FF0000">==</font></h3><h2 id="Homework2"><a href="#Homework2" class="headerlink" title="Homework2"></a>Homework2</h2><h3 id="CMU与美国国防部合作提出CMM-CMMI模型，解决了美国国防部什么问题？它对软件产业的作用是什么？"><a href="#CMU与美国国防部合作提出CMM-CMMI模型，解决了美国国防部什么问题？它对软件产业的作用是什么？" class="headerlink" title="CMU与美国国防部合作提出CMM/CMMI模型，解决了美国国防部什么问题？它对软件产业的作用是什么？"></a>CMU与美国国防部合作提出CMM/CMMI模型，解决了美国国防部什么问题？它对软件产业的作用是什么？</h3><p>  (1) CMM/CMMI解决了美国政府和美国国防部能<strong>有效地评估软件承包商</strong>的问题。<br>  CMM（CMMI是SEI于2000年发布的CMM的新版本）是“软件能力成熟度模型”的英文简写，该模型由美国卡内基-梅隆大学的软件工程研究所（简称SEI）受美国国防部委托，于1991年研究制定，初始的主要目的是为了评价美国国防部的软件合同承包组织的能力，后因为在软件企业应用CMM模型实施过程改进取得较大的成功，所以在全世界范围内被广泛使用。</p>
+<p>  (2) 它对软件企业的作用是<strong>帮助软件企业对软件工程过程进行管理和改进，增强开发与改进能力，从而能按时地、不超预算地开发出高质量的软件</strong>。其所依据的想法是：只要集中精力持续努力去建立有效的软件工程过程的基础结构，不断进行管理的实践和过程的改进，就可以克服软件开发中的困难。CMMI为改进一个组织的各种过程提供了一个单一的集成化框架，新的集成模型框架消除了各个模型的不一致性，减少了模型间的重复，增加透明度和理解，建立了一个自动的、可扩展的框架。因而能够从总体上改进组织的质量和效率。CMMI主要关注点就是成本效益、明确重点、过程集中和灵活性四个方面。<br>  （参考自百度百科CMMI/CMI词条）</p>
+<h3 id="简述瀑布模型、增量模型、螺旋模型（含原型方法）的优缺点。"><a href="#简述瀑布模型、增量模型、螺旋模型（含原型方法）的优缺点。" class="headerlink" title="简述瀑布模型、增量模型、螺旋模型（含原型方法）的优缺点。"></a>简述瀑布模型、增量模型、螺旋模型（含原型方法）的优缺点。</h3><h4 id="瀑布模型"><a href="#瀑布模型" class="headerlink" title="瀑布模型"></a>瀑布模型</h4><ul>
+<li><em>优点：</em>定义了软件开发基本流程与活动</li>
+<li><em>缺点：</em><ul>
+<li>依赖问题：前面需求模糊，后面工作…</li>
+<li>容错问题：在后期发现需求问题，工作量难接受</li>
+<li>资源调配问题：知识技能需求不同、人员数量要求不同</li>
+</ul>
+</li>
+</ul>
+<h4 id="增量模型"><a href="#增量模型" class="headerlink" title="增量模型"></a>增量模型</h4><ul>
+<li><em>优点：</em><ul>
+<li>由于能够在较短的时间内向用户提交一些有用的工作产品，因此能够解决用户的一些急用功能</li>
+<li>由于每次只提交用户部分功能，用户有较充分的时间学习和适应新的产品</li>
+<li>对系统的可维护性是一个极大的提高，因为整个系统是由一个个构件集成在一起的，当需求变更时只变更部分部件，而不必影响整个系统</li>
+</ul>
+</li>
+<li><em>缺点：</em><ul>
+<li>由于各个构件是逐渐并入已有的软件体系结构中的，所以加入构件必须不破坏已构造好的系统部分，这需要软件具备开放式的体系结构</li>
+<li>在开发过程中，需求的变化是不可避免的。增量模型的灵活性可以使其适应这种变化的能力大大优于瀑布模型和快速原型模型，但也很容易退化为边做边改模型，从而使软件过程的控制失去整体性</li>
+<li>如果增量包之间存在相交的情况且未很好处理，则必须做全盘系统分析，这种模型将功能细化后分别开发的方法较适应于需求经常改变的软件开发过程</li>
+</ul>
+</li>
+</ul>
+<h4 id="原型与螺旋模型"><a href="#原型与螺旋模型" class="headerlink" title="原型与螺旋模型"></a>原型与螺旋模型</h4><ul>
+<li><em>优点：</em><ul>
+<li>设计上的灵活性,可以在项目的各个阶段进行变更</li>
+<li>以小的分段来构建大型系统,使成本计算变得简单容易</li>
+<li>客户始终参与每个阶段的开发,保证了项目不偏离正确方向以及项目的可控性</li>
+<li>随着项目推进,客户始终掌握项目的最新信息, 而他或她能够和管理层有效地交互</li>
+<li>客户认可这种公司内部的开发方式带来的良好的沟通和高质量的产品</li>
+</ul>
+</li>
+<li><em>缺点：</em><ul>
+<li>迭代次数不确定</li>
+<li>不适合大团队</li>
+<li>无法确定发布日期</li>
+<li>很难让用户确信这种演化方法的结果是可以控制的</li>
+<li>建设周期长，而软件技术发展比较快，所以经常出现软件开发完毕后，和当前的技术水平有了较大的差距，无法满足当前用户需求</li>
+</ul>
+</li>
+</ul>
+<h3 id="简述RUP的三大特点，其中哪些内容体现了用户驱动的开发，哪些内容体现风险驱动的开发？"><a href="#简述RUP的三大特点，其中哪些内容体现了用户驱动的开发，哪些内容体现风险驱动的开发？" class="headerlink" title="简述RUP的三大特点，其中哪些内容体现了用户驱动的开发，哪些内容体现风险驱动的开发？"></a>简述RUP的三大特点，其中哪些内容体现了用户驱动的开发，哪些内容体现风险驱动的开发？</h3><p>RUP的三大特点是<strong>以用户为驱动的、以体系结构为中心的、迭代、增量式开发。</strong>第一个特点的内容<strong>体现了用户驱动的开发。</strong>第二个特点的内容体现<strong>风险驱动的开发。</strong>具体内容见下文。</p>
+<h4 id="以用户为驱动"><a href="#以用户为驱动" class="headerlink" title="以用户为驱动"></a>以用户为驱动</h4><p>意指在系统的生存周期中，以用户作为基础，驱动有关人员对所要建立系统之功能需求进行交流，驱动系统分析、设计、实现和测试等活动，包括制定计划、分配任务、监控执行和进行测试等，并将它们有机地组合为一体，使各个阶段中都可以回溯到用户的实际需求。<br><img src="/images/notes-system-design/RUP-use-case.png" alt="RUP-用况驱动" title="Credit: courseware of pku" style="width: 60%; margin: auto;"></p>
+<h4 id="以体系结构为中心"><a href="#以体系结构为中心" class="headerlink" title="以体系结构为中心"></a>以体系结构为中心</h4><p>意指在系统的生存周期中，开发的任何阶段（RUP规定了四个阶段，即初始阶段、细化阶段、构造阶段和移交阶段）都要给出相关模型视角下的有关体系结构的描述，作为构思、构造、管理和改善系统的主要制品。<br><img src="/images/notes-system-design/RUP-system-structure.png" alt="RUP-体系结构为中心" title="Credit: courseware of pku" style="width: 85%; margin: auto;"></p>
+<h4 id="迭代、增量式开发"><a href="#迭代、增量式开发" class="headerlink" title="迭代、增量式开发"></a>迭代、增量式开发</h4><p>意指通过开发活动的迭代，不断地产生相应的增量。在RUP中，规定了四个开发阶段：初始阶段（the inception phase）、精化阶段（ the elaboration phase）、构造阶段（ the constructionphase）和移交阶段（ the transition phase）。 每次迭代都要按照专门的计划和评估标准，通过一组明确的活动，产生一个内部的或外部的发布版本。两次相邻迭代所得到的发布版本之差，称为一个增量，因此增量是系统中一个较小的、可管理的部分(一个或几个构造块)。贯穿整个生存周期的迭代，形成了项目开发的一些里程碑。<br><img src="/images/notes-system-design/RUP-increment.png" alt="RUP-迭代增量式开发" title="Credit: courseware of SYSU" style="width: 95%; margin: auto;"><br>RUP通过迭代增量建模思想提高了风险控制能力，这体现在：</p>
+<ul>
+<li>迭代计划安排是风险驱动的，高风险因素集中在前两个阶段解决，特别是体系结构级的风险在细化阶段就得到了解决，及早降低了系统风险；</li>
+<li>每一次迭代都包括需求、设计、实施、部署和测试活动，因此，每一个中间产品都得到了集成测试，而且这个集成测试是在一个统一的软件体系结构指导下完成的；</li>
+<li>每一个阶段结束时严格的质量评审，保证里程碑文档的质量；</li>
+<li>由于中间版本的产品是逐步产生的，而且核心功能和性能需求已经包含在前面的版本中，所以，可以根据市场竞争的情况适时推出中间版本，降低市场风险。</li>
+</ul>
+<p>迭代式开发允许在每次迭代过程中需求可能有变化，通过不断细化来加深对问题的理解从而降低了项目的风险。RUP的要点之一是在项目早期就标识并处理最大的风险。项目组标识的每一个风险都应该有一个相应的缓解或解决计划。风险列表应该既作为项目活动的计划工具，又作为确定迭代的基础。</p>
+<h3 id="RUP四个阶段的划分准则是什么？关键的里程碑是什么？"><a href="#RUP四个阶段的划分准则是什么？关键的里程碑是什么？" class="headerlink" title="RUP四个阶段的划分准则是什么？关键的里程碑是什么？"></a>RUP四个阶段的划分准则是什么？关键的里程碑是什么？</h3><table>
+<thead>
+<tr>
+<th style="text-align:center">RUP阶段</th>
+<th style="text-align:center">划分准则</th>
+<th style="text-align:center">里程碑</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:center"><strong>初始阶段</strong></td>
+<td style="text-align:center"><em>建立该项目的生存周期目标。</em>系统建立业务案例(business case) 并确定项目的边界。</td>
+<td style="text-align:center"><em>生命周期目标</em>（Lifecycle Objective）里程碑。包括一些重要的文档，如：项目构想(vision)、原始用例模型、原始业务风险评估、一个或者多个原型、原始业务案例等。需要对这些文档进行评审，以确定正确理解用例需求、项目风险评估合理、阶段计划可行等。</td>
+</tr>
+<tr>
+<td style="text-align:center"><strong>细化阶段</strong></td>
+<td style="text-align:center"><em>建立系统的体系结构基线。</em>析问题领域，建立健全的体系结构基础，编制项目计划，完成项目中高风险需求部分的开发。</td>
+<td style="text-align:center"><em>生命周期结构</em>（Lifecycle Architecture）里程碑 。包括风险分析文档、软件体系结构基线、项目计划、可执行的进化原型、初始版本的用户手册等。通过评审确定软件体系结构已经稳定、高风险的业务需求和技术机制已经解决、修订的项目计划可行等。</td>
+</tr>
+<tr>
+<td style="text-align:center"><strong>构造阶段</strong></td>
+<td style="text-align:center"><em>形成一个可基本交付使用的产品/系统。</em>成所有剩余的技术构件和稳定业务需求功能的开发，并集成为产品，所有功能被详细测试。</td>
+<td style="text-align:center"><em>初始运行能力</em>（Initial Operational Capability）里程碑。包括可以运行的软件产品、用户手册等，它决定了产品是否可以在测试环境中进行部署。此刻，要确定软件、环境、用户是否可以开始系统的运行。</td>
+</tr>
+<tr>
+<td style="text-align:center"><strong>交付阶段</strong></td>
+<td style="text-align:center"><em>向用户交付一个可使用的产品/系统。</em>产品化阶段可以跨越几次迭代，包括为发布做准备的产品测试，基于用户反馈的少量调整。</td>
+<td style="text-align:center"><em>产品发布</em>（Product Release）里程碑。此时，要确定最终目标是否实现，是否应该开始产品下一个版本的另一个开发周期。在一些情况下这个里程碑可能与下一个周期的初始阶段的相重合。</td>
+</tr>
+</tbody>
+</table>
+<h3 id="IT项目管理中，“工期、质量、范围-内容”三个元素中，在合同固定条件下，哪个最容易与客户达成妥协？理由…-…"><a href="#IT项目管理中，“工期、质量、范围-内容”三个元素中，在合同固定条件下，哪个最容易与客户达成妥协？理由…-…" class="headerlink" title="IT项目管理中，“工期、质量、范围/内容”三个元素中，在合同固定条件下，哪个最容易与客户达成妥协？理由… …"></a>IT项目管理中，“工期、质量、范围/内容”三个元素中，在合同固定条件下，哪个最容易与客户达成妥协？理由… …</h3> <font color="#FF0000">==</font>
+
+<h3 id="RUP为企业按固定节奏生产、固定周期发布软件产品提供了依据，为什么？"><a href="#RUP为企业按固定节奏生产、固定周期发布软件产品提供了依据，为什么？" class="headerlink" title="RUP为企业按固定节奏生产、固定周期发布软件产品提供了依据，为什么？"></a>RUP为企业按固定节奏生产、固定周期发布软件产品提供了依据，为什么？</h3><p>依据：RUP中，软件开发生命周期根据<em>时间</em>（<strong>固定周期发布</strong>）和RUP的<em>核心工作流</em>（<strong>固定节奏生产</strong>）划分为二维空间。时间维从组织管理的角度描述整个软件开发生命周期，是RUP的动态组成部分。它可进一步描述为周期(Cycle)、阶段(Phase)、迭代(Iteration)。核心工作流从技术角度描述RUP的静态组成部分，它可进一步描述为行为(Activities)、工作流(Workflow)、产品(Artifact)、角色(Worker)。</p>
+<h3 id="（可集体讨论）讲述软件开发中-1-2个有效的敏捷实践，以及依据。"><a href="#（可集体讨论）讲述软件开发中-1-2个有效的敏捷实践，以及依据。" class="headerlink" title="（可集体讨论）讲述软件开发中 1-2个有效的敏捷实践，以及依据。"></a>（可集体讨论）讲述软件开发中 1-2个有效的敏捷实践，以及依据。</h3> <font color="#FF0000">==</font>
+
+<h3 id="（可集体讨论）选择一个可追溯到初始版本的软件，如“知乎”，你认为实现当初类似“stack-overflow”这类问答模式的软件，需要多少人，多少月？"><a href="#（可集体讨论）选择一个可追溯到初始版本的软件，如“知乎”，你认为实现当初类似“stack-overflow”这类问答模式的软件，需要多少人，多少月？" class="headerlink" title="（可集体讨论）选择一个可追溯到初始版本的软件，如“知乎”，你认为实现当初类似“stack-overflow”这类问答模式的软件，需要多少人，多少月？"></a>（可集体讨论）选择一个可追溯到初始版本的软件，如“知乎”，你认为实现当初类似“stack-overflow”这类问答模式的软件，需要多少人，多少月？</h3> <font color="#FF0000">==</font>
+
+
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+
+    <footer class="post-footer">
+      
+
+      
+        
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2017/03/04/leetcode/" rel="next" title="[PROGRAMMING] Leetcode">
+                <i class="fa fa-chevron-left"></i> [PROGRAMMING] Leetcode
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+          
+          </div>
+          
+
+
+          
+  <div class="comments" id="comments">
+    
+      <div class="ds-thread" data-thread-key="2017/03/06/notes-system-design/"
+           data-title="[NOTES] Software System Analysis and Design" data-url="http://yoursite.com/2017/03/06/notes-system-design/">
+      </div>
+    
+  </div>
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap" >
+            Table of Contents
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview">
+            Overview
+          </li>
+        </ul>
+      
+
+      <section class="site-overview sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+          <img class="site-author-image" itemprop="image"
+               src="/images/avatar.png"
+               alt="HYPJUDY" />
+          <p class="site-author-name" itemprop="name">HYPJUDY</p>
+           
+              <p class="site-description motion-element" itemprop="description">What I cannot create, I do not understand.</p>
+          
+        </div>
+        <nav class="site-state motion-element">
+        
+          
+            <div class="site-state-item site-state-posts">
+              <a href="/archives">
+                <span class="site-state-item-count">7</span>
+                <span class="site-state-item-name">posts</span>
+              </a>
+            </div>
+          
+
+          
+
+          
+
+        </nav>
+
+        
+
+        <div class="links-of-author motion-element">
+          
+            
+              <span class="links-of-author-item">
+                <a href="https://github.com/hypjudy" target="_blank" title="GitHub">
+                  
+                    <i class="fa fa-fw fa-github"></i>
+                  
+                  GitHub
+                </a>
+              </span>
+            
+          
+        </div>
+
+        
+        
+
+        
+        
+
+        
+
+
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#1-Introduction-of-SE-amp-OOAD"><span class="nav-number">1.</span> <span class="nav-text">1 - Introduction of SE & OOAD</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#Courseware"><span class="nav-number">1.1.</span> <span class="nav-text">Courseware</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Key-Point-of-Software-Engineering★"><span class="nav-number">1.2.</span> <span class="nav-text">Key Point of Software Engineering★</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#Software-Engineering-Definition-★★★"><span class="nav-number">1.2.1.</span> <span class="nav-text">Software Engineering Definition ★★★</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#History-of-Software-Engineering"><span class="nav-number">1.2.2.</span> <span class="nav-text">History of Software Engineering</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Software-Engineering-Body-of-Knowledge"><span class="nav-number">1.2.3.</span> <span class="nav-text">Software Engineering Body of Knowledge</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Software-LifeCycle"><span class="nav-number">1.2.4.</span> <span class="nav-text">Software LifeCycle</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Software-Process-Improvement-for-Enterprise"><span class="nav-number">1.2.5.</span> <span class="nav-text">Software Process Improvement for Enterprise</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Key-Point-of-Courseware"><span class="nav-number">1.3.</span> <span class="nav-text">Key Point of Courseware</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#Software-Quality-amp-Custom-Experience"><span class="nav-number">1.3.1.</span> <span class="nav-text">Software Quality & Custom Experience</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Analysis-vs-design"><span class="nav-number">1.3.2.</span> <span class="nav-text">Analysis vs. design</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Object-vs-Class"><span class="nav-number">1.3.3.</span> <span class="nav-text">Object vs. Class</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Object-oriented-Analysis-and-Design"><span class="nav-number">1.3.4.</span> <span class="nav-text">Object-oriented Analysis and Design</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#UML"><span class="nav-number">1.3.5.</span> <span class="nav-text">UML</span></a></li></ol></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#2-UP-Unified-Process-and-Agile"><span class="nav-number">2.</span> <span class="nav-text">2 - UP Unified Process and Agile</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#Courseware-1"><span class="nav-number">2.1.</span> <span class="nav-text">Courseware</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#软件团队管理基础"><span class="nav-number">2.2.</span> <span class="nav-text">软件团队管理基础</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#知识分子的管理要点与艺术"><span class="nav-number">2.3.</span> <span class="nav-text">知识分子的管理要点与艺术</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#目标管理"><span class="nav-number">2.4.</span> <span class="nav-text">目标管理</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#软件团队组织模型"><span class="nav-number">2.5.</span> <span class="nav-text">软件团队组织模型</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#软件开发过程模型"><span class="nav-number">2.6.</span> <span class="nav-text">软件开发过程模型</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Applying-UML-and-Patterns"><span class="nav-number">2.7.</span> <span class="nav-text">Applying UML and Patterns</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#Summary"><span class="nav-number">2.7.1.</span> <span class="nav-text">Summary ==</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Homework2"><span class="nav-number">2.8.</span> <span class="nav-text">Homework2</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#CMU与美国国防部合作提出CMM-CMMI模型，解决了美国国防部什么问题？它对软件产业的作用是什么？"><span class="nav-number">2.8.1.</span> <span class="nav-text">CMU与美国国防部合作提出CMM/CMMI模型，解决了美国国防部什么问题？它对软件产业的作用是什么？</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#简述瀑布模型、增量模型、螺旋模型（含原型方法）的优缺点。"><span class="nav-number">2.8.2.</span> <span class="nav-text">简述瀑布模型、增量模型、螺旋模型（含原型方法）的优缺点。</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#瀑布模型"><span class="nav-number">2.8.2.1.</span> <span class="nav-text">瀑布模型</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#增量模型"><span class="nav-number">2.8.2.2.</span> <span class="nav-text">增量模型</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#原型与螺旋模型"><span class="nav-number">2.8.2.3.</span> <span class="nav-text">原型与螺旋模型</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#简述RUP的三大特点，其中哪些内容体现了用户驱动的开发，哪些内容体现风险驱动的开发？"><span class="nav-number">2.8.3.</span> <span class="nav-text">简述RUP的三大特点，其中哪些内容体现了用户驱动的开发，哪些内容体现风险驱动的开发？</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#以用户为驱动"><span class="nav-number">2.8.3.1.</span> <span class="nav-text">以用户为驱动</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#以体系结构为中心"><span class="nav-number">2.8.3.2.</span> <span class="nav-text">以体系结构为中心</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#迭代、增量式开发"><span class="nav-number">2.8.3.3.</span> <span class="nav-text">迭代、增量式开发</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#RUP四个阶段的划分准则是什么？关键的里程碑是什么？"><span class="nav-number">2.8.4.</span> <span class="nav-text">RUP四个阶段的划分准则是什么？关键的里程碑是什么？</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#IT项目管理中，“工期、质量、范围-内容”三个元素中，在合同固定条件下，哪个最容易与客户达成妥协？理由…-…"><span class="nav-number">2.8.5.</span> <span class="nav-text">IT项目管理中，“工期、质量、范围/内容”三个元素中，在合同固定条件下，哪个最容易与客户达成妥协？理由… …</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#RUP为企业按固定节奏生产、固定周期发布软件产品提供了依据，为什么？"><span class="nav-number">2.8.6.</span> <span class="nav-text">RUP为企业按固定节奏生产、固定周期发布软件产品提供了依据，为什么？</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#（可集体讨论）讲述软件开发中-1-2个有效的敏捷实践，以及依据。"><span class="nav-number">2.8.7.</span> <span class="nav-text">（可集体讨论）讲述软件开发中 1-2个有效的敏捷实践，以及依据。</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#（可集体讨论）选择一个可追溯到初始版本的软件，如“知乎”，你认为实现当初类似“stack-overflow”这类问答模式的软件，需要多少人，多少月？"><span class="nav-number">2.8.8.</span> <span class="nav-text">（可集体讨论）选择一个可追溯到初始版本的软件，如“知乎”，你认为实现当初类似“stack-overflow”这类问答模式的软件，需要多少人，多少月？</span></a></li></ol></li></ol></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright" >
+  
+  &copy;  2016 - 
+  <span itemprop="copyrightYear">2017</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">HYPJUDY</span>
+</div>
+
+
+<div class="powered-by">
+  Powered by <a class="theme-link" href="https://hexo.io">Hexo</a>
+</div>
+
+<div class="theme-info">
+  Theme -
+  <a class="theme-link" href="https://github.com/iissnan/hexo-theme-next">
+    NexT.Mist
+  </a>
+</div>
+
+
+        
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+    
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+  
+  <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+
+  
+  <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+
+  
+  <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+
+  
+  <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.0"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.0"></script>
+
+
+
+  
+  
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.0"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.0"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.0"></script>
+
+
+
+  
+
+  
+    
+  
+
+  <script type="text/javascript">
+    var duoshuoQuery = {short_name:"hypjudy"};
+    (function() {
+      var ds = document.createElement('script');
+      ds.type = 'text/javascript';ds.async = true;
+      ds.id = 'duoshuo-script';
+      ds.src = (document.location.protocol == 'https:' ? 'https:' : 'http:') + '//static.duoshuo.com/embed.js';
+      ds.charset = 'UTF-8';
+      (document.getElementsByTagName('head')[0]
+      || document.getElementsByTagName('body')[0]).appendChild(ds);
+    })();
+  </script>
+
+  
+    
+    
+    <script src="/lib/ua-parser-js/dist/ua-parser.min.js?v=0.7.9"></script>
+    <script src="/js/src/hook-duoshuo.js"></script>
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+
+  
+  
+
+
+  
+
+  
+
+  
+
+
+  
+
+</body>
+</html>

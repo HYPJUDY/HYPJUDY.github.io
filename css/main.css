@@ -1121,9 +1121,9 @@ pre .javascript .function {
 .post-body .figure .caption {
   margin: 10px auto 15px;
   text-align: center;
-  font-size: 14px;
-  color: #999;
-  font-weight: bold;
+  font-size: 12px;
+  color: #dcd9d9;
+  font-weight: normal;
   line-height: 1;
 }
 .post-sticky-flag {
