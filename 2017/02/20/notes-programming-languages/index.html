@@ -94,7 +94,7 @@
 <meta property="og:site_name" content="HYPJUDY">
 <meta property="og:description" content="Notes of Programming Languages, Part A by Dan Grossman, University of Washington in Coursera.">
 <meta property="og:image" content="http://yoursite.com/images/notes-programming-languages/hw1_100.jpg">
-<meta property="og:updated_time" content="2017-03-08T10:58:18.488Z">
+<meta property="og:updated_time" content="2017-03-10T12:20:19.655Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="[Notes] Programming Languages">
 <meta name="twitter:description" content="Notes of Programming Languages, Part A by Dan Grossman, University of Washington in Coursera.">
@@ -411,7 +411,28 @@
 <li><em>Libraries</em>: What facilities does the language(or a well-known project) provide “standard”:</li>
 <li><em>Tools</em>: What do language implementations provide to make your job easier?</li>
 </ul>
-
+<h1 id="Section2"><a href="#Section2" class="headerlink" title="Section2"></a>Section2</h1><h2 id="Conceptual-Ways-to-Build-New-Types"><a href="#Conceptual-Ways-to-Build-New-Types" class="headerlink" title="Conceptual Ways to Build New Types"></a>Conceptual Ways to Build New Types</h2><p>Base types: <code>int</code> <code>bool</code> <code>unit</code> <code>char</code>…<br>Compound types: <code>tuples</code> <code>lists</code> <code>options</code>…<br>Any decent programming language provides these building blocks in some way:</p>
+<ul>
+<li><strong>“Each-of”:</strong> A compound type t describes values that contain <em>each of</em> values of type t1, t2, …, and tn.</li>
+<li><strong>“One-of”:</strong> A compound type t describes values that contain a value of <em>one of</em> the types t1, t2, …, or tn.</li>
+<li><strong>“Self-reference”:</strong> A compound type t may refer to itself in its definition in order to describe recursive data structures like lists and trees.<br>tuples are particular ways of writing paticular records<br>Example:</li>
+<li>Tuples build each-of types: <code>int * bool</code> contains an <code>int</code> <strong>and</strong> a <code>bool</code></li>
+<li>Options build one-of types: <code>int option</code> contains an <code>int</code> <strong>or</strong> it contains no data</li>
+<li>Lists use all three building blocks: <code>int list</code> contains an <code>int</code> <strong>and</strong> another <code>int list</code> <strong>or</strong> it contains no data</li>
+<li><h2 id="Records-Another-Approach-to-“Each-of”-Types"><a href="#Records-Another-Approach-to-“Each-of”-Types" class="headerlink" title="Records: Another Approach to “Each-of” Types"></a>Records: Another Approach to “Each-of” Types</h2></li>
+<li>Record <em>values</em> have fields (any name) holding values <code>{f1 = v1, ..., fn = vn}</code></li>
+<li>Record <em>types</em> have fields (and name) holding values <code>{f1 : t1, ..., fn : tn}</code></li>
+<li>The order of fields in a record value or type never matters (REPL alphabetizes fields just for consistency)</li>
+<li>Building records: <code>{f1 = e1, ..., fn = en}</code></li>
+<li>Accessing pieces: <code>#myfieldname e</code></li>
+</ul>
+<h2 id="By-Name-vs-By-Position-Syntactic-Sugar-and-The-Truth-About-Tuples"><a href="#By-Name-vs-By-Position-Syntactic-Sugar-and-The-Truth-About-Tuples" class="headerlink" title="By Name vs. By Position, Syntactic Sugar, and The Truth About Tuples"></a>By Name vs. By Position, Syntactic Sugar, and The Truth About Tuples</h2><ul>
+<li>Records are “by name” and tuples are “by position.”</li>
+<li><code>(e1, ..., en)</code> is another way of writing <code>{1=e1, ..., n=en}</code></li>
+<li><code>t1*...*tn</code> is another way of writing <code>{1:t1, ..., n:tn}</code></li>
+<li>“Tuples are just <em>syntactic sugar</em> for records with field named 1, 2, …, n”</li>
+</ul>
+<h2 id="Datatype-Bindings-Our-Own-“One-of”-Types"><a href="#Datatype-Bindings-Our-Own-“One-of”-Types" class="headerlink" title="Datatype Bindings: Our Own “One-of” Types"></a>Datatype Bindings: Our Own “One-of” Types</h2>
       
     </div>
 
@@ -579,7 +600,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#command"><span class="nav-number">1.</span> <span class="nav-text">command</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Basic"><span class="nav-number">2.</span> <span class="nav-text">Basic</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Lists"><span class="nav-number">3.</span> <span class="nav-text">Lists</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#Usages"><span class="nav-number">3.1.</span> <span class="nav-text">Usages</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#List-Functions"><span class="nav-number">3.2.</span> <span class="nav-text">List Functions</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Let-Expression"><span class="nav-number">4.</span> <span class="nav-text">Let Expression</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#Nested-Functions"><span class="nav-number">4.1.</span> <span class="nav-text">Nested Functions</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Options"><span class="nav-number">5.</span> <span class="nav-text">Options</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Lack-of-Mutation-and-Benefits-Thereof"><span class="nav-number">6.</span> <span class="nav-text">Lack of Mutation and Benefits Thereof</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#The-Pieces-of-a-Programming-Language"><span class="nav-number">7.</span> <span class="nav-text">The Pieces of a Programming Language</span></a></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#command"><span class="nav-number">1.</span> <span class="nav-text">command</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Basic"><span class="nav-number">2.</span> <span class="nav-text">Basic</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Lists"><span class="nav-number">3.</span> <span class="nav-text">Lists</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#Usages"><span class="nav-number">3.1.</span> <span class="nav-text">Usages</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#List-Functions"><span class="nav-number">3.2.</span> <span class="nav-text">List Functions</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Let-Expression"><span class="nav-number">4.</span> <span class="nav-text">Let Expression</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#Nested-Functions"><span class="nav-number">4.1.</span> <span class="nav-text">Nested Functions</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Options"><span class="nav-number">5.</span> <span class="nav-text">Options</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Lack-of-Mutation-and-Benefits-Thereof"><span class="nav-number">6.</span> <span class="nav-text">Lack of Mutation and Benefits Thereof</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#The-Pieces-of-a-Programming-Language"><span class="nav-number">7.</span> <span class="nav-text">The Pieces of a Programming Language</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Section2"><span class="nav-number"></span> <span class="nav-text">Section2</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#Conceptual-Ways-to-Build-New-Types"><span class="nav-number">1.</span> <span class="nav-text">Conceptual Ways to Build New Types</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Records-Another-Approach-to-“Each-of”-Types"><span class="nav-number">2.</span> <span class="nav-text">Records: Another Approach to “Each-of” Types</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#By-Name-vs-By-Position-Syntactic-Sugar-and-The-Truth-About-Tuples"><span class="nav-number">3.</span> <span class="nav-text">By Name vs. By Position, Syntactic Sugar, and The Truth About Tuples</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Datatype-Bindings-Our-Own-“One-of”-Types"><span class="nav-number">4.</span> <span class="nav-text">Datatype Bindings: Our Own “One-of” Types</span></a></li></ol></div>
             
 
           </div>
