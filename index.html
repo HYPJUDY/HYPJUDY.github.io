@@ -240,6 +240,403 @@
   
 
   <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2017/03/19/implementation-dip/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="HYPJUDY">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.png">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="HYPJUDY">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                
+                <a class="post-title-link" href="/2017/03/19/implementation-dip/" itemprop="url">
+                  [DIP] Histogram Equalization on Grayscale and Color Image
+                </a>
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Posted on</span>
+              
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2017-03-19T22:10:46+08:00">
+                2017-03-19
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+
+          
+            
+              <span class="post-comments-count">
+                <span class="post-meta-divider">|</span>
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-comment-o"></i>
+                </span>
+                <a href="/2017/03/19/implementation-dip/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count ds-thread-count" data-thread-key="2017/03/19/implementation-dip/" itemprop="commentCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          <p>Histogram equalization is a technique for adjusting image intensities to enhance contrast.<br>
+          <!--noindex-->
+          <div class="post-button text-center">
+            <a class="btn" href="/2017/03/19/implementation-dip/#more" rel="contents">
+              Read more &raquo;
+            </a>
+          </div>
+          <!--/noindex-->
+        
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2017/03/19/paperreading-color-transfer/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="HYPJUDY">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.png">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="HYPJUDY">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                
+                <a class="post-title-link" href="/2017/03/19/paperreading-color-transfer/" itemprop="url">
+                  [PaperReading] Color Transfer between Images, Erik Reinhard et al, 2001
+                </a>
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Posted on</span>
+              
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2017-03-19T00:38:34+08:00">
+                2017-03-19
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+
+          
+            
+              <span class="post-comments-count">
+                <span class="post-meta-divider">|</span>
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-comment-o"></i>
+                </span>
+                <a href="/2017/03/19/paperreading-color-transfer/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count ds-thread-count" data-thread-key="2017/03/19/paperreading-color-transfer/" itemprop="commentCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          <p><strong>Implementation and improvement</strong> of paper: <em>Color Transfer between Images, Erik Reinhard et al, 2001</em> —— A simple statistical analysis to impose one image’s color characteristics on another.<br><div class="group-picture"><div class="group-picture-container"><div class="group-picture-row"><div class="group-picture-column"  style="width: 33.333333333333336%;"><img src="/images/cvpr/10_source.bmp" alt=""></div><div class="group-picture-column"  style="width: 33.333333333333336%;"><img src="/images/cvpr/10_result.bmp" alt=""></div><div class="group-picture-column"  style="width: 33.333333333333336%;"><img src="/images/cvpr/10_target.bmp" alt=""></div></div><div class="group-picture-row"></div></div></div></p>
+<p>I put forward a method called <a href="#PureColorGuidedStyle">PureColorGuidedStyle</a> which is a easier, faster more controllable version based on this paper’s method. It can obtain better results most of the time.<br><div class="group-picture"><div class="group-picture-container"><div class="group-picture-row"><div class="group-picture-column"  style="width: 33.333333333333336%;"><img src="/images/cvpr/10_source.bmp" alt=""></div><div class="group-picture-column"  style="width: 33.333333333333336%;"><img src="/images/cvpr/12_result1.5.bmp" alt=""></div><div class="group-picture-column"  style="width: 33.333333333333336%;"><img src="/images/cvpr/12_result3.bmp" alt=""></div></div><div class="group-picture-row"><div class="group-picture-column"  style="width: 100%;"><img src="/images/cvpr/12_target.bmp" alt=""></div></div></div></div></p>
+          <!--noindex-->
+          <div class="post-button text-center">
+            <a class="btn" href="/2017/03/19/paperreading-color-transfer/#more" rel="contents">
+              Read more &raquo;
+            </a>
+          </div>
+          <!--/noindex-->
+        
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2017/03/16/assignment-software-testing/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="HYPJUDY">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.png">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="HYPJUDY">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                
+                <a class="post-title-link" href="/2017/03/16/assignment-software-testing/" itemprop="url">
+                  [Assignment] Software Testing
+                </a>
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Posted on</span>
+              
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2017-03-16T21:10:01+08:00">
+                2017-03-16
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+
+          
+            
+              <span class="post-comments-count">
+                <span class="post-meta-divider">|</span>
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-comment-o"></i>
+                </span>
+                <a href="/2017/03/16/assignment-software-testing/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count ds-thread-count" data-thread-key="2017/03/16/assignment-software-testing/" itemprop="commentCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          <p>Assignments of Software Testing course taught by Cai guoyang, SYSU.<br>Assignment 1<br>
+          <!--noindex-->
+          <div class="post-button text-center">
+            <a class="btn" href="/2017/03/16/assignment-software-testing/#more" rel="contents">
+              Read more &raquo;
+            </a>
+          </div>
+          <!--/noindex-->
+        
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
     <link itemprop="mainEntityOfPage" href="http://yoursite.com/2017/03/06/notes-system-design/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -263,7 +660,7 @@
               
                 
                 <a class="post-title-link" href="/2017/03/06/notes-system-design/" itemprop="url">
-                  [NOTES] Software System Analysis and Design
+                  [Notes] Software System Analysis and Design
                 </a>
               
             
@@ -326,7 +723,7 @@
 
       
         
-          <p>1 - Introduction of SE &amp; OOAD<br>2 - UP Unified Process and Agile<br>
+          <p><a href="#1">1 - Introduction of SE &amp; OOAD</a><br><a href="#2">2 - UP Unified Process and Agile</a><br>
           <!--noindex-->
           <div class="post-button text-center">
             <a class="btn" href="/2017/03/06/notes-system-design/#more" rel="contents">
@@ -772,7 +1169,7 @@ style="width: 50%; margin: auto;"></p>
   
 
   <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2017/02/04/markdown-usage/">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2017/02/04/tips-about-blog/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="HYPJUDY">
@@ -794,8 +1191,8 @@ style="width: 50%; margin: auto;"></p>
             
               
                 
-                <a class="post-title-link" href="/2017/02/04/markdown-usage/" itemprop="url">
-                  [Tips] Markdown Usage
+                <a class="post-title-link" href="/2017/02/04/tips-about-blog/" itemprop="url">
+                  [Tips] About Blog
                 </a>
               
             
@@ -830,8 +1227,8 @@ style="width: 50%; margin: auto;"></p>
                 <span class="post-meta-item-icon">
                   <i class="fa fa-comment-o"></i>
                 </span>
-                <a href="/2017/02/04/markdown-usage/#comments" itemprop="discussionUrl">
-                  <span class="post-comments-count ds-thread-count" data-thread-key="2017/02/04/markdown-usage/" itemprop="commentCount"></span>
+                <a href="/2017/02/04/tips-about-blog/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count ds-thread-count" data-thread-key="2017/02/04/tips-about-blog/" itemprop="commentCount"></span>
                 </a>
               </span>
             
@@ -858,10 +1255,10 @@ style="width: 50%; margin: auto;"></p>
 
       
         
-          <p>Some tips for markdown usage.</p>
+          <p>Some tips written down when I am blogging using Hexo, theme Next.</p>
           <!--noindex-->
           <div class="post-button text-center">
-            <a class="btn" href="/2017/02/04/markdown-usage/#more" rel="contents">
+            <a class="btn" href="/2017/02/04/tips-about-blog/#more" rel="contents">
               Read more &raquo;
             </a>
           </div>
@@ -1207,7 +1604,7 @@ style="width: 50%; margin: auto;"></p>
           
             <div class="site-state-item site-state-posts">
               <a href="/archives">
-                <span class="site-state-item-count">7</span>
+                <span class="site-state-item-count">10</span>
                 <span class="site-state-item-name">posts</span>
               </a>
             </div>

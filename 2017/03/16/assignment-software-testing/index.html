@@ -1,0 +1,809 @@
+<!doctype html>
+
+
+
+  
+
+
+<html class="theme-next mist use-motion" lang="en">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
+
+
+
+
+  
+  
+  
+  
+
+  
+    
+    
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+    
+    
+    <link href="//fonts.googleapis.com/css?family=Lato:300,300italic,400,400italic,700,700italic&subset=latin,latin-ext" rel="stylesheet" type="text/css">
+  
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=5.1.0" rel="stylesheet" type="text/css" />
+
+
+  <meta name="keywords" content="Hexo, NexT" />
+
+
+
+
+
+
+
+
+  <link rel="shortcut icon" type="image/x-icon" href="/favicon.png?v=5.1.0" />
+
+
+
+
+
+
+<meta name="description" content="Assignments of Software Testing course taught by Cai guoyang, SYSU.Assignment 1">
+<meta property="og:type" content="article">
+<meta property="og:title" content="[Assignment] Software Testing">
+<meta property="og:url" content="http://yoursite.com/2017/03/16/assignment-software-testing/index.html">
+<meta property="og:site_name" content="HYPJUDY">
+<meta property="og:description" content="Assignments of Software Testing course taught by Cai guoyang, SYSU.Assignment 1">
+<meta property="og:image" content="http://yoursite.com/images/software-testing/prototype-model-draw.jpg">
+<meta property="og:image" content="http://yoursite.com/images/software-testing/prototype-model.png">
+<meta property="og:image" content="http://yoursite.com/images/software-testing/project-risk-management-process.png">
+<meta property="og:image" content="http://yoursite.com/images/software-testing/spiral-model.gif">
+<meta property="og:image" content="http://yoursite.com/images/software-testing/risk-assessment-matrix.png">
+<meta property="og:updated_time" content="2017-03-16T17:34:34.677Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="[Assignment] Software Testing">
+<meta name="twitter:description" content="Assignments of Software Testing course taught by Cai guoyang, SYSU.Assignment 1">
+<meta name="twitter:image" content="http://yoursite.com/images/software-testing/prototype-model-draw.jpg">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Mist',
+    sidebar: {"position":"left","display":"hide","offset":12,"offset_float":0,"b2t":false,"scrollpercent":false},
+    fancybox: true,
+    motion: true,
+    duoshuo: {
+      userId: '0',
+      author: 'Author'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="http://yoursite.com/2017/03/16/assignment-software-testing/"/>
+
+
+
+
+
+  <title> [Assignment] Software Testing | HYPJUDY </title>
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="en">
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+    
+  
+
+  <div class="container one-collumn sidebar-position-left page-post-detail ">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/"  class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">HYPJUDY</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle">What I cannot create, I do not understand.</p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
+            
+            Home
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
+            
+            Archives
+          </a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2017/03/16/assignment-software-testing/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="HYPJUDY">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.png">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="HYPJUDY">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                [Assignment] Software Testing
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Posted on</span>
+              
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2017-03-16T21:10:01+08:00">
+                2017-03-16
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+
+          
+            
+              <span class="post-comments-count">
+                <span class="post-meta-divider">|</span>
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-comment-o"></i>
+                </span>
+                <a href="/2017/03/16/assignment-software-testing/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count ds-thread-count" data-thread-key="2017/03/16/assignment-software-testing/" itemprop="commentCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <p>Assignments of Software Testing course taught by Cai guoyang, SYSU.<br>Assignment 1<br><a id="more"></a></p>
+<h1 id="Assignment-1"><a href="#Assignment-1" class="headerlink" title="Assignment 1"></a>Assignment 1</h1><h2 id="正确理解原型方法对软件生命周期不同阶段的支持，分别给出：辅助或代替分析阶段；辅助设计阶段；代替分析与设计阶段；代替分析、设计和实现阶段；代替全部开发阶段所对应的开发活动执行时间顺序。"><a href="#正确理解原型方法对软件生命周期不同阶段的支持，分别给出：辅助或代替分析阶段；辅助设计阶段；代替分析与设计阶段；代替分析、设计和实现阶段；代替全部开发阶段所对应的开发活动执行时间顺序。" class="headerlink" title="正确理解原型方法对软件生命周期不同阶段的支持，分别给出：辅助或代替分析阶段；辅助设计阶段；代替分析与设计阶段；代替分析、设计和实现阶段；代替全部开发阶段所对应的开发活动执行时间顺序。"></a>正确理解原型方法对软件生命周期不同阶段的支持，分别给出：辅助或代替分析阶段；辅助设计阶段；代替分析与设计阶段；代替分析、设计和实现阶段；代替全部开发阶段所对应的开发活动执行时间顺序。</h2><h3 id="软件生命周期的6个阶段"><a href="#软件生命周期的6个阶段" class="headerlink" title="软件生命周期的6个阶段"></a>软件生命周期的6个阶段</h3><ul>
+<li>可行性分析与计划阶段<ul>
+<li>确定软件开发的总体目标，给出功能、性能、可靠性以及接口等方面的要求，进行完成可行性分析</li>
+<li>估计可利用的资源 (硬件、软件、人力等)、成本、效益、开发进度，进行投资-收益分析，制订开发计划。</li>
+<li>提交可行性分析报告、开发计划等文档。</li>
+</ul>
+</li>
+<li>需求分析阶段<ul>
+<li>对用户提出的要求进行分析，给出详细定义，确定软件系统的各项功能、性能需求和设计约束，确定对文档编制的要求。</li>
+<li>提交软件需求说明、软件规格说明、数据要求说明等文档和初步的用户手册。</li>
+</ul>
+</li>
+<li>设计阶段<ul>
+<li>概要设计：把各项需求转换成软件的体系结构。结构中每一组成部分都是意义明确的模块，每个模块都和某些需求相对应。</li>
+<li>详细设计：对每个模块所要完成的工作进行具体的描述，提供源程序编写的直接依据。</li>
+<li>提交结构设计说明、详细设计说明和测试计划初稿等文档。</li>
+</ul>
+</li>
+<li>实现阶段<ul>
+<li>完成源程序的编码、编译 (或汇编) 和排错调试，得到没有语法错误的程序清单。程序结构良好、清晰易读，且与设计相一致</li>
+<li>编写进度日报、周报和月报 (取决于项目的重要性和规模)。</li>
+<li>提交用户手册、操作手册等面向用户的文档的编写工作，以及测试计划的编制。</li>
+</ul>
+</li>
+<li>测试阶段<ul>
+<li>全面测试目标软件系统，并检查审阅已编制的文档，提交测试分析报告。逐项评价所生产的程序、文档以及开发工作本身，提交项目开发总结报告。</li>
+<li>在整个开发过程中 (即前五个阶段中)，开发集体需要按月编写开发进度月报。</li>
+</ul>
+</li>
+<li>运行与维护阶段<ul>
+<li>软件提交给用户后，在运行使用中得到持续维护，根据用户新提出的需求进行必要而且可能的扩充、删改、更新和升级。</li>
+<li>软件维护包括改正性维护 (发现错误)、适应性维护 (适应运行环境变化)和完善性维护 (增强功能)。</li>
+</ul>
+</li>
+</ul>
+<h3 id="原型方法对软件生命周期不同阶段的支持"><a href="#原型方法对软件生命周期不同阶段的支持" class="headerlink" title="原型方法对软件生命周期不同阶段的支持"></a>原型方法对软件生命周期不同阶段的支持</h3><p>原型开发可以应用于软件生存周期的不同阶段,也可以替代生存期的部分或全部阶段,下面两张图（中的箭头）均表示了原型方法对软件生命周期不同阶段的支持。一般而言，虚线表示辅助作用；实线表示代替作用。若原型辅助或代替了软件生命周期的某（些）阶段，则开发过程中不再经过该阶段而是使用原型方法。例如图一中蓝色箭头指示的过程为使用原型代替软件生命周期中分析与设计阶段的示意图。其他过程的分析类似。<br><img src="/images/software-testing/prototype-model-draw.jpg" alt="Prototype Model and SDLC" title="Prototype Model and SDLC" style="margin: auto;"></p>
+<p><img src="/images/software-testing/prototype-model.png" alt="Prototype Model and SDLC" title="Prototype Model and SDLC, credit: Cai guoyang" style="width: 80%; margin: auto;"></p>
+<p>下面以第二张图为例，分析原型方法对软件生命周期不同阶段的支持和对应的开发活动执行时间顺序</p>
+<ul>
+<li><strong>辅助或代替分析阶段：</strong> 初步需求 -&gt; <em>原型使用</em> -&gt; 需求说明 -&gt; 设计 -&gt; 设计说明 -&gt; 编码 -&gt; 程序系统 -&gt; 编码 -&gt; 软件产品 -&gt; 运行维护</li>
+<li><strong>辅助设计阶段：</strong> 初步需求 -&gt; 分析 -&gt; 需求说明 -&gt; <em>原型使用</em> -&gt;  设计说明 -&gt; 编码 -&gt; 程序系统 -&gt; 编码 -&gt; 软件产品 -&gt; 运行维护</li>
+<li><strong>代替分析与设计阶段：</strong> 初步需求 -&gt; <em>原型使用</em> -&gt;  设计说明 -&gt; 编码 -&gt; 程序系统 -&gt; 编码 -&gt; 软件产品 -&gt; 运行维护</li>
+<li><strong>代替分析、设计和实现阶段：</strong> 初步需求 -&gt; <em>原型使用</em> -&gt; 软件产品 -&gt; 运行维护</li>
+<li><strong>代替全部开发阶段：</strong> <em>原型使用</em></li>
+</ul>
+<h2 id="在敏捷开发方法的12条原则中挑选1条你感兴趣的原则进行风险评估。"><a href="#在敏捷开发方法的12条原则中挑选1条你感兴趣的原则进行风险评估。" class="headerlink" title="在敏捷开发方法的12条原则中挑选1条你感兴趣的原则进行风险评估。"></a>在敏捷开发方法的12条原则中挑选1条你感兴趣的原则进行风险评估。</h2><p>The second principle of the <a href="https://www.agilealliance.org/agile101/12-principles-behind-the-agile-manifesto/" target="_blank" rel="external">12 Principles Behind the Agile Manifesto</a> is as follow:</p>
+<blockquote>
+<p>Welcome changing requirements, even late in development. Agile processes harness change for the customer’s competitive advantage. (即使在开发的后期，需求变更也是允许的)</p>
+</blockquote>
+<h3 id="Project-Risk-Management-Process"><a href="#Project-Risk-Management-Process" class="headerlink" title="Project Risk Management Process"></a>Project Risk Management Process</h3><p>Here’s the agile risk management process refered from <a href="https://www.pmiwdc.org/sites/default/files/presentations/201405/PMIW_PMTools_Presentation_20140520.pdf" target="_blank" rel="external">Susan Parente’s PPT</a> and we focus on <em>Risk Assessment</em> part.<br>(Also see: <a href="https://michaellant.com/2010/06/04/five-simple-steps-to-agile-risk-management/" target="_blank" rel="external">Five Simple Steps to Agile Risk Management</a>)</p>
+<p><img src="/images/software-testing/project-risk-management-process.png" alt="Project Risk Management Process" title="Project Risk Management Process, Credit: Susan Parente" style="width: 40%; margin: auto;"></p>
+<ul>
+<li><strong>Identification</strong> Discovery of a potential risk</li>
+<li><strong>Assessment</strong> Review, analysis, and prioritization<ul>
+<li>What is the <em>probability</em> of the risk occurring? (or Likelyhood)<ul>
+<li>Qualitatively (e.g., “high probability”)</li>
+<li>Quantitatively (e.g., “1 in 1000 chance”)</li>
+</ul>
+</li>
+<li>What is the <em>impact</em> if the risk occurs? (or Consequences)</li>
+<li>Use a Risk Assessment Matrix on <em>Probability</em> and <em>Impact</em> to determine the <em>Risk Exposure</em></li>
+</ul>
+</li>
+<li><strong>Response Planning</strong> To mitigate, avoid, transferor assume assessed risks</li>
+<li><strong>Execution</strong> Of response strategies, as determined in response planning</li>
+<li><em>Planning, Monitoring, Documentation and Communication</em> Foundations of the RMP, essential to all phases; Part of continuous process improvement for the RMP</li>
+</ul>
+<p>This process is similar to the process of Spiral Model Boehm(1988).<br><img src="/images/software-testing/spiral-model.gif" alt="Spiral Model" title="Spiral model - Dr. Joey Paquet Web Site" style="margin: auto;"></p>
+<h3 id="Risk-Assessment-on-‘Welcome-changing-requirements’-Principle"><a href="#Risk-Assessment-on-‘Welcome-changing-requirements’-Principle" class="headerlink" title="Risk Assessment on ‘Welcome changing requirements’ Principle"></a>Risk Assessment on ‘Welcome changing requirements’ Principle</h3><p><img src="/images/software-testing/risk-assessment-matrix.png" alt="Project Risk Management Process" title="Risk Assessment Matrix, Credit: http://www.cbisco.com.au/project-risk-management/" style="margin: auto;"></p>
+<p>With the Risk Assessment Matrix I came out the following risk assessment result. (Risks refer to <a href="https://anhvnn.wordpress.com/2016/11/13/agile-manifesto-and-12-principles-behind-it-advantages-vs-disadvantages/" target="_blank" rel="external">Agile Manifesto and 12 Principles behind it: Advantages vs. Disadvantages</a> and <a href="http://www.niwotridge.com/Essays/AAPrinciples.htm" target="_blank" rel="external"><br>Niwot Ridge Resources: Agile Alliance Principles Examined</a>)</p>
+<table>
+<thead>
+<tr>
+<th style="text-align:center">Level</th>
+<th>Risk</th>
+<th style="text-align:center">Probability</th>
+<th style="text-align:center">Impact</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:center"><strong>Extreme</strong></td>
+<td><strong>Changing requirements are an indicator of big problems at the strategy level.</strong> Changing requirements may be an indication of <em>changing business values, unstable requirements, or a lack of understanding of the desired business outcome.</em> Without <em>stable business success metrics</em>, the creation of software to address unstable requirements is unlikely to be good business strategy at any level above a small group.</td>
+<td style="text-align:center">Likely</td>
+<td style="text-align:center">Major</td>
+</tr>
+<tr>
+<td style="text-align:center"><strong>High</strong></td>
+<td><strong>Scope creep can create the risk of ever-lasting projects.</strong> Flexibility to change course as needed and to ensure delivery of the right product leads to potential for <em>scope creep</em></td>
+<td style="text-align:center">Moderate</td>
+<td style="text-align:center">Moderate</td>
+</tr>
+<tr>
+<td style="text-align:center"><strong>High</strong></td>
+<td><strong>The project is much less predictability</strong>, at the start of the project and during, about what the project is actually going to deliver, especially for large ones.</td>
+<td style="text-align:center">Likely</td>
+<td style="text-align:center">Minor</td>
+</tr>
+<tr>
+<td style="text-align:center"><strong>Moderate</strong></td>
+<td><strong>Harder to define a business case for the project, and harder to negotiate fixed price projects.</strong> Even though the Agile Manifesto take the value of “Customer Collaboration over Contract Negotiation”, a <em>contract</em> is needed in any case. Without the maturity of a strong and clear vision, and the discipline of fixing time-scales and trading scope, this is potentially very dangerous.</td>
+<td style="text-align:center">Moderate</td>
+<td style="text-align:center">Minor</td>
+</tr>
+<tr>
+<td style="text-align:center"><strong>Low</strong></td>
+<td><strong>Prioritizing changes can be extremely difficult</strong>, especially in systems for which there are many stakeholders. Typically, each stakeholder gives different priorities to different changes.</td>
+<td style="text-align:center">Unlikely</td>
+<td style="text-align:center">Minor</td>
+</tr>
+</tbody>
+</table>
+
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+
+    <footer class="post-footer">
+      
+
+      
+        
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2017/03/06/notes-system-design/" rel="next" title="[Notes] Software System Analysis and Design">
+                <i class="fa fa-chevron-left"></i> [Notes] Software System Analysis and Design
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2017/03/19/paperreading-color-transfer/" rel="prev" title="[PaperReading] Color Transfer between Images, Erik Reinhard et al, 2001">
+                [PaperReading] Color Transfer between Images, Erik Reinhard et al, 2001 <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+          
+          </div>
+          
+
+
+          
+  <div class="comments" id="comments">
+    
+      <div class="ds-thread" data-thread-key="2017/03/16/assignment-software-testing/"
+           data-title="[Assignment] Software Testing" data-url="http://yoursite.com/2017/03/16/assignment-software-testing/">
+      </div>
+    
+  </div>
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap" >
+            Table of Contents
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview">
+            Overview
+          </li>
+        </ul>
+      
+
+      <section class="site-overview sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+          <img class="site-author-image" itemprop="image"
+               src="/images/avatar.png"
+               alt="HYPJUDY" />
+          <p class="site-author-name" itemprop="name">HYPJUDY</p>
+           
+              <p class="site-description motion-element" itemprop="description">What I cannot create, I do not understand.</p>
+          
+        </div>
+        <nav class="site-state motion-element">
+        
+          
+            <div class="site-state-item site-state-posts">
+              <a href="/archives">
+                <span class="site-state-item-count">10</span>
+                <span class="site-state-item-name">posts</span>
+              </a>
+            </div>
+          
+
+          
+
+          
+
+        </nav>
+
+        
+
+        <div class="links-of-author motion-element">
+          
+            
+              <span class="links-of-author-item">
+                <a href="https://github.com/hypjudy" target="_blank" title="GitHub">
+                  
+                    <i class="fa fa-fw fa-github"></i>
+                  
+                  GitHub
+                </a>
+              </span>
+            
+          
+        </div>
+
+        
+        
+
+        
+        
+
+        
+
+
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#Assignment-1"><span class="nav-number">1.</span> <span class="nav-text">Assignment 1</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#正确理解原型方法对软件生命周期不同阶段的支持，分别给出：辅助或代替分析阶段；辅助设计阶段；代替分析与设计阶段；代替分析、设计和实现阶段；代替全部开发阶段所对应的开发活动执行时间顺序。"><span class="nav-number">1.1.</span> <span class="nav-text">正确理解原型方法对软件生命周期不同阶段的支持，分别给出：辅助或代替分析阶段；辅助设计阶段；代替分析与设计阶段；代替分析、设计和实现阶段；代替全部开发阶段所对应的开发活动执行时间顺序。</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#软件生命周期的6个阶段"><span class="nav-number">1.1.1.</span> <span class="nav-text">软件生命周期的6个阶段</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#原型方法对软件生命周期不同阶段的支持"><span class="nav-number">1.1.2.</span> <span class="nav-text">原型方法对软件生命周期不同阶段的支持</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#在敏捷开发方法的12条原则中挑选1条你感兴趣的原则进行风险评估。"><span class="nav-number">1.2.</span> <span class="nav-text">在敏捷开发方法的12条原则中挑选1条你感兴趣的原则进行风险评估。</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#Project-Risk-Management-Process"><span class="nav-number">1.2.1.</span> <span class="nav-text">Project Risk Management Process</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Risk-Assessment-on-‘Welcome-changing-requirements’-Principle"><span class="nav-number">1.2.2.</span> <span class="nav-text">Risk Assessment on ‘Welcome changing requirements’ Principle</span></a></li></ol></li></ol></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright" >
+  
+  &copy;  2016 - 
+  <span itemprop="copyrightYear">2017</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">HYPJUDY</span>
+</div>
+
+
+<div class="powered-by">
+  Powered by <a class="theme-link" href="https://hexo.io">Hexo</a>
+</div>
+
+<div class="theme-info">
+  Theme -
+  <a class="theme-link" href="https://github.com/iissnan/hexo-theme-next">
+    NexT.Mist
+  </a>
+</div>
+
+
+        
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+    
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+  
+  <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+
+  
+  <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+
+  
+  <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+
+  
+  <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.0"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.0"></script>
+
+
+
+  
+  
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.0"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.0"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.0"></script>
+
+
+
+  
+
+  
+    
+  
+
+  <script type="text/javascript">
+    var duoshuoQuery = {short_name:"hypjudy"};
+    (function() {
+      var ds = document.createElement('script');
+      ds.type = 'text/javascript';ds.async = true;
+      ds.id = 'duoshuo-script';
+      ds.src = (document.location.protocol == 'https:' ? 'https:' : 'http:') + '//static.duoshuo.com/embed.js';
+      ds.charset = 'UTF-8';
+      (document.getElementsByTagName('head')[0]
+      || document.getElementsByTagName('body')[0]).appendChild(ds);
+    })();
+  </script>
+
+  
+    
+    
+    <script src="/lib/ua-parser-js/dist/ua-parser.min.js?v=0.7.9"></script>
+    <script src="/js/src/hook-duoshuo.js"></script>
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+
+  
+  
+    <script type="text/x-mathjax-config">
+      MathJax.Hub.Config({
+        tex2jax: {
+          inlineMath: [ ['$','$'], ["\\(","\\)"]  ],
+          processEscapes: true,
+          skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+        }
+      });
+    </script>
+
+    <script type="text/x-mathjax-config">
+      MathJax.Hub.Queue(function() {
+        var all = MathJax.Hub.getAllJax(), i;
+        for (i=0; i < all.length; i += 1) {
+          all[i].SourceElement().parentNode.className += ' has-jax';
+        }
+      });
+    </script>
+    <script type="text/javascript" src="//cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+  
+
+
+  
+
+  
+
+  
+
+
+  
+
+</body>
+</html>

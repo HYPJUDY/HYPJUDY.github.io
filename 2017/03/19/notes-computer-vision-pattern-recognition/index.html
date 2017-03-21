@@ -1,0 +1,710 @@
+<!doctype html>
+
+
+
+  
+
+
+<html class="theme-next mist use-motion" lang="en">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
+
+
+
+
+  
+  
+  
+  
+
+  
+    
+    
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+    
+    
+    <link href="//fonts.googleapis.com/css?family=Lato:300,300italic,400,400italic,700,700italic&subset=latin,latin-ext" rel="stylesheet" type="text/css">
+  
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=5.1.0" rel="stylesheet" type="text/css" />
+
+
+  <meta name="keywords" content="Hexo, NexT" />
+
+
+
+
+
+
+
+
+  <link rel="shortcut icon" type="image/x-icon" href="/favicon.png?v=5.1.0" />
+
+
+
+
+
+
+<meta name="description" content="wait a moment">
+<meta property="og:type" content="article">
+<meta property="og:title" content="[NOTES] Computer Vision and Pattern Recognition">
+<meta property="og:url" content="http://yoursite.com/2017/03/19/notes-computer-vision-pattern-recognition/index.html">
+<meta property="og:site_name" content="HYPJUDY">
+<meta property="og:description" content="wait a moment">
+<meta property="og:image" content="http://yoursite.com/images/cvpr/10_source.bmp">
+<meta property="og:image" content="http://yoursite.com/images/cvpr/10_source.bmp">
+<meta property="og:image" content="http://yoursite.com/images/cvpr/10_source.bmp">
+<meta property="og:image" content="http://yoursite.com/images/cvpr/10_source.bmp">
+<meta property="og:image" content="http://yoursite.com/images/cvpr/10_target.bmp">
+<meta property="og:image" content="http://yoursite.com/images/cvpr/10_result.bmp">
+<meta property="og:updated_time" content="2017-03-19T00:54:00.751Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="[NOTES] Computer Vision and Pattern Recognition">
+<meta name="twitter:description" content="wait a moment">
+<meta name="twitter:image" content="http://yoursite.com/images/cvpr/10_source.bmp">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Mist',
+    sidebar: {"position":"left","display":"hide","offset":12,"offset_float":0,"b2t":false,"scrollpercent":false},
+    fancybox: true,
+    motion: true,
+    duoshuo: {
+      userId: '0',
+      author: 'Author'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="http://yoursite.com/2017/03/19/notes-computer-vision-pattern-recognition/"/>
+
+
+
+
+
+  <title> [NOTES] Computer Vision and Pattern Recognition | HYPJUDY </title>
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="en">
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+    
+  
+
+  <div class="container one-collumn sidebar-position-left page-post-detail ">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/"  class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">HYPJUDY</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle">What I cannot create, I do not understand.</p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
+            
+            Home
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
+            
+            Archives
+          </a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-picture " itemscope itemtype="http://schema.org/Article">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2017/03/19/notes-computer-vision-pattern-recognition/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="HYPJUDY">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.png">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="HYPJUDY">
+    </span>
+
+    
+
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <div class="group-picture"><div class="group-picture-container"><div class="group-picture-row"><div class="group-picture-column" style="width: 100%;"><img src="/images/cvpr/10_source.bmp" alt=""></div></div><div class="group-picture-row"><div class="group-picture-column" style="width: 50%;"><img src="/images/cvpr/10_source.bmp" alt=""></div><div class="group-picture-column" style="width: 50%;"><img src="/images/cvpr/10_source.bmp" alt=""></div></div></div></div>
+<p>wait a moment</p>
+<a id="more"></a>
+<h1 id="Lecture-3-Low-Feature-of-the-Image-Edge-and-Hough-Tranformation"><a href="#Lecture-3-Low-Feature-of-the-Image-Edge-and-Hough-Tranformation" class="headerlink" title="Lecture 3 - Low Feature of the Image: Edge and Hough Tranformation"></a>Lecture 3 - Low Feature of the Image: Edge and Hough Tranformation</h1><h2 id="Edge"><a href="#Edge" class="headerlink" title="Edge"></a>Edge</h2><p><strong>Edge detection</strong> Identify sudden changes (discontinuities) in an image.<br>Edges are caused by a variety of factors:</p>
+<ul>
+<li>surface normal（法向量） discontinuity</li>
+<li>depth discontinuity</li>
+<li>surface color discontinuity</li>
+<li>illumination discontinuity<br>表面法向量不连续</li>
+</ul>
+<p>统计：一块区域内不同的颜色比例</p>
+<p><strong>Image gradient</strong></p>
+<p>Differentiation and convolution</p>
+<p>x方向的算子增强竖直方向；y方向的算子增强水平方向；</p>
+<p>Effects of noise<br>由于有噪声，直接用梯度算子去做，会得到处处都是杂乱无章的信号，看不出哪里是边缘。去除噪声：smooth（一般是高斯）</p>
+<p>人脸 图像到三维 电话号码和邮箱的提取</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line">cimg_forX(img,x) : equivalent to : for (int x = 0; x&lt;img.width(); ++x).</div><div class="line">cimg_forY(img,y) : equivalent to : for (int y = 0; y&lt;img.height(); ++y).</div><div class="line">cimg_forZ(img,z) : equivalent to : for (int z = 0; z&lt;img.depth(); ++z).</div><div class="line">cimg_forC(img,c) : equivalent to : for (int c = 0; c&lt;img.spectrum(); ++c).</div></pre></td></tr></table></figure>
+<p>CImg<t> : Represents an image, having 4 dimensions. (width, height, depth and spectrum)<br>width: Width of the image (in pixels)<br>height: Height of the image (in pixels)<br>spectrum: Number of colour channels<br>depth: Depth of the image/number of frames in a video<br>nPix: Total number of pixels (prod(dim(im)))</t></p>
+<h1 id="Color-Transfer-between-Images-Erik-Reinhard-et-al-2001"><a href="#Color-Transfer-between-Images-Erik-Reinhard-et-al-2001" class="headerlink" title="Color Transfer between Images, Erik Reinhard et al, 2001"></a>Color Transfer between Images, Erik Reinhard et al, 2001</h1><p>A simple statistical analysis to impose one image’s color characteristics on another.</p>
+<p><img src="/images/cvpr/10_source.bmp" style="display: inline-block; width: 25%;"><br><img src="/images/cvpr/10_target.bmp" style="display: inline-block; width: 25%;"><br><img src="/images/cvpr/10_result.bmp" style="display: inline-block; width: 25%;"></p>
+<h2 id="Intuition"><a href="#Intuition" class="headerlink" title="Intuition"></a>Intuition</h2><h3 id="Decorrelated-color-space"><a href="#Decorrelated-color-space" class="headerlink" title="Decorrelated color space"></a>Decorrelated color space</h3><p>Choose an orthogonal color space without correlations between the axes to simplify color modification process: <strong>Ruderman et al.’s perception-based color space lαβ</strong> minimizes correlation between channels for many natural scenes. Additionally, this color space is logarithmic, which means to a first approximation that uniform changes in channel intensity tend to be equally detectable. This space is based on data-driven human perception research that assumes the human visual system is ideally suited for processing natural scenes.</p>
+<h3 id="Statistics-and-color-correction"><a href="#Statistics-and-color-correction" class="headerlink" title="Statistics and color correction"></a>Statistics and color correction</h3><p>Make a synthetic image take on another image’s look and feel. Some aspects of the distribution of data points in lαβ space to transfer between images: <strong>the mean and standard deviations</strong> along each of the three axes suffice.<br>The result’s quality depends on the images’ similarity in composition. Sometimes fail: Manually select two or more pairs of clusters in lαβ space for transformation. Another possible extension would be to compute higher moments such as skew and kurtosis, which are respective measures of the lopsidedness of a distribution and of the thickness of a distribution’s tails. Imposing such higher moments on a second image would shape its distribution of pixel values along each axis to more closely resemble the corresponding distribution in the first image.</p>
+<h2 id="Algorithm"><a href="#Algorithm" class="headerlink" title="Algorithm"></a>Algorithm</h2><ul>
+<li><p><strong>RGB -&gt; lαβ</strong> Converting RGB signals to Ruderman et al.’s perception-based color space lαβ. </p>
+<ul>
+<li>RGB -&gt; LMS. Combining the following two matrices gives the following transformation between RGB and LMS cone space:<br>$$<br>\begin{bmatrix}L \cr M \cr S \cr \end{bmatrix} =<br>\begin{bmatrix}0.3811 &amp; 0.5783 &amp; 0.0402 \cr 0.1967 &amp; 0.7244 &amp; 0.0782 \cr 0.0241 &amp; 0.1228 &amp; 0.8444 \cr \end{bmatrix}<br>\begin{bmatrix}R \cr G \cr B \cr \end{bmatrix}<br>$$<ul>
+<li>RGB -&gt; XYZ<br>$$<br>\begin{bmatrix}X \cr Y \cr Z \cr \end{bmatrix} =<br>\begin{bmatrix}0.5141 &amp; 0.3239 &amp; 0.1604 \cr 0.2651 &amp; 0.6702 &amp; 0.0641 \cr 0.0241 &amp; 0.1228 &amp; 0.8444 \cr \end{bmatrix}<br>\begin{bmatrix}R \cr G \cr B \cr \end{bmatrix}<br>$$</li>
+<li>XYZ -&gt; LMS<br>$$<br>\begin{bmatrix}L \cr M \cr S \cr \end{bmatrix} =<br>\begin{bmatrix}0.3897 &amp; 0.6890 &amp; 0.0787 \cr -0.2298 &amp; 1.1834 &amp; 0.0464 \cr 0.0000 &amp; 0.0000 &amp; 1.0000 \cr \end{bmatrix}<br>\begin{bmatrix}X \cr Y \cr Z \cr \end{bmatrix}<br>$$</li>
+</ul>
+</li>
+<li>Convert the data to logarithmic space to eliminate skew.<br>$$<br>L = logL \\<br>M = logM \\<br>S = logS<br>$$</li>
+<li>LMS -&gt; lαβ<br>$$<br>\begin{bmatrix}l \cr α \cr β \cr \end{bmatrix} =<br>\begin{bmatrix}\frac{1}{\sqrt 3} &amp; 0 &amp; 0 \cr 0 &amp; \frac{1}{\sqrt 6} &amp; 0 \cr 0 &amp; 0 &amp; \frac{1}{\sqrt 2} \cr \end{bmatrix}<br>\begin{bmatrix}1 &amp; 1 &amp; 1 \cr 1 &amp; 1 &amp; -2 \cr 1 &amp; -1 &amp; 0 \cr \end{bmatrix}<br>\begin{bmatrix}L \cr M \cr S \cr \end{bmatrix}<br>$$</li>
+</ul>
+</li>
+<li><p><strong>Color processing(Statistics and color correction)</strong> Make a synthetic image take on another image’s look and feel. More formally this means that we would like some aspects of the distribution of data points in lαβ space to transfer between images.</p>
+<ul>
+<li>Compute the means and standard deviations for each axis(3 in total) separately in lαβ space</li>
+<li>Subtract the mean from the data points<br>$$<br>l^{\ast} = l - \langle l_s \rangle \\<br>α^{\ast} = α - \langle α_s \rangle \\<br>β^{\ast} = β - \langle β_s \rangle<br>$$</li>
+<li>scale the data points comprising the synthetic image by factors determined by the respective standard deviations:<br>$$<br>l^{‘} = {\sigma_t^l \over \sigma_s^l} l^{\ast} \\<br>α^{‘} = {\sigma_t^\alpha \over \sigma_s^\alpha} α^{\ast} \\<br>β^{‘} = {\sigma_t^\beta \over \sigma_s^\beta} β^{\ast}<br>$$</li>
+<li>Add the averages computed for the photograph<br>$$<br>l^{‘’} = l^{‘} + \langle l_t \rangle \\<br>α^{‘’} = α^{‘} + \langle α_t \rangle \\<br>β^{‘’} = β^{‘} + \langle β_t \rangle<br>$$</li>
+</ul>
+</li>
+<li><strong>lαβ -&gt; RGB</strong> Transfer result in lαβ to RGB to display it.<ul>
+<li>lαβ -&gt; LMS<br>$$<br>\begin{bmatrix}L \cr M \cr S \cr \end{bmatrix} =<br>\begin{bmatrix}1 &amp; 1 &amp; 1 \cr 1 &amp; 1 &amp; -1 \cr 1 &amp; -2 &amp; 0 \cr \end{bmatrix}<br>\begin{bmatrix}\frac{1}{\sqrt 3} &amp; 0 &amp; 0 \cr 0 &amp; \frac{1}{\sqrt 6} &amp; 0 \cr 0 &amp; 0 &amp; \frac{1}{\sqrt 2} \cr \end{bmatrix}<br>\begin{bmatrix}l \cr α \cr β \cr \end{bmatrix}<br>$$</li>
+<li>Raising the pixel values to the power ten to go back to linear space.<br>$$<br>L = L^{10} \\<br>M = M^{10} \\<br>S = S^{10}<br>$$</li>
+<li>LMS -&gt; RGB<br>$$<br>\begin{bmatrix}R \cr G \cr B \cr \end{bmatrix} =<br>\begin{bmatrix}4.4679 &amp; -3.5873 &amp; 0.1193 \cr -1.2186 &amp; 2.3809 &amp; -0.1624 \cr 0.0497 &amp; 0.2439 &amp; 1.2045 \cr \end{bmatrix}<br>\begin{bmatrix}L \cr M \cr S \cr \end{bmatrix}<br>$$</li>
+</ul>
+</li>
+</ul>
+<h2 id="Implementation"><a href="#Implementation" class="headerlink" title="Implementation"></a>Implementation</h2><p>Implement with <a href="http://cimg.eu/" target="_blank" rel="external">The CImg Library</a> in C++ language. Test on Visual Studio 2015, C++11. Images should be of <code>bmp</code> format(much easier to convert by <a href="https://www.imagemagick.org/script/index.php" target="_blank" rel="external">ImageMagick</a>).<br>But for a first understanding of the algorithm, I recommend reading this <a href="https://github.com/hangong/reinhard_color_transfer" target="_blank" rel="external">MATLAB version written by hangong</a> if you are familiar with MATLAB.</p>
+<ul>
+<li><p><strong>RGB -&gt; lαβ</strong> &lt;=&gt; RGB -&gt; LMS -&gt; logarithmic space -&gt; lαβ</p>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div></pre></td><td class="code"><pre><div class="line">CImg&lt;<span class="keyword">float</span>&gt; RGB2Lab(CImg&lt;<span class="keyword">unsigned</span> <span class="keyword">int</span>&gt; RGBimg) &#123;</div><div class="line">    <span class="keyword">if</span> (RGBimg<span class="number">._</span>spectrum != <span class="number">3</span>) &#123; <span class="comment">// Number of colour channels</span></div><div class="line">        <span class="built_in">cerr</span> &lt;&lt; <span class="string">"RGB2Lab(): Instance is not a RGB image."</span> &lt;&lt; <span class="built_in">endl</span>;</div><div class="line">    &#125;</div><div class="line">    CImg&lt;<span class="keyword">float</span>&gt; Labimg(RGBimg<span class="number">._</span>width, RGBimg<span class="number">._</span>height, <span class="number">1</span>, <span class="number">3</span>, <span class="number">0</span>); <span class="comment">// w,h,depth,spectrum,initVal</span></div><div class="line">    <span class="keyword">float</span> R, G, B, L, M, S, l, alpha, beta;</div><div class="line">    cimg_forXY(RGBimg, x, y) &#123;</div><div class="line">        R = cimg::max(<span class="number">1.0</span> * RGBimg(x, y, <span class="number">0</span>) / <span class="number">255</span>, <span class="number">1.0</span> / <span class="number">255</span>); <span class="comment">// must be 1.0f, or 1/255 will be zero!!</span></div><div class="line">        G = cimg::max(<span class="number">1.0</span> * RGBimg(x, y, <span class="number">1</span>) / <span class="number">255</span>, <span class="number">1.0</span> / <span class="number">255</span>);</div><div class="line">        B = cimg::max(<span class="number">1.0</span> * RGBimg(x, y, <span class="number">2</span>) / <span class="number">255</span>, <span class="number">1.0</span> / <span class="number">255</span>);</div><div class="line"></div><div class="line">        <span class="comment">// RGB -&gt; LMS</span></div><div class="line">        L = <span class="number">0.3811f</span>*R + <span class="number">0.5783f</span>*G + <span class="number">0.0402f</span>*B;</div><div class="line">        M = <span class="number">0.1967f</span>*R + <span class="number">0.7244f</span>*G + <span class="number">0.0782f</span>*B;</div><div class="line">        S = <span class="number">0.0241f</span>*R + <span class="number">0.1288f</span>*G + <span class="number">0.8444f</span>*B;</div><div class="line">        <span class="comment">// Convert the data to logarithmic space</span></div><div class="line">        L = <span class="built_in">log10</span>(L); <span class="comment">// log(x), x &gt; 0</span></div><div class="line">        M = <span class="built_in">log10</span>(M);</div><div class="line">        S = <span class="built_in">log10</span>(S);</div><div class="line">        <span class="comment">// LMS -&gt; Lab</span></div><div class="line">        l = <span class="number">1.0</span> / <span class="built_in">sqrt</span>(<span class="number">3</span>)*L + <span class="number">1.0</span> / <span class="built_in">sqrt</span>(<span class="number">3</span>)*M + <span class="number">1.0</span> / <span class="built_in">sqrt</span>(<span class="number">3</span>)*S;</div><div class="line">        alpha = <span class="number">1.0</span> / <span class="built_in">sqrt</span>(<span class="number">6</span>)*L + <span class="number">1.0</span> / <span class="built_in">sqrt</span>(<span class="number">6</span>)*M - <span class="number">2</span> / <span class="built_in">sqrt</span>(<span class="number">6</span>)*S;</div><div class="line">        beta = <span class="number">1.0</span> / <span class="built_in">sqrt</span>(<span class="number">2</span>)*L - <span class="number">1.0</span> / <span class="built_in">sqrt</span>(<span class="number">2</span>)*M + <span class="number">0</span> * S;</div><div class="line"></div><div class="line">        Labimg(x, y, <span class="number">0</span>) = l;</div><div class="line">        Labimg(x, y, <span class="number">1</span>) = alpha;</div><div class="line">        Labimg(x, y, <span class="number">2</span>) = beta;</div><div class="line">    &#125;</div><div class="line">    <span class="keyword">return</span> Labimg;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+</li>
+<li><p><strong>Color processing(Statistics and color correction)</strong><br>  In function <code>CImg&lt;float&gt; transferOfStatistics(CImg&lt;float&gt; Lab_source, CImg&lt;float&gt; Lab_target)</code>, we impose <code>Lab_target</code> image’s color characteristics on <code>Lab_source</code> and obtain <code>Lab_result</code> image in the following steps.</p>
+<ul>
+<li><p>Compute the means and standard deviations for each axis separately in lαβ space of <code>Lab_source</code> and <code>Lab_target</code>.</p>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">unsigned</span> <span class="keyword">long</span> n_source = Lab_source<span class="number">._</span>width * Lab_source<span class="number">._</span>height;</div><div class="line">cimg_forXYC(Lab_source, x, y, c)</div><div class="line">    mean_source(c) += Lab_source(x, y, c);</div><div class="line">cimg_forX(mean_source, c)</div><div class="line">    mean_source(c) /= n_source;</div><div class="line">cimg_forXYC(Lab_source, x, y, c)</div><div class="line">    std_source(c) += <span class="built_in">pow</span>(Lab_source(x, y, c) - mean_source(c), <span class="number">2.0</span>);</div><div class="line">cimg_forX(mean_source, c)</div><div class="line">    std_source(c) = <span class="built_in">sqrt</span>(std_source(c) / n_source);</div></pre></td></tr></table></figure>
+</li>
+<li><p>Transfer by adjust the mean and standard deviations along each of the three axes: firstly subtract the mean from the data points, and then scale the data points comprising the synthetic image by factors determined by the respective standard deviations, finally add the averages computed for the photograph.</p>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line">cimg_forXYC(Lab_source, x, y, c) &#123;</div><div class="line">    Lab_result(x, y, c) = Lab_source(x, y, c) - mean_source(c);</div><div class="line">    Lab_result(x, y, c) = Lab_result(x, y, c) * (std_target(c) / std_source(c));</div><div class="line">    Lab_result(x, y, c) = Lab_result(x, y, c) + mean_target(c);</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+</li>
+</ul>
+</li>
+<li><p><strong>lαβ -&gt; RGB</strong><br>Function <code>CImg&lt;unsigned int&gt; Lab2RGB(CImg&lt;float&gt; Labimg)</code> is the inverse process of <code>CImg&lt;float&gt; RGB2Lab(CImg&lt;unsigned int&gt; RGBimg)</code></p>
+<ul>
+<li><p>lαβ -&gt; LMS</p>
+  <figure class="highlight cpp"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">L = <span class="built_in">sqrt</span>(<span class="number">3.0</span>) / <span class="number">3.0</span> * l + <span class="built_in">sqrt</span>(<span class="number">6</span>) / <span class="number">6.0</span> * alpha + <span class="built_in">sqrt</span>(<span class="number">2</span>) / <span class="number">2.0</span> * beta;</div><div class="line">M = <span class="built_in">sqrt</span>(<span class="number">3.0</span>) / <span class="number">3.0</span> * l + <span class="built_in">sqrt</span>(<span class="number">6</span>) / <span class="number">6.0</span> * alpha - <span class="built_in">sqrt</span>(<span class="number">2</span>) / <span class="number">2.0</span> * beta;</div><div class="line">S = <span class="built_in">sqrt</span>(<span class="number">3.0</span>) / <span class="number">3.0</span> * l - <span class="built_in">sqrt</span>(<span class="number">6</span>) / <span class="number">3.0</span> * alpha - <span class="number">0</span> * beta;</div></pre></td></tr></table></figure>
+</li>
+<li><p>Raising the pixel values to the power ten to go back to linear space.</p>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">L = <span class="built_in">pow</span>(<span class="number">10.0</span>, L);</div><div class="line">M = <span class="built_in">pow</span>(<span class="number">10.0</span>, M);</div><div class="line">S = <span class="built_in">pow</span>(<span class="number">10.0</span>, S);</div></pre></td></tr></table></figure>
+</li>
+<li><p>LMS -&gt; RGB</p>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">R = <span class="number">4.4679</span>*L - <span class="number">3.5873</span>*M + <span class="number">0.1193</span>*S;</div><div class="line">G = <span class="number">-1.2186</span>*L + <span class="number">2.3809</span>*M - <span class="number">0.1624</span>*S;</div><div class="line">B = <span class="number">0.0497</span>*L - <span class="number">0.2439</span>*M + <span class="number">1.2045</span>*S;</div></pre></td></tr></table></figure>
+</li>
+</ul>
+</li>
+</ul>
+<h3 id="Results"><a href="#Results" class="headerlink" title="Results"></a>Results</h3>
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+
+    <footer class="post-footer">
+      
+
+      
+        
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2017/03/16/assignment-software-testing/" rel="next" title="[Assignment] Software Testing">
+                <i class="fa fa-chevron-left"></i> [Assignment] Software Testing
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+          
+          </div>
+          
+
+
+          
+  <div class="comments" id="comments">
+    
+      <div class="ds-thread" data-thread-key="2017/03/19/notes-computer-vision-pattern-recognition/"
+           data-title="[NOTES] Computer Vision and Pattern Recognition" data-url="http://yoursite.com/2017/03/19/notes-computer-vision-pattern-recognition/">
+      </div>
+    
+  </div>
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap" >
+            Table of Contents
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview">
+            Overview
+          </li>
+        </ul>
+      
+
+      <section class="site-overview sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+          <img class="site-author-image" itemprop="image"
+               src="/images/avatar.png"
+               alt="HYPJUDY" />
+          <p class="site-author-name" itemprop="name">HYPJUDY</p>
+           
+              <p class="site-description motion-element" itemprop="description">What I cannot create, I do not understand.</p>
+          
+        </div>
+        <nav class="site-state motion-element">
+        
+          
+            <div class="site-state-item site-state-posts">
+              <a href="/archives">
+                <span class="site-state-item-count">9</span>
+                <span class="site-state-item-name">posts</span>
+              </a>
+            </div>
+          
+
+          
+
+          
+
+        </nav>
+
+        
+
+        <div class="links-of-author motion-element">
+          
+            
+              <span class="links-of-author-item">
+                <a href="https://github.com/hypjudy" target="_blank" title="GitHub">
+                  
+                    <i class="fa fa-fw fa-github"></i>
+                  
+                  GitHub
+                </a>
+              </span>
+            
+          
+        </div>
+
+        
+        
+
+        
+        
+
+        
+
+
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#Lecture-3-Low-Feature-of-the-Image-Edge-and-Hough-Tranformation"><span class="nav-number">1.</span> <span class="nav-text">Lecture 3 - Low Feature of the Image: Edge and Hough Tranformation</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#Edge"><span class="nav-number">1.1.</span> <span class="nav-text">Edge</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Color-Transfer-between-Images-Erik-Reinhard-et-al-2001"><span class="nav-number">2.</span> <span class="nav-text">Color Transfer between Images, Erik Reinhard et al, 2001</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#Intuition"><span class="nav-number">2.1.</span> <span class="nav-text">Intuition</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#Decorrelated-color-space"><span class="nav-number">2.1.1.</span> <span class="nav-text">Decorrelated color space</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Statistics-and-color-correction"><span class="nav-number">2.1.2.</span> <span class="nav-text">Statistics and color correction</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Algorithm"><span class="nav-number">2.2.</span> <span class="nav-text">Algorithm</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Implementation"><span class="nav-number">2.3.</span> <span class="nav-text">Implementation</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#Results"><span class="nav-number">2.3.1.</span> <span class="nav-text">Results</span></a></li></ol></li></ol></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright" >
+  
+  &copy;  2016 - 
+  <span itemprop="copyrightYear">2017</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">HYPJUDY</span>
+</div>
+
+
+<div class="powered-by">
+  Powered by <a class="theme-link" href="https://hexo.io">Hexo</a>
+</div>
+
+<div class="theme-info">
+  Theme -
+  <a class="theme-link" href="https://github.com/iissnan/hexo-theme-next">
+    NexT.Mist
+  </a>
+</div>
+
+
+        
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+    
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+  
+  <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+
+  
+  <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+
+  
+  <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+
+  
+  <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.0"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.0"></script>
+
+
+
+  
+  
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.0"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.0"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.0"></script>
+
+
+
+  
+
+  
+    
+  
+
+  <script type="text/javascript">
+    var duoshuoQuery = {short_name:"hypjudy"};
+    (function() {
+      var ds = document.createElement('script');
+      ds.type = 'text/javascript';ds.async = true;
+      ds.id = 'duoshuo-script';
+      ds.src = (document.location.protocol == 'https:' ? 'https:' : 'http:') + '//static.duoshuo.com/embed.js';
+      ds.charset = 'UTF-8';
+      (document.getElementsByTagName('head')[0]
+      || document.getElementsByTagName('body')[0]).appendChild(ds);
+    })();
+  </script>
+
+  
+    
+    
+    <script src="/lib/ua-parser-js/dist/ua-parser.min.js?v=0.7.9"></script>
+    <script src="/js/src/hook-duoshuo.js"></script>
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+
+  
+  
+    <script type="text/x-mathjax-config">
+      MathJax.Hub.Config({
+        tex2jax: {
+          inlineMath: [ ['$','$'], ["\\(","\\)"]  ],
+          processEscapes: true,
+          skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+        }
+      });
+    </script>
+
+    <script type="text/x-mathjax-config">
+      MathJax.Hub.Queue(function() {
+        var all = MathJax.Hub.getAllJax(), i;
+        for (i=0; i < all.length; i += 1) {
+          all[i].SourceElement().parentNode.className += ' has-jax';
+        }
+      });
+    </script>
+    <script type="text/javascript" src="//cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+  
+
+
+  
+
+  
+
+  
+
+
+  
+
+</body>
+</html>

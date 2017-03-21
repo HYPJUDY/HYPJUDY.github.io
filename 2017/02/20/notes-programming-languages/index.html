@@ -94,7 +94,7 @@
 <meta property="og:site_name" content="HYPJUDY">
 <meta property="og:description" content="Notes of Programming Languages, Part A by Dan Grossman, University of Washington in Coursera.">
 <meta property="og:image" content="http://yoursite.com/images/notes-programming-languages/hw1_100.jpg">
-<meta property="og:updated_time" content="2017-03-10T12:20:19.655Z">
+<meta property="og:updated_time" content="2017-03-11T08:08:46.562Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="[Notes] Programming Languages">
 <meta name="twitter:description" content="Notes of Programming Languages, Part A by Dan Grossman, University of Washington in Coursera.">
@@ -432,7 +432,20 @@
 <li><code>t1*...*tn</code> is another way of writing <code>{1:t1, ..., n:tn}</code></li>
 <li>“Tuples are just <em>syntactic sugar</em> for records with field named 1, 2, …, n”</li>
 </ul>
-<h2 id="Datatype-Bindings-Our-Own-“One-of”-Types"><a href="#Datatype-Bindings-Our-Own-“One-of”-Types" class="headerlink" title="Datatype Bindings: Our Own “One-of” Types"></a>Datatype Bindings: Our Own “One-of” Types</h2>
+<h2 id="Datatype-Bindings-Our-Own-“One-of”-Types"><a href="#Datatype-Bindings-Our-Own-“One-of”-Types" class="headerlink" title="Datatype Bindings: Our Own “One-of” Types"></a>Datatype Bindings: Our Own “One-of” Types</h2><p>Datatype bindings, our third kind of binding after variable bindings and function bindings<br><strong>Build datatype values</strong></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">datatype mytype = TwoInts of int * int</div><div class="line">                  | Str of string</div><div class="line">                  | Pizza</div></pre></td></tr></table></figure>
+<ul>
+<li>Adds a new type <code>mytype</code> to the environment</li>
+<li>Adds <em>constructors</em> to the environment: <code>TwoInts</code>, <code>Str</code> and <code>Pizza</code></li>
+<li>A constructor is (among other things), a function that makes values of the new type (or is a value of the new type):</li>
+</ul>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">TwoInts : int * int -&gt; mytype</div><div class="line">Str : string -&gt; mytype</div><div class="line">Pizza : mytype</div></pre></td></tr></table></figure>
+<p><strong>Access a datatype value</strong></p>
+<ol>
+<li>Check what <em>variant</em> it is (what constructor made it) &lt;- <code>null</code> and <code>isSome</code></li>
+<li>Extract the <em>data</em> (if that variant has any) &lt;- <code>hd</code>, <code>tl</code> and <code>valOf</code></li>
+</ol>
+
       
     </div>
 
@@ -462,8 +475,8 @@
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
-              <a href="/2017/02/04/markdown-usage/" rel="next" title="[Tips] Markdown Usage">
-                <i class="fa fa-chevron-left"></i> [Tips] Markdown Usage
+              <a href="/2017/02/04/tips-about-blog/" rel="next" title="[Tips] About Blog">
+                <i class="fa fa-chevron-left"></i> [Tips] About Blog
               </a>
             
           </div>
@@ -550,7 +563,7 @@
           
             <div class="site-state-item site-state-posts">
               <a href="/archives">
-                <span class="site-state-item-count">7</span>
+                <span class="site-state-item-count">10</span>
                 <span class="site-state-item-name">posts</span>
               </a>
             </div>
@@ -765,6 +778,26 @@
   
 
   
+  
+    <script type="text/x-mathjax-config">
+      MathJax.Hub.Config({
+        tex2jax: {
+          inlineMath: [ ['$','$'], ["\\(","\\)"]  ],
+          processEscapes: true,
+          skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+        }
+      });
+    </script>
+
+    <script type="text/x-mathjax-config">
+      MathJax.Hub.Queue(function() {
+        var all = MathJax.Hub.getAllJax(), i;
+        for (i=0; i < all.length; i += 1) {
+          all[i].SourceElement().parentNode.className += ' has-jax';
+        }
+      });
+    </script>
+    <script type="text/javascript" src="//cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
   
 
 

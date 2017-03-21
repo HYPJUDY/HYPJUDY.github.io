@@ -94,7 +94,7 @@
 <meta property="og:site_name" content="HYPJUDY">
 <meta property="og:description" content="What I cannot create, I do not understand">
 <meta property="og:image" content="http://yoursite.com/images/Feynman.jpg">
-<meta property="og:updated_time" content="2017-03-06T06:08:18.733Z">
+<meta property="og:updated_time" content="2017-03-18T16:49:29.794Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Hello World">
 <meta name="twitter:description" content="What I cannot create, I do not understand">
@@ -335,10 +335,10 @@
 <h2 id="Welcome"><a href="#Welcome" class="headerlink" title="Welcome"></a>Welcome</h2><p>This should be my very first post(but in fact all is rewrite on 2017/02/26). It’s a tech blog(most of the time). Although I read <a href="http://mindhacks.cn/2009/02/15/why-you-should-start-blogging-now/" target="_blank" rel="external">Why You Should Start Blogging Now</a> and <a href="http://mindhacks.cn/2009/02/09/writing-is-better-thinking/" target="_blank" rel="external">Writing is Better Thinking</a> years ago, I was too <strong>lazy</strong> to take my first step! Now I wanna write down something. What I study, what I think, what I solve, what I create. </p>
 <p>Thanks this <a href="http://c4fun.cn/archives/page/2/" target="_blank" rel="external">blog</a> aroused my insterst in building an independent blog with <a href="https://hexo.io/" target="_blank" rel="external">hexo</a>+<a href="https://pages.github.com/" target="_blank" rel="external">github pages</a>. I used the theme <a href="https://github.com/luuman/hexo-theme-spfk" target="_blank" rel="external">spfk</a> in the beginning, but now I changed to <a href="https://github.com/iissnan/hexo-theme-next" target="_blank" rel="external">NexT.Mist</a> for its neat and clean design.</p>
 <h2 id="Post"><a href="#Post" class="headerlink" title="Post"></a>Post</h2><p><strong>Create a new post</strong></p>
-<p>Open the Git Shell, cd into the hexo path <code>F:\Hexo</code>,</p>
+<p>Open the Git Shell or just the cmd, cd into the hexo path <code>F:\Hexo</code>,</p>
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">$ hexo new <span class="string">"Hello World"</span></div></pre></td></tr></table></figure>
 <p>Then a new file will be created in <code>F:\Hexo\source\_posts\hello-world.md</code> beginning with<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line">---</div><div class="line">title: Hello World</div><div class="line">date: 2016-08-15 20:55:09</div><div class="line">tags:</div><div class="line">---</div></pre></td></tr></table></figure></p>
-<p>Change the title, filename or anything else if you like. Then write something and save it.<br>More info: <a href="https://hexo.io/docs/writing.html" target="_blank" rel="external">Writing</a></p>
+<p>The above step can skip by manually create a file into the posts directory. (filename must end with <code>.md</code>)<br>Change the title, filename or anything else if you like. Then write something and save it.<br>More info: <a href="https://hexo.io/docs/writing.html" target="_blank" rel="external">Writing</a></p>
 <p><strong>Run server</strong></p>
 <p>Preview your posts locally to ensure everying show as you want.</p>
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">$ hexo server</div></pre></td></tr></table></figure>
@@ -481,7 +481,7 @@
           
             <div class="site-state-item site-state-posts">
               <a href="/archives">
-                <span class="site-state-item-count">7</span>
+                <span class="site-state-item-count">10</span>
                 <span class="site-state-item-name">posts</span>
               </a>
             </div>
@@ -696,6 +696,26 @@
   
 
   
+  
+    <script type="text/x-mathjax-config">
+      MathJax.Hub.Config({
+        tex2jax: {
+          inlineMath: [ ['$','$'], ["\\(","\\)"]  ],
+          processEscapes: true,
+          skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+        }
+      });
+    </script>
+
+    <script type="text/x-mathjax-config">
+      MathJax.Hub.Queue(function() {
+        var all = MathJax.Hub.getAllJax(), i;
+        for (i=0; i < all.length; i += 1) {
+          all[i].SourceElement().parentNode.className += ' has-jax';
+        }
+      });
+    </script>
+    <script type="text/javascript" src="//cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
   
 
 

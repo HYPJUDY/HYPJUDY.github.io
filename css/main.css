@@ -397,7 +397,7 @@ table {
   border-spacing: 0;
   border: 1px solid #ddd;
   font-size: 14px;
-  table-layout: fixed;
+  table-layout: auto;
   word-wrap: break-all;
 }
 table>tbody>tr:nth-of-type(odd) {
@@ -709,9 +709,7 @@ pre .javascript .function {
   float: left;
 }
 .page-post-detail .post-body .group-picture-column {
-  float: none;
   margin-top: 10px;
-  width: auto !important;
 }
 .page-post-detail .post-body .group-picture-column img {
   margin: 0 auto;
@@ -1121,9 +1119,9 @@ pre .javascript .function {
 .post-body .figure .caption {
   margin: 10px auto 15px;
   text-align: center;
-  font-size: 12px;
-  color: #dcd9d9;
-  font-weight: normal;
+  font-size: 14px;
+  color: #999;
+  font-weight: bold;
   line-height: 1;
 }
 .post-sticky-flag {
@@ -1701,7 +1699,7 @@ pre .javascript .function {
   width: 4px;
   height: 4px;
   border-radius: 50%;
-  background: #98de1f;
+  background: #ff74ff;
 }
 .links-of-blogroll {
   font-size: 13px;

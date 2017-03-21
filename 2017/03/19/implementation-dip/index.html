@@ -1,0 +1,921 @@
+<!doctype html>
+
+
+
+  
+
+
+<html class="theme-next mist use-motion" lang="en">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
+
+
+
+
+  
+  
+  
+  
+
+  
+    
+    
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+    
+    
+    <link href="//fonts.googleapis.com/css?family=Lato:300,300italic,400,400italic,700,700italic&subset=latin,latin-ext" rel="stylesheet" type="text/css">
+  
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=5.1.0" rel="stylesheet" type="text/css" />
+
+
+  <meta name="keywords" content="Hexo, NexT" />
+
+
+
+
+
+
+
+
+  <link rel="shortcut icon" type="image/x-icon" href="/favicon.png?v=5.1.0" />
+
+
+
+
+
+
+<meta name="description" content="Histogram equalization is a technique for adjusting image intensities to enhance contrast.">
+<meta property="og:type" content="article">
+<meta property="og:title" content="[DIP] Histogram Equalization on Grayscale and Color Image">
+<meta property="og:url" content="http://yoursite.com/2017/03/19/implementation-dip/index.html">
+<meta property="og:site_name" content="HYPJUDY">
+<meta property="og:description" content="Histogram equalization is a technique for adjusting image intensities to enhance contrast.">
+<meta property="og:image" content="http://yoursite.com/images/dip/9_1_h.jpg">
+<meta property="og:image" content="http://yoursite.com/images/dip/9_2_h.jpg">
+<meta property="og:image" content="http://yoursite.com/images/dip/rgb2hsi.jpg">
+<meta property="og:image" content="http://yoursite.com/images/dip/hsi2rgb.jpg">
+<meta property="og:image" content="http://yoursite.com/images/dip/19.bmp">
+<meta property="og:image" content="http://yoursite.com/images/dip/19_gray.bmp">
+<meta property="og:image" content="http://yoursite.com/images/dip/19_eq.bmp">
+<meta property="og:image" content="http://yoursite.com/images/dip/19_1.bmp">
+<meta property="og:image" content="http://yoursite.com/images/dip/19_2.bmp">
+<meta property="og:image" content="http://yoursite.com/images/dip/19_3.bmp">
+<meta property="og:image" content="http://yoursite.com/images/dip/28.bmp">
+<meta property="og:image" content="http://yoursite.com/images/dip/28_gray.bmp">
+<meta property="og:image" content="http://yoursite.com/images/dip/28_eq.bmp">
+<meta property="og:image" content="http://yoursite.com/images/dip/28_1.bmp">
+<meta property="og:image" content="http://yoursite.com/images/dip/28_2.bmp">
+<meta property="og:image" content="http://yoursite.com/images/dip/28_3.bmp">
+<meta property="og:image" content="http://yoursite.com/images/dip/8.bmp">
+<meta property="og:image" content="http://yoursite.com/images/dip/8_gray.bmp">
+<meta property="og:image" content="http://yoursite.com/images/dip/8_eq.bmp">
+<meta property="og:image" content="http://yoursite.com/images/dip/8_1.bmp">
+<meta property="og:image" content="http://yoursite.com/images/dip/8_2.bmp">
+<meta property="og:image" content="http://yoursite.com/images/dip/8_3.bmp">
+<meta property="og:image" content="http://yoursite.com/images/dip/9.bmp">
+<meta property="og:image" content="http://yoursite.com/images/dip/9_gray.bmp">
+<meta property="og:image" content="http://yoursite.com/images/dip/9_eq.bmp">
+<meta property="og:image" content="http://yoursite.com/images/dip/9_1.bmp">
+<meta property="og:image" content="http://yoursite.com/images/dip/9_2.bmp">
+<meta property="og:image" content="http://yoursite.com/images/dip/9_3.bmp">
+<meta property="og:image" content="http://yoursite.com/images/dip/20.bmp">
+<meta property="og:image" content="http://yoursite.com/images/dip/20_gray.bmp">
+<meta property="og:image" content="http://yoursite.com/images/dip/20_eq.bmp">
+<meta property="og:image" content="http://yoursite.com/images/dip/20_1.bmp">
+<meta property="og:image" content="http://yoursite.com/images/dip/20_2.bmp">
+<meta property="og:image" content="http://yoursite.com/images/dip/20_3.bmp">
+<meta property="og:image" content="http://yoursite.com/images/dip/18.bmp">
+<meta property="og:image" content="http://yoursite.com/images/dip/18_gray.bmp">
+<meta property="og:image" content="http://yoursite.com/images/dip/18_eq.bmp">
+<meta property="og:image" content="http://yoursite.com/images/dip/18_1.bmp">
+<meta property="og:image" content="http://yoursite.com/images/dip/18_2.bmp">
+<meta property="og:image" content="http://yoursite.com/images/dip/18_3.bmp">
+<meta property="og:image" content="http://yoursite.com/images/dip/7.bmp">
+<meta property="og:image" content="http://yoursite.com/images/dip/7_gray.bmp">
+<meta property="og:image" content="http://yoursite.com/images/dip/7_eq.bmp">
+<meta property="og:image" content="http://yoursite.com/images/dip/7_1.bmp">
+<meta property="og:image" content="http://yoursite.com/images/dip/7_2.bmp">
+<meta property="og:image" content="http://yoursite.com/images/dip/7_3.bmp">
+<meta property="og:image" content="http://yoursite.com/images/dip/21.bmp">
+<meta property="og:image" content="http://yoursite.com/images/dip/21_gray.bmp">
+<meta property="og:image" content="http://yoursite.com/images/dip/21_eq.bmp">
+<meta property="og:image" content="http://yoursite.com/images/dip/21_1.bmp">
+<meta property="og:image" content="http://yoursite.com/images/dip/21_2.bmp">
+<meta property="og:image" content="http://yoursite.com/images/dip/21_3.bmp">
+<meta property="og:image" content="http://yoursite.com/images/dip/3.bmp">
+<meta property="og:image" content="http://yoursite.com/images/dip/3_gray.bmp">
+<meta property="og:image" content="http://yoursite.com/images/dip/3_eq.bmp">
+<meta property="og:image" content="http://yoursite.com/images/dip/3_1.bmp">
+<meta property="og:image" content="http://yoursite.com/images/dip/3_2.bmp">
+<meta property="og:image" content="http://yoursite.com/images/dip/3_3.bmp">
+<meta property="og:image" content="http://yoursite.com/images/dip/30.bmp">
+<meta property="og:image" content="http://yoursite.com/images/dip/30_gray.bmp">
+<meta property="og:image" content="http://yoursite.com/images/dip/30_eq.bmp">
+<meta property="og:image" content="http://yoursite.com/images/dip/30_1.bmp">
+<meta property="og:image" content="http://yoursite.com/images/dip/30_2.bmp">
+<meta property="og:image" content="http://yoursite.com/images/dip/30_3.bmp">
+<meta property="og:updated_time" content="2017-03-21T06:43:45.657Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="[DIP] Histogram Equalization on Grayscale and Color Image">
+<meta name="twitter:description" content="Histogram equalization is a technique for adjusting image intensities to enhance contrast.">
+<meta name="twitter:image" content="http://yoursite.com/images/dip/9_1_h.jpg">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Mist',
+    sidebar: {"position":"left","display":"hide","offset":12,"offset_float":0,"b2t":false,"scrollpercent":false},
+    fancybox: true,
+    motion: true,
+    duoshuo: {
+      userId: '0',
+      author: 'Author'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="http://yoursite.com/2017/03/19/implementation-dip/"/>
+
+
+
+
+
+  <title> [DIP] Histogram Equalization on Grayscale and Color Image | HYPJUDY </title>
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="en">
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+    
+  
+
+  <div class="container one-collumn sidebar-position-left page-post-detail ">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/"  class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">HYPJUDY</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle">What I cannot create, I do not understand.</p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
+            
+            Home
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
+            
+            Archives
+          </a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2017/03/19/implementation-dip/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="HYPJUDY">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.png">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="HYPJUDY">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                [DIP] Histogram Equalization on Grayscale and Color Image
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Posted on</span>
+              
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2017-03-19T22:10:46+08:00">
+                2017-03-19
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+
+          
+            
+              <span class="post-comments-count">
+                <span class="post-meta-divider">|</span>
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-comment-o"></i>
+                </span>
+                <a href="/2017/03/19/implementation-dip/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count ds-thread-count" data-thread-key="2017/03/19/implementation-dip/" itemprop="commentCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <p>Histogram equalization is a technique for adjusting image intensities to enhance contrast.<br><a id="more"></a></p>
+<h1 id="Grayscale-Image"><a href="#Grayscale-Image" class="headerlink" title="Grayscale Image"></a>Grayscale Image</h1><h2 id="Derivation"><a href="#Derivation" class="headerlink" title="Derivation"></a>Derivation</h2><p>You are welcome to read my <a href="https://github.com/HYPJUDY/digital-image-processing-hw/blob/master/hw2-Histogram%20and%20Spatial%20Filtering/report2.pdf" target="_blank" rel="external">chinese version derivation</a> of the process of implementing the histogram equalization operation and <a href="https://github.com/HYPJUDY/digital-image-processing-hw/tree/master/hw2-Histogram%20and%20Spatial%20Filtering/code_hw2" target="_blank" rel="external">MATLAB version code</a>. Or you can read <a href="http://www.math.uci.edu/icamp/courses/math77c/demos/hist_eq.pdf" target="_blank" rel="external">this</a>) more detailed and explictly explained derivation.<br>Following derivation without proof of transformation comes from <a href="https://en.wikipedia.org/wiki/Histogram_equalization" target="_blank" rel="external">Wikipedia:Histogram Equalization</a>.<br>Consider a discrete <a href="https://en.wikipedia.org/wiki/Grayscale" target="_blank" rel="external">grayscale image</a> $\{x\}$ and let $n_i$ be the number of occurrences of gray level $i$. <strong>The probability of an occurrence of a pixel of level $i$</strong> in the image is</p>
+<p>$$ p_x(i)=p(x=i)=\frac {n_i}{n}, \quad 0 \leq i&lt;L $$</p>
+<p>$L$ being the total number of gray levels in the image (typically 256), $n$ being the total number of pixels in the image, and $p_{x}(i)$ being in fact the image’s histogram for pixel value $i$, normalized to $[0,1]$.<br>Let us also define the <strong>cumulative distribution function</strong> corresponding to $p_x$ as</p>
+<p>$$cdf_x(i) = \sum_{j=0}^i p_x(j)$$</p>
+<p>which is also the image’s <a href="https://en.wikipedia.org/wiki/Cumulative_distribution_function" target="_blank" rel="external"><strong>accumulated normalized histogram</strong></a>.<br>We would like to create a transformation of the form $y = T(x)$ to produce a new image $\{y\}$, with a <strong>flat histogram</strong>. Such an image would have a <strong>linearized cumulative distribution function (CDF)</strong> across the value range, i.e.</p>
+<p>$$ cdf_{y}(i)=iK$$</p>
+<p>for some constant $K$. The properties of the CDF allow us to perform such a transform (see <a href="https://en.wikipedia.org/wiki/Cumulative_distribution_function#Inverse_distribution_function_.28quantile_function.29" target="_blank" rel="external"><strong>Inverse distribution function</strong></a>); it is defined as</p>
+<p>$$ cdf_{y}(y^{\prime })=cdf_{y}(T(k))=cdf_{x}(k) $$ </p>
+<p>where k is in the range $[0,L]$. Notice that T maps the levels into the range $[0,1]$, since we used a normalized histogram of $\{x\}$. In order to map the values back into their original range, the following simple transformation needs to be applied on the result:</p>
+<p>$$ y^{\prime }=y\cdot (\max\{x\}-\min\{x\})+\min\{x\} $$</p>
+<h2 id="Implementation"><a href="#Implementation" class="headerlink" title="Implementation"></a>Implementation</h2><p>Implement with <a href="http://cimg.eu/" target="_blank" rel="external">The CImg Library</a> in C++ language. Test on Visual Studio 2015, C++11. Images should be of <code>bmp</code> format(much easier to convert by <a href="https://www.imagemagick.org/script/index.php" target="_blank" rel="external">ImageMagick</a>).<br>But for first understanding of the algorithm, I recommend reading my <a href="https://github.com/HYPJUDY/digital-image-processing-hw/tree/master/hw2-Histogram%20and%20Spatial%20Filtering/code_hw2" target="_blank" rel="external">MATLAB version</a> if you are familiar with MATLAB.</p>
+<h3 id="RGB-to-Grayscale"><a href="#RGB-to-Grayscale" class="headerlink" title="RGB to Grayscale"></a>RGB to Grayscale</h3><p>See <a href="http://www.had2know.com/technology/rgb-to-gray-scale-converter.html" target="_blank" rel="external">the RGB to grayscale equation</a>.<br>Suppose the RGB value of a color is (r, g, b), where r, g, and b are integers between 0 and 255. The grayscale weighted average, x, is given by the formula<br>$x = 0.299r + 0.587g + 0.114b$<br>Notice that the colors are not weighted equally. Since pure green is lighter than pure red and pure blue, it has a higher weight. Pure blue is the darkest of the three, so it receives the least weight.</p>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div></pre></td><td class="code"><pre><div class="line">CImg&lt;<span class="keyword">unsigned</span> <span class="keyword">int</span>&gt; rgb2gray(CImg&lt;<span class="keyword">unsigned</span> <span class="keyword">int</span>&gt; rgb_img) &#123;</div><div class="line">    CImg&lt;<span class="keyword">unsigned</span> <span class="keyword">int</span>&gt; gray_img(rgb_img<span class="number">._</span>width, rgb_img<span class="number">._</span>height, <span class="number">1</span>, <span class="number">1</span>, <span class="number">0</span>);</div><div class="line">    cimg_forXY(rgb_img, x, y) &#123;</div><div class="line">        <span class="keyword">int</span> r = rgb_img(x, y, <span class="number">0</span>);</div><div class="line">        <span class="keyword">int</span> g = rgb_img(x, y, <span class="number">1</span>);</div><div class="line">        <span class="keyword">int</span> b = rgb_img(x, y, <span class="number">2</span>);</div><div class="line">        gray_img(x, y) = <span class="number">0.299</span> * r + <span class="number">0.587</span> * g + <span class="number">0.114</span> * b;</div><div class="line">    &#125;</div><div class="line">    <span class="keyword">return</span> gray_img;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<h3 id="Histogram-Calculation"><a href="#Histogram-Calculation" class="headerlink" title="Histogram Calculation"></a>Histogram Calculation</h3><p>The total number of gray levels (number of possible intensity values) $L$ in the image is typically 256, so I use a $256 \times 1$ matrix <code>histogram</code> to store the occurrence of a pixel of level $i$ (haven’t normalized to $[0,1]$). $n_{r_j}$ is the number of pixels of level $r_j$. The image’s histogram for pixel value $i$ is</p>
+<p>$$ histogram(i) = n_{r_j}, \quad 0 \leq i&lt;L $$</p>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line">CImg&lt;<span class="keyword">unsigned</span> <span class="keyword">int</span>&gt; im_histogram(CImg&lt;<span class="keyword">unsigned</span> <span class="keyword">int</span>&gt; input_img) &#123;</div><div class="line">    CImg&lt;<span class="keyword">unsigned</span> <span class="keyword">int</span>&gt; histogram(<span class="number">256</span>, <span class="number">1</span>, <span class="number">1</span>, <span class="number">1</span>, <span class="number">0</span>);</div><div class="line">    cimg_forXY(input_img, x, y) ++histogram[input_img(x, y)];</div><div class="line">    <span class="keyword">return</span> histogram;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<h3 id="Histogram-Equalization"><a href="#Histogram-Equalization" class="headerlink" title="Histogram Equalization"></a>Histogram Equalization</h3><p>First get the input image’s histogram. And then calculate the <strong>cumulative distribution function</strong> corresponding to normalized histogram as</p>
+<p>$$cdf(j) = \sum_{j=0}^k \frac{n_{r_j}}{n}$$</p>
+<p>$n$ being the total number of pixels in the image.<br>Transform input image’s intensity $r_k$ into output image’s intensity $s_k$</p>
+<p>$$ s_k = T(r_k) = round(cdf(r_k) \times (L-1)) $$</p>
+<p>where <code>round()</code> rounds down to the nearest integer. Store $s_k$ into <code>equalized</code> array.</p>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">int</span> count = <span class="number">0</span>;</div><div class="line">cimg_forX(histogram, pos) &#123; <span class="comment">// calculate cdf and equalized transform</span></div><div class="line">    count += histogram[pos];</div><div class="line">    cdf[pos] = <span class="number">1.0</span> * count / number_of_pixels;</div><div class="line">    equalized[pos] = round(cdf[pos] * (L - <span class="number">1</span>));</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p>Finally we get histogram equalization result.</p>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">cimg_forXY(output_img, x, y) output_img(x, y, <span class="number">0</span>) = equalized[input_img(x, y)];</div></pre></td></tr></table></figure>
+<h1 id="Color-Image"><a href="#Color-Image" class="headerlink" title="Color Image"></a>Color Image</h1><p>The above describes histogram equalization on a grayscale image. However it can also be used on color images. Here’s three ways and their implementations.</p>
+<p>Also see: my <a href="https://github.com/HYPJUDY/digital-image-processing-hw/tree/master/hw4-Image%20Restoration%20and%20Color%20Image%20Processing/code_hw4" target="_blank" rel="external">MATLAB version</a> code and <a href="https://github.com/HYPJUDY/digital-image-processing-hw/blob/master/hw4-Image%20Restoration%20and%20Color%20Image%20Processing/report4.pdf" target="_blank" rel="external">chinese version report</a>.</p>
+<h2 id="Independent-histogram-equalization-based-on-color-channel"><a href="#Independent-histogram-equalization-based-on-color-channel" class="headerlink" title="Independent histogram equalization based on color channel"></a>Independent histogram equalization based on color channel</h2><h3 id="Implementation-1"><a href="#Implementation-1" class="headerlink" title="Implementation"></a>Implementation</h3><p>Applying the grayscale image method separately to the Red, Green and Blue channels of the RGB color values of the image and rebuild an RGB image from the three processed channels.</p>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div></pre></td><td class="code"><pre><div class="line">CImg&lt;<span class="keyword">unsigned</span> <span class="keyword">int</span>&gt; R_equalized_img = equalize_hist(origin_rgb_img.get_channel(<span class="number">0</span>));</div><div class="line">CImg&lt;<span class="keyword">unsigned</span> <span class="keyword">int</span>&gt; G_equalized_img = equalize_hist(origin_rgb_img.get_channel(<span class="number">1</span>));</div><div class="line">CImg&lt;<span class="keyword">unsigned</span> <span class="keyword">int</span>&gt; B_equalized_img = equalize_hist(origin_rgb_img.get_channel(<span class="number">2</span>));</div><div class="line">CImg&lt;<span class="keyword">unsigned</span> <span class="keyword">int</span>&gt; rebuild_rgb_img(w, h, <span class="number">1</span>, <span class="number">3</span>, <span class="number">0</span>);</div><div class="line">cimg_forXY(rebuild_rgb_img, x, y) &#123;</div><div class="line">    rebuild_rgb_img(x, y, <span class="number">0</span>) = R_equalized_img(x, y);</div><div class="line">    rebuild_rgb_img(x, y, <span class="number">1</span>) = G_equalized_img(x, y);</div><div class="line">    rebuild_rgb_img(x, y, <span class="number">2</span>) = B_equalized_img(x, y);</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<h3 id="Analysis"><a href="#Analysis" class="headerlink" title="Analysis"></a>Analysis</h3><p><strong>Disadvantage:</strong> Not considering the relevance of R, G and B channel but process then respectively will distort the image. See <a href="https://en.wikipedia.org/wiki/Histogram_equalization" target="_blank" rel="external">Wekipedia</a>:</p>
+<blockquote>
+<p>Applying the same method on the Red, Green, and Blue components of an RGB image may yield dramatic changes in the image’s <a href="https://en.wikipedia.org/wiki/Color_balance" target="_blank" rel="external">color balance</a> since the relative distributions of the color channels change as a result of applying the algorithm.</p>
+</blockquote>
+<p>Here’s an example.<br><img src="/images/dip/9_1_h.jpg" alt=""><br>The R, G and B channel’s histogram are totally different. When we apply independent equalization on them respectively, we get B. The intensities have been better distributen on the histogram but B’s color is out of balance. This is caused by the change of relative distributions of the color channels. For example, A’s green components mostly distribute on low levels/small intensities while B’s green components distribute over the whole levels much more evenly. This makes B looks bluer.</p>
+<h2 id="Histogram-equalization-based-on-average-value-of-color-channel"><a href="#Histogram-equalization-based-on-average-value-of-color-channel" class="headerlink" title="Histogram equalization based on average value of color channel"></a>Histogram equalization based on average value of color channel</h2><p>What we want is a better distributed RGB histogram but not all histograms including color channels. So we can take the three channels as a whole when calculate the histogram.</p>
+<h3 id="Implementation-2"><a href="#Implementation-2" class="headerlink" title="Implementation"></a>Implementation</h3><p>The only difference between the second and first method is that the second method uses an average histogram of the three channels’ histograms.</p>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line">cimg_forXY(redChannel, x, y) &#123;</div><div class="line">    ++histogram[redChannel(x, y)];</div><div class="line">    ++histogram[greenChannel(x, y)];</div><div class="line">    ++histogram[blueChannel(x, y)];</div><div class="line">&#125;</div><div class="line">cimg_forX(histogram, pos) histogram(pos) /= <span class="number">3</span>;</div></pre></td></tr></table></figure>
+<h3 id="Analysis-1"><a href="#Analysis-1" class="headerlink" title="Analysis"></a>Analysis</h3><p>This method considers the relevance of R, G and B channel and gets better results.<br>Here’s an example.<br><img src="/images/dip/9_2_h.jpg" alt=""></p>
+<h2 id="Intensity-component-equalization-based-on-HSI-color-space"><a href="#Intensity-component-equalization-based-on-HSI-color-space" class="headerlink" title="Intensity component equalization based on HSI color space"></a>Intensity component equalization based on HSI color space</h2><h3 id="Implementation-3"><a href="#Implementation-3" class="headerlink" title="Implementation"></a>Implementation</h3><p>The image is first converted to HSI color space, then apply the grayscale method to the luminance without resulting in changes to the hue and saturation of the image.</p>
+<h4 id="Converting-colors-from-RGB-to-HSI"><a href="#Converting-colors-from-RGB-to-HSI" class="headerlink" title="Converting colors from RGB to HSI"></a>Converting colors from RGB to HSI</h4><p>The formula I used comes from Digital Image Processing (3rd Edition): Rafael C. Gonzalez, Richard E.Woods, section 6.2.3 The HSI Color Model. Here I found the same formula from <a href="http://eeweb.poly.edu/~yao/EL5123/lecture2_color_quant.pdf" target="_blank" rel="external">Yao Wang’s PPT</a> for quick reference.<br><img src="/images/dip/rgb2hsi.jpg" alt=""></p>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div></pre></td><td class="code"><pre><div class="line"><span class="comment">// H component</span></div><div class="line">CImg&lt;<span class="keyword">double</span>&gt; numerator(w, h, <span class="number">1</span>, <span class="number">1</span>, <span class="number">0</span>);</div><div class="line">CImg&lt;<span class="keyword">double</span>&gt; denominator(w, h, <span class="number">1</span>, <span class="number">1</span>, <span class="number">0</span>);</div><div class="line">CImg&lt;<span class="keyword">double</span>&gt; theta(w, h, <span class="number">1</span>, <span class="number">1</span>, <span class="number">0</span>);</div><div class="line">cimg_forXY(R, x, y) &#123;</div><div class="line">    numerator(x, y) = <span class="number">0.5</span> * ((R(x, y) - G(x, y)) + (R(x, y) - B(x, y)));</div><div class="line">    denominator(x, y) = <span class="built_in">sqrt</span>((R(x, y) - G(x, y)) * (R(x, y) - G(x, y)) +</div><div class="line">            (R(x, y) - B(x, y)) * (G(x, y) - B(x, y)));</div><div class="line">    theta(x, y) = <span class="built_in">acos</span>(numerator(x, y) / denominator(x, y));</div><div class="line">&#125;</div><div class="line">CImg&lt;<span class="keyword">double</span>&gt; H(theta);</div><div class="line">cimg_forXY(R, x, y)</div><div class="line">    <span class="keyword">if</span> (B(x, y) &gt; G(x, y)) H(x, y) = <span class="number">2</span> * cimg::PI - H(x, y);</div><div class="line"></div><div class="line"><span class="comment">// saturation component</span></div><div class="line">CImg&lt;<span class="keyword">double</span>&gt; num(w, h, <span class="number">1</span>, <span class="number">1</span>, <span class="number">0</span>);</div><div class="line">CImg&lt;<span class="keyword">double</span>&gt; den(w, h, <span class="number">1</span>, <span class="number">1</span>, <span class="number">0</span>);</div><div class="line">CImg&lt;<span class="keyword">double</span>&gt; S(w, h, <span class="number">1</span>, <span class="number">1</span>, <span class="number">0</span>);</div><div class="line">CImg&lt;<span class="keyword">double</span>&gt; I(w, h, <span class="number">1</span>, <span class="number">1</span>, <span class="number">0</span>);</div><div class="line">cimg_forXY(R, x, y) &#123;</div><div class="line">    num(x, y) = cimg::min(R(x, y), G(x, y), B(x, y));</div><div class="line">    den(x, y) = R(x, y) + G(x, y) + B(x, y);</div><div class="line">    <span class="keyword">if</span> (den(x, y) == <span class="number">0</span>) den(x, y) = <span class="number">1e-10</span>f; <span class="comment">// epsilon, avoid 0 division</span></div><div class="line">    S(x, y) = <span class="number">1</span> - <span class="number">3.0</span> * num(x, y) / den(x, y);</div><div class="line">    <span class="keyword">if</span> (S(x, y) == <span class="number">0</span>) H(x, y) = <span class="number">0</span>;</div><div class="line">    <span class="comment">// intensity component</span></div><div class="line">    I(x, y) = (R(x, y) + G(x, y) + G(x, y)) / <span class="number">3.0</span>;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<h4 id="Perform-histogram-equalization-on-the-intensity-channel"><a href="#Perform-histogram-equalization-on-the-intensity-channel" class="headerlink" title="Perform histogram equalization on the intensity channel"></a>Perform histogram equalization on the intensity channel</h4><figure class="highlight cpp"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">CImg&lt;<span class="keyword">unsigned</span> <span class="keyword">int</span>&gt; I_int = equalize_hist(I * <span class="number">255</span>); <span class="comment">// parameter must be integer</span></div><div class="line">cimg_forXY(R, x, y) I(x, y, <span class="number">0</span>) = I_int(x, y) * <span class="number">1.0</span> / <span class="number">255.0</span>;</div></pre></td></tr></table></figure>
+<h4 id="Converting-colors-from-HSI-to-RGB"><a href="#Converting-colors-from-HSI-to-RGB" class="headerlink" title="Converting colors from HSI to RGB"></a>Converting colors from HSI to RGB</h4><p><img src="/images/dip/hsi2rgb.jpg" alt=""></p>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div></pre></td><td class="code"><pre><div class="line"><span class="comment">// new rgb channel</span></div><div class="line">CImg&lt;<span class="keyword">double</span>&gt; r(w, h, <span class="number">1</span>, <span class="number">1</span>, <span class="number">0</span>);</div><div class="line">CImg&lt;<span class="keyword">double</span>&gt; g(w, h, <span class="number">1</span>, <span class="number">1</span>, <span class="number">0</span>);</div><div class="line">CImg&lt;<span class="keyword">double</span>&gt; b(w, h, <span class="number">1</span>, <span class="number">1</span>, <span class="number">0</span>);</div><div class="line"><span class="comment">// RG sector(0&lt;=H&lt;120)</span></div><div class="line">cimg_forXY(H, x, y) &#123;</div><div class="line">    <span class="keyword">if</span> (H(x, y) &gt;= <span class="number">0</span> &amp;&amp; H(x, y) &lt; <span class="number">2</span> * cimg::PI / <span class="number">3</span>) &#123;</div><div class="line">        b(x, y) = I(x, y) * (<span class="number">1</span> - S(x, y));</div><div class="line">        r(x, y) = I(x, y) * (<span class="number">1</span> + ((S(x, y)*<span class="built_in">cos</span>(H(x, y))) / <span class="built_in">cos</span>(cimg::PI/<span class="number">3</span> - H(x, y))));</div><div class="line">        g(x, y) = <span class="number">3</span> * I(x, y) - (r(x, y) + b(x, y));</div><div class="line">    &#125;</div><div class="line">&#125;</div><div class="line"><span class="comment">// GB sector(120&lt;=H&lt;240)</span></div><div class="line">cimg_forXY(H, x, y) &#123;</div><div class="line">    <span class="keyword">if</span> (H(x, y) &gt;= <span class="number">2</span> * cimg::PI / <span class="number">3</span> &amp;&amp; H(x, y) &lt; <span class="number">4</span> * cimg::PI / <span class="number">3</span>) &#123;</div><div class="line">        r(x, y) = I(x, y) * (<span class="number">1</span> - S(x, y));</div><div class="line">        g(x, y) = I(x, y) * (<span class="number">1</span> + ((S(x, y) * <span class="built_in">cos</span>(H(x, y) - <span class="number">2</span>*cimg::PI/<span class="number">3</span>))</div><div class="line">            / <span class="built_in">cos</span>(cimg::PI/<span class="number">3</span> - (H(x, y) - <span class="number">2</span> cimg::PI/<span class="number">3</span>))));</div><div class="line">        b(x, y) = <span class="number">3</span> * I(x, y) - (r(x, y) + g(x, y));</div><div class="line">    &#125;</div><div class="line">&#125;</div><div class="line"><span class="comment">// BR sector(240&lt;=H&lt;=360)</span></div><div class="line">cimg_forXY(H, x, y) &#123;</div><div class="line">    <span class="keyword">if</span> (H(x, y) &gt;= <span class="number">4</span> * cimg::PI / <span class="number">3</span> &amp;&amp; H(x, y) &lt;= <span class="number">2</span> * cimg::PI) &#123;</div><div class="line">        g(x, y) = I(x, y) * (<span class="number">1</span> - S(x, y));</div><div class="line">        b(x, y) = I(x, y) * (<span class="number">1</span> + ((S(x, y) * <span class="built_in">cos</span>(H(x, y) - <span class="number">4</span> * cimg::PI / <span class="number">3</span>))</div><div class="line">            / <span class="built_in">cos</span>(cimg::PI / <span class="number">3</span> - (H(x, y) - <span class="number">4</span> * cimg::PI / <span class="number">3</span>))));</div><div class="line">        r(x, y) = <span class="number">3</span> * I(x, y) - (g(x, y) + b(x, y));</div><div class="line">    &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<h4 id="Rebuild-an-RGB-image-from-the-three-processed-channels"><a href="#Rebuild-an-RGB-image-from-the-three-processed-channels" class="headerlink" title="Rebuild an RGB image from the three processed channels"></a>Rebuild an RGB image from the three processed channels</h4><figure class="highlight cpp"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line">CImg&lt;<span class="keyword">double</span>&gt; output_img(w, h, <span class="number">1</span>, <span class="number">3</span>, <span class="number">0</span>);</div><div class="line">cimg_forXY(output_img, x, y) &#123; <span class="comment">//  0.0 &lt;= value &lt;= 1.0</span></div><div class="line">    output_img(x, y, <span class="number">0</span>) = cimg::min(cimg::max(r(x, y), <span class="number">0</span>), <span class="number">1</span>);</div><div class="line">    output_img(x, y, <span class="number">1</span>) = cimg::min(cimg::max(g(x, y), <span class="number">0</span>), <span class="number">1</span>);</div><div class="line">    output_img(x, y, <span class="number">2</span>) = cimg::min(cimg::max(b(x, y), <span class="number">0</span>), <span class="number">1</span>);</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<h3 id="Analysis-2"><a href="#Analysis-2" class="headerlink" title="Analysis"></a>Analysis</h3><h1 id="Results"><a href="#Results" class="headerlink" title="Results"></a>Results</h1><p>All photos are taken by myself. Feel free to take away if you like.<br>Each group of six images is arranged in two rows in the following order.</p>
+<table>
+<thead>
+<tr>
+<th style="text-align:center">original rgb image</th>
+<th>grayscale image</th>
+<th style="text-align:center">grayscale equalized image</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:center">Independent histogram equalization based on color channel</td>
+<td>Histogram equalization based on average value of color channel</td>
+<td style="text-align:center">Intensity component equalization based on HSI color space</td>
+</tr>
+</tbody>
+</table>
+<p>Histogram equalization usually increases the global contrast of many images, especially when the usable data of the image is represented by close contrast values. But it’s not the case to every image and different methods of processing color image matter a lot. Here’s some examples.</p>
+<h2 id="Case-1-Backgrounds-and-foregrounds-are-both-bright-or-both-dark"><a href="#Case-1-Backgrounds-and-foregrounds-are-both-bright-or-both-dark" class="headerlink" title="Case 1: Backgrounds and foregrounds are both bright or both dark"></a>Case 1: Backgrounds and foregrounds are both bright or both dark</h2><blockquote>
+<p>The method is useful in images with backgrounds and foregrounds that are both bright or both dark. In particular, the method can lead to better views of bone structure in x-ray images, and to better detail in photographs that are over or under-exposed. (<a href="https://en.wikipedia.org/wiki/Histogram_equalization" target="_blank" rel="external">wiki</a>)</p>
+</blockquote>
+<div class="group-picture"><div class="group-picture-container"><div class="group-picture-row"><div class="group-picture-column" style="width: 33.333333333333336%;"><img src="/images/dip/19.bmp" alt=""></div><div class="group-picture-column" style="width: 33.333333333333336%;"><img src="/images/dip/19_gray.bmp" alt=""></div><div class="group-picture-column" style="width: 33.333333333333336%;"><img src="/images/dip/19_eq.bmp" alt=""></div></div><div class="group-picture-row"><div class="group-picture-column" style="width: 33.333333333333336%;"><img src="/images/dip/19_1.bmp" alt=""></div><div class="group-picture-column" style="width: 33.333333333333336%;"><img src="/images/dip/19_2.bmp" alt=""></div><div class="group-picture-column" style="width: 33.333333333333336%;"><img src="/images/dip/19_3.bmp" alt=""></div></div><div class="group-picture-row"></div></div></div>
+<div style="text-align:center">Background and foreground that are both bright.</div>
+
+<hr>
+<div class="group-picture"><div class="group-picture-container"><div class="group-picture-row"><div class="group-picture-column" style="width: 33.333333333333336%;"><img src="/images/dip/28.bmp" alt=""></div><div class="group-picture-column" style="width: 33.333333333333336%;"><img src="/images/dip/28_gray.bmp" alt=""></div><div class="group-picture-column" style="width: 33.333333333333336%;"><img src="/images/dip/28_eq.bmp" alt=""></div></div><div class="group-picture-row"><div class="group-picture-column" style="width: 33.333333333333336%;"><img src="/images/dip/28_1.bmp" alt=""></div><div class="group-picture-column" style="width: 33.333333333333336%;"><img src="/images/dip/28_2.bmp" alt=""></div><div class="group-picture-column" style="width: 33.333333333333336%;"><img src="/images/dip/28_3.bmp" alt=""></div></div><div class="group-picture-row"></div></div></div>
+<div style="text-align:center">Background and foreground that are both dark.</div>
+
+<hr>
+<p>For this situation, the results usually have the following features.</p>
+<table>
+<thead>
+<tr>
+<th style="text-align:center">Method(Best to worst)</th>
+<th style="text-align:center">Effect</th>
+<th style="text-align:center">speed</th>
+<th style="text-align:center">Explaination</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:center"><strong>Histogram equalization based on average value of color channel</strong></td>
+<td style="text-align:center"><strong>Higher saturation and better detail</strong></td>
+<td style="text-align:center">Slowest</td>
+<td style="text-align:center">Considers the relevance of R, G and B channel. The change of luminance increases contrast and the changes of hue and saturation improve the color effect.</td>
+</tr>
+<tr>
+<td style="text-align:center">Intensity component equalization based on HSI color space</td>
+<td style="text-align:center">Darker and less detail</td>
+<td style="text-align:center">Medium</td>
+<td style="text-align:center">Applying equalization to the luminance increases contrast but not adjusting the hue and saturation weaks color in this case</td>
+</tr>
+<tr>
+<td style="text-align:center">Independent histogram equalization based on color channel</td>
+<td style="text-align:center">Changes in the image’s color balance. Greener/bluer in whole.</td>
+<td style="text-align:center">Fastest</td>
+<td style="text-align:center">Not considering the relevance of R, G and B channel but applying the same method on the Red, Green, and Blue components of an RGB image changes the relative distributions of the color channels</td>
+</tr>
+</tbody>
+</table>
+<hr>
+<p>Here are two examples I cannot strictly include them into this case(backgrounds and foregrounds are both bright or dark) but they have the same features.<br><div class="group-picture"><div class="group-picture-container"><div class="group-picture-row"><div class="group-picture-column" style="width: 33.333333333333336%;"><img src="/images/dip/8.bmp" alt=""></div><div class="group-picture-column" style="width: 33.333333333333336%;"><img src="/images/dip/8_gray.bmp" alt=""></div><div class="group-picture-column" style="width: 33.333333333333336%;"><img src="/images/dip/8_eq.bmp" alt=""></div></div><div class="group-picture-row"><div class="group-picture-column" style="width: 33.333333333333336%;"><img src="/images/dip/8_1.bmp" alt=""></div><div class="group-picture-column" style="width: 33.333333333333336%;"><img src="/images/dip/8_2.bmp" alt=""></div><div class="group-picture-column" style="width: 33.333333333333336%;"><img src="/images/dip/8_3.bmp" alt=""></div></div><div class="group-picture-row"></div></div></div></p>
+<div style="text-align:center">Background seems brighter.</div>
+
+<hr>
+<div class="group-picture"><div class="group-picture-container"><div class="group-picture-row"><div class="group-picture-column" style="width: 33.333333333333336%;"><img src="/images/dip/9.bmp" alt=""></div><div class="group-picture-column" style="width: 33.333333333333336%;"><img src="/images/dip/9_gray.bmp" alt=""></div><div class="group-picture-column" style="width: 33.333333333333336%;"><img src="/images/dip/9_eq.bmp" alt=""></div></div><div class="group-picture-row"><div class="group-picture-column" style="width: 33.333333333333336%;"><img src="/images/dip/9_1.bmp" alt=""></div><div class="group-picture-column" style="width: 33.333333333333336%;"><img src="/images/dip/9_2.bmp" alt=""></div><div class="group-picture-column" style="width: 33.333333333333336%;"><img src="/images/dip/9_3.bmp" alt=""></div></div><div class="group-picture-row"></div></div></div>
+<div style="text-align:center">Candles seems brighter.</div>
+
+<hr>
+<h2 id="Case-2-Backgrounds-are-brighter-or-darker"><a href="#Case-2-Backgrounds-are-brighter-or-darker" class="headerlink" title="Case 2: Backgrounds are brighter or darker"></a>Case 2: Backgrounds are brighter or darker</h2><p>It also works well when applied to images with backgrounds much brighter or foregrounds much brighter.</p>
+<div class="group-picture"><div class="group-picture-container"><div class="group-picture-row"><div class="group-picture-column" style="width: 33.333333333333336%;"><img src="/images/dip/20.bmp" alt=""></div><div class="group-picture-column" style="width: 33.333333333333336%;"><img src="/images/dip/20_gray.bmp" alt=""></div><div class="group-picture-column" style="width: 33.333333333333336%;"><img src="/images/dip/20_eq.bmp" alt=""></div></div><div class="group-picture-row"><div class="group-picture-column" style="width: 33.333333333333336%;"><img src="/images/dip/20_1.bmp" alt=""></div><div class="group-picture-column" style="width: 33.333333333333336%;"><img src="/images/dip/20_2.bmp" alt=""></div><div class="group-picture-column" style="width: 33.333333333333336%;"><img src="/images/dip/20_3.bmp" alt=""></div></div><div class="group-picture-row"></div></div></div>
+<div style="text-align:center">Background brighter.</div>
+
+<hr>
+<div class="group-picture"><div class="group-picture-container"><div class="group-picture-row"><div class="group-picture-column" style="width: 33.333333333333336%;"><img src="/images/dip/18.bmp" alt=""></div><div class="group-picture-column" style="width: 33.333333333333336%;"><img src="/images/dip/18_gray.bmp" alt=""></div><div class="group-picture-column" style="width: 33.333333333333336%;"><img src="/images/dip/18_eq.bmp" alt=""></div></div><div class="group-picture-row"><div class="group-picture-column" style="width: 33.333333333333336%;"><img src="/images/dip/18_1.bmp" alt=""></div><div class="group-picture-column" style="width: 33.333333333333336%;"><img src="/images/dip/18_2.bmp" alt=""></div><div class="group-picture-column" style="width: 33.333333333333336%;"><img src="/images/dip/18_3.bmp" alt=""></div></div><div class="group-picture-row"></div></div></div>
+<div style="text-align:center">Foreground brighter.</div>
+
+<hr>
+<div class="group-picture"><div class="group-picture-container"><div class="group-picture-row"><div class="group-picture-column" style="width: 33.333333333333336%;"><img src="/images/dip/7.bmp" alt=""></div><div class="group-picture-column" style="width: 33.333333333333336%;"><img src="/images/dip/7_gray.bmp" alt=""></div><div class="group-picture-column" style="width: 33.333333333333336%;"><img src="/images/dip/7_eq.bmp" alt=""></div></div><div class="group-picture-row"><div class="group-picture-column" style="width: 33.333333333333336%;"><img src="/images/dip/7_1.bmp" alt=""></div><div class="group-picture-column" style="width: 33.333333333333336%;"><img src="/images/dip/7_2.bmp" alt=""></div><div class="group-picture-column" style="width: 33.333333333333336%;"><img src="/images/dip/7_3.bmp" alt=""></div></div><div class="group-picture-row"></div></div></div>
+<div style="text-align:center">Lanterns are brighter.</div>
+
+<hr>
+<div class="group-picture"><div class="group-picture-container"><div class="group-picture-row"><div class="group-picture-column" style="width: 33.333333333333336%;"><img src="/images/dip/21.bmp" alt=""></div><div class="group-picture-column" style="width: 33.333333333333336%;"><img src="/images/dip/21_gray.bmp" alt=""></div><div class="group-picture-column" style="width: 33.333333333333336%;"><img src="/images/dip/21_eq.bmp" alt=""></div></div><div class="group-picture-row"><div class="group-picture-column" style="width: 33.333333333333336%;"><img src="/images/dip/21_1.bmp" alt=""></div><div class="group-picture-column" style="width: 33.333333333333336%;"><img src="/images/dip/21_2.bmp" alt=""></div><div class="group-picture-column" style="width: 33.333333333333336%;"><img src="/images/dip/21_3.bmp" alt=""></div></div><div class="group-picture-row"></div></div></div>
+<div style="text-align:center">Local areas are brighter.</div>
+
+<hr>
+<p>In this typical case, the three methods of color image histogram equalization have the following effect.</p>
+<table>
+<thead>
+<tr>
+<th style="text-align:center">Method(Best to worst)</th>
+<th style="text-align:center">Effect</th>
+<th style="text-align:center">speed</th>
+<th style="text-align:center">Explaination</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:center">Intensity component equalization based on HSI color space</td>
+<td style="text-align:center">Brighter and higher saturation, less detail in some darken area</td>
+<td style="text-align:center">Medium</td>
+<td style="text-align:center">Apply equalization to the luminance only without resulting in changes to the hue and saturation of the image.</td>
+</tr>
+<tr>
+<td style="text-align:center">Histogram equalization based on average value of color channel</td>
+<td style="text-align:center">Brighter and better detail</td>
+<td style="text-align:center">Slowest</td>
+<td style="text-align:center">Considers the relevance of R, G and B channel. Because the equalization is based on the average histogram, the results’ color distributes more evenly without high saturation. The hue and saturation change as well.</td>
+</tr>
+<tr>
+<td style="text-align:center">Independent histogram equalization based on color channel</td>
+<td style="text-align:center">Changes in the image’s color balance. Greener/bluer in whole.</td>
+<td style="text-align:center">Fastest</td>
+<td style="text-align:center">Not considering the relevance of R, G and B channel but applying the same method on the Red, Green, and Blue components of an RGB image changes the relative distributions of the color channels</td>
+</tr>
+</tbody>
+</table>
+<h2 id="Case-3-Good-results-for-all-methods"><a href="#Case-3-Good-results-for-all-methods" class="headerlink" title="Case 3: Good results for all methods"></a>Case 3: Good results for all methods</h2><div class="group-picture"><div class="group-picture-container"><div class="group-picture-row"><div class="group-picture-column" style="width: 33.333333333333336%;"><img src="/images/dip/3.bmp" alt=""></div><div class="group-picture-column" style="width: 33.333333333333336%;"><img src="/images/dip/3_gray.bmp" alt=""></div><div class="group-picture-column" style="width: 33.333333333333336%;"><img src="/images/dip/3_eq.bmp" alt=""></div></div><div class="group-picture-row"><div class="group-picture-column" style="width: 33.333333333333336%;"><img src="/images/dip/3_1.bmp" alt=""></div><div class="group-picture-column" style="width: 33.333333333333336%;"><img src="/images/dip/3_2.bmp" alt=""></div><div class="group-picture-column" style="width: 33.333333333333336%;"><img src="/images/dip/3_3.bmp" alt=""></div></div><div class="group-picture-row"></div></div></div>
+<div style="text-align:center">Little difference between all methods. All are brighter.</div>
+
+<h2 id="Case-4-Bad-results-for-all-methods"><a href="#Case-4-Bad-results-for-all-methods" class="headerlink" title="Case 4: Bad results for all methods"></a>Case 4: Bad results for all methods</h2><div class="group-picture"><div class="group-picture-container"><div class="group-picture-row"><div class="group-picture-column" style="width: 33.333333333333336%;"><img src="/images/dip/30.bmp" alt=""></div><div class="group-picture-column" style="width: 33.333333333333336%;"><img src="/images/dip/30_gray.bmp" alt=""></div><div class="group-picture-column" style="width: 33.333333333333336%;"><img src="/images/dip/30_eq.bmp" alt=""></div></div><div class="group-picture-row"><div class="group-picture-column" style="width: 33.333333333333336%;"><img src="/images/dip/30_1.bmp" alt=""></div><div class="group-picture-column" style="width: 33.333333333333336%;"><img src="/images/dip/30_2.bmp" alt=""></div><div class="group-picture-column" style="width: 33.333333333333336%;"><img src="/images/dip/30_3.bmp" alt=""></div></div><div class="group-picture-row"></div></div></div>
+<div style="text-align:center">The grasses are unrealistic and the figure is outlined against the background with white line.</div>
+
+<hr>
+<hr>
+
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+
+    <footer class="post-footer">
+      
+
+      
+        
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2017/03/19/paperreading-color-transfer/" rel="next" title="[PaperReading] Color Transfer between Images, Erik Reinhard et al, 2001">
+                <i class="fa fa-chevron-left"></i> [PaperReading] Color Transfer between Images, Erik Reinhard et al, 2001
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+          
+          </div>
+          
+
+
+          
+  <div class="comments" id="comments">
+    
+      <div class="ds-thread" data-thread-key="2017/03/19/implementation-dip/"
+           data-title="[DIP] Histogram Equalization on Grayscale and Color Image" data-url="http://yoursite.com/2017/03/19/implementation-dip/">
+      </div>
+    
+  </div>
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap" >
+            Table of Contents
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview">
+            Overview
+          </li>
+        </ul>
+      
+
+      <section class="site-overview sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+          <img class="site-author-image" itemprop="image"
+               src="/images/avatar.png"
+               alt="HYPJUDY" />
+          <p class="site-author-name" itemprop="name">HYPJUDY</p>
+           
+              <p class="site-description motion-element" itemprop="description">What I cannot create, I do not understand.</p>
+          
+        </div>
+        <nav class="site-state motion-element">
+        
+          
+            <div class="site-state-item site-state-posts">
+              <a href="/archives">
+                <span class="site-state-item-count">10</span>
+                <span class="site-state-item-name">posts</span>
+              </a>
+            </div>
+          
+
+          
+
+          
+
+        </nav>
+
+        
+
+        <div class="links-of-author motion-element">
+          
+            
+              <span class="links-of-author-item">
+                <a href="https://github.com/hypjudy" target="_blank" title="GitHub">
+                  
+                    <i class="fa fa-fw fa-github"></i>
+                  
+                  GitHub
+                </a>
+              </span>
+            
+          
+        </div>
+
+        
+        
+
+        
+        
+
+        
+
+
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#Grayscale-Image"><span class="nav-number">1.</span> <span class="nav-text">Grayscale Image</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#Derivation"><span class="nav-number">1.1.</span> <span class="nav-text">Derivation</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Implementation"><span class="nav-number">1.2.</span> <span class="nav-text">Implementation</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#RGB-to-Grayscale"><span class="nav-number">1.2.1.</span> <span class="nav-text">RGB to Grayscale</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Histogram-Calculation"><span class="nav-number">1.2.2.</span> <span class="nav-text">Histogram Calculation</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Histogram-Equalization"><span class="nav-number">1.2.3.</span> <span class="nav-text">Histogram Equalization</span></a></li></ol></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Color-Image"><span class="nav-number">2.</span> <span class="nav-text">Color Image</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#Independent-histogram-equalization-based-on-color-channel"><span class="nav-number">2.1.</span> <span class="nav-text">Independent histogram equalization based on color channel</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#Implementation-1"><span class="nav-number">2.1.1.</span> <span class="nav-text">Implementation</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Analysis"><span class="nav-number">2.1.2.</span> <span class="nav-text">Analysis</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Histogram-equalization-based-on-average-value-of-color-channel"><span class="nav-number">2.2.</span> <span class="nav-text">Histogram equalization based on average value of color channel</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#Implementation-2"><span class="nav-number">2.2.1.</span> <span class="nav-text">Implementation</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Analysis-1"><span class="nav-number">2.2.2.</span> <span class="nav-text">Analysis</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Intensity-component-equalization-based-on-HSI-color-space"><span class="nav-number">2.3.</span> <span class="nav-text">Intensity component equalization based on HSI color space</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#Implementation-3"><span class="nav-number">2.3.1.</span> <span class="nav-text">Implementation</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#Converting-colors-from-RGB-to-HSI"><span class="nav-number">2.3.1.1.</span> <span class="nav-text">Converting colors from RGB to HSI</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#Perform-histogram-equalization-on-the-intensity-channel"><span class="nav-number">2.3.1.2.</span> <span class="nav-text">Perform histogram equalization on the intensity channel</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#Converting-colors-from-HSI-to-RGB"><span class="nav-number">2.3.1.3.</span> <span class="nav-text">Converting colors from HSI to RGB</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#Rebuild-an-RGB-image-from-the-three-processed-channels"><span class="nav-number">2.3.1.4.</span> <span class="nav-text">Rebuild an RGB image from the three processed channels</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Analysis-2"><span class="nav-number">2.3.2.</span> <span class="nav-text">Analysis</span></a></li></ol></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Results"><span class="nav-number">3.</span> <span class="nav-text">Results</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#Case-1-Backgrounds-and-foregrounds-are-both-bright-or-both-dark"><span class="nav-number">3.1.</span> <span class="nav-text">Case 1: Backgrounds and foregrounds are both bright or both dark</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Case-2-Backgrounds-are-brighter-or-darker"><span class="nav-number">3.2.</span> <span class="nav-text">Case 2: Backgrounds are brighter or darker</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Case-3-Good-results-for-all-methods"><span class="nav-number">3.3.</span> <span class="nav-text">Case 3: Good results for all methods</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Case-4-Bad-results-for-all-methods"><span class="nav-number">3.4.</span> <span class="nav-text">Case 4: Bad results for all methods</span></a></li></ol></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright" >
+  
+  &copy;  2016 - 
+  <span itemprop="copyrightYear">2017</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">HYPJUDY</span>
+</div>
+
+
+<div class="powered-by">
+  Powered by <a class="theme-link" href="https://hexo.io">Hexo</a>
+</div>
+
+<div class="theme-info">
+  Theme -
+  <a class="theme-link" href="https://github.com/iissnan/hexo-theme-next">
+    NexT.Mist
+  </a>
+</div>
+
+
+        
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+    
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+  
+  <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+
+  
+  <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+
+  
+  <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+
+  
+  <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.0"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.0"></script>
+
+
+
+  
+  
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.0"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.0"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.0"></script>
+
+
+
+  
+
+  
+    
+  
+
+  <script type="text/javascript">
+    var duoshuoQuery = {short_name:"hypjudy"};
+    (function() {
+      var ds = document.createElement('script');
+      ds.type = 'text/javascript';ds.async = true;
+      ds.id = 'duoshuo-script';
+      ds.src = (document.location.protocol == 'https:' ? 'https:' : 'http:') + '//static.duoshuo.com/embed.js';
+      ds.charset = 'UTF-8';
+      (document.getElementsByTagName('head')[0]
+      || document.getElementsByTagName('body')[0]).appendChild(ds);
+    })();
+  </script>
+
+  
+    
+    
+    <script src="/lib/ua-parser-js/dist/ua-parser.min.js?v=0.7.9"></script>
+    <script src="/js/src/hook-duoshuo.js"></script>
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+
+  
+  
+    <script type="text/x-mathjax-config">
+      MathJax.Hub.Config({
+        tex2jax: {
+          inlineMath: [ ['$','$'], ["\\(","\\)"]  ],
+          processEscapes: true,
+          skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+        }
+      });
+    </script>
+
+    <script type="text/x-mathjax-config">
+      MathJax.Hub.Queue(function() {
+        var all = MathJax.Hub.getAllJax(), i;
+        for (i=0; i < all.length; i += 1) {
+          all[i].SourceElement().parentNode.className += ' has-jax';
+        }
+      });
+    </script>
+    <script type="text/javascript" src="//cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+  
+
+
+  
+
+  
+
+  
+
+
+  
+
+</body>
+</html>
