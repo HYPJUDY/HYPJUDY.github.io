@@ -272,7 +272,7 @@
               
                 
                 <a class="post-title-link" href="/2017/03/28/cvpr-detect-edges-of-paper-sheet-with-hough-transform/" itemprop="url">
-                  [CVPR] Detect Edges of Paper Sheet with Hough Transform
+                  [CVPR] A4 Paper Sheet Detection and Cropping with Hough Transform and Warping
                 </a>
               
             
@@ -335,7 +335,8 @@
 
       
         
-          <p>Given images of A4 paper sheets, output paper sheets’ four corners as well as four edges and their equations. The Hough transform is a feature extraction technique. The simplest case of Hough transform is detecting straight lines. Here we use it for paper sheet detection. </p>
+          <p>Function similar to Document Scanner. Given images of A4 paper sheets, output paper sheets’ four corners as well as four edges and their equations. Then crop the background and leave the paper sheet in proper position and standard scaling. We can do this in three steps. Firstly, detect edges with hough transform. Then store the corners in order. Lastly, applying a perspective transform to warp the image.</p>
+<div class="group-picture"><div class="group-picture-container"><div class="group-picture-row"><div class="group-picture-column"  style="width: 33.333333333333336%;"><img src="/images/paper-sheet/2.bmp" alt=""></div><div class="group-picture-column"  style="width: 33.333333333333336%;"><img src="/images/paper-sheet/2_marked.bmp" alt=""></div><div class="group-picture-column"  style="width: 33.333333333333336%;"><img src="/images/paper-sheet/2_A4.bmp" alt=""></div></div><div class="group-picture-row"><div class="group-picture-column"  style="width: 33.333333333333336%;"><img src="/images/paper-sheet/14.bmp" alt=""></div><div class="group-picture-column"  style="width: 33.333333333333336%;"><img src="/images/paper-sheet/14_marked.bmp" alt=""></div><div class="group-picture-column"  style="width: 33.333333333333336%;"><img src="/images/paper-sheet/14_A4.bmp" alt=""></div></div><div class="group-picture-row"></div></div></div>
           <!--noindex-->
           <div class="post-button text-center">
             <a class="btn" href="/2017/03/28/cvpr-detect-edges-of-paper-sheet-with-hough-transform/#more" rel="contents">
