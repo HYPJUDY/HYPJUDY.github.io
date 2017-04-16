@@ -1,0 +1,796 @@
+<!doctype html>
+
+
+
+  
+
+
+<html class="theme-next mist use-motion" lang="en">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
+
+
+
+
+  
+  
+  
+  
+
+  
+    
+    
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+    
+    
+    <link href="//fonts.googleapis.com/css?family=Lato:300,300italic,400,400italic,700,700italic&subset=latin,latin-ext" rel="stylesheet" type="text/css">
+  
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=5.1.0" rel="stylesheet" type="text/css" />
+
+
+  <meta name="keywords" content="Hexo, NexT" />
+
+
+
+
+
+
+
+
+  <link rel="shortcut icon" type="image/x-icon" href="/favicon.png?v=5.1.0" />
+
+
+
+
+
+
+<meta name="description" content="A caffe version implementation of a hash network(DNNH/NINH) for similarity-based visual research based on paper: Hanjiang Lai, Yan Pan, Ye Liu, and Shuicheng Yan. Simultaneous feature learning and has">
+<meta property="og:type" content="article">
+<meta property="og:title" content="[Caffe] Similarity-Based Deep Neural Network Hashing">
+<meta property="og:url" content="http://yoursite.com/2017/04/14/caffe-dnnh/index.html">
+<meta property="og:site_name" content="HYPJUDY">
+<meta property="og:description" content="A caffe version implementation of a hash network(DNNH/NINH) for similarity-based visual research based on paper: Hanjiang Lai, Yan Pan, Ye Liu, and Shuicheng Yan. Simultaneous feature learning and has">
+<meta property="og:image" content="http://yoursite.com/images/caffe-dnnh/overview-dnnh.jpg">
+<meta property="og:image" content="http://yoursite.com/images/caffe-dnnh/configurations-sub-network.jpg">
+<meta property="og:image" content="http://yoursite.com/images/caffe-dnnh/divide-and-encode.jpg">
+<meta property="og:image" content="http://yoursite.com/images/caffe-dnnh/architecture-of-prediction.jpg">
+<meta property="og:image" content="http://yoursite.com/images/caffe-dnnh/dnnh-12bit.jpg">
+<meta property="og:image" content="http://yoursite.com/images/caffe-dnnh/map-10label-12bit-80000iter.png">
+<meta property="og:image" content="http://yoursite.com/images/caffe-dnnh/map-10label-24bit-50000top.png">
+<meta property="og:image" content="http://yoursite.com/images/caffe-dnnh/cifar-10.png">
+<meta property="og:updated_time" content="2017-04-16T20:09:51.862Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="[Caffe] Similarity-Based Deep Neural Network Hashing">
+<meta name="twitter:description" content="A caffe version implementation of a hash network(DNNH/NINH) for similarity-based visual research based on paper: Hanjiang Lai, Yan Pan, Ye Liu, and Shuicheng Yan. Simultaneous feature learning and has">
+<meta name="twitter:image" content="http://yoursite.com/images/caffe-dnnh/overview-dnnh.jpg">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Mist',
+    sidebar: {"position":"left","display":"hide","offset":12,"offset_float":0,"b2t":false,"scrollpercent":false},
+    fancybox: true,
+    motion: true,
+    duoshuo: {
+      userId: 'undefined',
+      author: 'Author'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":20},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="http://yoursite.com/2017/04/14/caffe-dnnh/"/>
+
+
+
+
+
+  <title> [Caffe] Similarity-Based Deep Neural Network Hashing | HYPJUDY </title>
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="en">
+
+  
+
+
+
+
+<script>
+  (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+            (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+          m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+  })(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
+  ga('create', 'UA-96132499-1', 'auto');
+  ga('send', 'pageview');
+</script>
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+    
+  
+
+  <div class="container one-collumn sidebar-position-left page-post-detail ">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/"  class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">HYPJUDY</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle">What I cannot create, I do not understand.</p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
+            
+            Home
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
+            
+            Archives
+          </a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2017/04/14/caffe-dnnh/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="HYPJUDY">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.png">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="HYPJUDY">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                [Caffe] Similarity-Based Deep Neural Network Hashing
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Posted on</span>
+              
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2017-04-14T04:24:07+08:00">
+                2017-04-14
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+
+          
+            
+              <span class="post-comments-count">
+                <span class="post-meta-divider">|</span>
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-comment-o"></i>
+                </span>
+                <a href="/2017/04/14/caffe-dnnh/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count disqus-comment-count" data-disqus-identifier="2017/04/14/caffe-dnnh/" itemprop="commentCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <p>A caffe version implementation of a hash network(DNNH/NINH) for similarity-based visual research based on paper: Hanjiang Lai, Yan Pan, Ye Liu, and Shuicheng Yan. Simultaneous feature learning and hash coding with deep neural networks, CVPR 2015.<br><img src="/images/caffe-dnnh/overview-dnnh.jpg" alt="Overview of the DNNH" title="Overview of the DNNH, credit: [Lai et al., 2015]" style="margin: auto;"><br><a id="more"></a></p>
+<p>★<a href="https://github.com/HYPJUDY/caffe-dnnh" target="_blank" rel="external"><strong>Source codes and slide here</strong></a></p>
+<p>Assume $I$ to be the image space. The goal of hash learning for images is to learn a mapping $F:I-&gt;{0,1}^q$, such that an input image $I$ can be encoded into a q-bit binary code $F(I)$, with the similarities of images being preserved.</p>
+<h1 id="Motivation"><a href="#Motivation" class="headerlink" title="Motivation"></a>Motivation</h1><p>Image Retrieval</p>
+<ul>
+<li><strong>Extracting informative image features —— Deep Convolutional Neural Network:</strong> extract discriminative features depend on data, build end-to-end relation between the raw image data and the binary hashing codes</li>
+<li><strong>Learning effective approximate hashing functions —— Hash Code</strong> =&gt; efficiency<ul>
+<li>Space-saving: high-dimensional features to lower dimensional space, compact bitwise representation</li>
+<li>Speedup: binary pattern matching or Hamming distance measurement</li>
+</ul>
+</li>
+</ul>
+<h1 id="Approaches"><a href="#Approaches" class="headerlink" title="Approaches"></a>Approaches</h1><p>These learning-based approaches usually comprise two stages: </p>
+<ul>
+<li>Projecting the high dimensional features onto the lower dimensional space.</li>
+<li>Quantizing the generated real-valued representations into binary codes.</li>
+</ul>
+<h2 id="Three-building-blocks-of-DNNH"><a href="#Three-building-blocks-of-DNNH" class="headerlink" title="Three building blocks of DNNH"></a>Three building blocks of DNNH</h2><ol>
+<li><p>A shared sub-network with a stack of convolution layers to produce the effective intermediate image features;</p>
+<ul>
+<li><strong>Basic framwork:</strong> Network in Network, insert convolution layers with $1\times 1$ filters after some convolution layers with filters of a larger receptive field. use an average pooling layer as the output layer.</li>
+<li><strong>Parameter sharing:</strong> this sub-network is shared by the three images in each input triplet. Significantly reduce the number of parameters.<br><img src="/images/caffe-dnnh/configurations-sub-network.jpg" alt="Configurations of the shared sub-network for input images of size 256*256" title="Configurations of the shared sub-network, credit: [Lai et al., 2015]" style="margin: auto;"></li>
+</ul>
+</li>
+<li><p>A divide-and-encode module to divide the intermediate image features into multiple branches, each encoded into one hash bit;</p>
+<ul>
+<li>Divide the input intermediate features into <strong>q slices with equal length</strong>.  Then each slice is mapped to one dimension by a fully-connected layer, followed by a sigmoid activation function that restricts the output value in the range $[0, 1]$ and a <strong>piece-wise</strong> threshold function to encourage the output of binary hash bits. After that, the q output hash bits are concatenated to be a q-bit (<strong>approximate</strong>) code.</li>
+<li>Trying to reduce the redundancy among the hash bits: each hash bit is generated from a separated slice of features.<br><img src="/images/caffe-dnnh/divide-and-encode.jpg" alt="A divide-and-encode module" title="A divide-and-encode module, credit: [Lai et al., 2015]" style="margin: auto;"></li>
+</ul>
+</li>
+<li><p>A triplet ranking loss designed to characterize that one image is more similar to the second image than to the third one.</p>
+<ul>
+<li>Preserve relative similarities of the form “image $I$ is more similar to image $I^+$ than to image $I^-$”.</li>
+<li>More easily to obtained than pairwise similarities (e.g. the click-through data from image retrieval systems)</li>
+<li><p>From paper: Triplet ranking hinge loss is defined by<br>$$<br>\begin{equation}<br>\begin{split}<br>&amp; \hat l_{triplet}(F(I),F(I^+),F(I^-))\\<br>&amp; =max(0,1-(\left\lVert F(I)-F(I^-) \right\rVert_H-\left\lVert F(I)-F(I^+) \right\rVert_H)), \\<br>&amp; s.t. F(I),F(I^+),F(I^-)\in \{0,1\}^q<br>\end{split}<br>\end{equation}<br>$$<br>where $\left\lVert .\right\rVert_H$ represents the Hamming distance. For ease of optimization, natural relaxation tricks are to replace the Hamming norm with the $l_2$ norm and replace the integer constraints on $F(.)$ with the range constraints. The modified loss functions(<em>used in forward propagation in neural networks</em>) is <a name="formulas"></a><br>$$<br>\begin{equation}<br>\begin{split}<br>&amp; \hat l_{triplet}(F(I),F(I^+),F(I^-))\\<br>&amp; =max(0,\left\lVert F(I)-F(I^+) \right\rVert_2^2-\left\lVert F(I)-F(I^-) \right\rVert_2^2+1), \\<br>&amp; s.t. F(I),F(I^+),F(I^-)\in[0,1]^q<br>\end{split}<br>\end{equation}<br>$$</p>
+<p>This variant of triplet ranking loss is convex. Its (sub-)gradients(<em>used in backward propagation in neural networks</em>) with respect to $F(I)$, $F(I^+)$ or $F(I^-)$ are<br>$$<br>\begin{equation}<br>\begin{split}<br>&amp; \frac {\partial l}{\partial b} =(2b^–2b^+)\times I_{||b-b^+||_2^2-||b-b^-||_2^2+1&gt;0}\\<br>&amp; \frac {\partial l}{\partial b} =(2b^+-2b)\times I_{||b-b^+||_2^2-||b-b^-||_2^2+1&gt;0}\\<br>&amp; \frac {\partial l}{\partial b} =(2b^–2b)\times I_{||b-b^+||_2^2-||b-b^-||_2^2+1&gt;0}<br>\end{split}<br>\end{equation}<br>$$<br>where we denote $F(I)$, $F(I^+)$ or $F(I^-)$ as $b$, $b^+$ or $b^-$. The indicator function $I_{condition}=1$ if $condition$ is true; otherwise $I_{condition}=0$.</p>
+</li>
+</ul>
+</li>
+</ol>
+<h2 id="Image-Retrieval-and-Evaluation-of-DNNH"><a href="#Image-Retrieval-and-Evaluation-of-DNNH" class="headerlink" title="Image Retrieval and Evaluation of DNNH"></a>Image Retrieval and Evaluation of DNNH</h2><p>In image retrieval procedure, an image X is first encoded into k-dimension feature in the forward pass of pretrained model. Then, a quantization operation is exploited to generate hash codes.<br><img src="/images/caffe-dnnh/architecture-of-prediction.jpg" alt="The architecture of prediction" title="The architecture of prediction, credit: [Lai et al., 2015]" style="margin: auto;"></p>
+<p>Given a query image, the retrieval list of images is produced by sorting the <a href="https://en.wikipedia.org/wiki/Hamming_distance" target="_blank" rel="external">hamming distances</a> between the query image and images in search pool. The performance can be evaluated by metric of <a href="https://www.kaggle.com/wiki/MeanAveragePrecision" target="_blank" rel="external">mean average precision(MAP)</a>. (Also see <a href="http://blog.csdn.net/zhuqiuhui/article/details/40861661" target="_blank" rel="external">chinese version explaination</a>)</p>
+<h1 id="Implementation"><a href="#Implementation" class="headerlink" title="Implementation"></a>Implementation</h1><p><a name="dataset"></a></p>
+<h2 id="Architecture-of-DNNH"><a href="#Architecture-of-DNNH" class="headerlink" title="Architecture of DNNH"></a>Architecture of DNNH</h2><p>To do: Write prototxt to define DNNH and bash files to execute for training on preprocessed triplet CIFAR-10 dataset.</p>
+<h3 id="Overview-and-Structure-of-Dataset"><a href="#Overview-and-Structure-of-Dataset" class="headerlink" title="Overview and Structure of Dataset"></a>Overview and Structure of Dataset</h3><p>We start with a data layer that reads from the LevalDB database we created earlier. Each entry in this database contains the image data for a triplet of images. In order to pack a triplet of images into the same blob in the database we pack one image per three channels(RGB). That is to say, for triplet train/validation images, each entry has 9 channels of I, I+ and I- respectively. Pool and query images also have 9 channels in each entry except that 3 images in 9 channels are the same.<br>In training phase, since the input of triplet ranking hinge loss layer here should be I, I+ and I-, we want to be able to work with these three images separately while at the same time share the parameters between layers on three sides (the sub-network is shared by the three images in each input triplet). This can be done by firstly adding a slice layer after the data layer to slice input data along the channel dimension and secondly naming the same parameters to share parameters between layers.<br>In testing phase, only one side is needed and loss layer should be delete.<br><img src="/images/caffe-dnnh/dnnh-12bit.jpg" alt="The architecture of 12-bit hash code DNNH(training phase)" title="The architecture of 12-bit hash code DNNH(training phase), credit: HYPJUDY" style="margin: auto;"></p>
+<p>Above is the architecture of my 12-bit hash code DNNH(<code>caffe-dnnh/runtime/12bit/train12.prototxt</code>) drawn by <a href="http://ethereon.github.io/netscope/#/editor" target="_blank" rel="external">netscope editor</a>. Click <a href="http://ethereon.github.io/netscope/#/gist/2f44d589dbe4355ad2f9374344527b6b" target="_blank" rel="external">me(training phase)</a> or <a href="http://ethereon.github.io/netscope/#/gist/2f44d589dbe4355ad2f9374344527b6b" target="_blank" rel="external">me(testing phase)</a> for an explict diagram of each layer in browser. Read codes and also see this <a href="http://caffe.berkeleyvision.org/gathered/examples/siamese.html" target="_blank" rel="external">weight sharing example</a> for more details.</p>
+<p><strong>Attention:</strong> We use dropout, an effective and simple regularization technique in neural networks. It should only be used in training phase but not testing/predicting phase. The reason why you can find dropout layer in my caffe prototxt for testing is the operation is implemented by <code>if (this-&gt;phase_ == TRAIN)</code> condition and <a href="http://cs231n.github.io/neural-networks-2/#reg" target="_blank" rel="external">inverted dropout</a>. Read code <code>CAFFE-ROOT/src/caffe/layers/dropout_layer.cpp</code> for more details.</p>
+<h3 id="Triplet-ranking-hinge-loss-layer"><a href="#Triplet-ranking-hinge-loss-layer" class="headerlink" title="Triplet ranking hinge loss layer"></a>Triplet ranking hinge loss layer</h3><blockquote>
+<p>Loss drives learning by comparing an output to a target and assigning cost to minimize. The loss itself is computed by the forward pass and the gradient w.r.t. to the loss is computed by the backward pass.(<a href="http://caffe.berkeleyvision.org/tutorial/layers.html" target="_blank" rel="external">Caffe Loss Layer</a>)</p>
+</blockquote>
+<p>Init in function <code>LayerSetUp</code>, <code>Forward_cpu</code> and <code>Backward_cpu</code> are direct implementation of the two <a href="#formulas">formulas</a> we mentioned above.</p>
+<blockquote>
+<p>The Solver optimizes a model by first calling forward to yield the output and loss, then calling backward to generate the gradient of the model, and then incorporating the gradient into a weight update that attempts to minimize the loss. (<a href="http://caffe.berkeleyvision.org/tutorial/forward_backward.html" target="_blank" rel="external">Forward and Backward</a>)</p>
+</blockquote>
+<p>Also see: <a href="https://github.com/BVLC/caffe/wiki/Development" target="_blank" rel="external">Developing new layers in Caffe</a>.</p>
+<h2 id="Image-Retrieval-and-Evaluate"><a href="#Image-Retrieval-and-Evaluate" class="headerlink" title="Image Retrieval and Evaluate"></a>Image Retrieval and Evaluate</h2><p>To do: Write prototxt to encode images and bash files to execute for image retrieval. Implement the metric of mean average precision (mAP) for evaluation.<br>In image retrieval task, we can employ one hashing stream in the DNNH architecture to generate k-bit hash codes for each input image. In this procedure, an image X is first encoded into k-dimension feature in the forward pass of pretrained model. Then, a quantization operationis exploited to generate hash codes. Do this procedure with query images and pool images, here I get the approxiamate hash codes output in <code>caffe.cpp</code> and write the result hashcode into files and read them out when I need to calculate MAP.</p>
+<h3 id="Hamming-distance"><a href="#Hamming-distance" class="headerlink" title="Hamming distance"></a>Hamming distance</h3><blockquote>
+<p>The Hamming distance between two strings of equal length is the number of positions at which the corresponding symbols are different.(<a href="https://en.wikipedia.org/wiki/Hamming_distance" target="_blank" rel="external">wiki</a>)</p>
+</blockquote>
+<p>Wiki gives us a neat implementation on C, which takes use of fast bitwise XOR(exclusive or). It also uses an algorithm of Wegner (1960) that repeatedly finds and clears the lowest-order nonzero bit.</p>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div></pre></td><td class="code"><pre><div class="line"><span class="function"><span class="keyword">int</span> <span class="title">hamming_distance</span><span class="params">(<span class="keyword">unsigned</span> x, <span class="keyword">unsigned</span> y)</span></span></div><div class="line">&#123;</div><div class="line">    <span class="keyword">int</span> dist = <span class="number">0</span>;</div><div class="line">    <span class="keyword">unsigned</span>  val = x ^ y;</div><div class="line">    <span class="keyword">while</span> (val != <span class="number">0</span>) &#123; <span class="comment">// Count the number of bits set</span></div><div class="line">        <span class="comment">// A bit is set, so increment the count and clear the bit</span></div><div class="line">        dist++;</div><div class="line">        val &amp;= val - <span class="number">1</span>;</div><div class="line">    &#125;</div><div class="line">    <span class="keyword">return</span> dist; <span class="comment">// Return the number of differing bits</span></div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p>But this implementation limits to binary integers input which is insuffcient for us (e.g. 24-bit, 48-bit). Thus I use <code>string</code> type as follow. Input <code>x</code> and <code>y</code> can have different length and the shorter one will be padded with zero prefix.</p>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div></pre></td><td class="code"><pre><div class="line"><span class="function"><span class="keyword">int</span> <span class="title">hamming_distance</span><span class="params">(<span class="built_in">string</span> x, <span class="built_in">string</span> y)</span> </span>&#123;</div><div class="line">    <span class="keyword">int</span> dist = <span class="number">0</span>;</div><div class="line">    <span class="keyword">int</span> i = x.size() - <span class="number">1</span>, j = y.size() - <span class="number">1</span>;</div><div class="line">    <span class="keyword">for</span>(i, j; i &gt;= <span class="number">0</span> &amp;&amp; j &gt;= <span class="number">0</span>; --i, --j) &#123; </div><div class="line">        <span class="keyword">if</span>(x[i] != y[i]) ++dist;</div><div class="line">    &#125;</div><div class="line">    <span class="keyword">while</span>(i != <span class="number">-1</span>) &#123;</div><div class="line">      <span class="keyword">if</span>(x[i--]) ++dist;</div><div class="line">    &#125;</div><div class="line">    <span class="keyword">while</span>(j != <span class="number">-1</span>) &#123;</div><div class="line">      <span class="keyword">if</span>(y[j--]) ++dist;</div><div class="line">    &#125;</div><div class="line">    <span class="keyword">return</span> dist;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<h3 id="Metric-of-Mean-Average-Precision-mAP"><a href="#Metric-of-Mean-Average-Precision-mAP" class="headerlink" title="Metric of Mean Average Precision (mAP)"></a>Metric of Mean Average Precision (mAP)</h3><blockquote>
+<p>Mean average precision for a set of queries is the mean of the average precision scores for each query.<br>$$MAP=\frac {\sum _{q=1}^{Q} AveP(q) }{Q}$$<br>$$AveP=\frac {\sum _{k=1}^{n} (P(k)\times rel(k))}{number\ of\ relevant\ documents}$$<br>where Q is the number of queries and $rel(k)$ is an indicator function equaling 1 if the item at rank $k$ is a relevant document, zero otherwise. Note that the average is over all relevant documents and the relevant documents not retrieved get a precision score of zero.(<a href="https://en.wikipedia.org/wiki/Information_retrieval#Mean_average_precision" target="_blank" rel="external">wiki</a>)</p>
+</blockquote>
+<p>Here we can modify the formula to calculate the MAP values <strong>within the top k returned neighbors</strong>. The denominator of MAP take the smaller one of k and number of relevant images. And the numerator of MAP should be the average of the precision at cut-off k in the retrieval list. I also calculate the MAP respect to 10 labels in CIFAR-10 dataset respectively.</p>
+<h1 id="Results-and-Analysis"><a href="#Results-and-Analysis" class="headerlink" title="Results and Analysis"></a>Results and Analysis</h1><p>To do: Draw performances for 12-bit, 24-bit and 48-bit hash code and make some analysis.</p>
+<h2 id="Different-lengths-of-hash-codes"><a href="#Different-lengths-of-hash-codes" class="headerlink" title="Different lengths of hash codes"></a>Different lengths of hash codes</h2><p>(Coming soon…)</p>
+<h2 id="Different-labels"><a href="#Different-labels" class="headerlink" title="Different labels"></a>Different labels</h2><p><img src="/images/caffe-dnnh/map-10label-12bit-80000iter.png" alt="10 labels image’s MAP with 12 hash bits, 80000 iterations"><br><img src="/images/caffe-dnnh/map-10label-24bit-50000top.png" alt="10 labels image’s MAP with 24 hash bits, top 50000 returned neighbors"><br>Here we see <span style="color: orange;">artifacts</span> like automobile, ship, truck, airplane outperform <span style="color: blue;">animals</span> like cat, bird, dear dog and so on.</p>
+<p><img src="/images/caffe-dnnh/cifar-10.png" alt="The CIFAR-10 dataset" title="The CIFAR-10 dataset" style="margin: auto;"></p>
+<h1 id="Further-Improvements"><a href="#Further-Improvements" class="headerlink" title="Further Improvements"></a>Further Improvements</h1><ol>
+<li><p>From the above results we can infer that MAP closely relates to labels/classes in the CIFAR-10 dataset. A first thought is to treat different labels differently and focus more on images with lower MAP labels. Since the <strong>margin</strong> in triplet hinge loss function characterizes the difference of similarity between dissimilar pair of image and similar pair of image, we can design different margins for different labels/classes. More specifically, <em>larger margins for artifacts and smaller margin for animals</em>.<br>$$<br>\begin{equation}<br>\begin{split}<br>&amp; \hat l_{triplet}(F(I),F(I^+),F(I^-))\\<br>&amp; =max(0,margin-(\left\lVert F(I)-F(I^-) \right\rVert_H-\left\lVert F(I)-F(I^+) \right\rVert_H)), \\<br>&amp; s.t. F(I),F(I^+),F(I^-)\in \{0,1\}^q<br>\end{split}<br>\end{equation}<br>$$</p>
+</li>
+<li><p>Inspired by <a href="http://caffe.berkeleyvision.org/gathered/examples/finetune_flickr_style.html" target="_blank" rel="external">Fine-tuning CaffeNet</a>, since CIFAR-10 dataset is small and training from scratch takes much time, I think we can try to use fine-tune on pre-trained deep models for better performance in both speed and precision. </p>
+</li>
+<li><p>How about four images a group? For example: $\{F(I^{a,b}),F(I^a),F(I^b),F(I^-)\}$. $F(I^{a,b})$ is image with tag $a$ and $b$, $F(I^a)$ and $F(I^b)$ are images with tag $a$ and $b$ respectively while $F(I^-)$ neither has tag $a$ or $b$. Because one image may contains several tags, this design aims to preserve <strong>semantic similarity</strong> as well.</p>
+</li>
+</ol>
+<h1 id="Further-Reading"><a href="#Further-Reading" class="headerlink" title="Further Reading"></a>Further Reading</h1><ol>
+<li><a href="https://cs.nju.edu.cn/lwj/L2H.html" target="_blank" rel="external">Learning to Hash —— Paper, Code and Dataset</a></li>
+<li><a href="http://lamda.nju.edu.cn/weixs/project/CNNTricks/CNNTricks.html" target="_blank" rel="external">Must Know Tips/Tricks in Deep Neural Networks (by Xiu-Shen Wei)</a></li>
+</ol>
+
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+
+    <footer class="post-footer">
+      
+
+      
+        
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2017/03/28/cvpr-A4-paper-sheet-detection-and-cropping/" rel="next" title="[CVPR] A4 Paper Sheet Detection and Cropping with Hough Transform and Warping">
+                <i class="fa fa-chevron-left"></i> [CVPR] A4 Paper Sheet Detection and Cropping with Hough Transform and Warping
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+          
+          </div>
+          
+
+
+          
+  <div class="comments" id="comments">
+    
+      <div id="disqus_thread">
+        <noscript>
+          Please enable JavaScript to view the
+          <a href="//disqus.com/?ref_noscript">comments powered by Disqus.</a>
+        </noscript>
+      </div>
+    
+  </div>
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap" >
+            Table of Contents
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview">
+            Overview
+          </li>
+        </ul>
+      
+
+      <section class="site-overview sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+          <img class="site-author-image" itemprop="image"
+               src="/images/avatar.png"
+               alt="HYPJUDY" />
+          <p class="site-author-name" itemprop="name">HYPJUDY</p>
+           
+              <p class="site-description motion-element" itemprop="description">What I cannot create, I do not understand.</p>
+          
+        </div>
+        <nav class="site-state motion-element">
+        
+          
+            <div class="site-state-item site-state-posts">
+              <a href="/archives">
+                <span class="site-state-item-count">12</span>
+                <span class="site-state-item-name">posts</span>
+              </a>
+            </div>
+          
+
+          
+
+          
+
+        </nav>
+
+        
+
+        <div class="links-of-author motion-element">
+          
+            
+              <span class="links-of-author-item">
+                <a href="https://github.com/hypjudy" target="_blank" title="GitHub">
+                  
+                    <i class="fa fa-fw fa-github"></i>
+                  
+                  GitHub
+                </a>
+              </span>
+            
+          
+        </div>
+
+        
+        
+
+        
+        
+
+        
+
+
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#Motivation"><span class="nav-number">1.</span> <span class="nav-text">Motivation</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Approaches"><span class="nav-number">2.</span> <span class="nav-text">Approaches</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#Three-building-blocks-of-DNNH"><span class="nav-number">2.1.</span> <span class="nav-text">Three building blocks of DNNH</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Image-Retrieval-and-Evaluation-of-DNNH"><span class="nav-number">2.2.</span> <span class="nav-text">Image Retrieval and Evaluation of DNNH</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Implementation"><span class="nav-number">3.</span> <span class="nav-text">Implementation</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#Architecture-of-DNNH"><span class="nav-number">3.1.</span> <span class="nav-text">Architecture of DNNH</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#Overview-and-Structure-of-Dataset"><span class="nav-number">3.1.1.</span> <span class="nav-text">Overview and Structure of Dataset</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Triplet-ranking-hinge-loss-layer"><span class="nav-number">3.1.2.</span> <span class="nav-text">Triplet ranking hinge loss layer</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Image-Retrieval-and-Evaluate"><span class="nav-number">3.2.</span> <span class="nav-text">Image Retrieval and Evaluate</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#Hamming-distance"><span class="nav-number">3.2.1.</span> <span class="nav-text">Hamming distance</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Metric-of-Mean-Average-Precision-mAP"><span class="nav-number">3.2.2.</span> <span class="nav-text">Metric of Mean Average Precision (mAP)</span></a></li></ol></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Results-and-Analysis"><span class="nav-number">4.</span> <span class="nav-text">Results and Analysis</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#Different-lengths-of-hash-codes"><span class="nav-number">4.1.</span> <span class="nav-text">Different lengths of hash codes</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Different-labels"><span class="nav-number">4.2.</span> <span class="nav-text">Different labels</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Further-Improvements"><span class="nav-number">5.</span> <span class="nav-text">Further Improvements</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Further-Reading"><span class="nav-number">6.</span> <span class="nav-text">Further Reading</span></a></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright" >
+  
+  &copy;  2016 - 
+  <span itemprop="copyrightYear">2017</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">HYPJUDY</span>
+</div>
+
+
+<div class="powered-by">
+  Powered by <a class="theme-link" href="https://hexo.io">Hexo</a>
+</div>
+
+<div class="theme-info">
+  Theme -
+  <a class="theme-link" href="https://github.com/iissnan/hexo-theme-next">
+    NexT.Mist
+  </a>
+</div>
+
+
+        
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+    
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+  
+  <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+
+  
+  <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+
+  
+  <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+
+  
+  <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.0"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.0"></script>
+
+
+
+  
+  
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.0"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.0"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.0"></script>
+
+
+
+  
+
+
+
+  
+
+    <script type="text/javascript">
+      var disqus_shortname = 'hypjudy';
+      var disqus_identifier = '2017/04/14/caffe-dnnh/';
+
+      var disqus_title = "[Caffe] Similarity-Based Deep Neural Network Hashing";
+
+
+      function run_disqus_script(disqus_script) {
+        var dsq = document.createElement('script');
+        dsq.type = 'text/javascript';
+        dsq.async = true;
+        dsq.src = '//' + disqus_shortname + '.disqus.com/' + disqus_script;
+        (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+      }
+
+      run_disqus_script('count.js');
+
+      
+        var disqus_config = function () {
+            this.page.url = disqus_url;
+            this.page.identifier = disqus_identifier;
+            this.page.title = disqus_title;
+        };
+        run_disqus_script('embed.js');
+      
+
+    </script>
+  
+
+
+
+
+
+
+
+
+
+
+  
+  
+
+  
+  
+    <script type="text/x-mathjax-config">
+      MathJax.Hub.Config({
+        tex2jax: {
+          inlineMath: [ ['$','$'], ["\\(","\\)"]  ],
+          processEscapes: true,
+          skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+        }
+      });
+    </script>
+
+    <script type="text/x-mathjax-config">
+      MathJax.Hub.Queue(function() {
+        var all = MathJax.Hub.getAllJax(), i;
+        for (i=0; i < all.length; i += 1) {
+          all[i].SourceElement().parentNode.className += ' has-jax';
+        }
+      });
+    </script>
+    <script type="text/javascript" src="//cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+  
+
+
+  
+
+  
+
+  
+
+
+  
+
+</body>
+</html>
