@@ -1,0 +1,803 @@
+<!doctype html>
+
+
+
+  
+
+
+<html class="theme-next mist use-motion" lang="en">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
+
+
+
+
+  
+  
+  
+  
+
+  
+    
+    
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+    
+    
+    <link href="//fonts.googleapis.com/css?family=Lato:300,300italic,400,400italic,700,700italic&subset=latin,latin-ext" rel="stylesheet" type="text/css">
+  
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=5.1.0" rel="stylesheet" type="text/css" />
+
+
+  <meta name="keywords" content="Hexo, NexT" />
+
+
+
+
+
+
+
+
+  <link rel="shortcut icon" type="image/x-icon" href="/favicon.png?v=5.1.0" />
+
+
+
+
+
+
+<meta name="description" content="Produce a “morph” animation of one image into another image.">
+<meta property="og:type" content="article">
+<meta property="og:title" content="[CVPR] Image Morphing">
+<meta property="og:url" content="http://yoursite.com/2017/04/25/image-morphing/index.html">
+<meta property="og:site_name" content="HYPJUDY">
+<meta property="og:description" content="Produce a “morph” animation of one image into another image.">
+<meta property="og:image" content="http://yoursite.com/images/morphing/chinese_beauty.gif">
+<meta property="og:image" content="http://yoursite.com/images/morphing/tri1_ori.jpg">
+<meta property="og:image" content="http://yoursite.com/images/morphing/tri_select_points.jpg">
+<meta property="og:image" content="http://yoursite.com/images/morphing/tri2_ori.jpg">
+<meta property="og:image" content="http://yoursite.com/images/morphing/t1_to_t2_fast.gif">
+<meta property="og:image" content="http://yoursite.com/images/morphing/t1_to_t2.gif">
+<meta property="og:image" content="http://yoursite.com/images/morphing/ori_transition.jpg">
+<meta property="og:image" content="http://yoursite.com/images/morphing/tri_select_points2.jpg">
+<meta property="og:image" content="http://yoursite.com/images/morphing/tri1_warp.gif">
+<meta property="og:image" content="http://yoursite.com/images/morphing/tri2_warp.gif">
+<meta property="og:image" content="http://yoursite.com/images/morphing/tri1_to_tri2.gif">
+<meta property="og:image" content="http://yoursite.com/images/morphing/cross_dissolve_transition.jpg">
+<meta property="og:image" content="http://yoursite.com/images/morphing/tri_index_map.jpg">
+<meta property="og:image" content="http://yoursite.com/images/morphing/select_points_face.jpg">
+<meta property="og:image" content="http://yoursite.com/images/morphing/girl.jpg">
+<meta property="og:image" content="http://yoursite.com/images/morphing/girl_to_boy.gif">
+<meta property="og:image" content="http://yoursite.com/images/morphing/boy.bmp">
+<meta property="og:image" content="http://yoursite.com/images/morphing/girl_to_boy_2.jpg">
+<meta property="og:image" content="http://yoursite.com/images/morphing/girl_to_boy_4.jpg">
+<meta property="og:image" content="http://yoursite.com/images/morphing/girl_to_boy_6.jpg">
+<meta property="og:image" content="http://yoursite.com/images/morphing/girl_boy_midway_tri.jpg">
+<meta property="og:image" content="http://yoursite.com/images/morphing/girl_to_boy_8.jpg">
+<meta property="og:image" content="http://yoursite.com/images/morphing/girl_to_boy_10.jpg">
+<meta property="og:image" content="http://yoursite.com/images/morphing/A_B_midway.jpg">
+<meta property="og:image" content="http://yoursite.com/images/morphing/A_B_midway_tri.jpg">
+<meta property="og:image" content="http://yoursite.com/images/morphing/A.jpg">
+<meta property="og:image" content="http://yoursite.com/images/morphing/A_to_B.gif">
+<meta property="og:image" content="http://yoursite.com/images/morphing/B.jpg">
+<meta property="og:image" content="http://yoursite.com/images/morphing/select_points_face2.jpg">
+<meta property="og:image" content="http://yoursite.com/images/morphing/lss_lyf_midway.jpg">
+<meta property="og:image" content="http://yoursite.com/images/morphing/lss_tly_midway.jpg">
+<meta property="og:image" content="http://yoursite.com/images/morphing/lyf_tly_midway.jpg">
+<meta property="og:image" content="http://yoursite.com/images/morphing/tly_ym_midway.jpg">
+<meta property="og:image" content="http://yoursite.com/images/morphing/ym_lyf_midway.jpg">
+<meta property="og:image" content="http://yoursite.com/images/morphing/ym_ty_midway.jpg">
+<meta property="og:image" content="http://yoursite.com/images/morphing/lyf_ty_midway.jpg">
+<meta property="og:image" content="http://yoursite.com/images/morphing/lss_lyf_midway.jpg">
+<meta property="og:image" content="http://yoursite.com/images/morphing/ty_lrt_midway.jpg">
+<meta property="og:image" content="http://yoursite.com/images/morphing/f1_to_f2.gif">
+<meta property="og:image" content="http://yoursite.com/images/morphing/masks.jpg">
+<meta property="og:image" content="http://yoursite.com/images/morphing/bobo.jpg">
+<meta property="og:image" content="http://yoursite.com/images/morphing/bobo2_to_bobo3.gif">
+<meta property="og:updated_time" content="2017-04-26T15:46:45.052Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="[CVPR] Image Morphing">
+<meta name="twitter:description" content="Produce a “morph” animation of one image into another image.">
+<meta name="twitter:image" content="http://yoursite.com/images/morphing/chinese_beauty.gif">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Mist',
+    sidebar: {"position":"left","display":"hide","offset":12,"offset_float":0,"b2t":false,"scrollpercent":false},
+    fancybox: true,
+    motion: true,
+    duoshuo: {
+      userId: 'undefined',
+      author: 'Author'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":20},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="http://yoursite.com/2017/04/25/image-morphing/"/>
+
+
+
+
+
+  <title> [CVPR] Image Morphing | HYPJUDY </title>
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="en">
+
+  
+
+
+
+
+<script>
+  (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+            (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+          m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+  })(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
+  ga('create', 'UA-96132499-1', 'auto');
+  ga('send', 'pageview');
+</script>
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+    
+  
+
+  <div class="container one-collumn sidebar-position-left page-post-detail ">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/"  class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">HYPJUDY</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle">What I cannot create, I do not understand.</p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
+            
+            Home
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
+            
+            Archives
+          </a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2017/04/25/image-morphing/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="HYPJUDY">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.png">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="HYPJUDY">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                [CVPR] Image Morphing
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Posted on</span>
+              
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2017-04-25T21:40:07+08:00">
+                2017-04-25
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+
+          
+            
+              <span class="post-comments-count">
+                <span class="post-meta-divider">|</span>
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-comment-o"></i>
+                </span>
+                <a href="/2017/04/25/image-morphing/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count disqus-comment-count" data-disqus-identifier="2017/04/25/image-morphing/" itemprop="commentCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <p>Produce a “morph” animation of one image into another image.</p>
+<p><img src="/images/morphing/chinese_beauty.gif" alt="Chinese beauty morphing"></p>
+<a id="more"></a>
+<p>★<a href="https://github.com/HYPJUDY/image-morphing" target="_blank" rel="external"><strong>Source codes and images here</strong></a></p>
+<h1 id="Approaches"><a href="#Approaches" class="headerlink" title="Approaches"></a>Approaches</h1><h2 id="GOAL"><a href="#GOAL" class="headerlink" title="GOAL"></a>GOAL</h2><p>Morph a blue triangle <code>tri1</code> to a pink triangle <code>tri2</code> according to their three vertices respectively.<br><div class="group-picture"><div class="group-picture-container"><div class="group-picture-row"><div class="group-picture-column" style="width: 33.333333333333336%;"><img src="/images/morphing/tri1_ori.jpg" alt=""></div><div class="group-picture-column" style="width: 33.333333333333336%;"><img src="/images/morphing/tri_select_points.jpg" alt=""></div><div class="group-picture-column" style="width: 33.333333333333336%;"><img src="/images/morphing/tri2_ori.jpg" alt=""></div></div><div class="group-picture-row"></div></div></div><br><em>Left: tri1; Middle: corresponding vertices of tri1 and tri2; Right: tri2</em></p>
+<p>The ideal transition is as follow.</p>
+<div class="group-picture"><div class="group-picture-container"><div class="group-picture-row"><div class="group-picture-column" style="width: 33.333333333333336%;"><img src="/images/morphing/t1_to_t2_fast.gif" alt=""></div><div class="group-picture-column" style="width: 33.333333333333336%;"><img src="/images/morphing/t1_to_t2.gif" alt=""></div><div class="group-picture-column" style="width: 33.333333333333336%;"><img src="/images/morphing/ori_transition.jpg" alt=""></div></div><div class="group-picture-row"></div></div></div>
+<p><em>Left: tri1 morph to tri2; Middle: tri1 morph to tri2 slowly in 5 frames; Right: each frame of slow transition</em></p>
+<h2 id="Process"><a href="#Process" class="headerlink" title="Process"></a>Process</h2><p>Firstly, slice two images into <strong>triangles</strong> in the same way. Four corners of images are appended so as to cover entire image with triangles.<br><img src="/images/morphing/tri_select_points2.jpg" alt=""></p>
+<p>Then, <strong>warp</strong> <code>tri1</code> from shape of <code>tri1</code> to shape of <code>tri2</code> for each triangle respectively. Do the same for <code>tri2</code> (warp <code>tri2</code> from shape of <code>tri1</code> to shape of <code>tri2</code>).<br>Lastly, perform <strong>cross-dissolve</strong> of two warp’s colors.<br><div class="group-picture"><div class="group-picture-container"><div class="group-picture-row"><div class="group-picture-column" style="width: 33.333333333333336%;"><img src="/images/morphing/tri1_warp.gif" alt=""></div><div class="group-picture-column" style="width: 33.333333333333336%;"><img src="/images/morphing/tri2_warp.gif" alt=""></div><div class="group-picture-column" style="width: 33.333333333333336%;"><img src="/images/morphing/tri1_to_tri2.gif" alt=""></div></div><div class="group-picture-row"></div></div></div><br><em>Left: warp of tri1; Middle: warp of tri2; Right: cross-dissolve of two warp’s color</em></p>
+<h2 id="Details"><a href="#Details" class="headerlink" title="Details"></a>Details</h2><p>Morphing is defined as the animated transformation of one image into another. We do it by producing sequence of frames. As shown above, morphing involves two parts: cross dissolving and warping.</p>
+<p><strong>Cross dissolving</strong> is linear interpolation to fade from one image to another. In another word, interpolate a value from 0 to 1 and use $A*value + B*(1-value)$ as the frame value.<br><img src="/images/morphing/cross_dissolve_transition.jpg" alt=""><br>Simply using cross-dissolving will cause double-exposure effect in misaligned regions. So we need to align the two images before cross dissolving</p>
+<p><strong>Warping</strong> is used for this purpose. Pixels are “moving” from frame to frame in this process. A mapping rule is used to determine the way in which the pixels in one image should be mapped to the pixels in the other image.<br>Here I use affine transformation for warping triangles. Given two triangles ABC and A’B’C’ in 2D, the transformation matrix to transfer <strong>all pixels</strong> from one to the other is</p>
+<p>$$<br>    \begin{bmatrix}x’ \cr y’ \cr 1 \cr \end{bmatrix} =<br>    \begin{bmatrix}a &amp; b &amp; c \cr d &amp; e &amp; f \cr 0 &amp; 0 &amp; 1 \cr \end{bmatrix}<br>    \begin{bmatrix}x \cr y \cr 1 \cr \end{bmatrix}<br>$$</p>
+<p>a,b,c,d,e,f are constants and x’, y’, x, y are 1-by-3 vectors. (e.g. $x=[x_A,x_B,x_C]$).<br>Write the formula in short: $p’=Ap$.<br>In this way, two images are sliced into triangles one-to-one. The one-to-one relationship between pair of triangle in two images is fixed for smoothly transformation. That is to say, triangle#n of frame t is always mapped to triangle#n of frame t+1.<br><img src="/images/morphing/tri_index_map.jpg" alt=""><br>Each pair of triangle has a transformation matrix for mapping. This matrix will change from frame to frame since the shape and position of triangles will change from frame to frame.<br>Now the problem is how to compute $A$. Since $p$ is a $3\times 3$ square matrix, it is invertible. $A=p’p^{-1}$. Points $p’$ and $p$ are specified by six vertices in each pair of triangles. We call them control pixels/points, which usually specify prominant features in the images. Select points on features that we want to align during the morph in a consistent manner using the same ordering of all keypoints (the more points, the better the morph, generally): eyes, ears, nose, mouth, etc.<br><img src="/images/morphing/select_points_face.jpg" alt=""><br>Having known $A$, the coordinate transform matrix, the non-marked points $p’$ (all pixels in triangles except vertices) can be computed from source points $p$. There are two ways to do this.</p>
+<ul>
+<li><strong>Forward warping:</strong> send each pixel $p$ to its corresponding location $p’=Ap$ in the second image.</li>
+<li><strong>Inverse warping:</strong> get each pixel $p’$ from its corresponding location $p=A^{-1}p’$ in the first image.</li>
+</ul>
+<p>Inverse warping is a better way. See <a href="https://hypjudy.github.io/2017/03/28/cvpr-A4-paper-sheet-detection-and-cropping/#ReverseMapping" target="_blank" rel="external">my discussion in A4 paper sheet detection and cropping</a> for more details.</p>
+<h1 id="Implementation"><a href="#Implementation" class="headerlink" title="Implementation"></a>Implementation</h1><p><strong>Language:</strong> Matlab.</p>
+<p><strong>Attention:</strong> Codes for checking, reading/saving images are omitted here. Hopefully my comments are detailed enough, I will not talk a lot in this part. Please see my <a href="https://github.com/HYPJUDY/image-morphing" target="_blank" rel="external">source code</a> for more details.</p>
+<p>The <strong>process</strong> is clear. Firstly, define correspondences and then produce each frame of the morph sequence specified by a fraction from 0 to 1. </p>
+<figure class="highlight matlab"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line">[im1_pts, im2_pts, tri] = ...</div><div class="line">    define_correspondences(im1, im2, im1_pts_path, im2_pts_path);</div><div class="line"><span class="keyword">for</span> frac = <span class="built_in">linspace</span>(<span class="number">0</span>, <span class="number">1</span>, frames_num)</div><div class="line">    morphed_im = morph(im1, im2, im1_pts, im2_pts, tri, frac, frac);</div><div class="line"><span class="keyword">end</span></div></pre></td></tr></table></figure>
+<h2 id="Defining-Correspondences"><a href="#Defining-Correspondences" class="headerlink" title="Defining Correspondences"></a>Defining Correspondences</h2><figure class="highlight matlab"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div></pre></td><td class="code"><pre><div class="line"><span class="function"><span class="keyword">function</span> <span class="params">[im1_pts, im2_pts, tri]</span> = <span class="title">define_correspondences</span><span class="params">(...</span></span></div><div class="line">    im1, im2, im1_pts_path, im2_pts_path)</div><div class="line"><span class="comment">%DEFINE_CORRESPONDENCES Define pairs of corresponding points.</span></div><div class="line"><span class="comment">%   returns pairs of corresponding points on the two images specify by </span></div><div class="line"><span class="comment">%   their paths and the triangulation structure tri at midway shape.</span></div><div class="line"></div><div class="line">[im1_pts, im2_pts] = cpselect(im1, im2, <span class="string">'Wait'</span>, true);</div><div class="line">pts_mean = (im1_pts + im2_pts) / <span class="number">2</span>;</div><div class="line">tri = delaunay(pts_mean);</div><div class="line"><span class="keyword">end</span></div></pre></td></tr></table></figure>
+<p>As I have mentioned, the one-to-one relationship between pair of triangle in two images is fixed. The triangulation is computed by the mean of the two point sets to lessen the potential triangle deformations. Each row of <code>tri</code> specifies a triangle defined by indices with respect to the points. In other word, tri is a matrix storing three vertices’s indexes of each triangle. The relative order of triangles will not change so we can tell which triangle from source image corresponds to which triangle in destination image.</p>
+<h2 id="The-Morph-Sequence"><a href="#The-Morph-Sequence" class="headerlink" title="The Morph Sequence"></a>The Morph Sequence</h2><figure class="highlight matlab"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div></pre></td><td class="code"><pre><div class="line"><span class="function"><span class="keyword">function</span> <span class="title">morphed_im</span> = <span class="title">morph</span><span class="params">(...</span></span></div><div class="line">    im1, im2, im1_pts, im2_pts, tri, warp_frac, dissolve_frac)</div><div class="line"><span class="comment">%MORPH Morph image.</span></div><div class="line"><span class="comment">%   [MORPHED_IM]=MORPH(IM1,IM2,IM1_PTS,IM2_PTS,TRI,WARP_FRAC,DISSOLVE_FRAC) </span></div><div class="line"><span class="comment">%   returns a warp between im1 and im2 using point correspondences defined </span></div><div class="line"><span class="comment">%   in im1_pts and im2_pts (which are both n-by-2 matrices of (x,y) </span></div><div class="line"><span class="comment">%   locations) and the triangulation structure tri. </span></div><div class="line"><span class="comment">%   The parameters warp_frac and dissolve_frac control shape warping and </span></div><div class="line"><span class="comment">%   cross-dissolve, respectively. For interpolation, both parameters lie</span></div><div class="line"><span class="comment">%   in the range [0,1]. They are the only parameters that will vary from</span></div><div class="line"><span class="comment">%   frame to frame in the animation.</span></div><div class="line"></div><div class="line"><span class="comment">% Images im1 and im2 are first warped into an intermediate shape</span></div><div class="line"><span class="comment">% configuration controlled by warp_frac.</span></div><div class="line">inter_shape_pts = warp_frac * im2_pts + (<span class="number">1</span> - warp_frac) * im1_pts;</div><div class="line">im1_warp = affine_warp(im1, im1_pts, inter_shape_pts, tri);</div><div class="line">im2_warp = affine_warp(im2, im2_pts, inter_shape_pts, tri);</div><div class="line"></div><div class="line"><span class="comment">% And then cross-dissolved according to dissolve_frac.</span></div><div class="line">morphed_im = dissolve_frac * im2_warp + (<span class="number">1</span> - dissolve_frac) * im1_warp;</div><div class="line"><span class="keyword">end</span></div></pre></td></tr></table></figure>
+<h3 id="Affine-warp"><a href="#Affine-warp" class="headerlink" title="Affine warp"></a>Affine warp</h3><p>This part is a little tricky in implementation.</p>
+<figure class="highlight matlab"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div></pre></td><td class="code"><pre><div class="line"><span class="function"><span class="keyword">function</span> <span class="title">warp_im</span> = <span class="title">affine_warp</span><span class="params">(im, from_pts, to_pts, tri)</span></span></div><div class="line"><span class="comment">%AFFINE_WARP Affine warp.</span></div><div class="line"><span class="comment">%   [WARP_IM] = AFFINE_WARP(IM,FROM_PTS,TO_PTS,TRI) </span></div><div class="line"><span class="comment">%   returns an affine warp for each triangle in the triangulation from the</span></div><div class="line"><span class="comment">%   original image into a new shape using point correspondences defined </span></div><div class="line"><span class="comment">%   in from_pts and to_pts (which are both n-by-2 matrices of (x,y) </span></div><div class="line"><span class="comment">%   locations) and the triangulation structure tri.</span></div><div class="line"></div><div class="line">warp_im = im;</div><div class="line">[h, w, channel] = <span class="built_in">size</span>(im);</div><div class="line">[Y, X] = <span class="built_in">meshgrid</span>(<span class="number">1</span>:h, <span class="number">1</span>:w);</div><div class="line"></div><div class="line"><span class="comment">%t(i) gives the index(into tri)of the first triangle containing (X(i),Y(i))</span></div><div class="line">t = mytsearch(to_pts(:, <span class="number">1</span>), to_pts(:, <span class="number">2</span>), tri, X, Y); <span class="comment">%search triangulation</span></div><div class="line">tri_index_map = <span class="built_in">zeros</span>(<span class="built_in">size</span>(t));</div><div class="line">valid_tri_idx = ~<span class="built_in">isnan</span>(t); <span class="comment">% t(i) is NaN for points not in any triangle</span></div><div class="line">tri_index_map(valid_tri_idx) = t(valid_tri_idx);</div><div class="line"></div><div class="line"><span class="comment">% inverse warp of all pixels</span></div><div class="line"><span class="keyword">for</span> <span class="built_in">i</span> = <span class="number">1</span>:<span class="built_in">size</span>(tri,<span class="number">1</span>) <span class="comment">% for each triangle</span></div><div class="line">    [col, row] = <span class="built_in">find</span>(tri_index_map == <span class="built_in">i</span>); <span class="comment">% find out all points in it</span></div><div class="line">    p2 = transpose([col, row, ones(size(col,<span class="number">1</span>),<span class="number">1</span>)]); <span class="comment">% [x';y';1]</span></div><div class="line">    <span class="comment">% computing an affine transformation matrix A between two triangles</span></div><div class="line">    A = computeAffine(from_pts(tri(<span class="built_in">i</span>,:),:), to_pts(tri(<span class="built_in">i</span>,:),:));</div><div class="line">    p = pinv(A) * p2; <span class="comment">% p2=Ap -&gt; p=A^(-1)p2</span></div><div class="line">    p = <span class="built_in">floor</span>(p); <span class="comment">% index should be integer</span></div><div class="line">    </div><div class="line">    <span class="comment">% avoid out of bound</span></div><div class="line">    <span class="comment">% omit......</span></div><div class="line"></div><div class="line">    <span class="comment">% warp_im(p2(1,:),p2(2,:),:)=im(p(1,:),p(2,:),:); % large memory&amp;time!</span></div><div class="line">    p_ind = <span class="built_in">sub2ind</span>([h, w], p(<span class="number">2</span>,:), p(<span class="number">1</span>,:)); <span class="comment">% convert to linear indices</span></div><div class="line">    p2_ind = <span class="built_in">sub2ind</span>([h, w], p2(<span class="number">2</span>,:), p2(<span class="number">1</span>,:));</div><div class="line">    </div><div class="line">    warp_im(p2_ind) = im(p_ind); <span class="comment">% first channel</span></div><div class="line">    <span class="keyword">if</span> channel == <span class="number">3</span></div><div class="line">        warp_im(p2_ind + w*h) = im(p_ind + w*h); <span class="comment">% second channel</span></div><div class="line">        warp_im(p2_ind + <span class="number">2</span>*w*h) = im(p_ind + <span class="number">2</span>*w*h); <span class="comment">% third channel</span></div><div class="line">    <span class="keyword">end</span></div><div class="line"><span class="keyword">end</span></div><div class="line"><span class="keyword">end</span></div></pre></td></tr></table></figure>
+<h1 id="Results-and-Analysis"><a href="#Results-and-Analysis" class="headerlink" title="Results and Analysis"></a>Results and Analysis</h1><p>Image morphing can be applied to any object, but obviously it will have better effect for objects with similar structure and uniform background. Human faces set an example.</p>
+<h2 id="Human-faces"><a href="#Human-faces" class="headerlink" title="Human faces"></a>Human faces</h2><h3 id="Girl-Morph-to-Boy"><a href="#Girl-Morph-to-Boy" class="headerlink" title="Girl Morph to Boy"></a>Girl Morph to Boy</h3><p>For human faces, about 60 control points are enough. Here I use about 100 control points for fine-grained result. From the girl to the boy, there are 11 frames of animation between them where each frame is displayed for 0.1 second.<br><div class="group-picture"><div class="group-picture-container"><div class="group-picture-row"><div class="group-picture-column" style="width: 33.333333333333336%;"><img src="/images/morphing/girl.jpg" alt=""></div><div class="group-picture-column" style="width: 33.333333333333336%;"><img src="/images/morphing/girl_to_boy.gif" alt=""></div><div class="group-picture-column" style="width: 33.333333333333336%;"><img src="/images/morphing/boy.bmp" alt=""></div></div><div class="group-picture-row"></div></div></div></p>
+<p>Here are the “mid-way” faces of frame 2, 4, 6, 8, 10. The fourth image is the triangulation of average face(frame 6)<br><div class="group-picture"><div class="group-picture-container"><div class="group-picture-row"><div class="group-picture-column" style="width: 33.333333333333336%;"><img src="/images/morphing/girl_to_boy_2.jpg" alt=""></div><div class="group-picture-column" style="width: 33.333333333333336%;"><img src="/images/morphing/girl_to_boy_4.jpg" alt=""></div><div class="group-picture-column" style="width: 33.333333333333336%;"><img src="/images/morphing/girl_to_boy_6.jpg" alt=""></div></div><div class="group-picture-row"><div class="group-picture-column" style="width: 33.333333333333336%;"><img src="/images/morphing/girl_boy_midway_tri.jpg" alt=""></div><div class="group-picture-column" style="width: 33.333333333333336%;"><img src="/images/morphing/girl_to_boy_8.jpg" alt=""></div><div class="group-picture-column" style="width: 33.333333333333336%;"><img src="/images/morphing/girl_to_boy_10.jpg" alt=""></div></div><div class="group-picture-row"></div></div></div></p>
+<h3 id="Emma-Morph-to-Daniel"><a href="#Emma-Morph-to-Daniel" class="headerlink" title="Emma Morph to Daniel"></a>Emma Morph to Daniel</h3><p>Can you tell whom this average face are combined of???<br><div class="group-picture"><div class="group-picture-container"><div class="group-picture-row"><div class="group-picture-column" style="width: 50%;"><img src="/images/morphing/A_B_midway.jpg" alt=""></div><div class="group-picture-column" style="width: 50%;"><img src="/images/morphing/A_B_midway_tri.jpg" alt=""></div></div><div class="group-picture-row"></div></div></div><br>Emma Watson and Daniel Radcliffe!<br><div class="group-picture"><div class="group-picture-container"><div class="group-picture-row"><div class="group-picture-column" style="width: 33.333333333333336%;"><img src="/images/morphing/A.jpg" alt=""></div><div class="group-picture-column" style="width: 33.333333333333336%;"><img src="/images/morphing/A_to_B.gif" alt=""></div><div class="group-picture-column" style="width: 33.333333333333336%;"><img src="/images/morphing/B.jpg" alt=""></div></div><div class="group-picture-row"></div></div></div><br>The selection of control points for hair is tricky since one is round while the other is square. Anyway, just select a set of points you want to map.<br><img src="/images/morphing/select_points_face2.jpg" alt=""></p>
+<h3 id="Average-Face-of-Chinese-Beauty"><a href="#Average-Face-of-Chinese-Beauty" class="headerlink" title="Average Face of Chinese Beauty"></a>Average Face of Chinese Beauty</h3><p>Game time! Take a guess.<br><div class="group-picture"><div class="group-picture-container"><div class="group-picture-row"><div class="group-picture-column" style="width: 33.333333333333336%;"><img src="/images/morphing/lss_lyf_midway.jpg" alt=""></div><div class="group-picture-column" style="width: 33.333333333333336%;"><img src="/images/morphing/lss_tly_midway.jpg" alt=""></div><div class="group-picture-column" style="width: 33.333333333333336%;"><img src="/images/morphing/lyf_tly_midway.jpg" alt=""></div></div><div class="group-picture-row"><div class="group-picture-column" style="width: 33.333333333333336%;"><img src="/images/morphing/tly_ym_midway.jpg" alt=""></div><div class="group-picture-column" style="width: 33.333333333333336%;"><img src="/images/morphing/ym_lyf_midway.jpg" alt=""></div><div class="group-picture-column" style="width: 33.333333333333336%;"><img src="/images/morphing/ym_ty_midway.jpg" alt=""></div></div><div class="group-picture-row"></div></div></div><br><div class="group-picture"><div class="group-picture-container"><div class="group-picture-row"><div class="group-picture-column" style="width: 33.333333333333336%;"><img src="/images/morphing/lyf_ty_midway.jpg" alt=""></div><div class="group-picture-column" style="width: 33.333333333333336%;"><img src="/images/morphing/lss_lyf_midway.jpg" alt=""></div><div class="group-picture-column" style="width: 33.333333333333336%;"><img src="/images/morphing/ty_lrt_midway.jpg" alt=""></div></div><div class="group-picture-row"></div></div></div></p>
+<p>As you can seen, these “combined” beauties still have rather real and clear faces which perfectly combine their two “source” beauties’s features. But the backgrounds and headwears have double-exposure effect due to lacking corresponding aligned objects.</p>
+<h2 id="Peking-Opera-Mask-Morphing"><a href="#Peking-Opera-Mask-Morphing" class="headerlink" title="Peking Opera Mask Morphing"></a>Peking Opera Mask Morphing</h2><p>In fact, my original intention was to produce a morphing music video of the traditional Chinese Peking Opera masks! At first glance, its rather simple because all masks are oval, symmetrical, with mouth/eyes/nose/ears and without background. However, I gave up after morphing a pair of masks.<br><img src="/images/morphing/f1_to_f2.gif" title="Chinese Peking Opera mask morphing" style="width: 30%; margin: auto;"><br>I used more than 100 control points and felt rather difficult to find corresponding control points. And this is the simplest one! Take a look at the following masks.<br><img src="/images/morphing/masks.jpg" title="Chinese Peking Opera masks, credit: lanrentuku.com" style="width: 80%; margin: auto;"></p>
+<h1 id="Cartoon-Character-Morphing"><a href="#Cartoon-Character-Morphing" class="headerlink" title="Cartoon Character Morphing"></a>Cartoon Character Morphing</h1><p>For fun, I morph a <a href="http://www.weihk.cn/article/238045" target="_blank" rel="external">spirit in Pokemon GO</a>. The effect is not very good due to the same reason. You can take it as a  counter-example.<br><div class="group-picture"><div class="group-picture-container"><div class="group-picture-row"><div class="group-picture-column" style="width: 50%;"><img src="/images/morphing/bobo.jpg" alt=""></div><div class="group-picture-column" style="width: 50%;"><img src="/images/morphing/bobo2_to_bobo3.gif" alt=""></div></div><div class="group-picture-row"></div></div></div></p>
+<h1 id="Future-work"><a href="#Future-work" class="headerlink" title="Future work"></a>Future work</h1><ul>
+<li>C++ implementation with CImg and Dlib library (automatic morphing for faces).</li>
+<li>The “Mean face” of a population</li>
+<li>Caricatures: Extrapolating from the mean</li>
+<li>“visual lip-syncing”</li>
+<li>Other funny application…</li>
+</ul>
+<h1 id="Reference-amp-Credits"><a href="#Reference-amp-Credits" class="headerlink" title="Reference &amp; Credits"></a>Reference &amp; Credits</h1><p>All images come from website. Thanks to them all.</p>
+<ol>
+<li><a href="https://inst.eecs.berkeley.edu/~cs194-26/fa14/hw/proj5-morph/index.html" target="_blank" rel="external">Face Morphing project</a> of CSCI1950, Brown University.</li>
+<li><a href="https://inst.eecs.berkeley.edu/~cs194-26/fa14/hw/proj5-morph/index.html" target="_blank" rel="external">Face Morphing project</a> of CS194-26, UC Berkeley.</li>
+<li><a href="https://inst.eecs.berkeley.edu/~cs194-26/fa14/Lectures/morphing.pdf" target="_blank" rel="external">Courseware: Image Warping and Morphing</a> of CS194-26, UC Berkeley.</li>
+<li><a href="https://www.cs.utexas.edu/users/fussell/courses/cs384g-fall2011/lectures/lecture07-Affine.pdf" target="_blank" rel="external">Courseware: Affine Transformations</a> of CS384G, University of Texas at Austin.</li>
+<li><a href="https://inst.eecs.berkeley.edu/~cs194-26/fa14/upload/files/proj5/" target="_blank" rel="external">Reports of face morphing project</a> of CS194-26, UC Berkeley. E.g. <a href="https://inst.eecs.berkeley.edu/~cs194-26/fa14/upload/files/proj5/cs194-dx/" target="_blank" rel="external">Report by Howard Nguyen</a>, <a href="https://inst.eecs.berkeley.edu/~cs194-26/fa14/upload/files/proj5/cs194-kc/albert_rachel_proj5/" target="_blank" rel="external">report by Rachel Albert</a> and <a href="https://inst.eecs.berkeley.edu/~cs194-26/fa14/upload/files/proj5/cs194-da/" target="_blank" rel="external">report by Nathaniel Mailoa</a>.</li>
+<li><a href="https://github.com/rachelalbert/CS294-26_code/tree/master/project5_code" target="_blank" rel="external">Python implementation by Rachel Albert</a>.</li>
+<li><a href="https://github.com/h-wang94/FaceMorphing" target="_blank" rel="external">Matlab implementation by Harrison Wang</a>.</li>
+<li><a href="https://www.youtube.com/watch?v=6gEclqZl_V0" target="_blank" rel="external">Composers Music Video by Nathaniel Mailoa</a>.</li>
+<li><a href="http://wikieducator.org/Image_Morphing" target="_blank" rel="external">Image Morphing: A Comparative Study by Prashant K. Oswal and Prashanth Y. Govindaraju</a></li>
+</ol>
+
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+
+    <footer class="post-footer">
+      
+
+      
+        
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2017/04/18/KMP-algorithm-split/" rel="next" title="[Algorithm] Implement Split Function with KMP Algorithm">
+                <i class="fa fa-chevron-left"></i> [Algorithm] Implement Split Function with KMP Algorithm
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+          
+          </div>
+          
+
+
+          
+  <div class="comments" id="comments">
+    
+      <div id="disqus_thread">
+        <noscript>
+          Please enable JavaScript to view the
+          <a href="//disqus.com/?ref_noscript">comments powered by Disqus.</a>
+        </noscript>
+      </div>
+    
+  </div>
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap" >
+            Table of Contents
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview">
+            Overview
+          </li>
+        </ul>
+      
+
+      <section class="site-overview sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+          <img class="site-author-image" itemprop="image"
+               src="/images/avatar.png"
+               alt="HYPJUDY" />
+          <p class="site-author-name" itemprop="name">HYPJUDY</p>
+           
+              <p class="site-description motion-element" itemprop="description">What I cannot create, I do not understand.</p>
+          
+        </div>
+        <nav class="site-state motion-element">
+        
+          
+            <div class="site-state-item site-state-posts">
+              <a href="/archives">
+                <span class="site-state-item-count">14</span>
+                <span class="site-state-item-name">posts</span>
+              </a>
+            </div>
+          
+
+          
+
+          
+
+        </nav>
+
+        
+
+        <div class="links-of-author motion-element">
+          
+            
+              <span class="links-of-author-item">
+                <a href="https://github.com/hypjudy" target="_blank" title="GitHub">
+                  
+                    <i class="fa fa-fw fa-github"></i>
+                  
+                  GitHub
+                </a>
+              </span>
+            
+          
+        </div>
+
+        
+        
+
+        
+        
+
+        
+
+
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#Approaches"><span class="nav-number">1.</span> <span class="nav-text">Approaches</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#GOAL"><span class="nav-number">1.1.</span> <span class="nav-text">GOAL</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Process"><span class="nav-number">1.2.</span> <span class="nav-text">Process</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Details"><span class="nav-number">1.3.</span> <span class="nav-text">Details</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Implementation"><span class="nav-number">2.</span> <span class="nav-text">Implementation</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#Defining-Correspondences"><span class="nav-number">2.1.</span> <span class="nav-text">Defining Correspondences</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#The-Morph-Sequence"><span class="nav-number">2.2.</span> <span class="nav-text">The Morph Sequence</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#Affine-warp"><span class="nav-number">2.2.1.</span> <span class="nav-text">Affine warp</span></a></li></ol></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Results-and-Analysis"><span class="nav-number">3.</span> <span class="nav-text">Results and Analysis</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#Human-faces"><span class="nav-number">3.1.</span> <span class="nav-text">Human faces</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#Girl-Morph-to-Boy"><span class="nav-number">3.1.1.</span> <span class="nav-text">Girl Morph to Boy</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Emma-Morph-to-Daniel"><span class="nav-number">3.1.2.</span> <span class="nav-text">Emma Morph to Daniel</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Average-Face-of-Chinese-Beauty"><span class="nav-number">3.1.3.</span> <span class="nav-text">Average Face of Chinese Beauty</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Peking-Opera-Mask-Morphing"><span class="nav-number">3.2.</span> <span class="nav-text">Peking Opera Mask Morphing</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Cartoon-Character-Morphing"><span class="nav-number">4.</span> <span class="nav-text">Cartoon Character Morphing</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Future-work"><span class="nav-number">5.</span> <span class="nav-text">Future work</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Reference-amp-Credits"><span class="nav-number">6.</span> <span class="nav-text">Reference & Credits</span></a></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright" >
+  
+  &copy;  2016 - 
+  <span itemprop="copyrightYear">2017</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">HYPJUDY</span>
+</div>
+
+
+<div class="powered-by">
+  Powered by <a class="theme-link" href="https://hexo.io">Hexo</a>
+</div>
+
+<div class="theme-info">
+  Theme -
+  <a class="theme-link" href="https://github.com/iissnan/hexo-theme-next">
+    NexT.Mist
+  </a>
+</div>
+
+
+        
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+    
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+  
+  <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+
+  
+  <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+
+  
+  <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+
+  
+  <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.0"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.0"></script>
+
+
+
+  
+  
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.0"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.0"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.0"></script>
+
+
+
+  
+
+
+
+  
+
+    <script type="text/javascript">
+      var disqus_shortname = 'hypjudy';
+      var disqus_identifier = '2017/04/25/image-morphing/';
+
+      var disqus_title = "[CVPR] Image Morphing";
+
+
+      function run_disqus_script(disqus_script) {
+        var dsq = document.createElement('script');
+        dsq.type = 'text/javascript';
+        dsq.async = true;
+        dsq.src = '//' + disqus_shortname + '.disqus.com/' + disqus_script;
+        (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+      }
+
+      run_disqus_script('count.js');
+
+      
+        var disqus_config = function () {
+            this.page.url = disqus_url;
+            this.page.identifier = disqus_identifier;
+            this.page.title = disqus_title;
+        };
+        run_disqus_script('embed.js');
+      
+
+    </script>
+  
+
+
+
+
+
+
+
+
+
+
+  
+  
+
+  
+  
+    <script type="text/x-mathjax-config">
+      MathJax.Hub.Config({
+        tex2jax: {
+          inlineMath: [ ['$','$'], ["\\(","\\)"]  ],
+          processEscapes: true,
+          skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+        }
+      });
+    </script>
+
+    <script type="text/x-mathjax-config">
+      MathJax.Hub.Queue(function() {
+        var all = MathJax.Hub.getAllJax(), i;
+        for (i=0; i < all.length; i += 1) {
+          all[i].SourceElement().parentNode.className += ' has-jax';
+        }
+      });
+    </script>
+    <script type="text/javascript" src="//cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+  
+
+
+  
+
+  
+
+  
+
+
+  
+
+</body>
+</html>

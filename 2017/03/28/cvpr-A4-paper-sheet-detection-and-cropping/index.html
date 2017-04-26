@@ -144,7 +144,7 @@
 <meta property="og:image" content="http://yoursite.com/images/paper-sheet/15.bmp">
 <meta property="og:image" content="http://yoursite.com/images/paper-sheet/15_marked.bmp">
 <meta property="og:image" content="http://yoursite.com/images/paper-sheet/15_A4.bmp">
-<meta property="og:updated_time" content="2017-04-12T06:32:16.802Z">
+<meta property="og:updated_time" content="2017-04-26T12:30:38.936Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="[CVPR] A4 Paper Sheet Detection and Cropping with Hough Transform and Warping">
 <meta name="twitter:description" content="Function similar to Document Scanner. Given images of A4 paper sheets, output paper sheets’ four corners as well as four edges and their equations. Then crop the background and leave the paper sheet i">
@@ -463,6 +463,7 @@
 <p>$$UV=A\times M$$</p>
 <p>Eight parameter in matrix form can be calculated by </p>
 <p>$$M=A^{-1}\times UV$$</p>
+<p><a name="ReverseMapping"></a></p>
 <h3 id="Reverse-Mapping"><a href="#Reverse-Mapping" class="headerlink" title="Reverse Mapping"></a>Reverse Mapping</h3><p><strong>Forward Mapping(Bad):</strong> Iterate over source image, sending pixels to destination. With this method, many source pixels can map to same destination pixel and some destination pixels may not be covered.<br><img src="/images/paper-sheet/forward_mapping.jpg" alt=""><br><strong>Inverse Mapping(Better):</strong> Iterate over destination image, finding pixels from source. (x,y) does not usually have integer coordinates. Must resample source. May oversample, but much simpler! Pseudo-code:</p>
 <figure class="highlight cpp"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">for</span> v = v_min to v_max</div><div class="line">    <span class="keyword">for</span> u = u_min to u_max</div><div class="line">        x = F(u, v); y = G(u, v)</div><div class="line">        copy pixel at source Src(x, y) to Dest(u, v)</div></pre></td></tr></table></figure>
 <p>Here the F, G is the inverse transform of $u=\frac{ax+by+c}{mx+ly+1}, v=\frac{dx+ey+f}{mx+ly+1}$. Solve it and get</p>
@@ -629,7 +630,7 @@
           
             <div class="site-state-item site-state-posts">
               <a href="/archives">
-                <span class="site-state-item-count">13</span>
+                <span class="site-state-item-count">14</span>
                 <span class="site-state-item-name">posts</span>
               </a>
             </div>

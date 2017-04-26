@@ -99,7 +99,7 @@
 <meta property="og:image" content="http://yoursite.com/images/algorithm/split-4.png">
 <meta property="og:image" content="http://yoursite.com/images/algorithm/partial-match-table.png">
 <meta property="og:image" content="http://yoursite.com/images/algorithm/counterexample-trick.png">
-<meta property="og:updated_time" content="2017-04-18T20:58:54.893Z">
+<meta property="og:updated_time" content="2017-04-18T21:10:16.091Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="[Algorithm] Implement Split Function with KMP Algorithm">
 <meta name="twitter:description" content="Splitting a string per the given seperator/delimiter similar to split() funtion in Python.Implement with Knuth–Morris–Pratt string searching algorithm (or KMP algorithm) in C++ language.">
@@ -345,7 +345,7 @@
 <p>Example:<br>Search sep “AABCAABA” in string “AABCAA BAABCAABA”</p>
 <h2 id="Naive-Pattern-Searching"><a href="#Naive-Pattern-Searching" class="headerlink" title="Naive Pattern Searching"></a>Naive Pattern Searching</h2><p>Well, my first thought was sliding the delimiter over string one by one for a match:</p>
 <figure class="highlight cpp"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div></pre></td><td class="code"><pre><div class="line"><span class="built_in">vector</span>&lt;<span class="built_in">string</span>&gt; split(<span class="keyword">const</span> <span class="built_in">string</span> &amp;s, <span class="keyword">const</span> <span class="built_in">string</span> &amp;sep) &#123;</div><div class="line">    <span class="built_in">vector</span>&lt;<span class="built_in">string</span>&gt; res;</div><div class="line">    <span class="keyword">int</span> last = <span class="number">0</span>, i = <span class="number">0</span>;</div><div class="line">    <span class="keyword">int</span> m = s.length(), n = sep.length();</div><div class="line">    <span class="keyword">while</span>(i &lt; m) &#123;</div><div class="line">        <span class="keyword">int</span> find_sep = <span class="number">0</span>;</div><div class="line">        <span class="keyword">if</span> (s[i] == sep[<span class="number">0</span>] &amp;&amp; i + n &lt;= m) &#123;</div><div class="line">            <span class="keyword">if</span> (s.substr(i, n) == sep) &#123;</div><div class="line">                res.push_back(s.substr(last, i-last));</div><div class="line">                last = i + n;</div><div class="line">                i += n;</div><div class="line">                find_sep = <span class="number">1</span>;</div><div class="line">            &#125;</div><div class="line">        &#125;</div><div class="line">        <span class="keyword">if</span> (find_sep == <span class="number">0</span>) ++i;</div><div class="line">    &#125;</div><div class="line">    res.push_back(s.substr(last, i - last));</div><div class="line">    <span class="keyword">return</span> res;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
-<p>Notice: this function doesn’t split string by space defaultly. For example, <code>split(&quot;a b c&quot;, &quot;&quot;) = &quot;a b c&quot;</code>, which I think is also resonable.</p>
+<p>Notice: this function doesn’t split string by space in default. For example, <code>split(&quot;a b c&quot;, &quot;&quot;) = &quot;a b c&quot;</code>, which I think is also resonable.</p>
 <p><em>Please read image from top to bottom, left to right.</em><br><div class="group-picture"><div class="group-picture-container"><div class="group-picture-row"><div class="group-picture-column" style="width: 50%;"><img src="/images/algorithm/split-1.png" alt=""></div><div class="group-picture-column" style="width: 50%;"><img src="/images/algorithm/split-2.png" alt=""></div></div><div class="group-picture-row"></div></div></div></p>
 <p><strong>Best case:</strong> First character of the delimiter is not present in string.<br><code>split(&quot;AAAAAA&quot;, &quot;BC&quot;)</code><br><em>Time complexity:</em> O(m), m is string’s length.<br><strong>Worst case:</strong> Only last character of the delimiter is different.<br><code>split(&quot;AAAAAA&quot;, &quot;AAB&quot;)</code><br><em>Time complexity:</em> O((m-n+1)n), m is string’s length and n is delimiter’s length.</p>
 <h2 id="Knuth–Morris–Pratt-KMP-string-searching-algorithm"><a href="#Knuth–Morris–Pratt-KMP-string-searching-algorithm" class="headerlink" title="Knuth–Morris–Pratt(KMP) string searching algorithm"></a>Knuth–Morris–Pratt(KMP) string searching algorithm</h2><p><em>Time complexity:</em> O(m+n) in worst case, m is string’s length and n is delimiter’s length. </p>
@@ -406,6 +406,10 @@
           <span class="post-nav-divider"></span>
 
           <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2017/04/25/image-morphing/" rel="prev" title="[CVPR] Image Morphing">
+                [CVPR] Image Morphing <i class="fa fa-chevron-right"></i>
+              </a>
             
           </div>
         </div>
@@ -484,7 +488,7 @@
           
             <div class="site-state-item site-state-posts">
               <a href="/archives">
-                <span class="site-state-item-count">13</span>
+                <span class="site-state-item-count">14</span>
                 <span class="site-state-item-name">posts</span>
               </a>
             </div>
