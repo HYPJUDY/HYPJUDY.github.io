@@ -135,7 +135,7 @@
 <meta property="og:image" content="http://yoursite.com/images/morphing/masks.jpg">
 <meta property="og:image" content="http://yoursite.com/images/morphing/bobo.jpg">
 <meta property="og:image" content="http://yoursite.com/images/morphing/bobo2_to_bobo3.gif">
-<meta property="og:updated_time" content="2017-04-26T17:48:56.951Z">
+<meta property="og:updated_time" content="2017-04-27T02:31:10.195Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="[CVPR] Image Morphing">
 <meta name="twitter:description" content="Produce a “morph” animation of one image into another image, which involves two parts: cross dissolving and affine warping.">
@@ -394,7 +394,7 @@
 </ul>
 <p>Inverse warping is a better way. See <a href="https://hypjudy.github.io/2017/03/28/cvpr-A4-paper-sheet-detection-and-cropping/#ReverseMapping" target="_blank" rel="external">my discussion in A4 paper sheet detection and cropping</a> for more details.</p>
 <h1 id="Implementation"><a href="#Implementation" class="headerlink" title="Implementation"></a>Implementation</h1><p><strong>Language:</strong> Matlab.</p>
-<p><strong>Attention:</strong> Codes for checking, reading/saving images are omitted here. Hopefully my comments are detailed enough, I will not talk a lot in this part. Please see my <a href="https://github.com/HYPJUDY/image-morphing" target="_blank" rel="external">source code</a> for more details.</p>
+<p><strong>Attention:</strong> Hopefully my comments are detailed enough, I will not talk a lot in this part. The code below is an excerpt; full source is <a href="https://github.com/HYPJUDY/image-morphing" target="_blank" rel="external">here</a>.</p>
 <p>The <strong>process</strong> is clear. Firstly, define correspondences and then produce each frame of the morph sequence specified by a fraction from 0 to 1. </p>
 <figure class="highlight matlab"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line">[im1_pts, im2_pts, tri] = ...</div><div class="line">    define_correspondences(im1, im2, im1_pts_path, im2_pts_path);</div><div class="line"><span class="keyword">for</span> frac = <span class="built_in">linspace</span>(<span class="number">0</span>, <span class="number">1</span>, frames_num)</div><div class="line">    morphed_im = morph(im1, im2, im1_pts, im2_pts, tri, frac, frac);</div><div class="line"><span class="keyword">end</span></div></pre></td></tr></table></figure>
 <h2 id="Defining-Correspondences"><a href="#Defining-Correspondences" class="headerlink" title="Defining Correspondences"></a>Defining Correspondences</h2><figure class="highlight matlab"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div></pre></td><td class="code"><pre><div class="line"><span class="function"><span class="keyword">function</span> <span class="params">[im1_pts, im2_pts, tri]</span> = <span class="title">define_correspondences</span><span class="params">(...</span></span></div><div class="line">    im1, im2, im1_pts_path, im2_pts_path)</div><div class="line"><span class="comment">%DEFINE_CORRESPONDENCES Define pairs of corresponding points.</span></div><div class="line"><span class="comment">%   returns pairs of corresponding points on the two images specify by </span></div><div class="line"><span class="comment">%   their paths and the triangulation structure tri at midway shape.</span></div><div class="line"></div><div class="line">[im1_pts, im2_pts] = cpselect(im1, im2, <span class="string">'Wait'</span>, true);</div><div class="line">pts_mean = (im1_pts + im2_pts) / <span class="number">2</span>;</div><div class="line">tri = delaunay(pts_mean);</div><div class="line"><span class="keyword">end</span></div></pre></td></tr></table></figure>
@@ -417,7 +417,7 @@
 <li>“visual lip-syncing”</li>
 <li>Other funny application…</li>
 </ul>
-<h1 id="Reference-amp-Credits"><a href="#Reference-amp-Credits" class="headerlink" title="Reference &amp; Credits"></a>Reference &amp; Credits</h1><p>All images come from website. Thanks to them all.</p>
+<h1 id="Reference-amp-Credits"><a href="#Reference-amp-Credits" class="headerlink" title="Reference &amp; Credits"></a>Reference &amp; Credits</h1><p>All images (except the small blue and pink triangles) come from website. Thanks to them all.</p>
 <ol>
 <li><a href="https://inst.eecs.berkeley.edu/~cs194-26/fa14/hw/proj5-morph/index.html" target="_blank" rel="external">Face Morphing project</a> of CSCI1950, Brown University.</li>
 <li><a href="https://inst.eecs.berkeley.edu/~cs194-26/fa14/hw/proj5-morph/index.html" target="_blank" rel="external">Face Morphing project</a> of CS194-26, UC Berkeley.</li>
@@ -468,6 +468,10 @@
           <span class="post-nav-divider"></span>
 
           <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2017/05/04/pose-estimation/" rel="prev" title="[Tensorflow] Human Pose estimation by Deep Learning">
+                [Tensorflow] Human Pose estimation by Deep Learning <i class="fa fa-chevron-right"></i>
+              </a>
             
           </div>
         </div>
@@ -546,7 +550,7 @@
           
             <div class="site-state-item site-state-posts">
               <a href="/archives">
-                <span class="site-state-item-count">14</span>
+                <span class="site-state-item-count">16</span>
                 <span class="site-state-item-name">posts</span>
               </a>
             </div>

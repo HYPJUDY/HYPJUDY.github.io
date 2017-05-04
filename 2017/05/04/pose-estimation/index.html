@@ -1,0 +1,809 @@
+<!doctype html>
+
+
+
+  
+
+
+<html class="theme-next mist use-motion" lang="en">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
+
+
+
+
+  
+  
+  
+  
+
+  
+    
+    
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+    
+    
+    <link href="//fonts.googleapis.com/css?family=Lato:300,300italic,400,400italic,700,700italic&subset=latin,latin-ext" rel="stylesheet" type="text/css">
+  
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=5.1.0" rel="stylesheet" type="text/css" />
+
+
+  <meta name="keywords" content="Hexo, NexT" />
+
+
+
+
+
+
+
+
+  <link rel="shortcut icon" type="image/x-icon" href="/favicon.png?v=5.1.0" />
+
+
+
+
+
+
+<meta name="description" content="Summary and comprehension of papers: S.-E. Wei, V. Ramakrishna, T. Kanade, and Y. Sheikh. Convolutional pose machines. In CVPR, 2016.
+A simple regression based implementation/VGG16 of pose estimation">
+<meta property="og:type" content="article">
+<meta property="og:title" content="[Tensorflow] Human Pose estimation by Deep Learning">
+<meta property="og:url" content="http://yoursite.com/2017/05/04/pose-estimation/index.html">
+<meta property="og:site_name" content="HYPJUDY">
+<meta property="og:description" content="Summary and comprehension of papers: S.-E. Wei, V. Ramakrishna, T. Kanade, and Y. Sheikh. Convolutional pose machines. In CVPR, 2016.
+A simple regression based implementation/VGG16 of pose estimation">
+<meta property="og:image" content="http://yoursite.com/images/pose-estimation/architecture-cpm.jpg">
+<meta property="og:image" content="http://yoursite.com/images/pose-estimation/pose-machines.jpg">
+<meta property="og:image" content="http://yoursite.com/images/pose-estimation/intermediate-supervision.jpg">
+<meta property="og:image" content="http://yoursite.com/images/pose-estimation/loss-cpm.jpg">
+<meta property="og:image" content="http://yoursite.com/images/pose-estimation/ori-network.png">
+<meta property="og:image" content="http://yoursite.com/images/pose-estimation/ori-result.png">
+<meta property="og:image" content="http://yoursite.com/images/pose-estimation/4conv-pose.png">
+<meta property="og:image" content="http://yoursite.com/images/pose-estimation/4conv-1.png">
+<meta property="og:image" content="http://yoursite.com/images/pose-estimation/4conv-2.png">
+<meta property="og:image" content="http://yoursite.com/images/pose-estimation/4conv-3.png">
+<meta property="og:image" content="http://yoursite.com/images/pose-estimation/train-1.png">
+<meta property="og:image" content="http://yoursite.com/images/pose-estimation/train-2.png">
+<meta property="og:image" content="http://yoursite.com/images/pose-estimation/train-3.png">
+<meta property="og:image" content="http://yoursite.com/images/pose-estimation/vgg16-pose.png">
+<meta property="og:image" content="http://yoursite.com/images/pose-estimation/vgg-1.png">
+<meta property="og:image" content="http://yoursite.com/images/pose-estimation/vgg-2.png">
+<meta property="og:image" content="http://yoursite.com/images/pose-estimation/vgg-3.png">
+<meta property="og:image" content="http://yoursite.com/images/pose-estimation/vgg-hist.jpg">
+<meta property="og:image" content="http://yoursite.com/images/pose-estimation/vgg-hist2.jpg">
+<meta property="og:image" content="http://yoursite.com/images/pose-estimation/loss.jpg">
+<meta property="og:image" content="http://yoursite.com/images/pose-estimation/sparsity.jpg">
+<meta property="og:image" content="http://yoursite.com/images/pose-estimation/dirty-1.png">
+<meta property="og:image" content="http://yoursite.com/images/pose-estimation/dirty-2.png">
+<meta property="og:image" content="http://yoursite.com/images/pose-estimation/dirty-3.png">
+<meta property="og:updated_time" content="2017-05-04T12:06:09.283Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="[Tensorflow] Human Pose estimation by Deep Learning">
+<meta name="twitter:description" content="Summary and comprehension of papers: S.-E. Wei, V. Ramakrishna, T. Kanade, and Y. Sheikh. Convolutional pose machines. In CVPR, 2016.
+A simple regression based implementation/VGG16 of pose estimation">
+<meta name="twitter:image" content="http://yoursite.com/images/pose-estimation/architecture-cpm.jpg">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Mist',
+    sidebar: {"position":"left","display":"hide","offset":12,"offset_float":0,"b2t":false,"scrollpercent":false},
+    fancybox: true,
+    motion: true,
+    duoshuo: {
+      userId: 'undefined',
+      author: 'Author'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":20},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="http://yoursite.com/2017/05/04/pose-estimation/"/>
+
+
+
+
+
+  <title> [Tensorflow] Human Pose estimation by Deep Learning | HYPJUDY </title>
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="en">
+
+  
+
+
+
+
+<script>
+  (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+            (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+          m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+  })(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
+  ga('create', 'UA-96132499-1', 'auto');
+  ga('send', 'pageview');
+</script>
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+    
+  
+
+  <div class="container one-collumn sidebar-position-left page-post-detail ">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/"  class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">HYPJUDY</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle">What I cannot create, I do not understand.</p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
+            
+            Home
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
+            
+            Archives
+          </a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2017/05/04/pose-estimation/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="HYPJUDY">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.png">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="HYPJUDY">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                [Tensorflow] Human Pose estimation by Deep Learning
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Posted on</span>
+              
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2017-05-04T20:06:50+08:00">
+                2017-05-04
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+
+          
+            
+              <span class="post-comments-count">
+                <span class="post-meta-divider">|</span>
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-comment-o"></i>
+                </span>
+                <a href="/2017/05/04/pose-estimation/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count disqus-comment-count" data-disqus-identifier="2017/05/04/pose-estimation/" itemprop="commentCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <p>Summary and comprehension of papers: S.-E. Wei, V. Ramakrishna, T. Kanade, and Y. Sheikh. Convolutional pose machines. In CVPR, 2016.</p>
+<p>A simple regression based implementation/VGG16 of pose estimation with tensorflow.<br><a id="more"></a></p>
+<p>★<a href="https://github.com/HYPJUDY/human-pose-estimation-by-deep-learning" target="_blank" rel="external"><strong>Source codes here</strong></a></p>
+<h1 id="Approaches"><a href="#Approaches" class="headerlink" title="Approaches"></a>Approaches</h1><p>A sequential architecture composed of convolutional networks that directly operate on belief maps from previous stages, producing increasingly refined estimates for part location.</p>
+<h2 id="Architecture-and-receptive-fields-of-CPMs"><a href="#Architecture-and-receptive-fields-of-CPMs" class="headerlink" title="Architecture and receptive fields of CPMs"></a>Architecture and receptive fields of CPMs</h2><p><img src="/images/pose-estimation/architecture-cpm.jpg" alt="Architecture and receptive fields of CPMs" title="Architecture and receptive fields of CPMs, credit: [Wei et al., 2016]" style="margin: auto;"><br>The <a href="http://ethereon.github.io/netscope/#/gist/921f05c77138faf3aec01b5bbfb5496b" target="_blank" rel="external">visualization</a> of each layer and their parameters in browser.<br>CPMs consist of a sequence of convolutional networks that repeatedly produce 2D belief maps 1 for the location of each part. At each stage in a CPM, image features and the belief maps produced by the previous stage are used as input. The belief maps provide the subsequent stage an expressive non-parametric encoding of the spatial uncertainty of location for each part, allowing the CPM to learn rich image-dependent spatial models of the relationships between parts.</p>
+<h3 id="Pose-Machine"><a href="#Pose-Machine" class="headerlink" title="Pose Machine"></a>Pose Machine</h3><p>Sequence of predictors produce increasingly refined estimates for each keypoint location.<br><img src="/images/pose-estimation/pose-machines.jpg" alt="Pose Machines" title="Pose Machines, credit: [Varum et al., 2014]" style="margin: auto;"></p>
+<ul>
+<li>Training reduces to training multiple supervised classifiers</li>
+<li>No structured loss function. No specialized solvers</li>
+<li>No handcrafted spatial model</li>
+<li>Spatial model is learned implicitly by the classifiers in a data-driven fashion</li>
+</ul>
+<h3 id="Convolutional-Networks"><a href="#Convolutional-Networks" class="headerlink" title="Convolutional Networks"></a>Convolutional Networks</h3><ul>
+<li>Learning Feature Representations: Convolutional Architectures for Feature Embedding</li>
+<li>Learning Context Representations: Large Receptive Fields as a Design Criterion<ul>
+<li>larger receptive field captures longrange interactions between parts &amp; incorporates more context information</li>
+<li>a large receptive field on both the image and the belief maps.</li>
+</ul>
+</li>
+<li>Subsequent stages<ul>
+<li>directly operate on belief maps from previous stages, producing increasingly refined estimates for part locations, without the need for explicit graphical model-style inference</li>
+</ul>
+</li>
+</ul>
+<h3 id="Learning-amp-Training"><a href="#Learning-amp-Training" class="headerlink" title="Learning &amp; Training"></a>Learning &amp; Training</h3><p>The overall proposed multistage architecture is fully differentiable and therefore can be trained in an end-to-end fashion using backpropagation.</p>
+<ul>
+<li>Jointing training with periodical <strong>intermediate supervision</strong> replenishes gradients and guides the network to produce increasingly accurate belief maps</li>
+<li>Network without intermediate supervision leads <strong>vanishing gradients</strong>.<br><img src="/images/pose-estimation/intermediate-supervision.jpg" alt="Joint training with intermediate supervision" title="Joint training with intermediate supervision, credit: [Wei et al., 2016]" style="margin: auto;"><br><img src="/images/pose-estimation/loss-cpm.jpg" alt="Loss: Euclidean distance" title="Loss: Euclidean distance, Credit: slide by Wei Yang" style="margin: auto;"></li>
+</ul>
+<h2 id="Evaluation-Metrics"><a href="#Evaluation-Metrics" class="headerlink" title="Evaluation Metrics"></a>Evaluation Metrics</h2><ul>
+<li><strong>Percentage of Detected Joints (PDJ)</strong><ul>
+<li>measures the performance using a curve of the percentage of correctly localized joints by varying localization precision threshold, which is normalized by the scale defined as distance between left shoulder and right hip</li>
+<li>invariant to scale</li>
+</ul>
+</li>
+<li><strong>Percentage of Correct Parts (PCP)</strong><ul>
+<li>measures the percentage of correctly localized body parts</li>
+<li>A candidate body part is treated as correct if its segment endpoints lie within 50% of the length of the ground-truth annotated endpoints.</li>
+</ul>
+</li>
+</ul>
+<h1 id="Implementation"><a href="#Implementation" class="headerlink" title="Implementation"></a>Implementation</h1><p>The <a href="https://github.com/shihenw/convolutional-pose-machines-release" target="_blank" rel="external">source code of CPM implemented with caffe</a> are provided by the authors. A tensorflow version implementation can be found <a href="https://github.com/psycharo/cpm" target="_blank" rel="external">here</a>. I test some images with the pretrained model of the tensorflow version but the results are terrible. But you can safely refer to the <a href="https://github.com/psycharo/cpm/blob/master/cpm.py" target="_blank" rel="external">CPM model definition in tensorflow</a>.<br>Here I just try to train and test some neural convolutional networks with my toy dataset for human pose estimation including:</p>
+<ul>
+<li>Simple several convolutinal layers network</li>
+<li>VGG16</li>
+</ul>
+<p>My code is based on <a href="https://github.com/JakeRenn/pose_estimation" target="_blank" rel="external">this repository</a>.</p>
+<p>The results/model are not good enough (or terrible) currently. Continue reading if you are interested in simple/fast neural network experiments for pose estimation.</p>
+<h2 id="Original-Convolutional-Network"><a href="#Original-Convolutional-Network" class="headerlink" title="Original Convolutional Network"></a>Original Convolutional Network</h2><p>Well, at first, I try to train with this network defined in the original repository (open the image in a new window to see the original big image):<br><img src="/images/pose-estimation/ori-network.png" alt="Original Convolutional Network for pose estimation" title="Original Convolutional Network for pose estimation" style="margin: auto;"><br><img src="/images/pose-estimation/ori-result.png" alt=""><br>But the results are identical for all images which indicates some layers’ weights are zeros and points only controlled by bias values.</p>
+<h2 id="4-Convolutional-Layers-Network"><a href="#4-Convolutional-Layers-Network" class="headerlink" title="4 Convolutional Layers Network"></a>4 Convolutional Layers Network</h2><p>So I reduce the convolutinal layer number to 4, which is better than 5 or 3. Let’s call it <em>4ConvNet</em></p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div></pre></td><td class="code"><pre><div class="line"><span class="function"><span class="keyword">def</span> <span class="title">cnn_fc</span><span class="params">(self, input_, is_train, name)</span>:</span></div><div class="line">    trainable = is_train</div><div class="line">    is_BN = <span class="keyword">True</span></div><div class="line"></div><div class="line">    <span class="keyword">with</span> tf.variable_scope(name) <span class="keyword">as</span> scope:</div><div class="line">        conv1 = self.conv_layer(input_, <span class="number">5</span>, <span class="number">96</span>,</div><div class="line">          <span class="string">'conv1'</span>, is_BN, trainable)</div><div class="line">        pool1 = tf.nn.max_pool(conv1, ksize=[<span class="number">1</span>, <span class="number">3</span>, <span class="number">3</span>, <span class="number">1</span>],</div><div class="line">              strides=[<span class="number">1</span>, <span class="number">2</span>, <span class="number">2</span>, <span class="number">1</span>],</div><div class="line">              padding=<span class="string">"SAME"</span>, name=<span class="string">"pool1"</span>)</div><div class="line"></div><div class="line">        conv8 = self.conv_layer(pool1, <span class="number">3</span>, <span class="number">128</span>,</div><div class="line">            <span class="string">'conv8'</span>, is_BN, trainable)</div><div class="line">        <span class="keyword">if</span> is_train:</div><div class="line">            conv8 = tf.nn.dropout(conv8, <span class="number">0.5</span>)</div><div class="line">        conv9 = self.conv_layer(conv8, <span class="number">1</span>, <span class="number">128</span>,</div><div class="line">            <span class="string">'conv9'</span>, is_BN, trainable)</div><div class="line">        fc2 = self.final_fc_layer(conv9, self.points_num * <span class="number">2</span>,</div><div class="line">              <span class="string">'fc2'</span>, trainable)</div><div class="line"></div><div class="line">    <span class="keyword">return</span> fc2</div></pre></td></tr></table></figure>
+<p><img src="/images/pose-estimation/4conv-pose.png" alt="4 Convolutional Layer Network for pose estimation" title="4 Convolutional Layer Network for pose estimation" style="margin: auto;"></p>
+<p>Now we can get different points for most test images.<br><div class="group-picture"><div class="group-picture-container"><div class="group-picture-row"><div class="group-picture-column" style="width: 33.333333333333336%;"><img src="/images/pose-estimation/4conv-1.png" alt=""></div><div class="group-picture-column" style="width: 33.333333333333336%;"><img src="/images/pose-estimation/4conv-2.png" alt=""></div><div class="group-picture-column" style="width: 33.333333333333336%;"><img src="/images/pose-estimation/4conv-3.png" alt=""></div></div><div class="group-picture-row"></div></div></div><br><em>(batch size:20, iter: 50000)</em><br>While the overall points shift and only some parts (e.g. right hand) are sensitive to different pose.</p>
+<p>For the moment, train images perform much better.<br><div class="group-picture"><div class="group-picture-container"><div class="group-picture-row"><div class="group-picture-column" style="width: 33.333333333333336%;"><img src="/images/pose-estimation/train-1.png" alt=""></div><div class="group-picture-column" style="width: 33.333333333333336%;"><img src="/images/pose-estimation/train-2.png" alt=""></div><div class="group-picture-column" style="width: 33.333333333333336%;"><img src="/images/pose-estimation/train-3.png" alt=""></div></div><div class="group-picture-row"></div></div></div></p>
+<h2 id="VGG16-Network"><a href="#VGG16-Network" class="headerlink" title="VGG16 Network"></a>VGG16 Network</h2><p>It seems impossible to get better results with simply reducing or increasing layers. I tried to train with <a href="">VGG16 Net</a>.<br><img src="/images/pose-estimation/vgg16-pose.png" alt="VGG16 for pose estimation" title="VGG16 for pose estimation" style="margin: auto;"></p>
+<div class="group-picture"><div class="group-picture-container"><div class="group-picture-row"><div class="group-picture-column" style="width: 33.333333333333336%;"><img src="/images/pose-estimation/vgg-1.png" alt=""></div><div class="group-picture-column" style="width: 33.333333333333336%;"><img src="/images/pose-estimation/vgg-2.png" alt=""></div><div class="group-picture-column" style="width: 33.333333333333336%;"><img src="/images/pose-estimation/vgg-3.png" alt=""></div></div><div class="group-picture-row"></div></div></div>
+<p><em>(batch size:20, iter: 30000)</em><br>It performs much better than the 4ConvNet models.</p>
+<p>For more details, we can see each layer’s histograms with tensorboard. Weights distributed over zero in general but not absolutely.<br><img src="/images/pose-estimation/vgg-hist.jpg" alt="Histogram of VGG16 layer" title="Histogram of VGG16 layer" style="margin: auto;"><br><img src="/images/pose-estimation/vgg-hist2.jpg" alt="Histogram of VGG16 layer-2" title="Histogram of VGG16 layer-2" style="margin: auto;"></p>
+<h2 id="Compare-4ConvNet-and-VGG16"><a href="#Compare-4ConvNet-and-VGG16" class="headerlink" title="Compare 4ConvNet and VGG16"></a>Compare 4ConvNet and VGG16</h2><p><img src="/images/pose-estimation/loss.jpg" alt="Compare loss between VGG16 and 4ConvNet model" title="Compare loss between VGG16(purple) and 4ConvNet(yellow/orange) model" style="margin: auto;"><br>Loss of VGG16 model much higher than 4ConvNet initially. 4ConvNet model converges quickly and result lower loss(0.09 &lt; 0.13 at iter 30K). But 4ConvNet has higher sparsity (zero fraction) in general.</p>
+<p><img src="/images/pose-estimation/sparsity.jpg" alt="Compare sparsity between VGG16 and 4ConvNet model" title="Compare sparsity between VGG16(purple) and 4ConvNet(yellow/orange) model" style="margin: auto;"></p>
+<h1 id="Data-Preprocess"><a href="#Data-Preprocess" class="headerlink" title="Data Preprocess"></a>Data Preprocess</h1><p>Each grayscale image is 256*212px, 13.3KB.</p>
+<ul>
+<li><code>pose_estimation/data/input/test_imgs</code>: ~4000 test images</li>
+<li><code>pose_estimation/data/input/train_imgs</code>: ~60000 train images, use half of them<br>Each of them are labeled with 15 articulate points.</li>
+</ul>
+<h2 id="Data-Cleaning"><a href="#Data-Cleaning" class="headerlink" title="Data Cleaning"></a>Data Cleaning</h2><p>Draw all train images with 15 articulate points, check them one-by-one to find out wrongly labeled images. Each set of 10K images has about 350 those dirty images. Clean them out of train images effectively improve the accuracy.<br>The following images are the results of applying model trainging with uncleaned data, in which some points fly away.<br><div class="group-picture"><div class="group-picture-container"><div class="group-picture-row"><div class="group-picture-column" style="width: 33.333333333333336%;"><img src="/images/pose-estimation/dirty-1.png" alt=""></div><div class="group-picture-column" style="width: 33.333333333333336%;"><img src="/images/pose-estimation/dirty-2.png" alt=""></div><div class="group-picture-column" style="width: 33.333333333333336%;"><img src="/images/pose-estimation/dirty-3.png" alt=""></div></div><div class="group-picture-row"></div></div></div><br><em>(batch size:20, iter: 30000)</em></p>
+<h2 id="Data-Augmentation"><a href="#Data-Augmentation" class="headerlink" title="Data Augmentation"></a>Data Augmentation</h2><p>Distort images by random rotation and flipping didn’t gain effective improvement in my experiments because the person stands vertically in most of my images. I think random horizontal shifting will because the points of test results shift both horizontally and vertically from the correct points in many cases.</p>
+<h1 id="Future-Work"><a href="#Future-Work" class="headerlink" title="Future Work"></a>Future Work</h1><p>Paper reading/Reimplementation: Zhe Cao, Tomas Simon, Shih-En Wei and Yaser Sheikh. Realtime Multi-Person 2D Pose Estimation using Part Affinity Fields. In CVPR, 2017</p>
+<h1 id="Further-Reading-amp-Reference"><a href="#Further-Reading-amp-Reference" class="headerlink" title="Further Reading &amp; Reference"></a>Further Reading &amp; Reference</h1><ol>
+<li><a href="https://www.slideshare.net/plutoyang/pose-machine/" target="_blank" rel="external">Pose Machine: Estimating Articulated Pose from Images (slide by Wei Yang)</a></li>
+<li><a href="https://www.slideshare.net/plutoyang/mmlab-seminar-2016-deep-learning-for-human-pose-estimation" target="_blank" rel="external">[Mmlab seminar 2016] deep learning for human pose estimation (slide by Wei Yang)</a></li>
+<li><a href="https://www.slideshare.net/plutoyang/human-pose-estimation-by-deep-learning" target="_blank" rel="external">Human Pose Estimation by Deep Learning (slide by Wei Yang)</a></li>
+</ol>
+
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+
+    <footer class="post-footer">
+      
+
+      
+        
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2017/04/25/image-morphing/" rel="next" title="[CVPR] Image Morphing">
+                <i class="fa fa-chevron-left"></i> [CVPR] Image Morphing
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2017/05/04/tensorflow-VGG-net/" rel="prev" title="">
+                 <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+          
+          </div>
+          
+
+
+          
+  <div class="comments" id="comments">
+    
+      <div id="disqus_thread">
+        <noscript>
+          Please enable JavaScript to view the
+          <a href="//disqus.com/?ref_noscript">comments powered by Disqus.</a>
+        </noscript>
+      </div>
+    
+  </div>
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap" >
+            Table of Contents
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview">
+            Overview
+          </li>
+        </ul>
+      
+
+      <section class="site-overview sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+          <img class="site-author-image" itemprop="image"
+               src="/images/avatar.png"
+               alt="HYPJUDY" />
+          <p class="site-author-name" itemprop="name">HYPJUDY</p>
+           
+              <p class="site-description motion-element" itemprop="description">What I cannot create, I do not understand.</p>
+          
+        </div>
+        <nav class="site-state motion-element">
+        
+          
+            <div class="site-state-item site-state-posts">
+              <a href="/archives">
+                <span class="site-state-item-count">16</span>
+                <span class="site-state-item-name">posts</span>
+              </a>
+            </div>
+          
+
+          
+
+          
+
+        </nav>
+
+        
+
+        <div class="links-of-author motion-element">
+          
+            
+              <span class="links-of-author-item">
+                <a href="https://github.com/hypjudy" target="_blank" title="GitHub">
+                  
+                    <i class="fa fa-fw fa-github"></i>
+                  
+                  GitHub
+                </a>
+              </span>
+            
+          
+        </div>
+
+        
+        
+
+        
+        
+
+        
+
+
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#Approaches"><span class="nav-number">1.</span> <span class="nav-text">Approaches</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#Architecture-and-receptive-fields-of-CPMs"><span class="nav-number">1.1.</span> <span class="nav-text">Architecture and receptive fields of CPMs</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#Pose-Machine"><span class="nav-number">1.1.1.</span> <span class="nav-text">Pose Machine</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Convolutional-Networks"><span class="nav-number">1.1.2.</span> <span class="nav-text">Convolutional Networks</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Learning-amp-Training"><span class="nav-number">1.1.3.</span> <span class="nav-text">Learning & Training</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Evaluation-Metrics"><span class="nav-number">1.2.</span> <span class="nav-text">Evaluation Metrics</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Implementation"><span class="nav-number">2.</span> <span class="nav-text">Implementation</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#Original-Convolutional-Network"><span class="nav-number">2.1.</span> <span class="nav-text">Original Convolutional Network</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#4-Convolutional-Layers-Network"><span class="nav-number">2.2.</span> <span class="nav-text">4 Convolutional Layers Network</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#VGG16-Network"><span class="nav-number">2.3.</span> <span class="nav-text">VGG16 Network</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Compare-4ConvNet-and-VGG16"><span class="nav-number">2.4.</span> <span class="nav-text">Compare 4ConvNet and VGG16</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Data-Preprocess"><span class="nav-number">3.</span> <span class="nav-text">Data Preprocess</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#Data-Cleaning"><span class="nav-number">3.1.</span> <span class="nav-text">Data Cleaning</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Data-Augmentation"><span class="nav-number">3.2.</span> <span class="nav-text">Data Augmentation</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Future-Work"><span class="nav-number">4.</span> <span class="nav-text">Future Work</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Further-Reading-amp-Reference"><span class="nav-number">5.</span> <span class="nav-text">Further Reading & Reference</span></a></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright" >
+  
+  &copy;  2016 - 
+  <span itemprop="copyrightYear">2017</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">HYPJUDY</span>
+</div>
+
+
+<div class="powered-by">
+  Powered by <a class="theme-link" href="https://hexo.io">Hexo</a>
+</div>
+
+<div class="theme-info">
+  Theme -
+  <a class="theme-link" href="https://github.com/iissnan/hexo-theme-next">
+    NexT.Mist
+  </a>
+</div>
+
+
+        
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+    
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+  
+  <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+
+  
+  <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+
+  
+  <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+
+  
+  <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.0"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.0"></script>
+
+
+
+  
+  
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.0"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.0"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.0"></script>
+
+
+
+  
+
+
+
+  
+
+    <script type="text/javascript">
+      var disqus_shortname = 'hypjudy';
+      var disqus_identifier = '2017/05/04/pose-estimation/';
+
+      var disqus_title = "[Tensorflow] Human Pose estimation by Deep Learning";
+
+
+      function run_disqus_script(disqus_script) {
+        var dsq = document.createElement('script');
+        dsq.type = 'text/javascript';
+        dsq.async = true;
+        dsq.src = '//' + disqus_shortname + '.disqus.com/' + disqus_script;
+        (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+      }
+
+      run_disqus_script('count.js');
+
+      
+        var disqus_config = function () {
+            this.page.url = disqus_url;
+            this.page.identifier = disqus_identifier;
+            this.page.title = disqus_title;
+        };
+        run_disqus_script('embed.js');
+      
+
+    </script>
+  
+
+
+
+
+
+
+
+
+
+
+  
+  
+
+  
+  
+    <script type="text/x-mathjax-config">
+      MathJax.Hub.Config({
+        tex2jax: {
+          inlineMath: [ ['$','$'], ["\\(","\\)"]  ],
+          processEscapes: true,
+          skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+        }
+      });
+    </script>
+
+    <script type="text/x-mathjax-config">
+      MathJax.Hub.Queue(function() {
+        var all = MathJax.Hub.getAllJax(), i;
+        for (i=0; i < all.length; i += 1) {
+          all[i].SourceElement().parentNode.className += ' has-jax';
+        }
+      });
+    </script>
+    <script type="text/javascript" src="//cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+  
+
+
+  
+
+  
+
+  
+
+
+  
+
+</body>
+</html>
