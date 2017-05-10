@@ -1,0 +1,814 @@
+<!doctype html>
+
+
+
+  
+
+
+<html class="theme-next mist use-motion" lang="en">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
+
+
+
+
+  
+  
+  
+  
+
+  
+    
+    
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+    
+    
+    <link href="//fonts.googleapis.com/css?family=Lato:300,300italic,400,400italic,700,700italic&subset=latin,latin-ext" rel="stylesheet" type="text/css">
+  
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=5.1.0" rel="stylesheet" type="text/css" />
+
+
+  <meta name="keywords" content="Hexo, NexT" />
+
+
+
+
+
+
+
+
+  <link rel="shortcut icon" type="image/x-icon" href="/favicon.png?v=5.1.0" />
+
+
+
+
+
+
+<meta name="description" content="Automatically stiching several individual images to generate a panorama image.Follow the routine described in the paper Automatic Panoramic Image Stitching using Invariant Features.Theory and practice">
+<meta property="og:type" content="article">
+<meta property="og:title" content="[CVPR] Panorama Image Stitching">
+<meta property="og:url" content="http://yoursite.com/2017/05/10/panorama-image-stitching/index.html">
+<meta property="og:site_name" content="HYPJUDY">
+<meta property="og:description" content="Automatically stiching several individual images to generate a panorama image.Follow the routine described in the paper Automatic Panoramic Image Stitching using Invariant Features.Theory and practice">
+<meta property="og:image" content="http://yoursite.com/images/panorama/flower-ori.jpg">
+<meta property="og:image" content="http://yoursite.com/images/panorama/flower-cropped.bmp">
+<meta property="og:image" content="http://yoursite.com/images/panorama/algorithm-automatic-panorama-stitching.jpg">
+<meta property="og:image" content="http://yoursite.com/images/panorama/sift-octaves.jpg">
+<meta property="og:image" content="http://yoursite.com/images/panorama/sift-dog-idea.jpg">
+<meta property="og:image" content="http://yoursite.com/images/panorama/sift-maxima-idea.jpg">
+<meta property="og:image" content="http://yoursite.com/images/panorama/sift-maxima-detector.jpg">
+<meta property="og:image" content="http://yoursite.com/images/panorama/sift-fingerprint.jpg">
+<meta property="og:image" content="http://yoursite.com/images/panorama/sift-4x4.jpg">
+<meta property="og:image" content="http://yoursite.com/images/panorama/sift-gaussian-4x4-weighting1.jpg">
+<meta property="og:image" content="http://yoursite.com/images/panorama/ransac_homography.jpg">
+<meta property="og:image" content="http://yoursite.com/images/panorama/calculate-N.jpg">
+<meta property="og:image" content="http://yoursite.com/images/panorama/homography_matrix.png">
+<meta property="og:image" content="http://yoursite.com/images/panorama/the-laplacian-pyramid.jpg">
+<meta property="og:image" content="http://yoursite.com/images/panorama/combine-laplacian-pyramids.jpg">
+<meta property="og:image" content="http://yoursite.com/images/panorama/building-ori.jpg">
+<meta property="og:image" content="http://yoursite.com/images/panorama/building-cropped.bmp">
+<meta property="og:image" content="http://yoursite.com/images/panorama/building.bmp">
+<meta property="og:image" content="http://yoursite.com/images/panorama/building-vertical-distortion.bmp">
+<meta property="og:image" content="http://yoursite.com/images/panorama/building-distortion.bmp">
+<meta property="og:image" content="http://yoursite.com/images/panorama/building-distortion2.bmp">
+<meta property="og:image" content="http://yoursite.com/images/panorama/building2-cropped.bmp">
+<meta property="og:updated_time" content="2017-05-10T20:03:42.289Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="[CVPR] Panorama Image Stitching">
+<meta name="twitter:description" content="Automatically stiching several individual images to generate a panorama image.Follow the routine described in the paper Automatic Panoramic Image Stitching using Invariant Features.Theory and practice">
+<meta name="twitter:image" content="http://yoursite.com/images/panorama/flower-ori.jpg">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Mist',
+    sidebar: {"position":"left","display":"hide","offset":12,"offset_float":0,"b2t":false,"scrollpercent":false},
+    fancybox: true,
+    motion: true,
+    duoshuo: {
+      userId: 'undefined',
+      author: 'Author'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":20},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="http://yoursite.com/2017/05/10/panorama-image-stitching/"/>
+
+
+
+
+
+  <title> [CVPR] Panorama Image Stitching | HYPJUDY </title>
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="en">
+
+  
+
+
+
+
+<script>
+  (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+            (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+          m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+  })(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
+  ga('create', 'UA-96132499-1', 'auto');
+  ga('send', 'pageview');
+</script>
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+    
+  
+
+  <div class="container one-collumn sidebar-position-left page-post-detail ">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/"  class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">HYPJUDY</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle">What I cannot create, I do not understand.</p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
+            
+            Home
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
+            
+            Archives
+          </a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2017/05/10/panorama-image-stitching/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="HYPJUDY">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.png">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="HYPJUDY">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                [CVPR] Panorama Image Stitching
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Posted on</span>
+              
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2017-05-10T23:56:50+08:00">
+                2017-05-10
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+
+          
+            
+              <span class="post-comments-count">
+                <span class="post-meta-divider">|</span>
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-comment-o"></i>
+                </span>
+                <a href="/2017/05/10/panorama-image-stitching/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count disqus-comment-count" data-disqus-identifier="2017/05/10/panorama-image-stitching/" itemprop="commentCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <p>Automatically stiching several individual images to generate a panorama image.<br>Follow the routine described in the paper <a href="http://matthewalunbrown.com/papers/ijcv2007.pdf" target="_blank" rel="external">Automatic Panoramic Image Stitching using Invariant Features</a>.<br>Theory and practice of panorama image stitching.<br><img src="/images/panorama/flower-ori.jpg" alt=""><br><img src="/images/panorama/flower-cropped.bmp" alt=""></p>
+<a id="more"></a>
+<p><em>Credit: source images (flowers) comes from <a href="https://github.com/ppwwyyxx/OpenPano/releases/download/0.1/example-data.tgz" target="_blank" rel="external">Example Data of OpenPano</a></em></p>
+<p>★<a href="https://github.com/HYPJUDY/panorama-image-stitching" target="_blank" rel="external"><strong>Source codes and images here</strong></a></p>
+<p>Here’s the algorithm described in the paper:<br><img src="/images/panorama/algorithm-automatic-panorama-stitching.jpg" alt="algorithm-automatic-panorama-stitching" style="margin: auto;"></p>
+<h1 id="Algorithm"><a href="#Algorithm" class="headerlink" title="Algorithm"></a>Algorithm</h1><h2 id="Extract-SIFT-Features"><a href="#Extract-SIFT-Features" class="headerlink" title="Extract SIFT Features"></a>Extract SIFT Features</h2><h3 id="Idea-of-SIFT"><a href="#Idea-of-SIFT" class="headerlink" title="Idea of SIFT"></a>Idea of SIFT</h3><blockquote>
+<p>Image content is transformed into local feature coordinates that are invariant to translation, rotation, scale, and other imaging parameters</p>
+</blockquote>
+<h3 id="Steps"><a href="#Steps" class="headerlink" title="Steps"></a>Steps</h3><p>I mainly follows the routine described in <a href="http://aishack.in/tutorials/sift-scale-invariant-feature-transform-introduction/" target="_blank" rel="external">Tutorials of SIFT: Theory and Practice</a>.</p>
+<ol>
+<li><strong>Constructing a scale space</strong> Ensure scale invariance.<br> Each octave’s image size is half the previous one. In each octave, progressively blur out images. By constructing a scale space, we express the image in different scale. In the following steps, all scales will be taken into consideration and the keypoint representation should be dependent of scales. Following are four octaves and each octave has five images.<br><img src="/images/panorama/sift-octaves.jpg" alt="SIFT Octaves" title="SIFT Octaves, credit: SIFT: Theory and Practice" style="margin: auto; width: 60%"></li>
+<li><strong>LoG Approximations</strong> Fast approximation of Laplacian of Gaussian used to find keypoints.<br> The results of previous step are used to generate DOG(Difference of Gaussian). That is, the difference between two consecutive scales of each octave.<br><img src="/images/panorama/sift-dog-idea.jpg" alt="SIFT DOG" title="SIFT DOG, credit: SIFT paper" style="margin: auto;"><br> The Laplacian of Gaussian(LoG) operation is effective for finding edges and corners (usually keypoints) on the image. It goes like bluring and calculate second order derivatives. However, LoG is computationally expensive and is not scale invariant. DoG images are approximately equivalent to LoG images but faster.</li>
+<li><strong>Finding keypoints</strong> Locate maxima and minima in the Difference of Gaussian image.<br> Iterate through each pixel and check its 26 neighbours (if any). In the following figure, X marks the current pixel. The green circles mark the neighbours. They distribute in three consecutive scales (one octave). Mark maxima and minima.<br> <img src="/images/panorama/sift-maxima-idea.jpg" alt=""><br> In practice, 5 level of blurs in each octave generates 5 Gaussian blurred images in each octave and will result in 4 DoG images. They can gernerate 2 extream images. Here’s the example image of that cat we used before.<br><img src="/images/panorama/sift-maxima-detector.jpg" alt="sift-maxima-detector" title="SIFT Maxima Detector, credit: SIFT: Theory and Practice" style="margin: auto; width: 80%"></li>
+<li><strong>Get rid of bad key points</strong> Edges and low contrast regions are bad keypoints.<br> Removing low contrast features: Select a threshold and reject those smaller value pixel. The value is the magnitude of the intensity at the current pixel in the DoG image (minima/maxima in previous step).<br> Removing edges: Edges are detected by two perpendicular gradients. An edge keypoint has one big gradient (perpendicular to the edge) and one small gradient (along the edge). When both gradients are small, the point is in a flat region. This case is also be rejected. We only accept keypoints in corners, where two gradients are both big.</li>
+<li><strong>Assigning an orientation to the keypoints</strong> Ensure rotation invariant.<br> Calculate gradient magnitudes and orientations for all points in the scale space.<br> $$m(x,y)=\sqrt { {(L(x+1,y)-L(x-1,y))}^2+{(L(x,y+1)-L(x,y-1))}^2 }$$<br> $$\theta {(x,y)}={tan}^{-1}((L(x,y+1)-L(x,y-1))/(L(x+1,y)-L(x-1,y)))$$<br> Then, an orientation histogram is used to store the orientation of keypoints and their neighbour regions. The peaks in the histogram correspond to dominant orientations.</li>
+<li><strong>Generate SIFT features</strong> A 128 dimensions vector is used to represent each keypoint.<br> A $16\times 16$ window around the keypoint is used to generate such distinctive feature.<br> <img src="/images/panorama/sift-fingerprint.jpg" alt=""><br> It’s composed of sixteen $4\times 4$ windows. Let’s focus on one $4\times 4$ window.<br> <img src="/images/panorama/sift-4x4.jpg" alt=""><br> Each pixel/cell has a direction. Every sixteen directions are collected by an orientation histogram. Considering the pixels closer to keypoint (in the center) affect more than further pixels, we use a “gaussian weighting function” to assign different value. In the following figure, the farther away, the lesser the magnitude (darker).<br> <img src="/images/panorama/sift-gaussian-4x4-weighting1.jpg" alt=""></li>
+</ol>
+<h2 id="Find-k-nearest-neighbours-amp-Select-Candidate-Mating-Images"><a href="#Find-k-nearest-neighbours-amp-Select-Candidate-Mating-Images" class="headerlink" title="Find k nearest-neighbours &amp; Select Candidate Mating Images"></a>Find k nearest-neighbours &amp; Select Candidate Mating Images</h2><p>In order to detect and stitch adjacent images, we need to match features. For every pair of image (a query image and a searched image), find 2 nearest-neighbours for each feature of query image in searched image using a k-d tree. If the best match much better than the next, accept. Then we can obtain some feature pairs for each pair of image. The size of feature pairs indicates in what degree this pair of image are matched (have similar features). A threshold is used to select m candidate matching images that have the most feature matches to this image.</p>
+<h2 id="RANSAC-for-estimating-homography"><a href="#RANSAC-for-estimating-homography" class="headerlink" title="RANSAC for estimating homography"></a>RANSAC for estimating homography</h2><h3 id="RANSAC-Idea"><a href="#RANSAC-Idea" class="headerlink" title="RANSAC Idea"></a>RANSAC Idea</h3><blockquote>
+<p>Random sample consensus (RANSAC) is an iterative method to estimate parameters of a mathematical model from a set of observed data that contains outliers, when outliers are to be accorded no influence on the values of the estimates. Therefore, it also can be interpreted as an outlier detection method. (<a href="https://en.wikipedia.org/wiki/Random_sample_consensus" target="_blank" rel="external">wiki</a>)</p>
+</blockquote>
+<p>The features pairs we detected in previous may be noisy, we need to filter cleaner features.</p>
+<h3 id="Steps-1"><a href="#Steps-1" class="headerlink" title="Steps"></a>Steps</h3><p>I mainly follows the routine described in <a href="http://www.cc.gatech.edu/~afb/classes/CS4495-Fall2014/slides/CS4495-Ransac.pdf" target="_blank" rel="external">RANdom SAmple Consensus (slide by Aaron Bobick)</a>.<br><img src="/images/panorama/ransac_homography.jpg" alt="RANSAC for estimating homography" style="margin: auto; width: 70%"><br>The loop iteration N is determined adaptively.<br><img src="/images/panorama/calculate-N.jpg" alt="Calculate iteration N for RANSAC loop" style="margin: auto; width: 70%"><br>Then four feature pairs are selected randomly for computing homography, which is used to matching points for any two images taken from a camera at some fixed points.<br>For homography we have $x’=H \times x$ where $x’=[u_i,v_i]$ is a point in the reference image and  $x=[x_i,y_i]$ is a point in the image that we want to warp. In order to calculate H we have to solve the following equation:<br><img src="/images/panorama/homography_matrix.png" alt=""></p>
+<p>$$\begin{bmatrix}a &amp;&amp; b &amp;&amp; c \cr d &amp;&amp; e &amp;&amp; f \cr g &amp;&amp; h &amp;&amp; 1 \end{bmatrix}$$<br><em>Credit: <a href="http://vision.gel.ulaval.ca/~jflalonde/cours/4105/h15/tps/results/tp4/ALHAJ1/" target="_blank" rel="external">Image Stitching Report By Ali Hajiabadi</a></em></p>
+<p>Then, using the matrix H, warp one of the feature in each feature pairs and calculate the Sum of Square Differences (SSD) with the other feature. If the SSD is small enough (smaller than threshold), then the keypoints of this feature pair is considered as inliers.<br>Record the H relating to largest set of inliers and re-compute least-squares H estimate on all of those inliers.</p>
+<h2 id="Mlti-band-blending"><a href="#Mlti-band-blending" class="headerlink" title="Mlti-band blending"></a>Mlti-band blending</h2><h3 id="Idea"><a href="#Idea" class="headerlink" title="Idea"></a>Idea</h3><blockquote>
+<p>The idea behind multi-band blending is to blend low frequencies over a large spatial range, and high frequencies over a short range. [1]</p>
+</blockquote>
+<p>Now we have detected adjacent images and warpped then for stitching. The next step is seamlessly stitch the overlapping area and blend them.</p>
+<h3 id="Steps-2"><a href="#Steps-2" class="headerlink" title="Steps"></a>Steps</h3><p>I mainly follows the routine described in <a href="https://courses.cs.washington.edu/courses/cse576/17sp/notes/9_ImageStitching2-17.pdf" target="_blank" rel="external">Image Stitching II (slide by Linda Shapiro)</a></p>
+<ol>
+<li><strong>Forming a Gaussian Pyramid</strong><ul>
+<li>Start with the original image G0</li>
+<li>Perform a local Gaussian weighted averaging function in a neighborhood about each pixel, sampling so that the result is a reduced image of half the size in each dimension.</li>
+<li>Do this all the way up the pyramid Gl = REDUCE(Gl-1)</li>
+<li>Each level l node will represent a weighted average of a subarray of level l.</li>
+</ul>
+</li>
+<li><strong>Compute Laplacian pyramid of images and mask:</strong> Making the Laplacians Li=Gi-expand(Gi+1)<ul>
+<li>subtract each level of the pyramid from the next lower one</li>
+<li>EXPAND: interpolate new samples between those of a given image to make it big enough to subtract<br><img src="/images/panorama/the-laplacian-pyramid.jpg" alt="the-laplacian-pyramid" style="margin: auto; width: 80%"></li>
+</ul>
+</li>
+<li><strong>Create blended image at each level of pyramid:</strong> Forming the New Pyramid<ul>
+<li>A third Laplacian pyramid LS is constructed by copying nodes from the left half of LA to the corresponding nodes of LS and nodes from the right half of LB to the right half of LS.<br><img src="/images/panorama/combine-laplacian-pyramids.jpg" alt="combine-laplacian-pyramids" style="margin: auto; width: 80%"></li>
+<li>Nodes along the center line are set equal to the average of corresponding LA and LB nodes</li>
+</ul>
+</li>
+<li><strong>Reconstruct complete image:</strong> Using the new Laplacian Pyramid<br>Use the new Laplacian pyramid with the reverse of how it was created to create a Gaussian pyramid. Gi=Li+expand(Gi+1) The lowest level of the new Gaussian pyramid gives the final result.</li>
+</ol>
+<h1 id="Implementation"><a href="#Implementation" class="headerlink" title="Implementation"></a>Implementation</h1><p>Implement with <a href="http://cimg.eu/" target="_blank" rel="external">The CImg Library</a> and <a href="http://www.vlfeat.org/index.html" target="_blank" rel="external">VLFeat open source library</a> in C++ language. Test on Visual Studio 2015, C++11. Images should be of <code>bmp</code> format(much easier to convert by <a href="https://www.imagemagick.org/script/index.php" target="_blank" rel="external">ImageMagick</a>).<br>My codes reference to <a href="https://github.com/AmazingZhen/ImageStitching" target="_blank" rel="external">AmazingZhen/ImageStitching</a> since it’s compact, without too much dependencies, writing from scratch and satisfying basic requirements. My sincere thanks! Just because its effect is not very good in blending and has bugs especially in stitching many (~10) images, I have space to improve it in many perspectives. Currently, my codes is not robust but neat and easy to understand. I should futher work on this project. If looking for more complete and robust codes, I recommend <a href="https://github.com/ppwwyyxx/OpenPano" target="_blank" rel="external">OpenPano: Automatic Panorama Stitching From Scratch</a>.</p>
+<p><a href="https://github.com/HYPJUDY/panorama-image-stitching" target="_blank" rel="external"><strong>Source codes and images can be found here</strong></a>. Everything is well explained (hope so) in the code with comments, so I am not going to paste codes here. Any feedback is welcomed!</p>
+<h2 id="Usage-of-VLFeat"><a href="#Usage-of-VLFeat" class="headerlink" title="Usage of VLFeat"></a>Usage of VLFeat</h2><p><a href="http://www.vlfeat.org/download.html" target="_blank" rel="external">Download</a> and unpack the latest VLFeat binary distribution (currently <a href="http://www.vlfeat.org/download/vlfeat-0.9.20-bin.tar.gz" target="_blank" rel="external">VLFeat 0.9.20 binary package</a>) in a directory of your choice (e.g. <code>F:\vlfeat-0.9.20-bin</code>)<br>For Mac users, read this <a href="http://www.vlfeat.org/xcode.html" target="_blank" rel="external">Apple X-Code tutorial</a>.<br>These instructions show how to setup a basic VLFeat project with Visual Studio 2015 on Windows 10 (64 bit). Instructions for other versions of Visual Studio and Windows should be similar.</p>
+<ol>
+<li>Specify the value of the PATH environment variable. E.g. Add <code>F:\vlfeat-0.9.20-bin\vlfeat-0.9.20\bin\win64</code> to <code>Path</code>, where <code>win64</code> depends on your architecture.</li>
+<li>Open VS and select <code>File &gt; New &gt; Project</code> and choose <code>General &gt; Empty Project</code>.</li>
+<li>Click <code>Project &gt; Properties</code> to open Property Pages. Choose <code>Configuration &gt; All Configurations</code>.</li>
+<li>Select <code>Configuration Properties &gt; C/C++ &gt; General</code> and add the root path of the VLFeat folder (e.g. <code>F:\vlfeat-0.9.20-bin\vlfeat-0.9.20</code>) to <code>Additional Include Directories</code>.</li>
+<li>Select <code>Configuration Properties &gt; Linker &gt; General</code> and add the <code>bin/win32</code> folder (even if your architecture is win64) (e.g. <code>F:\vlfeat-0.9.20-bin\vlfeat-0.9.20\bin\win32</code>) to <code>Additional Library Directories</code>. </li>
+<li>Select <code>Configuration Properties &gt; Linker &gt; Input</code> and add <code>vl.lib</code> to <code>Additional Dependencies</code>. </li>
+<li>Copy the <code>vl.dll</code> file in <code>bin/win32</code> folder (e.g. <code>F:\vlfeat-0.9.20-bin\vlfeat-0.9.20\bin\win32</code>) to your VS project’s debug or release folder (e.g. <code>C:\Users\HYPJUDY\Documents\Visual Studio 2015\Projects\PanoramaImageStitching\Debug</code>).</li>
+<li>Build and run the project (Ctrl+F5)</li>
+</ol>
+<p>Reference: <a href="http://www.vlfeat.org/install-c.html" target="_blank" rel="external">Using from C</a> and <a href="http://www.vlfeat.org/vsexpress.html" target="_blank" rel="external">Microsoft Visual Studio tutorial</a>.</p>
+<h1 id="Results-and-Analysis"><a href="#Results-and-Analysis" class="headerlink" title="Results and Analysis"></a>Results and Analysis</h1><p>Source images:<br><img src="/images/panorama/building-ori.jpg" alt=""><br>Result:<br><img src="/images/panorama/building-cropped.bmp" alt=""><br>The above image is cropped. Before cropping, you can easily identify the warpped images.<br><img src="/images/panorama/building.bmp" alt=""><br>You should also have noticed that the warpped images have cylinder surfaces. The step of warpping images by a cylindrical or spherical projection can effective improve results’ quality. Following is the stitched image without cylidrical projection, which has vertical distortion. Find more about cylindrical panoramas at <a href="http://graphics.stanford.edu/courses/cs178-12/applets/projection.html" target="_blank" rel="external">this page</a><br><img src="/images/panorama/building-vertical-distortion.bmp" alt=""></p>
+<p>Notice that in the RANSAC for estimating homography procedure, since four feature pairs are selected <strong>randomly</strong> for computing homography, we may obtain different results each run. Some results can be very bad due to one or several images’ distortion.<br><div class="group-picture"><div class="group-picture-container"><div class="group-picture-row"><div class="group-picture-column" style="width: 50%;"><img src="/images/panorama/building-distortion.bmp" alt=""></div><div class="group-picture-column" style="width: 50%;"><img src="/images/panorama/building-distortion2.bmp" alt=""></div></div><div class="group-picture-row"></div></div></div></p>
+<p>The reason is the number of inliers is used as criteria for calculating homography transformation matrix H. “However, for high-resolution images, it’s common that you’ll actually find false matches with a considerable number of inliers, as long as enough RANSAC iterations are performed.”[5] Thus, after each matrix estimation, we should perform match validation check. I skip this part in my code currently and thus have a high chance of getting distorted stitched image when the number of source images is large.</p>
+<p>This one (18 source images) is much tougher!<br><img src="/images/panorama/building2-cropped.bmp" alt=""></p>
+<h1 id="Reference-amp-Futher-Reading"><a href="#Reference-amp-Futher-Reading" class="headerlink" title="Reference &amp; Futher Reading"></a>Reference &amp; Futher Reading</h1><ol>
+<li><a href="http://matthewalunbrown.com/papers/ijcv2007.pdf" target="_blank" rel="external">Paper: Automatic Panoramic Image Stitching using Invariant Features</a></li>
+<li><a href="http://aishack.in/tutorials/sift-scale-invariant-feature-transform-introduction/" target="_blank" rel="external">Tutorials of SIFT: Theory and Practice by Utkarsh Sinha</a> and corresponding <a href="https://github.com/vanero/SIFT-1/tree/master/MySIFT" target="_blank" rel="external">code with OpenCV</a></li>
+<li><a href="http://www.cnblogs.com/eyeszjwang/articles/2429382.html" target="_blank" rel="external">k-d Tree Introduction (in chinese)</a></li>
+<li><a href="http://www.cc.gatech.edu/~afb/classes/CS4495-Fall2014/slides/CS4495-Ransac.pdf" target="_blank" rel="external">RANdom SAmple Consensus (slide by Aaron Bobick)</a></li>
+<li><a href="https://github.com/ppwwyyxx/OpenPano" target="_blank" rel="external">OpenPano: Automatic Panorama Stitching From Scratch</a> and post <a href="http://ppwwyyxx.com/2016/How-to-Write-a-Panorama-Stitcher/" target="_blank" rel="external">OpenPano: How to write a Panorama Stitcher</a></li>
+<li><a href="http://www.vlfeat.org/index.html" target="_blank" rel="external">VLFeat open source library</a></li>
+<li><a href="http://vision.gel.ulaval.ca/~jflalonde/cours/4105/h15/tps/results/tp4/ALHAJ1/" target="_blank" rel="external">Image Stitching Report By Ali Hajiabadi</a></li>
+<li><a href="https://courses.cs.washington.edu/courses/cse576/17sp/notes/9_ImageStitching2-17.pdf" target="_blank" rel="external">Image Stitching II (slide by Linda Shapiro)</a> and <a href="https://courses.cs.washington.edu/courses/cse576/17sp/notes/8_ImageStitching17.pdf" target="_blank" rel="external">Image Stitching</a></li>
+<li><a href="http://graphics.stanford.edu/courses/cs178-12/applets/projection.html" target="_blank" rel="external">Cylindrical Panoramas</a></li>
+<li><a href="https://inst.eecs.berkeley.edu/~cs194-26/fa14/Lectures/feature-alignment.pdf" target="_blank" rel="external">Slide: Automatic Image Alignment</a></li>
+<li><a href="https://inst.eecs.berkeley.edu/~cs194-26/fa14/Lectures/mosaic.pdf" target="_blank" rel="external">Slide: Homographies and Mosaics</a></li>
+<li><a href="http://courses.cs.washington.edu/courses/cse576/05sp/papers/MSR-TR-2004-92.pdf" target="_blank" rel="external">Image Alignment and Stitching: A Tutorial by Richard Szeliski</a></li>
+<li>Wiki: <a href="https://en.wikipedia.org/wiki/Random_sample_consensus" target="_blank" rel="external">Random sample consensus</a></li>
+<li>Wiki: <a href="https://en.wikipedia.org/wiki/Scale-invariant_feature_transform" target="_blank" rel="external">Scale-invariant feature transform</a></li>
+<li><a href="https://www.youtube.com/watch?v=p16frKJLVi0" target="_blank" rel="external">YouTube video: Microsoft Photosynth</a></li>
+<li>Panoramas Assignments from <a href="https://courses.cs.washington.edu/courses/cse576/17sp/assignments/hw2/" target="_blank" rel="external">Washington CSE 576, Spring 2017</a> (c++ skeleton code provided, use Harris corner detector); <a href="https://inst.eecs.berkeley.edu/~cs194-26/fa14/hw/proj7-stitch/" target="_blank" rel="external">Berkeley CS194-26</a></li>
+<li>Reports <a href="https://inst.eecs.berkeley.edu/~cs194-26/fa14/upload/files/proj7B/cs194-dj/faizullabhoy_riyaz_proj7B/" target="_blank" rel="external">by Riyaz Faizullabhoy</a>, <a href="https://inst.eecs.berkeley.edu/~cs194-26/fa14/upload/files/proj7B/cs194-fb/" target="_blank" rel="external">by Japheth Wong</a> from CS194-26 courses.</li>
+</ol>
+
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+
+    <footer class="post-footer">
+      
+
+      
+        
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2017/05/04/pose-estimation/" rel="next" title="[Tensorflow] Human Pose estimation by Deep Learning">
+                <i class="fa fa-chevron-left"></i> [Tensorflow] Human Pose estimation by Deep Learning
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+          
+          </div>
+          
+
+
+          
+  <div class="comments" id="comments">
+    
+      <div id="disqus_thread">
+        <noscript>
+          Please enable JavaScript to view the
+          <a href="//disqus.com/?ref_noscript">comments powered by Disqus.</a>
+        </noscript>
+      </div>
+    
+  </div>
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap" >
+            Table of Contents
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview">
+            Overview
+          </li>
+        </ul>
+      
+
+      <section class="site-overview sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+          <img class="site-author-image" itemprop="image"
+               src="/images/avatar.png"
+               alt="HYPJUDY" />
+          <p class="site-author-name" itemprop="name">HYPJUDY</p>
+           
+              <p class="site-description motion-element" itemprop="description">What I cannot create, I do not understand.</p>
+          
+        </div>
+        <nav class="site-state motion-element">
+        
+          
+            <div class="site-state-item site-state-posts">
+              <a href="/archives">
+                <span class="site-state-item-count">16</span>
+                <span class="site-state-item-name">posts</span>
+              </a>
+            </div>
+          
+
+          
+
+          
+
+        </nav>
+
+        
+
+        <div class="links-of-author motion-element">
+          
+            
+              <span class="links-of-author-item">
+                <a href="https://github.com/hypjudy" target="_blank" title="GitHub">
+                  
+                    <i class="fa fa-fw fa-github"></i>
+                  
+                  GitHub
+                </a>
+              </span>
+            
+          
+        </div>
+
+        
+        
+
+        
+        
+
+        
+
+
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#Algorithm"><span class="nav-number">1.</span> <span class="nav-text">Algorithm</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#Extract-SIFT-Features"><span class="nav-number">1.1.</span> <span class="nav-text">Extract SIFT Features</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#Idea-of-SIFT"><span class="nav-number">1.1.1.</span> <span class="nav-text">Idea of SIFT</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Steps"><span class="nav-number">1.1.2.</span> <span class="nav-text">Steps</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Find-k-nearest-neighbours-amp-Select-Candidate-Mating-Images"><span class="nav-number">1.2.</span> <span class="nav-text">Find k nearest-neighbours & Select Candidate Mating Images</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#RANSAC-for-estimating-homography"><span class="nav-number">1.3.</span> <span class="nav-text">RANSAC for estimating homography</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#RANSAC-Idea"><span class="nav-number">1.3.1.</span> <span class="nav-text">RANSAC Idea</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Steps-1"><span class="nav-number">1.3.2.</span> <span class="nav-text">Steps</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Mlti-band-blending"><span class="nav-number">1.4.</span> <span class="nav-text">Mlti-band blending</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#Idea"><span class="nav-number">1.4.1.</span> <span class="nav-text">Idea</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Steps-2"><span class="nav-number">1.4.2.</span> <span class="nav-text">Steps</span></a></li></ol></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Implementation"><span class="nav-number">2.</span> <span class="nav-text">Implementation</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#Usage-of-VLFeat"><span class="nav-number">2.1.</span> <span class="nav-text">Usage of VLFeat</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Results-and-Analysis"><span class="nav-number">3.</span> <span class="nav-text">Results and Analysis</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Reference-amp-Futher-Reading"><span class="nav-number">4.</span> <span class="nav-text">Reference & Futher Reading</span></a></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright" >
+  
+  &copy;  2016 - 
+  <span itemprop="copyrightYear">2017</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">HYPJUDY</span>
+</div>
+
+
+<div class="powered-by">
+  Powered by <a class="theme-link" href="https://hexo.io">Hexo</a>
+</div>
+
+<div class="theme-info">
+  Theme -
+  <a class="theme-link" href="https://github.com/iissnan/hexo-theme-next">
+    NexT.Mist
+  </a>
+</div>
+
+
+        
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+    
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+  
+  <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+
+  
+  <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+
+  
+  <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+
+  
+  <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.0"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.0"></script>
+
+
+
+  
+  
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.0"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.0"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.0"></script>
+
+
+
+  
+
+
+
+  
+
+    <script type="text/javascript">
+      var disqus_shortname = 'hypjudy';
+      var disqus_identifier = '2017/05/10/panorama-image-stitching/';
+
+      var disqus_title = "[CVPR] Panorama Image Stitching";
+
+
+      function run_disqus_script(disqus_script) {
+        var dsq = document.createElement('script');
+        dsq.type = 'text/javascript';
+        dsq.async = true;
+        dsq.src = '//' + disqus_shortname + '.disqus.com/' + disqus_script;
+        (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+      }
+
+      run_disqus_script('count.js');
+
+      
+        var disqus_config = function () {
+            this.page.url = disqus_url;
+            this.page.identifier = disqus_identifier;
+            this.page.title = disqus_title;
+        };
+        run_disqus_script('embed.js');
+      
+
+    </script>
+  
+
+
+
+
+
+
+
+
+
+
+  
+  
+
+  
+  
+    <script type="text/x-mathjax-config">
+      MathJax.Hub.Config({
+        tex2jax: {
+          inlineMath: [ ['$','$'], ["\\(","\\)"]  ],
+          processEscapes: true,
+          skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+        }
+      });
+    </script>
+
+    <script type="text/x-mathjax-config">
+      MathJax.Hub.Queue(function() {
+        var all = MathJax.Hub.getAllJax(), i;
+        for (i=0; i < all.length; i += 1) {
+          all[i].SourceElement().parentNode.className += ' has-jax';
+        }
+      });
+    </script>
+    <script type="text/javascript" src="//cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+  
+
+
+  
+
+  
+
+  
+
+
+  
+
+</body>
+</html>
