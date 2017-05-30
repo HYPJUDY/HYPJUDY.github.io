@@ -1,0 +1,782 @@
+<!doctype html>
+
+
+
+  
+
+
+<html class="theme-next mist use-motion" lang="en">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
+
+
+
+
+  
+  
+  
+  
+
+  
+    
+    
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+    
+    
+    <link href="//fonts.googleapis.com/css?family=Lato:300,300italic,400,400italic,700,700italic&subset=latin,latin-ext" rel="stylesheet" type="text/css">
+  
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=5.1.0" rel="stylesheet" type="text/css" />
+
+
+  <meta name="keywords" content="Hexo, NexT" />
+
+
+
+
+
+
+
+
+  <link rel="shortcut icon" type="image/x-icon" href="/favicon.png?v=5.1.0" />
+
+
+
+
+
+
+<meta name="description" content="Building a Spring Boot Web Application for movie ticket and service website.">
+<meta property="og:type" content="article">
+<meta property="og:title" content="[Web] Spring Boot Web Application">
+<meta property="og:url" content="http://yoursite.com/2017/05/30/spring-boot-web-application/index.html">
+<meta property="og:site_name" content="HYPJUDY">
+<meta property="og:description" content="Building a Spring Boot Web Application for movie ticket and service website.">
+<meta property="og:image" content="http://yoursite.com/images/web/demo1.gif">
+<meta property="og:image" content="http://yoursite.com/images/web/utils.jpg">
+<meta property="og:image" content="http://yoursite.com/images/web/dir.jpg">
+<meta property="og:image" content="http://yoursite.com/images/web/utils_raw.jpg">
+<meta property="og:image" content="http://yoursite.com/images/web/login.jpg">
+<meta property="og:updated_time" content="2017-05-30T02:12:31.009Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="[Web] Spring Boot Web Application">
+<meta name="twitter:description" content="Building a Spring Boot Web Application for movie ticket and service website.">
+<meta name="twitter:image" content="http://yoursite.com/images/web/demo1.gif">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Mist',
+    sidebar: {"position":"left","display":"hide","offset":12,"offset_float":0,"b2t":false,"scrollpercent":false},
+    fancybox: true,
+    motion: true,
+    duoshuo: {
+      userId: 'undefined',
+      author: 'Author'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":20},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="http://yoursite.com/2017/05/30/spring-boot-web-application/"/>
+
+
+
+
+
+  <title> [Web] Spring Boot Web Application | HYPJUDY </title>
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="en">
+
+  
+
+
+
+
+<script>
+  (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+            (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+          m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+  })(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
+  ga('create', 'UA-96132499-1', 'auto');
+  ga('send', 'pageview');
+</script>
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+    
+  
+
+  <div class="container one-collumn sidebar-position-left page-post-detail ">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/"  class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">HYPJUDY</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle">What I cannot create, I do not understand.</p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
+            
+            Home
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
+            
+            Archives
+          </a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2017/05/30/spring-boot-web-application/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="HYPJUDY">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.png">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="HYPJUDY">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                [Web] Spring Boot Web Application
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Posted on</span>
+              
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2017-05-30T10:12:14+08:00">
+                2017-05-30
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+
+          
+            
+              <span class="post-comments-count">
+                <span class="post-meta-divider">|</span>
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-comment-o"></i>
+                </span>
+                <a href="/2017/05/30/spring-boot-web-application/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count disqus-comment-count" data-disqus-identifier="2017/05/30/spring-boot-web-application/" itemprop="commentCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <p>Building a Spring Boot Web Application for movie ticket and service website.</p>
+<p><img src="/images/web/demo1.gif" alt="movie ticket and service website demo"></p>
+<a id="more"></a>
+<p>★<a href="https://github.com/HYPJUDY/movie-ticket-and-service-website/tree/master/codes/movie-ticket-and-service-website" target="_blank" rel="external"><strong>Source codes here</strong></a> (Commits on May 23, 2017)<br>Note: this post focuses on the front end part of <a href="https://github.com/HYPJUDY/movie-ticket-and-service-website" target="_blank" rel="external">Project: Movie Ticket and Service Website</a> without any complex business logic. The code will be updated as the project progresses.</p>
+<h1 id="Overview"><a href="#Overview" class="headerlink" title="Overview"></a>Overview</h1><p>Only several steps are needed to build such a simple application:</p>
+<ol>
+<li><strong>Initialize a Spring Boot project</strong> with <a href="https://spring.io/guides/gs/intellij-idea/" target="_blank" rel="external">IntelliJ IDEA</a>. Be sure to check “Web” and “Thymeleaf”. (Refer to <a href="https://springframework.guru/spring-boot-web-application-part-1-spring-initializr/" target="_blank" rel="external">PART 1 - Spring Initializer</a>)</li>
+<li>Download tow web templates:<ul>
+<li><a href="https://w3layouts.com/cinema-a-entertainment-category-flat-bootstrap-responsive-web-template/" target="_blank" rel="external">Cinema a Entertainment Category Flat Bootstrap Responsive Web Template</a></li>
+<li><a href="https://w3layouts.com/movie-ticket-booking-widget-flat-responsive-widget-template/" target="_blank" rel="external">Movie Ticket Booking Widget Flat Responsive Widget Template</a></li>
+</ul>
+</li>
+<li><strong>Serving web content</strong> with Spring MVC – write htmls and controllers. Also need to combine two web templates. (Refer to <a href="https://spring.io/guides/gs/serving-web-content/" target="_blank" rel="external">Serving Web Content with Spring MVC</a>, <a href="https://springframework.guru/spring-boot-web-application-part-2-using-thymeleaf/" target="_blank" rel="external">PART 2 - Using Thymeleaf</a> and <a href="https://springframework.guru/spring-boot-web-application-part-4-spring-mvc/" target="_blank" rel="external">PART 4 - Spring MVC</a>)</li>
+<li>Including <a href="http://www.thymeleaf.org/" target="_blank" rel="external">Thymeleaf</a> fragments to make code neat and compact. (Refer to <a href="https://springframework.guru/spring-boot-web-application-part-4-spring-mvc/" target="_blank" rel="external">PART 4 - Spring MVC</a>)</li>
+</ol>
+<p>What you will use in this application are:</p>
+<ul>
+<li>Spring</li>
+<li>Spring MVC for the web part (without database currently)</li>
+<li>Thymeleaf for the template engine</li>
+<li>Tomcat server</li>
+</ul>
+<h1 id="Spring"><a href="#Spring" class="headerlink" title="Spring"></a>Spring</h1><p><a href="https://spring.io/" target="_blank" rel="external">Spring</a> is a framework which can be used to build JVM-based systems and applications. <a href="http://docs.spring.io/spring/docs/current/spring-framework-reference/html/mvc.html" target="_blank" rel="external">Spring MVC Framework</a> is used for developing Web application. <a href="http://projects.spring.io/spring-boot/" target="_blank" rel="external">Spring Boot</a> can free us from complex configuration.<br>We use Boot because it’s fast. We use framework because we don’t want to reinvent the wheel (e.g. session management, templating frameworks, database access…) and focus on business logic methods. We use Model–view–controller (MVC) because it modularized code and promotes code reuse. We use Spring because it has many features to make it “simple, portable, fast and flexible”.</p>
+<h1 id="Spring-MVC"><a href="#Spring-MVC" class="headerlink" title="Spring MVC"></a>Spring MVC</h1><blockquote>
+<p>The <strong>Model-View-Controller (MVC) software design pattern</strong> is a method for separating concerns within a software application. In principal, the <strong>application logic</strong>, or <em>controller</em>, is separated from the technology used to <strong>display information</strong> to the user, or the <em>view</em> layer. The <em>model</em> is a <strong>communications vehicle</strong> between the controller and view layers. (<a href="https://spring.io/understanding/view-templates" target="_blank" rel="external">link</a>)</p>
+</blockquote>
+<h2 id="Model"><a href="#Model" class="headerlink" title="Model"></a>Model</h2><blockquote>
+<p>Model refers to a data model, or some type of data structure.</p>
+</blockquote>
+<p>For example, in movie ticket and service website, the ‘model’ would contain a list of movie data and user data (username, password..).<br>Here we skip this part.</p>
+<h2 id="View-–-Thymeleaf"><a href="#View-–-Thymeleaf" class="headerlink" title="View – Thymeleaf"></a>View – Thymeleaf</h2><blockquote>
+<p>Thymeleaf is a modern server-side Java template engine for both web and standalone environments.<br>Thymeleaf’s main goal is to bring elegant natural templates to your development workflow — HTML that can be correctly displayed in browsers and also work as static prototypes, allowing for stronger collaboration in development teams.</p>
+</blockquote>
+<p>In Spring, Thymeleaf is a <a href="https://spring.io/understanding/view-templates" target="_blank" rel="external">view technology</a>. It performs server-side redering of the HTML.<br>Here I use an example to show some basic use of Thymeleaf. In this case, Thymeleaf parses the <code>utils.html</code> template below and evaluates the <code>th:*</code> expressions to render corresponding parameters.</p>
+<h3 id="HTML-in-Standalone-Environment"><a href="#HTML-in-Standalone-Environment" class="headerlink" title="HTML in Standalone Environment"></a>HTML in Standalone Environment</h3><p>We write a page <code>utils.html</code> containing header and footer (also the head of html) that will be reused across web pages.</p>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div></pre></td><td class="code"><pre><div class="line"><span class="meta">&lt;!DOCTYPE html&gt;</span></div><div class="line"><span class="tag">&lt;<span class="name">html</span>&gt;</span></div><div class="line"><span class="tag">&lt;<span class="name">head</span> <span class="attr">lang</span>=<span class="string">"en"</span>&gt;</span></div><div class="line">    <span class="tag">&lt;<span class="name">link</span> <span class="attr">href</span>=<span class="string">"../../static/css/bootstrap.css"</span> <span class="attr">rel</span>=<span class="string">'stylesheet'</span> <span class="attr">type</span>=<span class="string">'text/css'</span> /&gt;</span></div><div class="line">    <span class="tag">&lt;<span class="name">link</span> <span class="attr">href</span>=<span class="string">"../../static/css/style.css"</span> <span class="attr">rel</span>=<span class="string">"stylesheet"</span> <span class="attr">type</span>=<span class="string">"text/css"</span> <span class="attr">media</span>=<span class="string">"all"</span> /&gt;</span></div><div class="line">    <span class="tag">&lt;<span class="name">meta</span> <span class="attr">http-equiv</span>=<span class="string">"Content-Type"</span> <span class="attr">content</span>=<span class="string">"text/html; charset=utf-8"</span> /&gt;</span></div><div class="line"><span class="tag">&lt;/<span class="name">head</span>&gt;</span></div><div class="line"><span class="tag">&lt;<span class="name">body</span>&gt;</span></div><div class="line"></div><div class="line"><span class="tag">&lt;<span class="name">div</span> <span class="attr">class</span>=<span class="string">"full"</span>&gt;</span></div><div class="line">    <span class="tag">&lt;<span class="name">div</span> <span class="attr">class</span>=<span class="string">"main"</span>&gt;</span></div><div class="line">        <span class="tag">&lt;<span class="name">div</span> <span class="attr">class</span>=<span class="string">"error-content"</span>&gt;</span></div><div class="line">            <span class="tag">&lt;<span class="name">div</span> <span class="attr">class</span>=<span class="string">"top-header span_top"</span>&gt;</span></div><div class="line">                <span class="tag">&lt;<span class="name">div</span> <span class="attr">class</span>=<span class="string">"logo"</span>&gt;</span></div><div class="line">                    <span class="tag">&lt;<span class="name">a</span> <span class="attr">href</span>=<span class="string">"index.html"</span>&gt;</span></div><div class="line">                        <span class="tag">&lt;<span class="name">img</span> <span class="attr">src</span>=<span class="string">"../../static/images/logo.png"</span> <span class="attr">alt</span>=<span class="string">""</span> /&gt;</span></div><div class="line">                    <span class="tag">&lt;/<span class="name">a</span>&gt;</span></div><div class="line">                <span class="tag">&lt;/<span class="name">div</span>&gt;</span></div><div class="line">                <span class="tag">&lt;<span class="name">div</span> <span class="attr">class</span>=<span class="string">"clearfix"</span>&gt;</span><span class="tag">&lt;/<span class="name">div</span>&gt;</span></div><div class="line">            <span class="tag">&lt;/<span class="name">div</span>&gt;</span></div><div class="line"></div><div class="line">            <span class="tag">&lt;<span class="name">div</span> <span class="attr">class</span>=<span class="string">"error-404 text-center"</span>&gt;</span><span class="tag">&lt;/<span class="name">div</span>&gt;</span></div><div class="line"></div><div class="line">            <span class="tag">&lt;<span class="name">div</span> <span class="attr">class</span>=<span class="string">"footer"</span>&gt;</span></div><div class="line">                <span class="tag">&lt;<span class="name">div</span> <span class="attr">class</span>=<span class="string">"copyright"</span>&gt;</span></div><div class="line">                    <span class="tag">&lt;<span class="name">p</span>&gt;</span> Template by  <span class="tag">&lt;<span class="name">a</span> <span class="attr">href</span>=<span class="string">"http://w3layouts.com"</span>&gt;</span>  W3layouts<span class="tag">&lt;/<span class="name">a</span>&gt;</span><span class="tag">&lt;/<span class="name">p</span>&gt;</span></div><div class="line">                <span class="tag">&lt;/<span class="name">div</span>&gt;</span></div><div class="line">            <span class="tag">&lt;/<span class="name">div</span>&gt;</span></div><div class="line">        <span class="tag">&lt;/<span class="name">div</span>&gt;</span></div><div class="line">    <span class="tag">&lt;/<span class="name">div</span>&gt;</span></div><div class="line"><span class="tag">&lt;/<span class="name">div</span>&gt;</span></div><div class="line"><span class="tag">&lt;/<span class="name">body</span>&gt;</span></div><div class="line"><span class="tag">&lt;/<span class="name">html</span>&gt;</span></div></pre></td></tr></table></figure>
+<p>Directly open the <code>utils.html</code> in browser:<br><img src="/images/web/utils.jpg" alt=""></p>
+<h3 id="HTML-in-Web-Environment"><a href="#HTML-in-Web-Environment" class="headerlink" title="HTML in Web Environment"></a>HTML in Web Environment</h3><p>Spring Boot configures the Thymeleaf template engine to read template files from <code>/resources/templates</code> by default. Following is the directory structure we use:<br><img src="/images/web/dir.jpg" alt=""></p>
+<p>But run the web application we will get this utils page:<br><img src="/images/web/utils_raw.jpg" alt=""><br>It fails to find the link of stylesheet and logo image while still shows the text. This is because we haven’t configured Thymeleaf.</p>
+<p>The complete code of <code>utils.html</code> is as follow. Details will show below.</p>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div></pre></td><td class="code"><pre><div class="line"><span class="meta">&lt;!DOCTYPE html&gt;</span></div><div class="line"><span class="tag">&lt;<span class="name">html</span> <span class="attr">xmlns:th</span>=<span class="string">"http://www.thymeleaf.org"</span>&gt;</span></div><div class="line"><span class="tag">&lt;<span class="name">head</span> <span class="attr">lang</span>=<span class="string">"en"</span> <span class="attr">th:fragment</span>=<span class="string">"head"</span>&gt;</span></div><div class="line">    <span class="tag">&lt;<span class="name">link</span> <span class="attr">href</span>=<span class="string">"../../static/css/bootstrap.css"</span></span></div><div class="line">          <span class="attr">th:href</span>=<span class="string">"@&#123;css/bootstrap.css&#125;"</span> <span class="attr">rel</span>=<span class="string">'stylesheet'</span> <span class="attr">type</span>=<span class="string">'text/css'</span> /&gt;</div><div class="line">    <span class="tag">&lt;<span class="name">link</span> <span class="attr">href</span>=<span class="string">"../../static/css/style.css"</span></span></div><div class="line">          <span class="attr">th:href</span>=<span class="string">"@&#123;css/style.css&#125;"</span> <span class="attr">rel</span>=<span class="string">"stylesheet"</span> <span class="attr">type</span>=<span class="string">"text/css"</span> <span class="attr">media</span>=<span class="string">"all"</span> /&gt;</div><div class="line">    <span class="tag">&lt;<span class="name">meta</span> <span class="attr">http-equiv</span>=<span class="string">"Content-Type"</span> <span class="attr">content</span>=<span class="string">"text/html; charset=utf-8"</span> /&gt;</span></div><div class="line"><span class="tag">&lt;/<span class="name">head</span>&gt;</span></div><div class="line"><span class="tag">&lt;<span class="name">body</span>&gt;</span></div><div class="line"></div><div class="line"><span class="tag">&lt;<span class="name">div</span> <span class="attr">class</span>=<span class="string">"full"</span>&gt;</span></div><div class="line">    <span class="tag">&lt;<span class="name">div</span> <span class="attr">class</span>=<span class="string">"main"</span>&gt;</span></div><div class="line">        <span class="tag">&lt;<span class="name">div</span> <span class="attr">class</span>=<span class="string">"error-content"</span>&gt;</span></div><div class="line">            <span class="tag">&lt;<span class="name">div</span> <span class="attr">class</span>=<span class="string">"top-header span_top"</span> <span class="attr">th:fragment</span>=<span class="string">"header"</span>&gt;</span></div><div class="line">                <span class="tag">&lt;<span class="name">div</span> <span class="attr">class</span>=<span class="string">"logo"</span>&gt;</span></div><div class="line">                    <span class="tag">&lt;<span class="name">a</span> <span class="attr">href</span>=<span class="string">"index.html"</span>&gt;</span><span class="tag">&lt;<span class="name">img</span> <span class="attr">src</span>=<span class="string">"../../static/images/logo.png"</span></span></div><div class="line">                                              <span class="attr">th:src</span>=<span class="string">"@&#123;images/logo.png&#125;"</span> <span class="attr">alt</span>=<span class="string">""</span> /&gt;<span class="tag">&lt;/<span class="name">a</span>&gt;</span></div><div class="line">                <span class="tag">&lt;/<span class="name">div</span>&gt;</span></div><div class="line">                <span class="tag">&lt;<span class="name">div</span> <span class="attr">class</span>=<span class="string">"clearfix"</span>&gt;</span><span class="tag">&lt;/<span class="name">div</span>&gt;</span></div><div class="line">            <span class="tag">&lt;/<span class="name">div</span>&gt;</span></div><div class="line"></div><div class="line">            <span class="tag">&lt;<span class="name">div</span> <span class="attr">class</span>=<span class="string">"error-404 text-center"</span>&gt;</span><span class="tag">&lt;/<span class="name">div</span>&gt;</span></div><div class="line"></div><div class="line">            <span class="tag">&lt;<span class="name">div</span> <span class="attr">class</span>=<span class="string">"footer"</span> <span class="attr">th:fragment</span>=<span class="string">"footer"</span>&gt;</span></div><div class="line">                <span class="tag">&lt;<span class="name">div</span> <span class="attr">class</span>=<span class="string">"copyright"</span>&gt;</span></div><div class="line">                    <span class="tag">&lt;<span class="name">p</span>&gt;</span> Template by  <span class="tag">&lt;<span class="name">a</span> <span class="attr">href</span>=<span class="string">"http://w3layouts.com"</span>&gt;</span>  W3layouts<span class="tag">&lt;/<span class="name">a</span>&gt;</span><span class="tag">&lt;/<span class="name">p</span>&gt;</span></div><div class="line">                <span class="tag">&lt;/<span class="name">div</span>&gt;</span></div><div class="line">            <span class="tag">&lt;/<span class="name">div</span>&gt;</span></div><div class="line">        <span class="tag">&lt;/<span class="name">div</span>&gt;</span></div><div class="line">    <span class="tag">&lt;/<span class="name">div</span>&gt;</span></div><div class="line"><span class="tag">&lt;/<span class="name">div</span>&gt;</span></div><div class="line"><span class="tag">&lt;/<span class="name">body</span>&gt;</span></div><div class="line"><span class="tag">&lt;/<span class="name">html</span>&gt;</span></div></pre></td></tr></table></figure>
+<h4 id="Basic-Config-Thymeleaf-Namespace-amp-Link-URLs"><a href="#Basic-Config-Thymeleaf-Namespace-amp-Link-URLs" class="headerlink" title="Basic Config (Thymeleaf Namespace &amp; Link URLs)"></a>Basic Config (Thymeleaf Namespace &amp; Link URLs)</h4><p>For <code>utils.html</code>, you need to configure (<code>th:*</code> attributes):</p>
+<ul>
+<li>Line 2 -&gt; <strong>Declare a Thymeleaf namespace</strong> indicating use of the Thymeleaf extensions: <code>&lt;html xmlns:th=&quot;http://www.thymeleaf.org&quot;&gt;</code></li>
+<li>Line 5/7/18 -&gt; <strong>Link URLs</strong> by <code>th:href</code> and <code>th:src</code> attributes. E.g. use <code>th:href=&quot;@{css/style.css}&quot;</code> to link stylesheet and <code>th:src=&quot;@{images/logo.png}&quot;</code> to link logo image. Note the root of the relative path is <code>resources/static</code>.</li>
+</ul>
+<p>Now the page can be normally rendered in web application.</p>
+<h4 id="Including-Template-Fragments"><a href="#Including-Template-Fragments" class="headerlink" title="Including Template Fragments"></a>Including Template Fragments</h4><h5 id="Define-Thymeleaf-Fragments"><a href="#Define-Thymeleaf-Fragments" class="headerlink" title="Define Thymeleaf Fragments"></a>Define Thymeleaf Fragments</h5><p>Use the <code>th:fragment</code> attribute to <strong>define the fragments</strong> available for inclusion.</p>
+<ul>
+<li>Line 3 -&gt; Define head fragment: <code>&lt;head lang=&quot;en&quot; th:fragment=&quot;head&quot;&gt;</code></li>
+<li>Line 15 -&gt; Define header fragment: <code>&lt;div class=&quot;top-header span_top&quot; th:fragment=&quot;header&quot;&gt;</code></li>
+<li>Line 25 -&gt; Define footer fragment: <code>&lt;div class=&quot;footer&quot; th:fragment=&quot;footer&quot;&gt;</code></li>
+</ul>
+<h5 id="Including-Fragments-in-Pages"><a href="#Including-Fragments-in-Pages" class="headerlink" title="Including Fragments in Pages"></a>Including Fragments in Pages</h5><p>In the block you want to use fragment, use code like <code>&lt;!--/*/ &lt;th:block th:include=&quot;fragments/utils :: head&quot;&gt;&lt;/th:block&gt; /*/--&gt;</code>.<br>For example, the following code implement the Log In page based on the three fragments we defined above.</p>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div></pre></td><td class="code"><pre><div class="line"><span class="meta">&lt;!DOCTYPE html&gt;</span></div><div class="line"><span class="tag">&lt;<span class="name">html</span> <span class="attr">xmlns:th</span>=<span class="string">"http://www.thymeleaf.org"</span>&gt;</span></div><div class="line"><span class="tag">&lt;<span class="name">head</span>&gt;</span></div><div class="line">    <span class="tag">&lt;<span class="name">title</span>&gt;</span>Movie Ticket and Service Website | Contact<span class="tag">&lt;/<span class="name">title</span>&gt;</span></div><div class="line">    <span class="comment">&lt;!--/*/ &lt;th:block th:include="fragments/utils :: head"&gt;&lt;/th:block&gt; /*/--&gt;</span></div><div class="line"><span class="tag">&lt;/<span class="name">head</span>&gt;</span></div><div class="line"><span class="tag">&lt;<span class="name">body</span>&gt;</span></div><div class="line"></div><div class="line"><span class="tag">&lt;<span class="name">div</span> <span class="attr">class</span>=<span class="string">"full"</span>&gt;</span></div><div class="line">    <span class="tag">&lt;<span class="name">div</span> <span class="attr">class</span>=<span class="string">"main"</span>&gt;</span></div><div class="line">        <span class="tag">&lt;<span class="name">div</span> <span class="attr">class</span>=<span class="string">"contact-content"</span>&gt;</span></div><div class="line">            <span class="tag">&lt;<span class="name">div</span> <span class="attr">class</span>=<span class="string">"top-header span_top"</span>&gt;</span></div><div class="line">                <span class="comment">&lt;!--/*/ &lt;th:block th:include="fragments/utils :: header"&gt;&lt;/th:block&gt; /*/--&gt;</span></div><div class="line">            <span class="tag">&lt;/<span class="name">div</span>&gt;</span></div><div class="line"></div><div class="line">            <span class="tag">&lt;<span class="name">div</span> <span class="attr">class</span>=<span class="string">"main-contact"</span>&gt;</span></div><div class="line">                <span class="tag">&lt;<span class="name">div</span> <span class="attr">class</span>=<span class="string">"contact-form"</span>&gt;</span></div><div class="line">                    <span class="tag">&lt;<span class="name">form</span>&gt;</span></div><div class="line">                        <span class="tag">&lt;<span class="name">input</span> <span class="attr">type</span>=<span class="string">"text"</span> <span class="attr">placeholder</span>=<span class="string">"Email"</span> <span class="attr">required</span>=<span class="string">"required"</span> /&gt;</span></div><div class="line">                        <span class="tag">&lt;<span class="name">input</span> <span class="attr">type</span>=<span class="string">"password"</span> <span class="attr">placeholder</span>=<span class="string">"Password"</span> <span class="attr">required</span>=<span class="string">"required"</span>/&gt;</span></div><div class="line">                        <span class="tag">&lt;<span class="name">input</span> <span class="attr">type</span>=<span class="string">"submit"</span> <span class="attr">value</span>=<span class="string">"Log In"</span>/&gt;</span></div><div class="line">                        <span class="tag">&lt;<span class="name">div</span> <span class="attr">class</span>=<span class="string">"clearfix"</span>&gt;</span><span class="tag">&lt;/<span class="name">div</span>&gt;</span></div><div class="line">                    <span class="tag">&lt;/<span class="name">form</span>&gt;</span></div><div class="line">                <span class="tag">&lt;/<span class="name">div</span>&gt;</span></div><div class="line">            <span class="tag">&lt;/<span class="name">div</span>&gt;</span></div><div class="line">        <span class="tag">&lt;/<span class="name">div</span>&gt;</span></div><div class="line">        <span class="tag">&lt;<span class="name">div</span> <span class="attr">class</span>=<span class="string">"footer"</span>&gt;</span></div><div class="line">            <span class="comment">&lt;!--/*/ &lt;th:block th:include="fragments/utils :: footer"&gt;&lt;/th:block&gt; /*/--&gt;</span></div><div class="line">        <span class="tag">&lt;/<span class="name">div</span>&gt;</span></div><div class="line">    <span class="tag">&lt;/<span class="name">div</span>&gt;</span></div><div class="line"><span class="tag">&lt;/<span class="name">div</span>&gt;</span></div><div class="line"><span class="tag">&lt;/<span class="name">body</span>&gt;</span></div><div class="line"><span class="tag">&lt;/<span class="name">html</span>&gt;</span></div></pre></td></tr></table></figure>
+<p><img src="/images/web/login.jpg" alt=""></p>
+<h2 id="Controller"><a href="#Controller" class="headerlink" title="Controller"></a>Controller</h2><p>In order to visit the website, we need to design urls. For example, the application will accept HTTP GET requests at both <code>http://localhost:8080/</code> and <code>http://localhost:8080/index.html</code> and respond with the index page displaying HTML.</p>
+<p>HTTP requests are handled by a controller. In the following example, the <code>IndexController</code> handles HTTP requests for <code>/</code> (web root path) and <code>/index</code> by returning the name of a <code>View</code>, in this case, “index” (index template). A <code>View</code> is responsible for rendering the HTML content:</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">package</span> team.legendary.controllers;</div><div class="line"><span class="keyword">import</span> org.springframework.stereotype.Controller;</div><div class="line"><span class="keyword">import</span> org.springframework.web.bind.annotation.RequestMapping;</div><div class="line"></div><div class="line"><span class="meta">@Controller</span></div><div class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">IndexController</span> </span>&#123;</div><div class="line">    <span class="meta">@RequestMapping</span>(<span class="string">"/"</span>)</div><div class="line">    <span class="function">String <span class="title">root</span><span class="params">()</span> </span>&#123;<span class="keyword">return</span>  <span class="string">"index"</span>;&#125;</div><div class="line"></div><div class="line">    <span class="meta">@RequestMapping</span>(<span class="string">"/index"</span>)</div><div class="line">    <span class="function">String <span class="title">index</span><span class="params">()</span> </span>&#123;<span class="keyword">return</span>  <span class="string">"index"</span>;&#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<ul>
+<li><code>@Controller</code> annotation indicates that <code>IndexController</code> class is a “Controller”.</li>
+<li><code>@RequestMapping</code> annotation ensures that HTTP requests to <code>/</code> and <code>/index</code> are mapped to the root() and index() method respectively.</li>
+</ul>
+<h1 id="Reference-amp-Futher-Reading"><a href="#Reference-amp-Futher-Reading" class="headerlink" title="Reference &amp; Futher Reading"></a>Reference &amp; Futher Reading</h1><ol>
+<li><a href="https://spring.io/guides/gs/serving-web-content/" target="_blank" rel="external">Serving Web Content with Spring MVC</a></li>
+<li>Tutorial series – SPRING BOOT WEB APPLICATION: <a href="https://springframework.guru/spring-boot-web-application-part-1-spring-initializr/" target="_blank" rel="external">PART 1 - Spring Initializer</a>, <a href="https://springframework.guru/spring-boot-web-application-part-2-using-thymeleaf/" target="_blank" rel="external">PART 2 - Using Thymeleaf</a>, <a href="https://springframework.guru/spring-boot-web-application-part-3-spring-data-jpa/" target="_blank" rel="external">PART 3 - Spring Data JPA</a>, <a href="https://springframework.guru/spring-boot-web-application-part-4-spring-mvc/" target="_blank" rel="external">PART 4 - Spring MVC</a> and <a href="https://springframework.guru/spring-boot-web-application-part-5-spring-security/" target="_blank" rel="external">PART 5 - Spring Security</a>.</li>
+<li><a href="https://w3layouts.com/cinema-a-entertainment-category-flat-bootstrap-responsive-web-template/" target="_blank" rel="external">Cinema a Entertainment Category Flat Bootstrap Responsive Web Template</a></li>
+<li><a href="https://w3layouts.com/movie-ticket-booking-widget-flat-responsive-widget-template/" target="_blank" rel="external">Movie Ticket Booking Widget Flat Responsive Widget Template</a></li>
+<li><a href="https://docs.spring.io/spring/docs/current/spring-framework-reference/html/mvc.html" target="_blank" rel="external">(Spring) Web MVC framework</a></li>
+<li><a href="https://course.tianmaying.com/spring-mvc" target="_blank" rel="external">打造功能完整的博客系统：Spring MVC实战入门</a></li>
+<li><a href="https://www.tianmaying.com/tutorial/using-thymeleaf" target="_blank" rel="external">新一代Java模板引擎Thymeleaf</a></li>
+</ol>
+
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+
+    <footer class="post-footer">
+      
+
+      
+        
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2017/05/10/panorama-image-stitching/" rel="next" title="[CVPR] Panorama Image Stitching">
+                <i class="fa fa-chevron-left"></i> [CVPR] Panorama Image Stitching
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+          
+          </div>
+          
+
+
+          
+  <div class="comments" id="comments">
+    
+      <div id="disqus_thread">
+        <noscript>
+          Please enable JavaScript to view the
+          <a href="//disqus.com/?ref_noscript">comments powered by Disqus.</a>
+        </noscript>
+      </div>
+    
+  </div>
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap" >
+            Table of Contents
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview">
+            Overview
+          </li>
+        </ul>
+      
+
+      <section class="site-overview sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+          <img class="site-author-image" itemprop="image"
+               src="/images/avatar.png"
+               alt="HYPJUDY" />
+          <p class="site-author-name" itemprop="name">HYPJUDY</p>
+           
+              <p class="site-description motion-element" itemprop="description">What I cannot create, I do not understand.</p>
+          
+        </div>
+        <nav class="site-state motion-element">
+        
+          
+            <div class="site-state-item site-state-posts">
+              <a href="/archives">
+                <span class="site-state-item-count">17</span>
+                <span class="site-state-item-name">posts</span>
+              </a>
+            </div>
+          
+
+          
+
+          
+
+        </nav>
+
+        
+
+        <div class="links-of-author motion-element">
+          
+            
+              <span class="links-of-author-item">
+                <a href="https://github.com/hypjudy" target="_blank" title="GitHub">
+                  
+                    <i class="fa fa-fw fa-github"></i>
+                  
+                  GitHub
+                </a>
+              </span>
+            
+          
+        </div>
+
+        
+        
+
+        
+        
+
+        
+
+
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#Overview"><span class="nav-number">1.</span> <span class="nav-text">Overview</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Spring"><span class="nav-number">2.</span> <span class="nav-text">Spring</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Spring-MVC"><span class="nav-number">3.</span> <span class="nav-text">Spring MVC</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#Model"><span class="nav-number">3.1.</span> <span class="nav-text">Model</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#View-–-Thymeleaf"><span class="nav-number">3.2.</span> <span class="nav-text">View – Thymeleaf</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#HTML-in-Standalone-Environment"><span class="nav-number">3.2.1.</span> <span class="nav-text">HTML in Standalone Environment</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#HTML-in-Web-Environment"><span class="nav-number">3.2.2.</span> <span class="nav-text">HTML in Web Environment</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#Basic-Config-Thymeleaf-Namespace-amp-Link-URLs"><span class="nav-number">3.2.2.1.</span> <span class="nav-text">Basic Config (Thymeleaf Namespace & Link URLs)</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#Including-Template-Fragments"><span class="nav-number">3.2.2.2.</span> <span class="nav-text">Including Template Fragments</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#Define-Thymeleaf-Fragments"><span class="nav-number">3.2.2.2.1.</span> <span class="nav-text">Define Thymeleaf Fragments</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#Including-Fragments-in-Pages"><span class="nav-number">3.2.2.2.2.</span> <span class="nav-text">Including Fragments in Pages</span></a></li></ol></li></ol></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Controller"><span class="nav-number">3.3.</span> <span class="nav-text">Controller</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Reference-amp-Futher-Reading"><span class="nav-number">4.</span> <span class="nav-text">Reference & Futher Reading</span></a></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright" >
+  
+  &copy;  2016 - 
+  <span itemprop="copyrightYear">2017</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">HYPJUDY</span>
+</div>
+
+
+<div class="powered-by">
+  Powered by <a class="theme-link" href="https://hexo.io">Hexo</a>
+</div>
+
+<div class="theme-info">
+  Theme -
+  <a class="theme-link" href="https://github.com/iissnan/hexo-theme-next">
+    NexT.Mist
+  </a>
+</div>
+
+
+        
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+    
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+  
+  <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+
+  
+  <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+
+  
+  <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+
+  
+  <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.0"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.0"></script>
+
+
+
+  
+  
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.0"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.0"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.0"></script>
+
+
+
+  
+
+
+
+  
+
+    <script type="text/javascript">
+      var disqus_shortname = 'hypjudy';
+      var disqus_identifier = '2017/05/30/spring-boot-web-application/';
+
+      var disqus_title = "[Web] Spring Boot Web Application";
+
+
+      function run_disqus_script(disqus_script) {
+        var dsq = document.createElement('script');
+        dsq.type = 'text/javascript';
+        dsq.async = true;
+        dsq.src = '//' + disqus_shortname + '.disqus.com/' + disqus_script;
+        (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+      }
+
+      run_disqus_script('count.js');
+
+      
+        var disqus_config = function () {
+            this.page.url = disqus_url;
+            this.page.identifier = disqus_identifier;
+            this.page.title = disqus_title;
+        };
+        run_disqus_script('embed.js');
+      
+
+    </script>
+  
+
+
+
+
+
+
+
+
+
+
+  
+  
+
+  
+  
+    <script type="text/x-mathjax-config">
+      MathJax.Hub.Config({
+        tex2jax: {
+          inlineMath: [ ['$','$'], ["\\(","\\)"]  ],
+          processEscapes: true,
+          skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+        }
+      });
+    </script>
+
+    <script type="text/x-mathjax-config">
+      MathJax.Hub.Queue(function() {
+        var all = MathJax.Hub.getAllJax(), i;
+        for (i=0; i < all.length; i += 1) {
+          all[i].SourceElement().parentNode.className += ' has-jax';
+        }
+      });
+    </script>
+    <script type="text/javascript" src="//cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+  
+
+
+  
+
+  
+
+  
+
+
+  
+
+</body>
+</html>
