@@ -87,23 +87,34 @@
 
 
 
-<meta name="description" content="1 - Introduction of SE &amp;amp; OOAD2 - UP Unified Process and Agile">
+<meta name="description" content="Notes of Software System Analysis and Design taught by Maolin Pan, SYSU, 2017.Keypoints, assignments, courseware…Introduction of SE &amp;amp; OOADUP Unified Process and AgileInception &amp;amp; Business Model">
 <meta property="og:type" content="article">
 <meta property="og:title" content="[Notes] Software System Analysis and Design">
 <meta property="og:url" content="http://yoursite.com/2017/03/06/notes-system-design/index.html">
 <meta property="og:site_name" content="HYPJUDY">
-<meta property="og:description" content="1 - Introduction of SE &amp;amp; OOAD2 - UP Unified Process and Agile">
+<meta property="og:description" content="Notes of Software System Analysis and Design taught by Maolin Pan, SYSU, 2017.Keypoints, assignments, courseware…Introduction of SE &amp;amp; OOADUP Unified Process and AgileInception &amp;amp; Business Model">
+<meta property="og:image" content="http://yoursite.com/images/notes-system-design/analysis-and-design.jpg">
 <meta property="og:image" content="http://yoursite.com/images/notes-system-design/CMMI.jpg">
 <meta property="og:image" content="http://yoursite.com/images/notes-system-design/CMMI_en.png">
 <meta property="og:image" content="http://yoursite.com/images/notes-system-design/2-1迭代和进化式开发.png">
+<meta property="og:image" content="http://yoursite.com/images/notes-system-design/unified-process-phases.jpg">
 <meta property="og:image" content="http://yoursite.com/images/notes-system-design/RUP-use-case.png">
 <meta property="og:image" content="http://yoursite.com/images/notes-system-design/RUP-system-structure.png">
 <meta property="og:image" content="http://yoursite.com/images/notes-system-design/RUP-increment.png">
-<meta property="og:updated_time" content="2017-04-16T15:54:42.442Z">
+<meta property="og:image" content="http://yoursite.com/images/notes-system-design/fully-use-case-template.jpg">
+<meta property="og:image" content="http://yoursite.com/images/notes-system-design/usecase6-3.png">
+<meta property="og:image" content="http://yoursite.com/images/notes-system-design/uml-activity.jpg">
+<meta property="og:image" content="http://yoursite.com/images/notes-system-design/domain-model-real.png">
+<meta property="og:image" content="http://yoursite.com/images/notes-system-design/domain-model-avoid.png">
+<meta property="og:image" content="http://yoursite.com/images/notes-system-design/attr-vs-class.png">
+<meta property="og:image" content="http://yoursite.com/images/notes-system-design/model-descr-class.png">
+<meta property="og:image" content="http://yoursite.com/images/notes-system-design/attributes.png">
+<meta property="og:image" content="http://yoursite.com/images/notes-system-design/POS-Partial-Domain-Model.png">
+<meta property="og:updated_time" content="2017-06-08T15:06:32.224Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="[Notes] Software System Analysis and Design">
-<meta name="twitter:description" content="1 - Introduction of SE &amp;amp; OOAD2 - UP Unified Process and Agile">
-<meta name="twitter:image" content="http://yoursite.com/images/notes-system-design/CMMI.jpg">
+<meta name="twitter:description" content="Notes of Software System Analysis and Design taught by Maolin Pan, SYSU, 2017.Keypoints, assignments, courseware…Introduction of SE &amp;amp; OOADUP Unified Process and AgileInception &amp;amp; Business Model">
+<meta name="twitter:image" content="http://yoursite.com/images/notes-system-design/analysis-and-design.jpg">
 
 
 
@@ -337,17 +348,21 @@
       
 
       
-        <p><a href="#1">1 - Introduction of SE &amp; OOAD</a><br><a href="#2">2 - UP Unified Process and Agile</a><br><a id="more"></a></p>
+        <p>Notes of Software System Analysis and Design taught by Maolin Pan, SYSU, 2017.<br>Keypoints, assignments, courseware…<br><a href="#1">Introduction of SE &amp; OOAD</a><br><a href="#2">UP Unified Process and Agile</a><br><a href="#3">Inception &amp; Business Modeling</a><br><a href="#4">UseCase Modeling</a><br><a href="#5">Domain Modeling</a><br><a id="more"></a></p>
+<p>Textbook: <a href="https://www.amazon.com/Applying-UML-Patterns-Introduction-Object-Oriented/dp/0131489062" target="_blank" rel="external"><strong>Applying UML and Patterns</strong></a>: An Introduction to Object-Oriented Analysis and Design and Iterative Development (3rd Edition) <em>by Craig Larman</em><br>中文版：<a href="https://www.amazon.cn/UML%E5%92%8C%E6%A8%A1%E5%BC%8F%E5%BA%94%E7%94%A8-%E6%8B%89%E6%9B%BC/dp/B00116WMSU" target="_blank" rel="external">UML和模式应用(原书第3版)</a></p>
 <p><a name="1"></a></p>
-<h1 id="1-Introduction-of-SE-amp-OOAD"><a href="#1-Introduction-of-SE-amp-OOAD" class="headerlink" title="1 - Introduction of SE &amp; OOAD"></a>1 - Introduction of SE &amp; OOAD</h1><h2 id="Courseware"><a href="#Courseware" class="headerlink" title="Courseware"></a>Courseware</h2><p><a href="http://ss.sysu.edu.cn/~pml/se305/2015sp/slides/00-SoftwareEngineeringReview.pdf" target="_blank" rel="external">软件工程概述</a><br><a href="http://ss.sysu.edu.cn/~pml/se305/2015sp/slides/LarmanOOAD_Part1_C01.pdf" target="_blank" rel="external">OOAD Introduction</a></p>
-<h2 id="Key-Point-of-Software-Engineering★"><a href="#Key-Point-of-Software-Engineering★" class="headerlink" title="Key Point of Software Engineering★"></a>Key Point of Software Engineering<font color="#FF0000">★</font></h2><h3 id="Software-Engineering-Definition-★★★"><a href="#Software-Engineering-Definition-★★★" class="headerlink" title="Software Engineering Definition ★★★"></a>Software Engineering Definition <font color="#FF0000">★★★</font></h3><ul>
+<h1 id="Introduction-of-SE-amp-OOAD"><a href="#Introduction-of-SE-amp-OOAD" class="headerlink" title="Introduction of SE &amp; OOAD"></a>Introduction of SE &amp; OOAD</h1><h2 id="Courseware"><a href="#Courseware" class="headerlink" title="Courseware"></a>Courseware</h2><p><a href="http://ss.sysu.edu.cn/~pml/se305/2015sp/slides/00-SoftwareEngineeringReview.pdf" target="_blank" rel="external">软件工程概述</a><br><a href="http://ss.sysu.edu.cn/~pml/se305/2015sp/slides/LarmanOOAD_Part1_C01.pdf" target="_blank" rel="external">OOAD Introduction</a><br>(<strong>1. Object oriented analysis and design</strong> Part I - Introduction)</p>
+<h2 id="Key-Point-of-Software-Engineering-★"><a href="#Key-Point-of-Software-Engineering-★" class="headerlink" title="Key Point of Software Engineering ★"></a>Key Point of Software Engineering <font color="red">★</font></h2><p>软件工程要点【必考】</p>
+<h3 id="Software-Engineering-Definition-★★★"><a href="#Software-Engineering-Definition-★★★" class="headerlink" title="Software Engineering Definition ★★★"></a>Software Engineering Definition <font color="red">★★★</font></h3><p>软件工程的定义</p>
+<ul>
 <li>(1) the application of a <strong>systematic</strong>, <strong>disciplined</strong>, <strong>quantifiable</strong>   approach to the development, operation, and maintenance of software, that is, the application of engineering to software. (2) the study of approaches as in (1) – IEEE Standard 610.12</li>
 <li>软件工程：(1)将<strong>系统化</strong>、<strong>规范化</strong>、<strong>可度量</strong>的方法应用于软件的开发、运行和维护的过程，即将工程化应用于软件中。(2)对(1)中所述方法的研究。——IEEE[IEE93]</li>
 <li>软件工程：是指导计算机软件开发和维护的工程学科。采用工程的概念、原理、技术和方法来开发与维护软件，把经过实践考验而证明正确的管理技术和当前能够得到的最好的技术方法结合起来，这就是软件工程。</li>
 </ul>
-<h3 id="History-of-Software-Engineering"><a href="#History-of-Software-Engineering" class="headerlink" title="History of Software Engineering"></a><a href="https://en.wikipedia.org/wiki/Software_engineering" target="_blank" rel="external">History of Software Engineering</a></h3><p><strong>software crisis</strong> The widespread lack of best practices for software at the time was perceived as a “software crisis”. 六十年代以来，随着计算机应用需求的驱动，系统软件和应用软件有很大的发展，如操作系统，编译系统和大型应用软件等。由于软件生产的复杂性和高成本，使大型软件的生产出现了很大的困难，即出现软件危机。软件工程正是为克服软件危机而提出的一种概念，并在实践中不断地探索它的原理，技术和方法。在此过程中，人们研究和借鉴了工程学的某些原理和方法，并形成了一门新的学科─软件工程学。</p>
-<p><strong>The Constructive Cost Model (<a href="http://blog.sina.com.cn/s/blog_8db4afb90101doui.html" target="_blank" rel="external">COCOMO</a>)</strong> is a procedural software cost estimation model developed by Barry W. Boehm. The model parameters are derived from fitting a regression formula using data from historical projects.</p>
-<h3 id="Software-Engineering-Body-of-Knowledge"><a href="#Software-Engineering-Body-of-Knowledge" class="headerlink" title="Software Engineering Body of Knowledge"></a><a href="https://en.wikipedia.org/wiki/Software_Engineering_Body_of_Knowledge" target="_blank" rel="external">Software Engineering Body of Knowledge</a></h3><p>必须知道<strong>本课程涉及的KA</strong><font color="#FF0000">==</font> </p>
+<h3 id="History-of-Software-Engineering"><a href="#History-of-Software-Engineering" class="headerlink" title="History of Software Engineering"></a><a href="https://en.wikipedia.org/wiki/Software_engineering" target="_blank" rel="external">History of Software Engineering</a></h3><p>其中涉及两个重要词汇 “software crisis”-软件危机， “Constructive Cost Model (COCOMO)”</p>
+<p><strong>software crisis</strong> The widespread lack of best practices for software at the time was perceived as a “software crisis”. 六十年代以来，随着计算机应用需求的驱动，系统软件和应用软件有很大的发展，如操作系统，编译系统和大型应用软件等。由于软件生产的复杂性和高成本，使大型软件的生产出现了很大的困难，即出现软件危机。软件工程正是为克服软件危机而提出的一种概念，并在实践中不断地探索它的原理，技术和方法。在此过程中，人们研究和借鉴了工程学的某些原理和方法，并形成了一门新的学科─软件工程学。</p>
+<p><strong>The Constructive Cost Model (<a href="http://blog.sina.com.cn/s/blog_8db4afb90101doui.html" target="_blank" rel="external">COCOMO</a>)</strong> is a procedural software cost estimation model developed by Barry W. Boehm. The model parameters are derived from fitting a regression formula using data from historical projects.结构化成本估算模型</p>
+<h3 id="Software-Engineering-Body-of-Knowledge"><a href="#Software-Engineering-Body-of-Knowledge" class="headerlink" title="Software Engineering Body of Knowledge"></a><a href="https://en.wikipedia.org/wiki/Software_Engineering_Body_of_Knowledge" target="_blank" rel="external">Software Engineering Body of Knowledge</a></h3><p>必须知道<strong>本课程涉及的KA</strong><font color="red">==</font> </p>
 <h3 id="Software-LifeCycle"><a href="#Software-LifeCycle" class="headerlink" title="Software LifeCycle"></a><a href="https://en.wikipedia.org/wiki/Software_development_process" target="_blank" rel="external">Software LifeCycle</a></h3><p><strong>软件生命周期</strong> 从时间角度，把整个周期划分为若干个阶段。划分的原则：各阶段的任务彼此间尽可能相对独立，同一个阶段各项任务的性质尽可能相同，从而降低每个阶段任务的复杂性，简化不同阶段之间的联系，有利于软件开发过程的组织管理。受软件规模、性质、种类、开发方法等因素的影响。<br>典型划分GB8567（4个时期7个阶段）：</p>
 <ul>
 <li>软件分析时期：问题定义、可行性研究、需求分析</li>
@@ -373,7 +388,7 @@
 <li>Kanban</li>
 <li>Scrum</li>
 </ul>
-<h3 id="Software-Process-Improvement-for-Enterprise"><a href="#Software-Process-Improvement-for-Enterprise" class="headerlink" title="Software Process Improvement for Enterprise"></a>Software Process Improvement for Enterprise</h3><p>Also see : Capability Maturity Model Integration (<a href="https://en.wikipedia.org/wiki/Capability_Maturity_Model_Integration" target="_blank" rel="external">CMMI</a>)要点：给企业一个明确的 5 级分类指标， 推动企业在在软件工程各个 KPA 向上爬！<br>见第二课</p>
+<h3 id="Software-Process-Improvement-for-Enterprise"><a href="#Software-Process-Improvement-for-Enterprise" class="headerlink" title="Software Process Improvement for Enterprise"></a>Software Process Improvement for Enterprise</h3><p>Also see : Capability Maturity Model Integration (<a href="https://en.wikipedia.org/wiki/Capability_Maturity_Model_Integration" target="_blank" rel="external">CMMI</a>)要点：给企业一个明确的 5 级分类指标， 推动企业在在软件工程各个 KPA 向上爬！<br>见第二课：<a href="#2">2 - UP Unified Process and Agile</a></p>
 <p>Also see : <a href="http://blog.sina.com.cn/s/blog_5e98ca2b01019aou.html" target="_blank" rel="external">软件工程国家标准</a> 其中，<em>计算机软件产品开发文件编制指南GB／T 8567－2006</em>最重要。否则政府项目无法验收！</p>
 <h2 id="Key-Point-of-Courseware"><a href="#Key-Point-of-Courseware" class="headerlink" title="Key Point of Courseware"></a>Key Point of Courseware</h2><h3 id="Software-Quality-amp-Custom-Experience"><a href="#Software-Quality-amp-Custom-Experience" class="headerlink" title="Software Quality &amp; Custom Experience"></a>Software Quality &amp; Custom Experience</h3><ol>
 <li>分析设计的目标就是生产高品质且满足客户需求的软件产品</li>
@@ -388,17 +403,70 @@
 <li>Custom Experience != 用户数量（流量）</li>
 <li>用户数量 <em> 单用户价值 </em> 社会责任</li>
 </ol>
-<h3 id="Analysis-vs-design"><a href="#Analysis-vs-design" class="headerlink" title="Analysis vs. design"></a>Analysis vs. design</h3><font color="#FF0000">==</font> 
+<h3 id="Analysis-vs-design-★"><a href="#Analysis-vs-design-★" class="headerlink" title="Analysis vs. design ★"></a>Analysis vs. design <font color="red">★</font></h3><p><strong>Analysis</strong></p>
+<ul>
+<li>emphasizes an <em>investigation</em> of the problem and requirements, rather than a solution.<br>分析强调对问题和需求的<strong>调查研究</strong>，而不是解决方案。</li>
+<li><em>do the right thing</em><br>做正确的事（分析）</li>
+</ul>
+<p><strong>Design</strong></p>
+<ul>
+<li>emphasizes a <em>conceptual solution</em> (in software and hardware) that fulfills the requirements, rather than its implementation. For example, a description of a database schema and software objects.<br>设计强调满足需求的<strong>概念上的解决方案</strong>，而不是其实现。</li>
+<li><em>do the thing right</em><br>正确地做事（设计）</li>
+</ul>
+<h3 id="Object-vs-Class"><a href="#Object-vs-Class" class="headerlink" title="Object vs. Class"></a>Object vs. Class</h3><font color="red">==</font>
 
-<h3 id="Object-vs-Class"><a href="#Object-vs-Class" class="headerlink" title="Object vs. Class"></a>Object vs. Class</h3><font color="#FF0000">==</font> 
-
-<h3 id="Object-oriented-Analysis-and-Design"><a href="#Object-oriented-Analysis-and-Design" class="headerlink" title="Object-oriented Analysis and Design"></a>Object-oriented Analysis and Design</h3><font color="#FF0000">==</font> 
-
-<h3 id="UML"><a href="#UML" class="headerlink" title="UML"></a>UML</h3><font color="#FF0000">==</font> 
-
+<!-- ![](/images/notes-system-design/domain-class.jpg) -->
+<h3 id="Chap-1-Object-oriented-Analysis-and-Design-★"><a href="#Chap-1-Object-oriented-Analysis-and-Design-★" class="headerlink" title="Chap 1 Object-oriented Analysis and Design ★"></a>Chap 1 Object-oriented Analysis and Design <font color="red">★</font></h3><p><strong>Object-oriented analysis</strong> 面向对象分析</p>
+<ul>
+<li>emphasis on finding and describing the objects—or <font color="red">concepts</font> — in the problem domain. For example, in the case of the flight information system, some of the concepts include <em>Plane</em>, <em>Flight</em>, and <em>Pilot</em>.<br>强调在问题领域内发现和描述对象（或概念）</li>
+</ul>
+<p><strong>Object-oriented design</strong></p>
+<ul>
+<li>Emphasis on defining software objects and how they <font color="red">collaborate</font> to fulfill the requirements. For example, a Plane software object may have a <em>tailNumber</em> attribute and a <em>getFlightHistory</em> method<br>强调定义软件对象以及它们如何协作以实现需求</li>
+</ul>
+<p><img src="/images/notes-system-design/analysis-and-design.jpg" alt="analysis-and-design.jpg"></p>
+<h3 id="UML-Unified-Modeling-Language-★"><a href="#UML-Unified-Modeling-Language-★" class="headerlink" title="UML (Unified Modeling Language) ★"></a>UML (Unified Modeling Language) <font color="red">★</font></h3><ul>
+<li>The UML is standard diagramming language to visualize the results of analysis and design.<br>统一建模语言（UML）是描述、构造和文档化制品的可视化语言。</li>
+<li>Notation (the UML) is a simple, relatively trivial thing.</li>
+<li>Much more important: Skill in designing with objects. Learning UML notation does not help.<br>UML仅仅是标准的图形化表示法，不可能与设计和对象思想同等重要</li>
+<li>The UML is <font color="red">not</font><ul>
+<li>a process or methodology</li>
+<li>object-oriented analysis and design</li>
+<li>guidelines for design</li>
+</ul>
+</li>
+<li><em>Three Ways to Apply UML</em> 应用UML的三种方式<br><strong>Agile modeling</strong> emphasizes UML as sketch.<ul>
+<li><strong>UML as sketch</strong> 草图：非正式、不完整<ul>
+<li>Informal and incomplete diagrams (often hand sketched on whiteboards) created to explore difficult parts of the problem or solution space, exploiting the power of visual languages.</li>
+</ul>
+</li>
+<li><strong>UML as blueprint</strong> 蓝图：相对详细<ul>
+<li>Relatively detailed design diagrams used either for<ul>
+<li>reverse engineering to visualize and better understanding existing code in UML diagrams 逆向工程</li>
+<li>code generation (forward engineering) 前向工程</li>
+</ul>
+</li>
+<li>If reverse engineering, a UML tool reads the source or binaries and generates (typically) UML package, class, and sequence diagrams. help the reader understand the big picture elements, structure, and collaborations.</li>
+<li>Before programming, some detailed diagrams can provide guidance for code generation (e.g. Java), either manually or automatically with a tool.</li>
+</ul>
+</li>
+<li><strong>UML as programming language</strong> 编程语言：用UML完成软件系统可执行规格说明<ul>
+<li>Complete executable specification of a software system in UML. Executable code will be automatically generated, but is not normally seen or modified by developers; one works only in the UML “programming language.” This use of UML requires a practical way to diagram all behavior or logic (probably using interaction or state diagrams), and is still under development in terms of theory, tool robustness and usability.</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>Class-related terms consistent with the UML and the UP 与类相关的术语将与UML和UP保持一致<ul>
+<li><strong>Conceptual class</strong> — real-world concept or thing. A conceptual or essential perspective. The UP Domain Model contains conceptual classes.<br><strong>概念类</strong>：现实世界中的概念或事物。</li>
+<li><strong>Software class</strong> — a class representing a specification or implementation perspective of a software component, regardless of the process or method.<br><strong>软件类</strong>：无论在过程还是在方法中，都表示软件构件在规格说明或实现透视图中的类</li>
+<li><strong>Implementation class</strong> — a class implemented in a specific OO language such as Java<br><strong>实现类</strong>：特定OO语言（如Java）中的类</li>
+</ul>
+</li>
+</ul>
 <hr>
 <p><a name="2"></a></p>
-<h1 id="2-UP-Unified-Process-and-Agile"><a href="#2-UP-Unified-Process-and-Agile" class="headerlink" title="2 - UP Unified Process and Agile"></a>2 - UP Unified Process and Agile</h1><h2 id="Courseware-1"><a href="#Courseware-1" class="headerlink" title="Courseware"></a>Courseware</h2><p><a href="http://ss.sysu.edu.cn/~pml/se305/2015sp/slides/LarmanOOAD_Part1_C02.pdf" target="_blank" rel="external">Unified Process</a><br>Reference: </p>
+<h1 id="UP-Unified-Process-and-Agile"><a href="#UP-Unified-Process-and-Agile" class="headerlink" title="UP Unified Process and Agile"></a>UP Unified Process and Agile</h1><h2 id="Courseware-1"><a href="#Courseware-1" class="headerlink" title="Courseware"></a>Courseware</h2><p><a href="http://ss.sysu.edu.cn/~pml/se305/2015sp/slides/LarmanOOAD_Part1_C02.pdf" target="_blank" rel="external">Unified Process</a><br>(<strong>2. Iterative, evolutionary, and agile</strong> Part I - Introduction)</p>
+<p>Reference: </p>
 <ol>
 <li>Cai, SYSU, Software Testing: Methods &amp; Technologies</li>
 <li><a href="http://course.pku.edu.cn/bbcswebdav/courses/JPK100319001/%E6%8E%88%E8%AF%BE%E6%95%99%E6%A1%88/RUPjianjie1.pdf" target="_blank" rel="external">统一软件开发过程(RUP)简介-王立福</a></li>
@@ -428,8 +496,11 @@
 <li>技术优雅，可持续支持软件的发展与进化。</li>
 <li>产品定位清晰，资料完善，无明显使用缺陷。</li>
 </ul>
-<h2 id="软件开发过程模型"><a href="#软件开发过程模型" class="headerlink" title="软件开发过程模型"></a>软件开发过程模型</h2><p><strong>CMMI五个级别</strong>：</p>
-<ul>
+<h2 id="软件开发过程模型"><a href="#软件开发过程模型" class="headerlink" title="软件开发过程模型"></a>软件开发过程模型</h2><ul>
+<li>过程（资产）建设在软件企业中的重要性<br>ISO-9000，CMMI 认证</li>
+<li>瀑布模型、增量模型、螺旋模型的优缺点<br>风险（需求），规模（工作量），工期的控制分析</li>
+</ul>
+<h3 id="CMMI五个级别"><a href="#CMMI五个级别" class="headerlink" title="CMMI五个级别"></a>CMMI五个级别</h3><ul>
 <li>初始级：无序，自发生产模式。</li>
 <li>可管理级：项目管理，过程纪律</li>
 <li>已定义级：标准化</li>
@@ -444,7 +515,7 @@
 <li>Level 4 – Quantitatively Managed: measured, controlled</li>
 <li>Level 5 – Optimizing: process improvement<br><img src="/images/notes-system-design/CMMI_en.png" alt="CMMI Model" title="Credit: Wikipedia" style="margin: auto;"></li>
 </ul>
-<p><strong>Waterfall Model 瀑布模型</strong><font color="#FF0000">★</font>  Idea-&gt;Analysis-&gt;Design-&gt;Development-&gt;Test-&gt;Final Product</p>
+<h3 id="Waterfall-Model-瀑布模型-★"><a href="#Waterfall-Model-瀑布模型-★" class="headerlink" title="Waterfall Model 瀑布模型 ★"></a>Waterfall Model 瀑布模型 <font color="red">★</font></h3><p>Idea-&gt;Analysis-&gt;Design-&gt;Development-&gt;Test-&gt;Final Product</p>
 <ul>
 <li><em>假设：</em> 需求是明确的，在短期内可获取每个阶段是无差错的</li>
 <li><em>优势：</em>定义了软件开发基本流程与活动</li>
@@ -456,61 +527,67 @@
 </li>
 <li><em>现象：</em>延期，项目不可控</li>
 </ul>
-<p><strong>增量模型</strong> </p>
-<ul>
+<h3 id="增量模型"><a href="#增量模型" class="headerlink" title="增量模型"></a>增量模型</h3><ul>
 <li><em>假设：</em>需求明确</li>
 <li><em>解决问题：</em>项目控制、团队组织</li>
 </ul>
-<p><strong>原型与螺旋模型</strong></p>
-<ul>
+<h3 id="原型与螺旋模型"><a href="#原型与螺旋模型" class="headerlink" title="原型与螺旋模型"></a>原型与螺旋模型</h3><ul>
 <li><em>假设：</em>需求随用户评估进化</li>
 <li><em>新问题：</em>迭代次数？不适合大团队。无法确定发布日期</li>
 </ul>
-<p><strong>迭代、敏捷开发</strong></p>
-<h2 id="Applying-UML-and-Patterns"><a href="#Applying-UML-and-Patterns" class="headerlink" title="Applying UML and Patterns"></a>Applying UML and Patterns</h2><p><strong>Unified Process</strong><font color="#FF0000">★</font>  统一过程 </p>
-<ul>
-<li>The process is <strong>scalable</strong>.</li>
-<li>The process is <strong>effective</strong>.</li>
+<p>—&gt; 迭代、敏捷开发</p>
+<h2 id="Chap-2-Iterative-Evolutionary-and-Agile"><a href="#Chap-2-Iterative-Evolutionary-and-Agile" class="headerlink" title="Chap 2 Iterative, Evolutionary, and Agile"></a>Chap 2 Iterative, Evolutionary, and Agile</h2><p>迭代、敏捷开发是OOAD的关键“最佳实践”</p>
+<h3 id="Unified-Process-★-统一过程"><a href="#Unified-Process-★-统一过程" class="headerlink" title="Unified Process ★  统一过程"></a>Unified Process <font color="red">★</font>  统一过程</h3><ul>
+<li>The Unified Process (UP) represents a mainstream approach for software development across the spectrum of project scales.</li>
+<li>The process is <strong>scalable</strong>: you need not use the entire framework of the process for every project, only those that are effective.</li>
+<li>The process is <strong>effective</strong>: it has been successfully employed on a large population of projects.</li>
 <li>Improves <strong>productivity</strong> through use of practical methods that you’ve probably used already (but didn’t know it).</li>
-<li>Iterative and incremental approach <strong>allows start of work with incomplete, imperfect knowledge.</strong></li>
+<li>Iterative and incremental approach <font color="red">allows start of work with incomplete, imperfect knowledge.</font></li>
 </ul>
-<p><strong>Unified Process Workflows</strong><font color="#FF0000">★★</font> </p>
-<ul>
+<h3 id="Unified-Process-Workflows-★★"><a href="#Unified-Process-Workflows-★★" class="headerlink" title="Unified Process Workflows ★★"></a>Unified Process Workflows <font color="red">★★</font></h3><ul>
+<li>Workflows define a set of activities that are performed</li>
+<li>Workflows cut across the phases, but with different levels of emphasis in each phase</li>
+<li>The core workflows<ul>
 <li>Business Modeling.业务模型</li>
 <li>Requirements Analysis</li>
 <li>Design</li>
 <li>Implementation</li>
 <li>Test and Integration</li>
 </ul>
-<p><strong>Use-Case-Driven</strong><font color="#FF0000">★★</font> means the development team employs the use cases from requirements gathering through code and test.</p>
-<ul>
-<li>A prose representation of a <em>sequence of actions</em></li>
-<li>Actions are performed by one or more actors <em>(human or nonhuman)<br>and the system</em> itself</li>
-<li>These actions lead to <em>valuable results</em> for one or more of the<br>actors—helping the actors <em>to achieve their goals</em></li>
+</li>
 </ul>
-<p><strong>Architecture Centric:</strong><font color="#FF0000">★★</font> software architecture provides the central point around which all other development evolves. Software architecture captures decisions about:</p>
-<ul>
-<li>The overall structure of the software system</li>
-<li>The structural elements of the system and their interfaces</li>
-<li>The collaborations among these structural elements and their expected behavior</li>
+<h3 id="Use-Case-Driven-★★"><a href="#Use-Case-Driven-★★" class="headerlink" title="Use-Case-Driven ★★"></a>Use-Case-Driven <font color="red">★★</font></h3><ul>
+<li>Use case<ul>
+<li>A <em>prose</em> representation of a <font color="red">sequence of actions</font></li>
+<li>Actions are performed by one or more actors <font color="red">(human or nonhuman)<br>and the system</font> itself</li>
+<li>These actions lead to <font color="red">valuable results</font> for one or more of the actors—helping the actors <font color="red">to achieve their goals</font></li>
 </ul>
-<p><strong>Iterative and Evolutionary</strong><font color="#FF0000">★★</font> </p>
+</li>
+<li>Use cases are expressed from the perspective of the users, in natural language, and should be understandable by all stakeholders</li>
+<li><strong><em>Use-case-driven</em> means the development team employs the use cases from requirements gathering through code and test.</strong></li>
+</ul>
+<h3 id="Architecture-Centric-★★"><a href="#Architecture-Centric-★★" class="headerlink" title="Architecture Centric ★★"></a>Architecture Centric <font color="red">★★</font></h3><p>Architecture-centric: software architecture provides the central point around which all other development evolves. Software architecture captures decisions about:</p>
+<p>Software architecture captures decisions about:</p>
 <ul>
+<li>The <strong>overall</strong> structure of the software system</li>
+<li>The structural elements of the system and their <strong>interfaces</strong></li>
+<li>The <strong>collaborations</strong> among these structural elements and their expected behavior</li>
+</ul>
+<h3 id="Iterative-and-Evolutionary-★★"><a href="#Iterative-and-Evolutionary-★★" class="headerlink" title="Iterative and Evolutionary ★★"></a>Iterative and Evolutionary <font color="red">★★</font></h3><ul>
 <li>An iterative and evolutionary approach allows start of development with <strong>incomplete, imperfect knowledge</strong></li>
 <li>Iterative and evolutionary the following advantages<ul>
 <li>Logical <strong>progress</strong> toward a robust architecture（逐步趋向稳定）</li>
-<li>Effective management of changing requirements（有效管理需求变化）</li>
+<li>Effective management of <strong>changing requirements</strong>（有效管理需求变化）</li>
 <li>Continuous integration（持续集成）</li>
-<li>Early understanding of the system (‘Hello world!’ effect)（尽早接触整个系统）</li>
+<li>Early understanding of the system (<strong>‘Hello world!’ effect</strong>)（尽早接触整个系统）</li>
 <li>Ongoing risk assessment（在线风险评估）</li>
 </ul>
 </li>
 </ul>
 <p>Iterations are fixed in length, or timeboxed.（固定周期）量化管理的需求</p>
 <p><img src="/images/notes-system-design/2-1迭代和进化式开发.png" alt="2-1 迭代和进化式开发" title="Credit: 《UML和模式识别》" style="width: 95%; margin: auto;"></p>
-<p><strong>Agile Methods and Attitudes</strong></p>
-<ul>
-<li>The Agile Manifesto <font color="#FF0000">★</font> <ul>
+<h3 id="Agile-Methods-and-Attitudes-★"><a href="#Agile-Methods-and-Attitudes-★" class="headerlink" title="Agile Methods and Attitudes ★"></a>Agile Methods and Attitudes <font color="red">★</font></h3><ul>
+<li>The Agile Manifesto 敏捷宣言<ul>
 <li>Individuals and interactions over processes and tools</li>
 <li>Working software over comprehensive documentation</li>
 <li>Customer collaboration over contract negotiation</li>
@@ -518,22 +595,23 @@
 </ul>
 </li>
 <li>The Agile Principles<ul>
-<li>Our highest priority is to satisfy the customer through early and continuous delivery of valuable software. <font color="#FF0000">★</font> </li>
-<li>Welcome changing requirements, even late in development <font color="#FF0000">★</font></li>
+<li><font color="red">Our highest priority is to satisfy the customer through early and continuous delivery of valuable software.</font> </li>
+<li><font color="red">Welcome changing requirements, even late in development</font></li>
+<li>…</li>
 </ul>
 </li>
 </ul>
-<p><strong>Agile Modeling</strong></p>
-<ul>
-<li>Adopting an agile method does not mean avoiding any modeling <font color="#FF0000">★</font></li>
-<li>The purpose of modeling and models is primarily to support understanding and communication, not documentation. <font color="#FF0000">★</font></li>
-<li>Don’t model or apply the UML to all or most of the software design. <font color="#FF0000">★</font></li>
-<li>Know that all models will be inaccurate, and the final code or design different sometimes dramatically different than the model. <font color="#FF0000">★</font></li>
+<h3 id="Agile-Modeling-★"><a href="#Agile-Modeling-★" class="headerlink" title="Agile Modeling ★"></a>Agile Modeling <font color="red">★</font></h3><ul>
+<li><font color="red">Adopting an agile method does not mean avoiding any modeling </font></li>
+<li><font color="red">The purpose of modeling and models is primarily to support understanding and communication, not documentation. </font></li>
+<li><font color="red">Don’t model or apply the UML to all or most of the software design. </font></li>
+<li><font color="red">Know that all models will be inaccurate, and the final code or design different sometimes dramatically different than the model. </font></li>
+<li>…</li>
 </ul>
-<p><strong>Artifacts, Workers, and Activities</strong></p>
-<ul>
-<li>An artifact is a piece of information that is used as input to, changed by, or output from a process <font color="#FF0000">★</font> </li>
-<li>Examples include: <font color="#FF0000">★</font> <ul>
+<h3 id="Unified-Process-Phases-★"><a href="#Unified-Process-Phases-★" class="headerlink" title="Unified Process Phases ★"></a>Unified Process Phases <font color="red">★</font></h3><p><img src="/images/notes-system-design/unified-process-phases.jpg" alt=""></p>
+<h3 id="Artifacts-Workers-and-Activities-★"><a href="#Artifacts-Workers-and-Activities-★" class="headerlink" title="Artifacts, Workers, and Activities ★"></a>Artifacts, Workers, and Activities <font color="red">★</font></h3><ul>
+<li>An <strong>artifact</strong> is a piece of information that is used as input to, changed by, or output from a process </li>
+<li>Examples include: <ul>
 <li>Models — use-case, domain, and design</li>
 <li>Model elements—use case, domain class, design class</li>
 <li>Diagrams and documents</li>
@@ -542,13 +620,13 @@
 </ul>
 </li>
 <li>Some important distinctions:<ul>
-<li>Workers participate in the development of the system <font color="#FF0000">★</font> </li>
-<li>Actors are outside the system and have usage relationships with the system <font color="#FF0000">★</font></li>
-<li>Stakeholders encompass both actors and workers, as well as others involved with the project <font color="#FF0000">★</font></li>
+<li><strong>Workers</strong> participate in the development of the system </li>
+<li><strong>Actors</strong> are outside the system and have usage relationships with the system</li>
+<li><strong>Stakeholders</strong> encompass both actors and workers, as well as others involved with the project</li>
 </ul>
 </li>
 </ul>
-<h3 id="Summary"><a href="#Summary" class="headerlink" title="Summary =="></a>Summary <font color="#FF0000">==</font></h3><h2 id="Homework2"><a href="#Homework2" class="headerlink" title="Homework2"></a>Homework2</h2><h3 id="CMU与美国国防部合作提出CMM-CMMI模型，解决了美国国防部什么问题？它对软件产业的作用是什么？"><a href="#CMU与美国国防部合作提出CMM-CMMI模型，解决了美国国防部什么问题？它对软件产业的作用是什么？" class="headerlink" title="CMU与美国国防部合作提出CMM/CMMI模型，解决了美国国防部什么问题？它对软件产业的作用是什么？"></a>CMU与美国国防部合作提出CMM/CMMI模型，解决了美国国防部什么问题？它对软件产业的作用是什么？</h3><p>  (1) CMM/CMMI解决了美国政府和美国国防部能<strong>有效地评估软件承包商</strong>的问题。<br>  CMM（CMMI是SEI于2000年发布的CMM的新版本）是“软件能力成熟度模型”的英文简写，该模型由美国卡内基-梅隆大学的软件工程研究所（简称SEI）受美国国防部委托，于1991年研究制定，初始的主要目的是为了评价美国国防部的软件合同承包组织的能力，后因为在软件企业应用CMM模型实施过程改进取得较大的成功，所以在全世界范围内被广泛使用。</p>
+<h2 id="Assignment"><a href="#Assignment" class="headerlink" title="Assignment"></a>Assignment</h2><h3 id="CMU与美国国防部合作提出CMM-CMMI模型，解决了美国国防部什么问题？它对软件产业的作用是什么？"><a href="#CMU与美国国防部合作提出CMM-CMMI模型，解决了美国国防部什么问题？它对软件产业的作用是什么？" class="headerlink" title="CMU与美国国防部合作提出CMM/CMMI模型，解决了美国国防部什么问题？它对软件产业的作用是什么？"></a>CMU与美国国防部合作提出CMM/CMMI模型，解决了美国国防部什么问题？它对软件产业的作用是什么？</h3><p>  (1) CMM/CMMI解决了美国政府和美国国防部能<strong>有效地评估软件承包商</strong>的问题。<br>  CMM（CMMI是SEI于2000年发布的CMM的新版本）是“软件能力成熟度模型”的英文简写，该模型由美国卡内基-梅隆大学的软件工程研究所（简称SEI）受美国国防部委托，于1991年研究制定，初始的主要目的是为了评价美国国防部的软件合同承包组织的能力，后因为在软件企业应用CMM模型实施过程改进取得较大的成功，所以在全世界范围内被广泛使用。</p>
 <p>  (2) 它对软件企业的作用是<strong>帮助软件企业对软件工程过程进行管理和改进，增强开发与改进能力，从而能按时地、不超预算地开发出高质量的软件</strong>。其所依据的想法是：只要集中精力持续努力去建立有效的软件工程过程的基础结构，不断进行管理的实践和过程的改进，就可以克服软件开发中的困难。CMMI为改进一个组织的各种过程提供了一个单一的集成化框架，新的集成模型框架消除了各个模型的不一致性，减少了模型间的重复，增加透明度和理解，建立了一个自动的、可扩展的框架。因而能够从总体上改进组织的质量和效率。CMMI主要关注点就是成本效益、明确重点、过程集中和灵活性四个方面。<br>  （参考自百度百科CMMI/CMI词条）</p>
 <h3 id="简述瀑布模型、增量模型、螺旋模型（含原型方法）的优缺点。"><a href="#简述瀑布模型、增量模型、螺旋模型（含原型方法）的优缺点。" class="headerlink" title="简述瀑布模型、增量模型、螺旋模型（含原型方法）的优缺点。"></a>简述瀑布模型、增量模型、螺旋模型（含原型方法）的优缺点。</h3><h4 id="瀑布模型"><a href="#瀑布模型" class="headerlink" title="瀑布模型"></a>瀑布模型</h4><ul>
 <li><em>优点：</em>定义了软件开发基本流程与活动</li>
@@ -559,7 +637,7 @@
 </ul>
 </li>
 </ul>
-<h4 id="增量模型"><a href="#增量模型" class="headerlink" title="增量模型"></a>增量模型</h4><ul>
+<h4 id="增量模型-1"><a href="#增量模型-1" class="headerlink" title="增量模型"></a>增量模型</h4><ul>
 <li><em>优点：</em><ul>
 <li>由于能够在较短的时间内向用户提交一些有用的工作产品，因此能够解决用户的一些急用功能</li>
 <li>由于每次只提交用户部分功能，用户有较充分的时间学习和适应新的产品</li>
@@ -573,7 +651,7 @@
 </ul>
 </li>
 </ul>
-<h4 id="原型与螺旋模型"><a href="#原型与螺旋模型" class="headerlink" title="原型与螺旋模型"></a>原型与螺旋模型</h4><ul>
+<h4 id="原型与螺旋模型-1"><a href="#原型与螺旋模型-1" class="headerlink" title="原型与螺旋模型"></a>原型与螺旋模型</h4><ul>
 <li><em>优点：</em><ul>
 <li>设计上的灵活性,可以在项目的各个阶段进行变更</li>
 <li>以小的分段来构建大型系统,使成本计算变得简单容易</li>
@@ -661,25 +739,208 @@
 <p>更多内容可参考<a href="http://www.infoq.com/resource/minibooks/agile-patterns-cn/zh/pdf/agile%20patterns%20book%20online.pdf" target="_blank" rel="external">《敏捷实践实施模式技术实践组合》</a>中的敏捷实施策略章节</p>
 <h3 id="（可集体讨论）选择一个可追溯到初始版本的软件，如“知乎”，你认为实现当初类似“stack-overflow”这类问答模式的软件，需要多少人，多少月？"><a href="#（可集体讨论）选择一个可追溯到初始版本的软件，如“知乎”，你认为实现当初类似“stack-overflow”这类问答模式的软件，需要多少人，多少月？" class="headerlink" title="（可集体讨论）选择一个可追溯到初始版本的软件，如“知乎”，你认为实现当初类似“stack-overflow”这类问答模式的软件，需要多少人，多少月？"></a>（可集体讨论）选择一个可追溯到初始版本的软件，如“知乎”，你认为实现当初类似“stack-overflow”这类问答模式的软件，需要多少人，多少月？</h3><p>在ArchSummit北京2014大会上，知乎联合创始人兼CTO李申申带来了知乎创业三年多来的首次全面技术分享（<a href="http://www.infoq.com/cn/news/2014/12/zhihu-architecture-evolution" target="_blank" rel="external">演讲内容整理</a>）：知乎在<em>2010年10月</em>真正开始动手做知乎这个产品时，包含李申申在内，最初只有<em>两位</em>工程师；到<em>2010年12月</em>上线时，工程师是<em>四个</em>。最初整个团队的精力全部放在产品功能的开发上，而其他方面，基本上能节约时间、能省的都用最简单的方法来解决，当然这在后期也带来了一些问题。在<em>2011年上半年</em>时，单机存储成为瓶颈，所以引入了分片，同时做了一致性。知乎最初是邀请制的，<em>2011年下半年</em>，知乎上线了申请注册，没有邀请码的用户也可以通过填写一些资料申请注册知乎。<br>知乎在<em>2013年</em>时每天有上百万的PV，页面渲染其实是计算密集型的，另外因为要获取数据，所以也有IO密集型的特点。这时开发团队就对页面进行了组件化，还升级了数据获取机制，知乎自己做了一套模板渲染开发框架——ZhihuNode。在<em>2014年</em>时，知乎在规模上是仅次于百度贴吧和豆瓣的中文互联网最大的UGC(用户生成内容)社区。<br>参考知乎的发展时间线，他们在2010年时从两人到四人历时约三个月上线了最初的产品，已经具有类似stack overflow的问答模式。现在2017年，技术在发展、自动化工具更加普遍易于使用、架构更加完善、可参考的发展模式更多、开发流程更加多样和完善，因此我认为时间人力不比当年多，实现当初类似“stack-overflow”这类问答模式的软件，需要<strong>四个人，三个月</strong>。</p>
 <hr>
-<h1 id="3-Inception-amp-Business-Modeling"><a href="#3-Inception-amp-Business-Modeling" class="headerlink" title="3 - Inception &amp; Business Modeling"></a>3 - Inception &amp; Business Modeling</h1><h1 id="7-Domain-Modeling"><a href="#7-Domain-Modeling" class="headerlink" title="7 - Domain Modeling"></a>7 - Domain Modeling</h1><h2 id="Assignment"><a href="#Assignment" class="headerlink" title="Assignment"></a>Assignment</h2><ol>
-<li>UML Domain Model</li>
-<li>数据库建模</li>
-<li>领域建模学习小结<ul>
+<p><a name="3"></a></p>
+<h1 id="Inception-amp-Business-Modeling"><a href="#Inception-amp-Business-Modeling" class="headerlink" title="Inception &amp; Business Modeling"></a>Inception &amp; Business Modeling</h1><h2 id="Courseware-2"><a href="#Courseware-2" class="headerlink" title="Courseware"></a>Courseware</h2><p><a href="http://ss.sysu.edu.cn/~pml/se305/2015sp/slides/LarmanOOAD_part2_C04-05.pdf" target="_blank" rel="external">Inception</a><br>(Chap 4,5 - Part II Inception)</p>
+<h2 id="Chap-4-Inception-is-Not-the-Requirements-Phase"><a href="#Chap-4-Inception-is-Not-the-Requirements-Phase" class="headerlink" title="Chap 4 Inception is Not the Requirements Phase"></a>Chap 4 Inception is Not the Requirements Phase</h2><p><strong>Inception Phase</strong> <font color="red">★★</font></p>
+<ul>
+<li>Inception phase: <font color="red">envision the product scope, vision, and business case.</font><br><strong>初始阶段</strong>是建立项目共同设想和基本范围的比较简短的起始步骤。初始阶段的目标不是定义所有需求，或产生可信的预算或项目计划<ul>
+<li>Buy and/or build this system?</li>
+<li>Rough unreliable range of cost ?</li>
+<li>Should we proceed or stop?</li>
+<li><font color="red">Do the stakeholders have basic agreement on the vision of the project,</font> and is it worth investing in serious investigation?</li>
+</ul>
+</li>
+<li>Most requirements analysis during the <strong>elaboration phase</strong>, in parallel with early production-quality programming and testing<br>大多数需求分析是在细化阶段进行的，并且伴以具有产品品质的早期编程和测试</li>
+<li>Inception phase should be relatively <strong>short</strong> for most projects. (one or a few weeks long)<br>初始阶段持续时间短</li>
+</ul>
+<h2 id="Chap-5-Evolutionary-Requirements"><a href="#Chap-5-Evolutionary-Requirements" class="headerlink" title="Chap 5 Evolutionary Requirements"></a>Chap 5 Evolutionary Requirements</h2><ul>
+<li>Requirement are a description of need or desired for a product. <font color="red">★</font><ul>
+<li><strong>Goal</strong> - to <strong>identify</strong> and <strong>document</strong> what is really needed, in a form that clearly communicates to the client and to development team members.<br>寻找、沟通和记录什么是真正需要的，并能够清楚地讲解给客户和开发团队的成员</li>
+<li><strong>Challenge</strong> - to define the requirement unambiguously.</li>
+</ul>
+</li>
+<li>In UP, requirements are categorized according to the FURPS+ model. <font color="red">★★</font><br>在统一过程中，需求按照“FURPS+”模型进行分类<ul>
+<li><strong>Functional</strong>: features, capability, security<br><strong>功能性</strong>：特性、功能、安全性</li>
+<li><strong>Usability</strong>: human factors, help, documentation<br><strong>可用性</strong>：人性化因素、帮助、文档</li>
+<li><strong>Reliability</strong>: frequency of failure, recoverability, predictability<br><strong>可靠性</strong>：故障频率、可恢复性、可预测性</li>
+<li><strong>Performance</strong>: response times, throughput, accuracy, availability, resource usage.<br><strong>性能</strong>：响应时间、吞吐量、准确性、有效性、资源利用率</li>
+<li><strong>Supportability</strong>: adaptability, maintainability, internationalization, configurability<br><strong>可支持性</strong>：适应性、可维护性、国际化、可配置性</li>
+</ul>
+</li>
+</ul>
+<hr>
+<p><a name="4"></a></p>
+<h1 id="UseCase-Modeling"><a href="#UseCase-Modeling" class="headerlink" title="UseCase Modeling"></a>UseCase Modeling</h1><h2 id="Courseware-3"><a href="#Courseware-3" class="headerlink" title="Courseware"></a>Courseware</h2><p><a href="http://ss.sysu.edu.cn/~pml/se305/2015sp/slides/LarmanOOAD_part2_C06.pdf" target="_blank" rel="external">UseCase Model</a><br>(Chap 6 Use Cases - Part II Inception)<br><a href="http://msdn.microsoft.com/zh-cn/library/ff183189.aspx" target="_blank" rel="external">微软项目建模实践</a><br><a href="http://ss.sysu.edu.cn/~pml/se305/2015sp/assignments/Asg_RH.pdf" target="_blank" rel="external">建模练习</a></p>
+<h2 id="Chap-6-Use-Cases"><a href="#Chap-6-Use-Cases" class="headerlink" title="Chap 6 Use Cases"></a>Chap 6 Use Cases</h2><h3 id="Actors-参与者-★★"><a href="#Actors-参与者-★★" class="headerlink" title="Actors(参与者) ★★"></a>Actors(参与者) <font color="red">★★</font></h3><ul>
+<li>Actor: external entity interacts (behavior) with system 参与者是具有某些行为的事物<ul>
+<li><strong>Primary actor</strong> has user goals fulfilled through using services. <em>Find user goals to drive the use cases.</em><br><strong>主要参与者</strong>：具有用户目标，并通过使用SuD服务完成。例如，收银员<em>用于发现驱动用例的用户目标</em></li>
+<li><strong>Supporting actor</strong> provides a service. Often a computer system, but could be an organization or person. <em>The purpose is to clarify external interfaces and protocols.</em><br><strong>协助参与者</strong>：为SuD提供服务（如信息服务）。自动付费授权服务即是一例。协助参与者通常是计算机系统，也可以是组织或人。<em>用于明确外部接口和协议</em></li>
+<li><strong>Offstage actor</strong> has an <em>interest</em> in the behavior of the use case, but is not primary or supporting.<br><strong>幕后参与者</strong>：在用例行为中具有影响或利益，但不是主要或协助参与者。例如，政府税收机构。<em>用于确保确定并满足所有必要的重要事务。如果不明确地对幕后参与者进行命名，则有时很容易忽略其影响或利益</em></li>
+</ul>
+</li>
+</ul>
+<h3 id="Use-Case-用例-★"><a href="#Use-Case-用例-★" class="headerlink" title="Use Case(用例) ★"></a>Use Case(用例) <font color="red">★</font></h3><ul>
+<li>Use case is a collection of related <strong>success and failure scenarios</strong> that describe an actor using a system to support a <strong>goal</strong>.<br>用例是一组相关的<strong>成功和失败场景</strong>集合，用来描述参与者如何使用系统来实现其<strong>目标</strong></li>
+<li>be <strong>text</strong> documents, not diagrams<br>用例是<strong>文本文档</strong>，而非图形</li>
+<li>Use case modeling is primarily an act of writing text, not drawing diagrams.<br>用力建模主要是编写文本的活动，而非制图</li>
+<li>There <strong>is nothing object-oriented about use cases</strong>;<br>用例<strong>不是面向对象</strong>的，编写用例时也不会进行OO分析。但这并不妨碍其有效性，用例可以被广泛应用。也就是说，</li>
+<li>Use cases are a key <strong>requirements</strong> input to classic OOA/D.<br>用例是经典OOA/D的关键<strong>需求</strong>输入</li>
+<li>be functional or behavioral requirements that indicate what the system will do. In terms of the FURPS+ requirements types, they <strong>emphasize the “F”</strong>, but can <strong>also</strong> be used for other types.<br>用例就是需求，主要是说明系统如何工作的功能性或行为需求。按照“FURPS+”需求类型，用例<strong>强调了“F”（功能性或行为性）</strong>，但<strong>也可以</strong>用于其他类型，特别是与用例紧密相关的那些类型。</li>
+</ul>
+<h3 id="Use-Case-Modeling-用例模型-★"><a href="#Use-Case-Modeling-用例模型-★" class="headerlink" title="Use Case Modeling(用例模型) ★"></a>Use Case Modeling(用例模型) <font color="red">★</font></h3><ul>
+<li>Be the set of all written use cases; it is a model of the <strong>black-box</strong> system’s functionality and environment.<br>所有书面用例的集合；系统功能性和环境的模型</li>
+<li>be <strong>not the only requirement</strong> artifact in the UP. There are also the Supplementary Specification, Glossary, Vision, and Business Rules.<br>在UP中<strong>不是唯一的需求制品</strong>。其他制品还有补充性规格说明、词汇表、设想和业务规则</li>
+<li>Use case modeling is primarily an act of writing <strong>text</strong>, not drawing diagrams.<br>主要是编写<strong>文本</strong>的活动，而非制图</li>
+<li>may optionally include a UML use case diagram to show the names of use cases and actors, and their relationships. This gives <font color="red">a nice <strong>context diagram</strong> of a system and its environment.</font><br>用例模型还可以包含UML用例图，以显示用例和参与者的名称及其关系。UML用例图可以<font color="red">为系统及其环境提供良好的<strong>语境图</strong></font></li>
+</ul>
+<h3 id="Three-Common-Use-Case-Formats-★"><a href="#Three-Common-Use-Case-Formats-★" class="headerlink" title="Three Common Use Case Formats ★"></a>Three Common Use Case Formats <font color="red">★</font></h3><ul>
+<li>Brief (high level) 摘要<ul>
+<li>Terse one-paragraph <strong>summary</strong>, usually of the main success scenario.<br>简洁的一段式<strong>概要</strong>，通常用于主成功场景</li>
+<li>During <strong>early requirements analysis</strong>, to get a quick sense of subject and scope. May take only a few minutes to create.<br>在<strong>早期需求分析</strong>快速了解主题和范围</li>
+</ul>
+</li>
+<li>Casual 非正式/简便格式<ul>
+<li>Informal paragraph format.<br>非正式的段落格式。用几个段落覆盖不同场景</li>
+</ul>
+</li>
+<li>Fully 详述<ul>
+<li>All steps and variations are written in detail, and there are supporting sections, such as preconditions and success guarantees.<br>详细编写所有步骤及各种变化，同时具有补充部分，如前置条件和成功保证。</li>
+<li>After many use cases have been identified and written in a brief format, then <strong>during the first requirements workshop a few (such as 10%)</strong> of the <strong>architecturally significant</strong> and <strong>high-value use cases</strong> are written in detail.<br>确定并以摘要形式编写了大量用例后，在<strong>第一次需求讨论会中，详细地编写其中少量（例如10%）的具有重要架构意义和高价值的用例</strong></li>
+</ul>
+</li>
+</ul>
+<p><strong>Fully Use Case Template</strong><br>中文书：P55-59<br><img src="/images/notes-system-design/fully-use-case-template.jpg" alt="fully-use-case-template.jpg"></p>
+<h3 id="Guideline-How-to-Write-Use-Cases-★"><a href="#Guideline-How-to-Write-Use-Cases-★" class="headerlink" title="Guideline: How to Write Use Cases ★"></a>Guideline: How to Write Use Cases <font color="red">★</font></h3><ul>
+<li>Write in an Essential UI-Free Style. During <strong>early requirements work</strong>, “keep the user interface out, focus on intent.”<br>以本质风格编写用例，摒除用户界面并且关注参与者的意图</li>
+<li>Write Terse Use Cases. Delete “noise” words<br>编写简洁的用例，删除“噪音”词汇</li>
+<li>Write Black-Box Use Cases. do not describe the internal workings of the system, its components, or design.<br>写黑盒用例：不对系统内部工作、构件或设计进行描述</li>
+<li>Take an Actor and Actor-Goal Perspective<br>采用参与者和参与者目标的视点</li>
+</ul>
+<h3 id="Guideline-How-to-Find-Use-Cases-★★★"><a href="#Guideline-How-to-Find-Use-Cases-★★★" class="headerlink" title="Guideline: How to Find Use Cases ★★★"></a>Guideline: How to Find Use Cases <font color="red">★★★</font></h3><p>Use cases are defined to satisfy the goals of the primary actors. The basic procedure is:<br>为满足主要参与者的目标而定义用例。因此，基本的过程如下：</p>
+<ol>
+<li>Choose the <strong>system boundary</strong>.<br>选择<strong>系统边界</strong></li>
+<li>Identify the primary <strong>actors</strong> – that have goals fulfilled through using services of the system.<br>确定主要<strong>参与者</strong>——通过使用系统地服务实现其目标的那些人或事物</li>
+<li>Identify <strong>the goals</strong> for each primary actor.<br>确定每个主要参与者的<strong>目标</strong></li>
+<li>Define use cases that satisfy user goals; name them according to their goal.<br>user-goal level use cases will be <strong>one-to-one</strong> with user goals.<br>定义满足用户目标的用例，根据其目标对用例命名。<strong>通常</strong>，用户目标级别的用例和用户目标是<strong>一一对应</strong>的。</li>
+</ol>
+<h2 id="应用UML：用例图"><a href="#应用UML：用例图" class="headerlink" title="应用UML：用例图"></a>应用UML：用例图</h2><p>用例图是一种优秀的系统<strong>语境图</strong>；也就是说，用例图能够展示系统边界、位于边界之外的事物以及系统如何被使用。用例图可以作为沟通的工具，用以概括系统及其参与者的行为。<br><img src="/images/notes-system-design/usecase6-3.png" alt="部分用例语境图" title="NextGen系统的部分用例语境图" style="width: 70%;"></p>
+<h2 id="应用UML：活动图-★★★"><a href="#应用UML：活动图-★★★" class="headerlink" title="应用UML：活动图 ★★★"></a>应用UML：活动图 <font color="red">★★★</font></h2><p>有助于使工作流和业务过程可视化的图<br><img src="/images/notes-system-design/uml-activity.jpg" alt="UML活动图基本符号" title="UML活动图基本符号" style="width: 70%;"></p>
+<h2 id="应用UML：状态图"><a href="#应用UML：状态图" class="headerlink" title="应用UML：状态图"></a>应用UML：状态图</h2><hr>
+<p><a name="5"></a></p>
+<h1 id="Domain-Modeling"><a href="#Domain-Modeling" class="headerlink" title="Domain Modeling"></a>Domain Modeling</h1><h2 id="Courseware-4"><a href="#Courseware-4" class="headerlink" title="Courseware"></a>Courseware</h2><p><a href="http://ss.sysu.edu.cn/~pml/se305/2015sp/slides/LarmanOOAD_part2_C06.pdf" target="_blank" rel="external">Domain Model</a><br>(Part III Elaboration Iteration I – Basic)</p>
+<h2 id="Introduction-★"><a href="#Introduction-★" class="headerlink" title="Introduction ★"></a>Introduction <font color="red">★</font></h2><ul>
+<li>A domain model（领域模型）<ul>
+<li>the most important and classic model in OO analysis.<br>OO分析中最重要和经典的模型</li>
+<li>be a visual representation of conceptual classes or <strong>real situation objects</strong> in a domain.<br>对领域内的概念类或<strong>现实世界中对象</strong>的可视化表示（而非软件对象的表示）</li>
+<li>Also called <strong>conceptual models</strong>, <strong>domain object models</strong>, and analysis object models.<br>也成为<strong>概念模型</strong>、<strong>领域对象模型</strong>和分析对象模型</li>
+<li>“focusing on explaining ‘things’ and products important to a business domain”<br>“专用于解释业务领域中重要的‘事物’和产品”</li>
+</ul>
+</li>
+<li>Guideline（准则）<ul>
+<li>Avoid a waterfall-mindset big-modeling effort to make a thorough or “correct” domain model<br>避免瀑布思维倾向，为完成详尽或“正确”的领域模型而进行大量建模工作。</li>
+<li>it won’t ever be either, and such over-modeling efforts lead to analysis paralysis, with little or no return on the investment.<br>过量的建模工作反而会导致<em>分析停滞</em>，这种调查几乎不会有什么回报</li>
+</ul>
+</li>
+</ul>
+<h2 id="Domain-Model"><a href="#Domain-Model" class="headerlink" title="Domain Model"></a>Domain Model</h2><ul>
+<li>It provides a conceptual perspective. <font color="red">★★</font> 它提供了概念透视图<ul>
+<li>domain objects or conceptual classes 领域对象或概念类</li>
+<li>associations between conceptual classes 概念类之间的关联</li>
+<li>attributes of conceptual classes 概念类的属性</li>
+</ul>
+</li>
+<li>Following elements are <strong>not</strong> suitable in a domain model <font color="red">★★</font><ul>
+<li>Software artifacts, such as a window or a database, unless the domain being modeled is of software concepts, such as a model of graphical user interfaces.<br>软件制品，例如窗口或数据库，除非已建模的领域模型是针对软件概念的，如图形化用户界面的模型</li>
+<li>Responsibilities or methods. 指责或方法</li>
+</ul>
+</li>
+<li>A domain model shows real-situation conceptual classes, not software classes <font color="red">★</font><br>领域模型表示真实世界概念类，不是软件类<br><img src="/images/notes-system-design/domain-model-real.png" alt=""></li>
+<li>A domain model does not show software artifacts or classes <font color="red">★</font><br>领域模型并非软件制品或类<br><img src="/images/notes-system-design/domain-model-avoid.png" alt=""></li>
+<li>A conceptual class is an idea, thing, or object. <font color="red">★</font> 概念类是思想、事物或对象<ul>
+<li><strong>Symbol</strong> words or images representing a conceptual class<br><strong>符号</strong>：表示概念类的词语或图形</li>
+<li><strong>Intension</strong> the definition of a conceptual class.<br><strong>内涵</strong>：概念类的定义</li>
+<li><strong>Extension</strong> the set of examples to which the conceptual class applies<br><strong>外延</strong>：概念类所使用的一组示例</li>
+</ul>
+</li>
+</ul>
+<h2 id="Guideline"><a href="#Guideline" class="headerlink" title="Guideline"></a>Guideline</h2><h3 id="Create-a-Domain-Model"><a href="#Create-a-Domain-Model" class="headerlink" title="Create a Domain Model"></a>Create a Domain Model</h3><ul>
+<li>Bounded by the current iteration requirements under design <font color="red">★★★</font> 以当前迭代中所要设计的需求为界<ul>
+<li>Find the conceptual classes. 寻找概念类</li>
+<li>Draw them as classes in a UML class diagram. 将其绘制为UML类图中的类</li>
+<li>Add the association <strong>necessary</strong> to record relationships for which there is a need to preserve some memory. 添加关联</li>
+<li>Add the attributes <strong>necessary</strong> to fulfill the information requirements. 添加属性</li>
+</ul>
+</li>
+</ul>
+<h3 id="Find-Conceptual-Classes-★★"><a href="#Find-Conceptual-Classes-★★" class="headerlink" title="Find Conceptual Classes ★★"></a>Find Conceptual Classes <font color="red">★★</font></h3><p>找到概念类的三条策略</p>
+<ol>
+<li>Reuse or modify existing models. 重用和修改现有的模型</li>
+<li>Use a category list. 使用分类列表</li>
+<li>Identify noun phrases from the case text 通过识别名词短语寻找概念类<ul>
+<li>Identify the nouns and noun phrases in textual descriptions of a domain, and consider them as candidate conceptual classes or attributes<br>在对领域的文本性描述中识别名词和名词短语，将其作为候选的概念类或属性</li>
+<li>Some of these noun phrases may refer to conceptual classes that are ignored in this iteration, and some may be simply attributes of conceptual classes.<br>有些名词所指的概念类可能会在本次迭代中忽略，还有一些可能只是概念类的属性</li>
+<li>A weakness of this approach is the imprecision of natural language; different noun phrases may represent the same conceptual class or attribute, among other ambiguities.<br>弱点：自然语言的不准确性。不同名词短语可能表示同一概念类或属性，此外可能还有歧义</li>
+</ul>
+</li>
+</ol>
+<h3 id="Report-Objects-Include-‘Receipt’-in-the-Model-★★"><a href="#Report-Objects-Include-‘Receipt’-in-the-Model-★★" class="headerlink" title="Report Objects Include ‘Receipt’ in the Model ★★"></a>Report Objects Include ‘Receipt’ in the Model <font color="red">★★</font></h3><p>报表对象——模型中是否要包含“票据”</p>
+<ul>
+<li>Receipt is a noteworthy term in the POS domain. But perhaps it’s only a report of a sale and payment, and duplicate information. Two factors to consider<ul>
+<li><strong>Exclude it:</strong> Showing a report of other information in a domain model is not useful since all its information is <strong>derived or duplicated</strong> from other sources.<br>排除：在领域模型中显示其他信息的报表没有意义，因为其所有信息都是源于或复制于其他信息源的</li>
+<li><strong>Include it:</strong> it has a special role in terms of the business rules: It confers the right to the bearer of the receipt to return bought items.<br>包含：就业务规则而言，它有特殊的作用：通常持有（纸质）票据的人有退货的权利</li>
+</ul>
+</li>
+<li>Since <strong>item returns</strong> are not being considered in this iteration, Receipt will be excluded.<br>因为在本次迭代中没有考虑<strong>退货</strong>，所以不应该包含票据。在解决处理退货用例的迭代中再考虑将其包含在内</li>
+</ul>
+<h3 id="A-Common-Mistake-with-Attributes-vs-Classes-★★"><a href="#A-Common-Mistake-with-Attributes-vs-Classes-★★" class="headerlink" title="A Common Mistake with Attributes vs. Classes ★★"></a>A Common Mistake with Attributes vs. Classes <font color="red">★★</font></h3><p>If we do not think of some conceptual class X as a number or text in the real world, X is probably a conceptual class, not an attribute.<br>如果我们认为某概念类X<strong>不是现实世界中的数字或文本</strong>，那么X可能是<strong>概念类</strong>而不是属性<br><img src="/images/notes-system-design/attr-vs-class.png" alt=""><br>In the real world, a store is not considered a number or text, the term suggests a legal entity, an organization, and something that occupies space. Therefore, Store should be a conceptual class.<br>在现实世界里，商店不会被认为是数字或文本，这一术语表示的是合法实体、组织和占据空间的事物。因此Store应该是概念类。</p>
+<h3 id="When-to-Model-with-‘Description’-Classes-★★"><a href="#When-to-Model-with-‘Description’-Classes-★★" class="headerlink" title="When to Model with ‘Description’ Classes ★★"></a>When to Model with ‘Description’ Classes <font color="red">★★</font></h3><p>何时使用“描述”类建模<br>A description class contains information that describes something else.<br>描述类包含描述其他事物的信息。</p>
+<ul>
+<li>需要有关商品或服务的描述，独立于任何商品或服务的现有实例</li>
+<li>删除其所描述事物的实例后，导致信息丢失，而这些信息是需要维护的，但是被错误地与所删除的事物联系起来</li>
+<li>减少冗余或重复信息</li>
+</ul>
+<p>例如，ProductDescription记录Item的价格、图片和文字描述</p>
+<ul>
+<li>Problems: if implemented in software similar to the domain model, it has duplicate data (space-inefficient, and error-prone).<br>如果软件实现模型类似于领域模型，则其中含有重复数据，这会降低空间利用效率并有可能产生错误，因为描述、价格和ID对于同一产品的每个Item实例来说都是重复的</li>
+<li>A particular Item may have a serial number; it represents a physical instance. A ProductDescription wouldn’t have a serial number<br>某个Item可能拥有序列号，用于表示其物理实例。ProductDescription则没有序列号</li>
+</ul>
+<p><img src="/images/notes-system-design/model-descr-class.png" alt=""><br>对象需要其他事物来记录其<em>描述</em>（规格说明）。为解决Item问题，需要ProductDescription类来记录商品的信息。ProductDescription并不代表Item，而是表示有关商品的描述信息。</p>
+<h2 id="Association-★"><a href="#Association-★" class="headerlink" title="Association ★"></a>Association <font color="red">★</font></h2><p>a relationship between classes (instances of those classes) that indicates <strong>some meaningful and interesting</strong> connection.<br><strong>关联</strong>是类的实例之间的关系，表示<strong>有意义和值得关注</strong>的连接<br>关联本质上是<strong>双向</strong>的，就是说无论从哪个类实例出发，到另一端的逻辑遍历都是可能的。这种遍历是春抽象的，与软件实体间的连接无关。可选的“阅读导向箭头”指示阅读关联名称的方向；但它并不表示可见性或导航的方向<br>应使用关联而不是属性将类型关联起来</p>
+<h3 id="Guideline-1"><a href="#Guideline-1" class="headerlink" title="Guideline"></a>Guideline</h3><ul>
+<li><strong>When to Show an Association</strong>: Associations imply knowledge of a relationship that needs to be preserved for some duration.<br>关联表示了需要持续一段时间的关系</li>
+<li><strong>Avoid Adding Many Associations</strong>: Many lines on the diagram will obscure it with “visual noise.”<br>避免加入大量关联：连线太多会产生“视觉干扰”，使图变得混乱</li>
+<li><strong>Name an association</strong>: based on a ClassName-VerbPhraseClassName format where the verb phrase creates a sequence that is readable and meaningful.<br>以“类名-动词短语-类名”的格式为关联命名，其中的动词短语构成了可读的和有意义的顺序<ul>
+<li>Association names should start with a capital letter, since an association represents a <em>classifier of links between instances</em>;<br>关联名称应该<strong>首字母大写</strong>，因为关联表示的是<em>实例之间链接的类元</em>。在UML中，类元应该首字母大写</li>
+<li>反例：Sale Paid-by CashPayment（没有增加意义），应改为Sale Uses CashPayment</li>
+<li>反例：Player Is-on Square（没有增加意义），应改为Player Has Square</li>
+</ul>
+</li>
+</ul>
+<h3 id="Perspectives-Will-the-Associations-Be-Implemented-In-Software"><a href="#Perspectives-Will-the-Associations-Be-Implemented-In-Software" class="headerlink" title="Perspectives: Will the Associations Be Implemented In Software?"></a>Perspectives: Will the Associations Be Implemented In Software?</h3><p>观点：关联是否会在软件中实现<br>During domain modeling, an association is not data flows, database foreign key relationships, instance variables, or object connections in software solution. It is meaningful in a <strong>purely conceptual perspective in the real domain</strong>.<br>在领域建模过程中，关联不是关于数据流、数据库外键联系、实例变量或软件方案中的对象链接的语句；关联声明的是<strong>针对现实领域从纯概念角度看有意义的关系</strong>。</p>
+<p>也就是说，这些关系的大部分将作为（设计模型和数据模型中的）导航和可见性路径在软件中加以实现。但是领域模型不是数据模型；添加关联是为了<strong>突出我们对重要关系的大致理解</strong>，而<strong>非记录对象或数据的结构</strong>。</p>
+<h3 id="Applying-UML-Roles"><a href="#Applying-UML-Roles" class="headerlink" title="Applying UML: Roles"></a>Applying UML: Roles</h3><p>Each end of an association is called a <em>role</em>. Roles may optionally have multiplicity expression, name, navigability.<br>关联的每一端称为<em>角色</em>。角色可具有多重性表达式、名称、导航。</p>
+<h2 id="Attributes"><a href="#Attributes" class="headerlink" title="Attributes"></a>Attributes</h2><p>An <strong>attribute</strong> is a logical data value of an object 属性是对象的逻辑数据值<br>没有属性的概念类是合法的。大部分属性应该是“简单”数据类型，例如数字和布尔。</p>
+<p><strong>Guideline: When to Show Attributes?</strong></p>
+<ul>
+<li>Include attributes that the requirements (e.g., use cases) <strong>suggest or imply a need</strong> to remember information.<br>当需求（例如，用例）建议或暗示需要记住信息时，引入属性</li>
+<li>e.g., a receipt (which reports the information of a sale) in the Process Sale use case normally includes a date and time, the store name and address, and the cashier ID<br>例如，在<em>处理销售</em>用例中的票据通常含有日期和时间、店名和地址以及收银员ID等<br><img src="/images/notes-system-design/attributes.png" alt=""></li>
+</ul>
+<h2 id="POS-Partial-Domain-Model-★★★"><a href="#POS-Partial-Domain-Model-★★★" class="headerlink" title="POS Partial Domain Model ★★★"></a>POS Partial Domain Model <font color="red">★★★</font></h2><p><img src="/images/notes-system-design/POS-Partial-Domain-Model.png" alt=""></p>
+<h2 id="Assignment-1"><a href="#Assignment-1" class="headerlink" title="Assignment"></a>Assignment</h2><p>领域建模学习小结</p>
+<ol>
 <li>简述领域模型在项目开发中的作用<br>参考<a href="http://www.infoq.com/cn/articles/ddd-in-practice" target="_blank" rel="external">领域驱动设计和开发实战</a>，领域模型在项目开发中的作用有<ul>
 <li>有助于团队创建一个业务部门与IT部门都能理解的通用模型，并用该模型来沟通业务需求、数据实体、过程模型。</li>
 <li>模型是模块化、可扩展、易于维护的，同时设计还反映了业务模型。</li>
 <li>提高了业务领域对象的可重用性和可测性。</li>
 </ul>
 </li>
-<li>简述数据库模型与领域模型的差异</li>
-</ul>
-</li>
-</ol>
+<li><p>简述数据库模型与领域模型的差异       </p>
 <blockquote>
-<p><strong>领域模型</strong>可以被看作是一个系统的概念模型，用于以可视化的形式描述系统中的各个实体及其之间的关系。领域模型记录了一个系统中的关键概念和词汇表，显示出了系统中的主要实体之间的关系，并确定了它们的重要的方法和属性。因此，对应于用例所描述的动态视图，领域模型提供了一种对整个系统的结构化的视图。领域模型的一个好处是描述并限制了系统边界。（<a href="https://zh.wikipedia.org/wiki/%E9%A2%86%E5%9F%9F%E6%A8%A1%E5%9E%8B" target="_blank" rel="external">wiki</a>）<br>模型是一种描述客观现实的抽象技术。数据模型(data model)是描述数据如何表示、如何访问的抽象模型，常用来定义特定领域的数据元素和数据元素之间的关系。在程序设计语言中，数据模型也常常称为数据结构。在数据库领域中建立的数据模型称为数据库模型。<strong>数据库模型</strong>(database model)是描述数据库结构和使用的方法和技术。（<a href="http://book.51cto.com/art/201007/209732.htm" target="_blank" rel="external">数据库模型和数据库建模</a>）</p>
+<p><strong>领域模型</strong>可以被看作是一个系统的概念模型，用于以可视化的形式描述系统中的各个实体及其之间的关系。领域模型记录了一个系统中的关键概念和词汇表，显示出了系统中的主要实体之间的关系，并确定了它们的重要的方法和属性。因此，对应于用例所描述的动态视图，领域模型提供了一种对整个系统的结构化的视图。领域模型的一个好处是描述并限制了系统边界。（<a href="https://zh.wikipedia.org/wiki/%E9%A2%86%E5%9F%9F%E6%A8%A1%E5%9E%8B" target="_blank" rel="external">wiki</a>）</p>
+<p>模型是一种描述客观现实的抽象技术。数据模型(data model)是描述数据如何表示、如何访问的抽象模型，常用来定义特定领域的数据元素和数据元素之间的关系。在程序设计语言中，数据模型也常常称为数据结构。在数据库领域中建立的数据模型称为数据库模型。<strong>数据库模型</strong>(database model)是描述数据库结构和使用的方法和技术。（<a href="http://book.51cto.com/art/201007/209732.htm" target="_blank" rel="external">数据库模型和数据库建模</a>）</p>
 </blockquote>
 <p>差异：领域模型是系统的结构化视图，而数据库模型是专指数据库的结构化视图。领域模型主要描述系统中各实体的关系，而数据库模型主要描述数据的表示、关系。</p>
-<ul>
+</li>
 <li>假设你主导软件数据设计评审，你认为需要哪些准备文档，会关注哪些要素<br>参考<a href="http://www.fx114.net/qa-152-138582.aspx" target="_blank" rel="external">数据库设计评审</a>：<ul>
 <li>数据库设计是否满足软件设计的一般要求？数据库设计是否与其他设计内容一致？</li>
 <li>设计是否充分考虑了新系统与现有系统的关系，与现有系统的接口是否被充分考虑？在数据库设计中应该充分考虑新系统与现有系统的关系，与现有系统的接口应被充分考虑。</li>
@@ -688,7 +949,7 @@
 <li>如果有移植的需求，那么是否对移植性作了充分的考虑？如果有移植需求，那么应该慎重使用函数、过程、触发器，并且要有单独的移植方案。</li>
 </ul>
 </li>
-</ul>
+</ol>
 
       
     </div>
@@ -729,8 +990,8 @@
 
           <div class="post-nav-prev post-nav-item">
             
-              <a href="/2017/03/16/assignment-software-testing/" rel="prev" title="[Assignment] Software Testing">
-                [Assignment] Software Testing <i class="fa fa-chevron-right"></i>
+              <a href="/2017/03/19/paperreading-color-transfer/" rel="prev" title="[PaperReading] Color Transfer between Images, Erik Reinhard et al, 2001">
+                [PaperReading] Color Transfer between Images, Erik Reinhard et al, 2001 <i class="fa fa-chevron-right"></i>
               </a>
             
           </div>
@@ -810,7 +1071,7 @@
           
             <div class="site-state-item site-state-posts">
               <a href="/archives">
-                <span class="site-state-item-count">17</span>
+                <span class="site-state-item-count">16</span>
                 <span class="site-state-item-name">posts</span>
               </a>
             </div>
@@ -860,7 +1121,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#1-Introduction-of-SE-amp-OOAD"><span class="nav-number">1.</span> <span class="nav-text">1 - Introduction of SE & OOAD</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#Courseware"><span class="nav-number">1.1.</span> <span class="nav-text">Courseware</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Key-Point-of-Software-Engineering★"><span class="nav-number">1.2.</span> <span class="nav-text">Key Point of Software Engineering★</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#Software-Engineering-Definition-★★★"><span class="nav-number">1.2.1.</span> <span class="nav-text">Software Engineering Definition ★★★</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#History-of-Software-Engineering"><span class="nav-number">1.2.2.</span> <span class="nav-text">History of Software Engineering</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Software-Engineering-Body-of-Knowledge"><span class="nav-number">1.2.3.</span> <span class="nav-text">Software Engineering Body of Knowledge</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Software-LifeCycle"><span class="nav-number">1.2.4.</span> <span class="nav-text">Software LifeCycle</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Software-Process-Improvement-for-Enterprise"><span class="nav-number">1.2.5.</span> <span class="nav-text">Software Process Improvement for Enterprise</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Key-Point-of-Courseware"><span class="nav-number">1.3.</span> <span class="nav-text">Key Point of Courseware</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#Software-Quality-amp-Custom-Experience"><span class="nav-number">1.3.1.</span> <span class="nav-text">Software Quality & Custom Experience</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Analysis-vs-design"><span class="nav-number">1.3.2.</span> <span class="nav-text">Analysis vs. design</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Object-vs-Class"><span class="nav-number">1.3.3.</span> <span class="nav-text">Object vs. Class</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Object-oriented-Analysis-and-Design"><span class="nav-number">1.3.4.</span> <span class="nav-text">Object-oriented Analysis and Design</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#UML"><span class="nav-number">1.3.5.</span> <span class="nav-text">UML</span></a></li></ol></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#2-UP-Unified-Process-and-Agile"><span class="nav-number">2.</span> <span class="nav-text">2 - UP Unified Process and Agile</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#Courseware-1"><span class="nav-number">2.1.</span> <span class="nav-text">Courseware</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#软件团队管理基础"><span class="nav-number">2.2.</span> <span class="nav-text">软件团队管理基础</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#知识分子的管理要点与艺术"><span class="nav-number">2.3.</span> <span class="nav-text">知识分子的管理要点与艺术</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#目标管理"><span class="nav-number">2.4.</span> <span class="nav-text">目标管理</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#软件团队组织模型"><span class="nav-number">2.5.</span> <span class="nav-text">软件团队组织模型</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#软件开发过程模型"><span class="nav-number">2.6.</span> <span class="nav-text">软件开发过程模型</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Applying-UML-and-Patterns"><span class="nav-number">2.7.</span> <span class="nav-text">Applying UML and Patterns</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#Summary"><span class="nav-number">2.7.1.</span> <span class="nav-text">Summary ==</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Homework2"><span class="nav-number">2.8.</span> <span class="nav-text">Homework2</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#CMU与美国国防部合作提出CMM-CMMI模型，解决了美国国防部什么问题？它对软件产业的作用是什么？"><span class="nav-number">2.8.1.</span> <span class="nav-text">CMU与美国国防部合作提出CMM/CMMI模型，解决了美国国防部什么问题？它对软件产业的作用是什么？</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#简述瀑布模型、增量模型、螺旋模型（含原型方法）的优缺点。"><span class="nav-number">2.8.2.</span> <span class="nav-text">简述瀑布模型、增量模型、螺旋模型（含原型方法）的优缺点。</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#瀑布模型"><span class="nav-number">2.8.2.1.</span> <span class="nav-text">瀑布模型</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#增量模型"><span class="nav-number">2.8.2.2.</span> <span class="nav-text">增量模型</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#原型与螺旋模型"><span class="nav-number">2.8.2.3.</span> <span class="nav-text">原型与螺旋模型</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#简述RUP的三大特点，其中哪些内容体现了用户驱动的开发，哪些内容体现风险驱动的开发？"><span class="nav-number">2.8.3.</span> <span class="nav-text">简述RUP的三大特点，其中哪些内容体现了用户驱动的开发，哪些内容体现风险驱动的开发？</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#以用户为驱动"><span class="nav-number">2.8.3.1.</span> <span class="nav-text">以用户为驱动</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#以体系结构为中心"><span class="nav-number">2.8.3.2.</span> <span class="nav-text">以体系结构为中心</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#迭代、增量式开发"><span class="nav-number">2.8.3.3.</span> <span class="nav-text">迭代、增量式开发</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#RUP四个阶段的划分准则是什么？关键的里程碑是什么？"><span class="nav-number">2.8.4.</span> <span class="nav-text">RUP四个阶段的划分准则是什么？关键的里程碑是什么？</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#IT项目管理中，“工期、质量、范围-内容”三个元素中，在合同固定条件下，哪个最容易与客户达成妥协？理由？"><span class="nav-number">2.8.5.</span> <span class="nav-text">IT项目管理中，“工期、质量、范围/内容”三个元素中，在合同固定条件下，哪个最容易与客户达成妥协？理由？</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#RUP为企业按固定节奏生产、固定周期发布软件产品提供了依据，为什么？"><span class="nav-number">2.8.6.</span> <span class="nav-text">RUP为企业按固定节奏生产、固定周期发布软件产品提供了依据，为什么？</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#（可集体讨论）讲述软件开发中-1-2个有效的敏捷实践，以及依据。"><span class="nav-number">2.8.7.</span> <span class="nav-text">（可集体讨论）讲述软件开发中 1-2个有效的敏捷实践，以及依据。</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#（可集体讨论）选择一个可追溯到初始版本的软件，如“知乎”，你认为实现当初类似“stack-overflow”这类问答模式的软件，需要多少人，多少月？"><span class="nav-number">2.8.8.</span> <span class="nav-text">（可集体讨论）选择一个可追溯到初始版本的软件，如“知乎”，你认为实现当初类似“stack-overflow”这类问答模式的软件，需要多少人，多少月？</span></a></li></ol></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#3-Inception-amp-Business-Modeling"><span class="nav-number">3.</span> <span class="nav-text">3 - Inception & Business Modeling</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#7-Domain-Modeling"><span class="nav-number">4.</span> <span class="nav-text">7 - Domain Modeling</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#Assignment"><span class="nav-number">4.1.</span> <span class="nav-text">Assignment</span></a></li></ol></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#Introduction-of-SE-amp-OOAD"><span class="nav-number">1.</span> <span class="nav-text">Introduction of SE & OOAD</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#Courseware"><span class="nav-number">1.1.</span> <span class="nav-text">Courseware</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Key-Point-of-Software-Engineering-★"><span class="nav-number">1.2.</span> <span class="nav-text">Key Point of Software Engineering ★</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#Software-Engineering-Definition-★★★"><span class="nav-number">1.2.1.</span> <span class="nav-text">Software Engineering Definition ★★★</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#History-of-Software-Engineering"><span class="nav-number">1.2.2.</span> <span class="nav-text">History of Software Engineering</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Software-Engineering-Body-of-Knowledge"><span class="nav-number">1.2.3.</span> <span class="nav-text">Software Engineering Body of Knowledge</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Software-LifeCycle"><span class="nav-number">1.2.4.</span> <span class="nav-text">Software LifeCycle</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Software-Process-Improvement-for-Enterprise"><span class="nav-number">1.2.5.</span> <span class="nav-text">Software Process Improvement for Enterprise</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Key-Point-of-Courseware"><span class="nav-number">1.3.</span> <span class="nav-text">Key Point of Courseware</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#Software-Quality-amp-Custom-Experience"><span class="nav-number">1.3.1.</span> <span class="nav-text">Software Quality & Custom Experience</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Analysis-vs-design-★"><span class="nav-number">1.3.2.</span> <span class="nav-text">Analysis vs. design ★</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Object-vs-Class"><span class="nav-number">1.3.3.</span> <span class="nav-text">Object vs. Class</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Chap-1-Object-oriented-Analysis-and-Design-★"><span class="nav-number">1.3.4.</span> <span class="nav-text">Chap 1 Object-oriented Analysis and Design ★</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#UML-Unified-Modeling-Language-★"><span class="nav-number">1.3.5.</span> <span class="nav-text">UML (Unified Modeling Language) ★</span></a></li></ol></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#UP-Unified-Process-and-Agile"><span class="nav-number">2.</span> <span class="nav-text">UP Unified Process and Agile</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#Courseware-1"><span class="nav-number">2.1.</span> <span class="nav-text">Courseware</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#软件团队管理基础"><span class="nav-number">2.2.</span> <span class="nav-text">软件团队管理基础</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#知识分子的管理要点与艺术"><span class="nav-number">2.3.</span> <span class="nav-text">知识分子的管理要点与艺术</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#目标管理"><span class="nav-number">2.4.</span> <span class="nav-text">目标管理</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#软件团队组织模型"><span class="nav-number">2.5.</span> <span class="nav-text">软件团队组织模型</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#软件开发过程模型"><span class="nav-number">2.6.</span> <span class="nav-text">软件开发过程模型</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#CMMI五个级别"><span class="nav-number">2.6.1.</span> <span class="nav-text">CMMI五个级别</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Waterfall-Model-瀑布模型-★"><span class="nav-number">2.6.2.</span> <span class="nav-text">Waterfall Model 瀑布模型 ★</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#增量模型"><span class="nav-number">2.6.3.</span> <span class="nav-text">增量模型</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#原型与螺旋模型"><span class="nav-number">2.6.4.</span> <span class="nav-text">原型与螺旋模型</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Chap-2-Iterative-Evolutionary-and-Agile"><span class="nav-number">2.7.</span> <span class="nav-text">Chap 2 Iterative, Evolutionary, and Agile</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#Unified-Process-★-统一过程"><span class="nav-number">2.7.1.</span> <span class="nav-text">Unified Process ★  统一过程</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Unified-Process-Workflows-★★"><span class="nav-number">2.7.2.</span> <span class="nav-text">Unified Process Workflows ★★</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Use-Case-Driven-★★"><span class="nav-number">2.7.3.</span> <span class="nav-text">Use-Case-Driven ★★</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Architecture-Centric-★★"><span class="nav-number">2.7.4.</span> <span class="nav-text">Architecture Centric ★★</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Iterative-and-Evolutionary-★★"><span class="nav-number">2.7.5.</span> <span class="nav-text">Iterative and Evolutionary ★★</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Agile-Methods-and-Attitudes-★"><span class="nav-number">2.7.6.</span> <span class="nav-text">Agile Methods and Attitudes ★</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Agile-Modeling-★"><span class="nav-number">2.7.7.</span> <span class="nav-text">Agile Modeling ★</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Unified-Process-Phases-★"><span class="nav-number">2.7.8.</span> <span class="nav-text">Unified Process Phases ★</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Artifacts-Workers-and-Activities-★"><span class="nav-number">2.7.9.</span> <span class="nav-text">Artifacts, Workers, and Activities ★</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Assignment"><span class="nav-number">2.8.</span> <span class="nav-text">Assignment</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#CMU与美国国防部合作提出CMM-CMMI模型，解决了美国国防部什么问题？它对软件产业的作用是什么？"><span class="nav-number">2.8.1.</span> <span class="nav-text">CMU与美国国防部合作提出CMM/CMMI模型，解决了美国国防部什么问题？它对软件产业的作用是什么？</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#简述瀑布模型、增量模型、螺旋模型（含原型方法）的优缺点。"><span class="nav-number">2.8.2.</span> <span class="nav-text">简述瀑布模型、增量模型、螺旋模型（含原型方法）的优缺点。</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#瀑布模型"><span class="nav-number">2.8.2.1.</span> <span class="nav-text">瀑布模型</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#增量模型-1"><span class="nav-number">2.8.2.2.</span> <span class="nav-text">增量模型</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#原型与螺旋模型-1"><span class="nav-number">2.8.2.3.</span> <span class="nav-text">原型与螺旋模型</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#简述RUP的三大特点，其中哪些内容体现了用户驱动的开发，哪些内容体现风险驱动的开发？"><span class="nav-number">2.8.3.</span> <span class="nav-text">简述RUP的三大特点，其中哪些内容体现了用户驱动的开发，哪些内容体现风险驱动的开发？</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#以用户为驱动"><span class="nav-number">2.8.3.1.</span> <span class="nav-text">以用户为驱动</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#以体系结构为中心"><span class="nav-number">2.8.3.2.</span> <span class="nav-text">以体系结构为中心</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#迭代、增量式开发"><span class="nav-number">2.8.3.3.</span> <span class="nav-text">迭代、增量式开发</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#RUP四个阶段的划分准则是什么？关键的里程碑是什么？"><span class="nav-number">2.8.4.</span> <span class="nav-text">RUP四个阶段的划分准则是什么？关键的里程碑是什么？</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#IT项目管理中，“工期、质量、范围-内容”三个元素中，在合同固定条件下，哪个最容易与客户达成妥协？理由？"><span class="nav-number">2.8.5.</span> <span class="nav-text">IT项目管理中，“工期、质量、范围/内容”三个元素中，在合同固定条件下，哪个最容易与客户达成妥协？理由？</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#RUP为企业按固定节奏生产、固定周期发布软件产品提供了依据，为什么？"><span class="nav-number">2.8.6.</span> <span class="nav-text">RUP为企业按固定节奏生产、固定周期发布软件产品提供了依据，为什么？</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#（可集体讨论）讲述软件开发中-1-2个有效的敏捷实践，以及依据。"><span class="nav-number">2.8.7.</span> <span class="nav-text">（可集体讨论）讲述软件开发中 1-2个有效的敏捷实践，以及依据。</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#（可集体讨论）选择一个可追溯到初始版本的软件，如“知乎”，你认为实现当初类似“stack-overflow”这类问答模式的软件，需要多少人，多少月？"><span class="nav-number">2.8.8.</span> <span class="nav-text">（可集体讨论）选择一个可追溯到初始版本的软件，如“知乎”，你认为实现当初类似“stack-overflow”这类问答模式的软件，需要多少人，多少月？</span></a></li></ol></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Inception-amp-Business-Modeling"><span class="nav-number">3.</span> <span class="nav-text">Inception & Business Modeling</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#Courseware-2"><span class="nav-number">3.1.</span> <span class="nav-text">Courseware</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Chap-4-Inception-is-Not-the-Requirements-Phase"><span class="nav-number">3.2.</span> <span class="nav-text">Chap 4 Inception is Not the Requirements Phase</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Chap-5-Evolutionary-Requirements"><span class="nav-number">3.3.</span> <span class="nav-text">Chap 5 Evolutionary Requirements</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#UseCase-Modeling"><span class="nav-number">4.</span> <span class="nav-text">UseCase Modeling</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#Courseware-3"><span class="nav-number">4.1.</span> <span class="nav-text">Courseware</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Chap-6-Use-Cases"><span class="nav-number">4.2.</span> <span class="nav-text">Chap 6 Use Cases</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#Actors-参与者-★★"><span class="nav-number">4.2.1.</span> <span class="nav-text">Actors(参与者) ★★</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Use-Case-用例-★"><span class="nav-number">4.2.2.</span> <span class="nav-text">Use Case(用例) ★</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Use-Case-Modeling-用例模型-★"><span class="nav-number">4.2.3.</span> <span class="nav-text">Use Case Modeling(用例模型) ★</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Three-Common-Use-Case-Formats-★"><span class="nav-number">4.2.4.</span> <span class="nav-text">Three Common Use Case Formats ★</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Guideline-How-to-Write-Use-Cases-★"><span class="nav-number">4.2.5.</span> <span class="nav-text">Guideline: How to Write Use Cases ★</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Guideline-How-to-Find-Use-Cases-★★★"><span class="nav-number">4.2.6.</span> <span class="nav-text">Guideline: How to Find Use Cases ★★★</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#应用UML：用例图"><span class="nav-number">4.3.</span> <span class="nav-text">应用UML：用例图</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#应用UML：活动图-★★★"><span class="nav-number">4.4.</span> <span class="nav-text">应用UML：活动图 ★★★</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#应用UML：状态图"><span class="nav-number">4.5.</span> <span class="nav-text">应用UML：状态图</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Domain-Modeling"><span class="nav-number">5.</span> <span class="nav-text">Domain Modeling</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#Courseware-4"><span class="nav-number">5.1.</span> <span class="nav-text">Courseware</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Introduction-★"><span class="nav-number">5.2.</span> <span class="nav-text">Introduction ★</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Domain-Model"><span class="nav-number">5.3.</span> <span class="nav-text">Domain Model</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Guideline"><span class="nav-number">5.4.</span> <span class="nav-text">Guideline</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#Create-a-Domain-Model"><span class="nav-number">5.4.1.</span> <span class="nav-text">Create a Domain Model</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Find-Conceptual-Classes-★★"><span class="nav-number">5.4.2.</span> <span class="nav-text">Find Conceptual Classes ★★</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Report-Objects-Include-‘Receipt’-in-the-Model-★★"><span class="nav-number">5.4.3.</span> <span class="nav-text">Report Objects Include ‘Receipt’ in the Model ★★</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#A-Common-Mistake-with-Attributes-vs-Classes-★★"><span class="nav-number">5.4.4.</span> <span class="nav-text">A Common Mistake with Attributes vs. Classes ★★</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#When-to-Model-with-‘Description’-Classes-★★"><span class="nav-number">5.4.5.</span> <span class="nav-text">When to Model with ‘Description’ Classes ★★</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Association-★"><span class="nav-number">5.5.</span> <span class="nav-text">Association ★</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#Guideline-1"><span class="nav-number">5.5.1.</span> <span class="nav-text">Guideline</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Perspectives-Will-the-Associations-Be-Implemented-In-Software"><span class="nav-number">5.5.2.</span> <span class="nav-text">Perspectives: Will the Associations Be Implemented In Software?</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Applying-UML-Roles"><span class="nav-number">5.5.3.</span> <span class="nav-text">Applying UML: Roles</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Attributes"><span class="nav-number">5.6.</span> <span class="nav-text">Attributes</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#POS-Partial-Domain-Model-★★★"><span class="nav-number">5.7.</span> <span class="nav-text">POS Partial Domain Model ★★★</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Assignment-1"><span class="nav-number">5.8.</span> <span class="nav-text">Assignment</span></a></li></ol></li></ol></div>
             
 
           </div>
