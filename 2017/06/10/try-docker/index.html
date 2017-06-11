@@ -1,0 +1,804 @@
+<!doctype html>
+
+
+
+  
+
+
+<html class="theme-next mist use-motion" lang="en">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
+
+
+
+
+  
+  
+  
+  
+
+  
+    
+    
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+    
+    
+    <link href="//fonts.googleapis.com/css?family=Lato:300,300italic,400,400italic,700,700italic&subset=latin,latin-ext" rel="stylesheet" type="text/css">
+  
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=5.1.0" rel="stylesheet" type="text/css" />
+
+
+  <meta name="keywords" content="Hexo, NexT" />
+
+
+
+
+
+
+
+
+  <link rel="shortcut icon" type="image/x-icon" href="/favicon.png?v=5.1.0" />
+
+
+
+
+
+
+<meta name="description" content="Dive into the basics of Docker and learn how to create a self-contained, shareable development environment with containers, images, Dockerfiles, and volumes.">
+<meta property="og:type" content="article">
+<meta property="og:title" content="[Web] Try Docker">
+<meta property="og:url" content="http://yoursite.com/2017/06/10/try-docker/index.html">
+<meta property="og:site_name" content="HYPJUDY">
+<meta property="og:description" content="Dive into the basics of Docker and learn how to create a self-contained, shareable development environment with containers, images, Dockerfiles, and volumes.">
+<meta property="og:image" content="http://yoursite.com/images/docker/docker.png">
+<meta property="og:image" content="http://yoursite.com/images/docker/containers.png">
+<meta property="og:image" content="http://yoursite.com/images/docker/docker-engine.png">
+<meta property="og:image" content="http://yoursite.com/images/docker/image-container.png">
+<meta property="og:image" content="http://yoursite.com/images/docker/dockerfiles.png">
+<meta property="og:image" content="http://yoursite.com/images/docker/persist-data-problem.png">
+<meta property="og:image" content="http://yoursite.com/images/docker/volumes.png">
+<meta property="og:updated_time" content="2017-06-10T12:43:29.988Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="[Web] Try Docker">
+<meta name="twitter:description" content="Dive into the basics of Docker and learn how to create a self-contained, shareable development environment with containers, images, Dockerfiles, and volumes.">
+<meta name="twitter:image" content="http://yoursite.com/images/docker/docker.png">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Mist',
+    sidebar: {"position":"left","display":"hide","offset":12,"offset_float":0,"b2t":false,"scrollpercent":false},
+    fancybox: true,
+    motion: true,
+    duoshuo: {
+      userId: 'undefined',
+      author: 'Author'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":20},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="http://yoursite.com/2017/06/10/try-docker/"/>
+
+
+
+
+
+  <title> [Web] Try Docker | HYPJUDY </title>
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="en">
+
+  
+
+
+
+
+<script>
+  (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+            (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+          m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+  })(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
+  ga('create', 'UA-96132499-1', 'auto');
+  ga('send', 'pageview');
+</script>
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+    
+  
+
+  <div class="container one-collumn sidebar-position-left page-post-detail ">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/"  class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">HYPJUDY</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle">What I cannot create, I do not understand.</p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
+            
+            Home
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
+            
+            Archives
+          </a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2017/06/10/try-docker/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="HYPJUDY">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.png">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="HYPJUDY">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                [Web] Try Docker
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Posted on</span>
+              
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2017-06-10T15:02:00+08:00">
+                2017-06-10
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+
+          
+            
+              <span class="post-comments-count">
+                <span class="post-meta-divider">|</span>
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-comment-o"></i>
+                </span>
+                <a href="/2017/06/10/try-docker/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count disqus-comment-count" data-disqus-identifier="2017/06/10/try-docker/" itemprop="commentCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <p>Dive into the <strong>basics of <a href="https://www.docker.com/" target="_blank" rel="external">Docker</a></strong> and learn how to <strong>create a self-contained, shareable development environment</strong> with <em>containers</em>, <em>images</em>, <em>Dockerfiles</em>, and <em>volumes</em>.<br><img src="/images/docker/docker.png" alt=""><br><a id="more"></a><br><em>Image credit: <a href="https://www.docker.com/what-docker" target="_blank" rel="external">What is Docker</a></em></p>
+<p>Here’s the <strong>notes</strong> of <a href="https://www.codeschool.com/courses/try-docker" target="_blank" rel="external">Try Docker</a>.<br>I recommend you click the link and enjoy the vivid course (with video lessons, coding challenges, and screencasts). Read this notes if you want to go through the course quickly or refer back to the keypoints.<br>Images credit: <a href="http://courseware.codeschool.com/try_docker/slides/CodeSchool-TryDocker.pdf" target="_blank" rel="external">slide of Try Docker</a>.</p>
+<h1 id="Containers-amp-Images"><a href="#Containers-amp-Images" class="headerlink" title="Containers &amp; Images"></a>Containers &amp; Images</h1><p>Learn how to use images to create Docker containers.</p>
+<h2 id="Concepts"><a href="#Concepts" class="headerlink" title="Concepts"></a>Concepts</h2><h3 id="Linux-containers"><a href="#Linux-containers" class="headerlink" title="Linux containers"></a>Linux containers</h3><p><strong>Linux containers are a way to create isolated environments that can run code while sharing a single operating system.</strong><br><img src="/images/docker/containers.png" alt=""><br>Containers will live <strong>on top of</strong> that base operating system and they can have their own code dependencies and application code inside of them, but each one of those containers will be <strong>completely isolated</strong> from any of the other ones that are running.<br>These containers have their own file system and useful parts of the operating system that you can customize and control while still sharing the largest parts of the operating system with your host. That means the conatiners are really <strong>small</strong> and therefore really <strong>fast</strong>.</p>
+<h3 id="Why-Docker"><a href="#Why-Docker" class="headerlink" title="Why Docker?"></a>Why Docker?</h3><p><strong>Docker is a tool that makes it much easier to manage Linux containers.</strong><br>That said, creating Linux containers isn’t easy and requires a lot of specialized knowledge of Unix operating systems, and that’s where Docker comes in.<br><img src="/images/docker/docker-engine.png" alt=""></p>
+<h3 id="How-Can-Docker-Help-Me"><a href="#How-Can-Docker-Help-Me" class="headerlink" title="How Can Docker Help Me?"></a>How Can Docker Help Me?</h3><ul>
+<li>Developers<ul>
+<li><strong>Create contained, controlled dev environment</strong> (Here we focus on this point)</li>
+<li>Share identical dev environment across team (creating a reproducible environment)</li>
+<li>Bug reporting (isolating the state of an application)</li>
+</ul>
+</li>
+<li>IT Ops<ul>
+<li>Testing</li>
+<li>Deployment</li>
+</ul>
+</li>
+</ul>
+<h3 id="Containers-amp-Images-1"><a href="#Containers-amp-Images-1" class="headerlink" title="Containers &amp; Images"></a>Containers &amp; Images</h3><p><strong>An image is a blueprint for creating a container.</strong><br><img src="/images/docker/image-container.png" alt=""><br>Containers are this <strong>light weight isolated section</strong> of a Linux operating system that can be filled up with code, like libraries and application code. Well images are <strong>prepackaged sets of instructions</strong>, kind of like blueprints, that can be used to <strong>build and run containers</strong>.<br>The reason images are so useful is that you can create a custom container and <strong>save the state</strong> of it as an image that can then be used to <strong>recreate the container</strong> exactly as described. You can even <strong>share</strong> images with other developers so that you can easily recreate an exact development across multiple people and computers on your team.<br>Docker publishes a bunch of <strong>pre-built images</strong> in the <a href="https://store.docker.com/" target="_blank" rel="external">Docker Store</a> and by default that’s where Docker will look when you try to start a new container based on one of those images.</p>
+<h2 id="Commands"><a href="#Commands" class="headerlink" title="Commands"></a>Commands</h2><h3 id="Running-a-Container"><a href="#Running-a-Container" class="headerlink" title="Running a Container"></a>Running a Container</h3><p>To start running a container, type <code>docker container run</code> followed by the <strong>name of the image</strong> used to make the container, then a colon <code>:</code> followed by the <strong>version number</strong> of the image used to make the container.<br>This container is the bare minimum OS plus the <em>Apache webserver</em>.</p>
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">$ docker container run httpd:2.4</div></pre></td></tr></table></figure>
+<h3 id="Mapping-Ports"><a href="#Mapping-Ports" class="headerlink" title="Mapping Ports"></a>Mapping Ports</h3><p>To access the default <code>index.html</code> page on that server by visiting <code>http://localhost:80/index.html</code>: Adding a <code>-p</code> flag with some port numbers after it to the <code>run</code> command.</p>
+<ul>
+<li>The <code>-p</code> means <strong>“publish ports”</strong>.</li>
+<li>The <strong>first</strong> number is the port on the host we want to <strong>open up</strong>.</li>
+<li>The <strong>second</strong> number is the port in the container we want to <strong>map it to</strong>.</li>
+<li>Port <code>80</code> is a <strong>standard port</strong> for handling web requests</li>
+</ul>
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">$ docker container run -p 80:80 httpd:2.4</div></pre></td></tr></table></figure>
+<h3 id="Accessing-a-Container"><a href="#Accessing-a-Container" class="headerlink" title="Accessing a Container"></a>Accessing a Container</h3><p>Each container gets a <strong>unique ID</strong>, and Docker also assigns them a <strong>random name</strong>. You can use either the container ID or the container name whenever you’re running a command that needs you to specify a container.</p>
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line">$ docker container ls</div><div class="line">CONTAINER ID        IMAGE               COMMAND              CREATED</div><div class="line"> STATUS              PORTS                  NAMES</div><div class="line">a8c267869b0b        httpd:2.4           <span class="string">"httpd-foreground"</span>   53 seconds ago</div><div class="line"> Up 52 seconds       0.0.0.0:9999-&gt;80/tcp   elegant_noether</div></pre></td></tr></table></figure>
+<p>The <code>docker container exec</code> command lets us run commands against a running container.</p>
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">$ docker container <span class="built_in">exec</span> elegant_noether du -mh</div></pre></td></tr></table></figure>
+<h3 id="Attaching-a-Shell-to-a-Container"><a href="#Attaching-a-Shell-to-a-Container" class="headerlink" title="Attaching a Shell to a Container"></a>Attaching a Shell to a Container</h3><p>Attach a shell to those containers and browse them just like they were a full operating system — which they kind of are.</p>
+<ul>
+<li>The <code>-i</code> and <code>-t</code> flags can be passed to the <code>exec</code> command to <strong>keep an interactive shell open</strong>.</li>
+<li><strong>Specify the shell you want to attach</strong> after the container ID. Here we’ll attach a standard Bash shell.</li>
+</ul>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">$ docker container exec -it elegant_noether /bin/bash</div><div class="line">root@a8c267869b0b:/usr/local/apache2# du -mh</div></pre></td></tr></table></figure>
+<p>Now we’re just navigating a normal Unix system, so any commands we type will <strong>run inside of that system</strong>. So we can use that same command <code>du -mh</code> we just ran with exec from inside the container.</p>
+<h3 id="Installing-Things-in-Containers"><a href="#Installing-Things-in-Containers" class="headerlink" title="Installing Things in Containers"></a>Installing Things in Containers</h3><p>Install new programs, or packages, that aren’t part of the base image.<br>Let’s install the <code>fortunes</code> package.</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line">$ docker container exec -it elegant_noether /bin/bash</div><div class="line">root@a8c267869b0b:/usr/local/apache2# apt-get install -y fortunes</div><div class="line">root@a8c267869b0b:/usr/local/apache2# /usr/games/fortune</div><div class="line">&quot;I found out why my car was humming.  It had forgotten the words.&quot;</div></pre></td></tr></table></figure>
+<p>If we see a random fortune displayed then we know the installation worked!</p>
+<h3 id="Update-the-ENV-in-a-Container"><a href="#Update-the-ENV-in-a-Container" class="headerlink" title="Update the ENV in a Container"></a>Update the ENV in a Container</h3><p>Update the <code>PATH</code> environment variable in the container so that we don’t have to type <code>/usr/games/</code> before the <code>fortune</code> command anymore.</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line">$ docker container exec -it elegant_noether /bin/bash</div><div class="line">root@a8c267869b0b:/usr/local/apache2# PATH=$PATH:/usr/games/</div><div class="line">root@a8c267869b0b:/usr/local/apache2# export PATH</div><div class="line">root@a8c267869b0b:/usr/local/apache2# fortune</div><div class="line">Offer limited to residents of the contiguous United States.</div></pre></td></tr></table></figure>
+<h1 id="Dockerfiles"><a href="#Dockerfiles" class="headerlink" title="Dockerfiles"></a>Dockerfiles</h1><p>Use Dockerfiles to configure images in a centralized and repeatable way.</p>
+<h2 id="Concepts-1"><a href="#Concepts-1" class="headerlink" title="Concepts"></a>Concepts</h2><p><strong>A Dockerfile is a specially formatted text file where you can add a list of instructions that will run and result in a new image that can be used to make a container.</strong><br>Creating containers from the command line works, but it quickly gets a little clunky the more customization that you need to do.<br><img src="/images/docker/dockerfiles.png" alt=""></p>
+<h2 id="Commands-1"><a href="#Commands-1" class="headerlink" title="Commands"></a>Commands</h2><h3 id="Customize-Dockerfile"><a href="#Customize-Dockerfile" class="headerlink" title="Customize Dockerfile"></a>Customize Dockerfile</h3><p>Use a Dockerfile to customize a base image before creating a container.</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line">FROM httpd:<span class="number">2.4</span> <span class="comment"># base the custom image off of version 2.4 of the httpd image</span></div><div class="line">EXPOSE <span class="number">80</span> <span class="comment"># expose port 80</span></div><div class="line">RUN apt-get update &amp;&amp; apt-get install -y fortunes <span class="comment"># install fortunes</span></div><div class="line">LABEL maintainer=<span class="string">"moby-dock@example.com"</span> <span class="comment">#  label the `maintainer` of this image.</span></div></pre></td></tr></table></figure>
+<ul>
+<li><em>Line 1:</em> The first line of a Dockerfile is usually <strong>the <code>FROM</code> keyword followed a base image name</strong>. Every other instruction in the Dockerfile following the <code>FROM</code> instruction will create a new image that blends together everything in the base <strong>plus</strong> the modifications we’re making in the rest of the Dockerfile.</li>
+<li><em>Line 2:</em> Next, we can use the Dockerfile to <strong>expose a port inside of its associated container</strong>. Note that we’ll still need to map ports between the host and container when we run <code>docker container run</code>, but this line will let the image know <strong>which ports inside of the container should become available</strong>.</li>
+<li><em>Line 3:</em> Remember how in the last level we had to <code>docker container exec</code> to install <code>fortunes</code>? Well, with a Dockerfile we can <strong>run any commands as the image is being built with the <code>RUN</code> command</strong>. Line 3 is a combination of</li>
+</ul>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">RUN apt-get update</div><div class="line">RUN apt-get install -y fortunes</div></pre></td></tr></table></figure>
+<ul>
+<li><em>Line 4:</em> Since we can distribute Dockerfiles to other developers, it’s a good idea to <strong>put our contact information in them</strong> with the <code>LABEL</code> instruction. <code>LABEL</code> accepts key-value pairs in the form of <code>key=&quot;value&quot;</code>.</li>
+</ul>
+<h3 id="Building-an-Image-From-a-Dockerfile"><a href="#Building-an-Image-From-a-Dockerfile" class="headerlink" title="Building an Image From a Dockerfile"></a>Building an Image From a Dockerfile</h3><p>Use that Dockerfile to <em>build a new image</em> with the <code>docker image build</code> command. The <code>--tag</code> command is a useful option to pass to <code>docker build</code> that lets us specify the <em>name of our new image</em> followed by a <em>version number</em>.<br>Note: End the command with a single <code>.</code> so it knows to look for the Dockerfile in the <strong>same folder</strong> that the command is run in.</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div></pre></td><td class="code"><pre><div class="line">$ docker image build --tag web-server:1.0 .</div><div class="line">Sending build context to Docker daemon  3.072kB</div><div class="line">Step 1/4 : FROM httpd:2.4</div><div class="line"> ---&gt; 278cd55ca6c5</div><div class="line">Step 2/4 : EXPOSE 80</div><div class="line"> ---&gt; Running in 3df6726122c6</div><div class="line"> ---&gt; 3928f2805894</div><div class="line">Removing intermediate container 3df6726122c6</div><div class="line">Step 3/4 : RUN apt-get update &amp;&amp; apt-get install -y fortunes</div><div class="line"> ---&gt; Running in 619f90d50e91</div><div class="line">Ign http://deb.debian.org jessie InRelease</div><div class="line"># ...... (omit some output here)</div><div class="line">Setting up fortunes (1:1.99.1-7) ...</div><div class="line">Processing triggers for libc-bin (2.19-18+deb8u7) ...</div><div class="line"> ---&gt; 2735abf14761</div><div class="line">Removing intermediate container 619f90d50e91</div><div class="line">Step 4/4 : LABEL maintainer moby-dock@example.com</div><div class="line"> ---&gt; Running in 726074fa125a</div><div class="line"> ---&gt; 5eceabe3da13</div><div class="line">Removing intermediate container 726074fa125a</div><div class="line">Successfully built 5eceabe3da1</div></pre></td></tr></table></figure>
+<p><strong>Get a list of all images</strong> on the computer. In this list, we’ll see our newly created <code>web-server</code> image.</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line">$ docker image ls</div><div class="line">REPOSITORY          TAG                 IMAGE ID            CREATED</div><div class="line"> SIZE</div><div class="line">web-server          1.0                 5eceabe3da13        About a minute ago</div><div class="line"> 203MB</div><div class="line">httpd               2.4                 278cd55ca6c5        4 weeks ago</div><div class="line"> 177MB</div></pre></td></tr></table></figure>
+<h3 id="Running-a-Container-From-a-Custom-Image"><a href="#Running-a-Container-From-a-Custom-Image" class="headerlink" title="Running a Container From a Custom Image"></a>Running a Container From a Custom Image</h3><p>Now we can create a container with the new <code>web-server</code> image.</p>
+<ul>
+<li>Uses the <code>web-server</code> version <code>1.0</code> image</li>
+<li>Maps port <code>80</code> on the host to <code>80</code> on the container.</li>
+</ul>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">$ docker container run --publish 80:80 web-server:1.0</div></pre></td></tr></table></figure>
+<h1 id="Volumes"><a href="#Volumes" class="headerlink" title="Volumes"></a>Volumes</h1><p>Take control of the data in your containers with volumes.</p>
+<h2 id="Concepts-2"><a href="#Concepts-2" class="headerlink" title="Concepts"></a>Concepts</h2><p>If the image you’re building a container with doesn’t already contain application files, you’ll need an extra step to <strong>get them into your container</strong>.</p>
+<ul>
+<li>Copy a file into a container from the command line</li>
+<li>Copy a file into an image with instructions in a Dockerfile</li>
+</ul>
+<p>Now if you’re already got the files then including them in the container from the start works fine, but what about <em>files that aren’t created yet</em> or files that are going to <em>change after the container’s already been started</em>? The problem with <em>just copying files in</em> is the containers <strong>won’t persist data</strong>.<br>As soon as you stop that container from running, all of the data inside of it is gone too and won’t be there when you start it up again.<br><img src="/images/docker/persist-data-problem.png" alt=""></p>
+<p>One way to fix this problem is to use a data volume to <strong>create a connection</strong> between files on our local computer (host) and the filesystem in the container.</p>
+<p><strong>Data volumes expose files on your host machine to the container.</strong><br><img src="/images/docker/volumes.png" alt=""></p>
+<p>That way whenever you stop the container, you can still access that data from inside the container when you start it up again. This is a great option for local development when you want a container to have access to files that you’re working in and that are <em>actively changing</em>.</p>
+<h2 id="Commands-2"><a href="#Commands-2" class="headerlink" title="Commands"></a>Commands</h2><h3 id="Copying-Files-into-a-Running-Container"><a href="#Copying-Files-into-a-Running-Container" class="headerlink" title="Copying Files into a Running Container"></a>Copying Files into a Running Container</h3><p>Here, we’ve got a container that’s already running with the name <code>elegant_noether</code>.</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">$ docker container cp page.html elegant_noether:/usr/local/apache2/htdocs/</div></pre></td></tr></table></figure>
+<p>Notice the order that the commands must be written: First, the path to the file on your host machine, then the container’s ID followed by a colon, then the path to the file in the container.</p>
+<h3 id="Copying-Files-Through-Dockerfile-Instructions"><a href="#Copying-Files-Through-Dockerfile-Instructions" class="headerlink" title="Copying Files Through Dockerfile Instructions"></a>Copying Files Through Dockerfile Instructions</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">COPY page.html /usr/local/apache2/htdocs/</div></pre></td></tr></table></figure>
+<h3 id="Creating-a-Volume"><a href="#Creating-a-Volume" class="headerlink" title="Creating a Volume"></a>Creating a Volume</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div></pre></td><td class="code"><pre><div class="line">$ docker run -d -p 80:80 -v /my-files:/usr/local/apache2/htdocs web-server:1.1</div><div class="line">429c875f14361d356f40e42d645219c6fb3f8c6a53e6dcbc83b5084ff40b26b2</div><div class="line">$ docker container exec -it elegant_noether /bin/bash</div><div class="line">root@429c875f1436:/usr/local/apache2# cd /usr/local/apache2/htdocs</div><div class="line">root@429c875f1436:/usr/local/apache2/htdocs# ls -la</div><div class="line">total 12</div><div class="line">drwxr-xr-x 2 root     root     4096 Apr 19 04:48 .</div><div class="line">drwxr-sr-x 1 www-data www-data 4096 Apr 19 04:50 ..</div><div class="line">-rw-r--r-- 1 root     root      158 Apr 19 04:48 local-file.html</div></pre></td></tr></table></figure>
+<ul>
+<li>Line 1: <strong>Create a link</strong> between the folder <code>/my-files</code> on your host machine and the <code>htdocs</code> folder in the container. This also <strong>runs the container in the background</strong>.</li>
+<li>Line 3: <strong>Get a shell</strong> in the container</li>
+<li>Line 5: This will show us that the container thinks those files on our local machine are inside of it. we’ve created a volume that’s linking those local files to the container!</li>
+</ul>
+
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+
+    <footer class="post-footer">
+      
+
+      
+        
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2017/05/30/spring-boot-web-application/" rel="next" title="[Web] Spring Boot Web Application">
+                <i class="fa fa-chevron-left"></i> [Web] Spring Boot Web Application
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2017/06/11/SSAD-project-practice/" rel="prev" title="系统分析与设计项目实践">
+                系统分析与设计项目实践 <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+          
+          </div>
+          
+
+
+          
+  <div class="comments" id="comments">
+    
+      <div id="disqus_thread">
+        <noscript>
+          Please enable JavaScript to view the
+          <a href="//disqus.com/?ref_noscript">comments powered by Disqus.</a>
+        </noscript>
+      </div>
+    
+  </div>
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap" >
+            Table of Contents
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview">
+            Overview
+          </li>
+        </ul>
+      
+
+      <section class="site-overview sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+          <img class="site-author-image" itemprop="image"
+               src="/images/avatar.png"
+               alt="HYPJUDY" />
+          <p class="site-author-name" itemprop="name">HYPJUDY</p>
+           
+              <p class="site-description motion-element" itemprop="description">What I cannot create, I do not understand.</p>
+          
+        </div>
+        <nav class="site-state motion-element">
+        
+          
+            <div class="site-state-item site-state-posts">
+              <a href="/archives">
+                <span class="site-state-item-count">18</span>
+                <span class="site-state-item-name">posts</span>
+              </a>
+            </div>
+          
+
+          
+
+          
+
+        </nav>
+
+        
+
+        <div class="links-of-author motion-element">
+          
+            
+              <span class="links-of-author-item">
+                <a href="https://github.com/hypjudy" target="_blank" title="GitHub">
+                  
+                    <i class="fa fa-fw fa-github"></i>
+                  
+                  GitHub
+                </a>
+              </span>
+            
+          
+        </div>
+
+        
+        
+
+        
+        
+
+        
+
+
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#Containers-amp-Images"><span class="nav-number">1.</span> <span class="nav-text">Containers & Images</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#Concepts"><span class="nav-number">1.1.</span> <span class="nav-text">Concepts</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#Linux-containers"><span class="nav-number">1.1.1.</span> <span class="nav-text">Linux containers</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Why-Docker"><span class="nav-number">1.1.2.</span> <span class="nav-text">Why Docker?</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#How-Can-Docker-Help-Me"><span class="nav-number">1.1.3.</span> <span class="nav-text">How Can Docker Help Me?</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Containers-amp-Images-1"><span class="nav-number">1.1.4.</span> <span class="nav-text">Containers & Images</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Commands"><span class="nav-number">1.2.</span> <span class="nav-text">Commands</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#Running-a-Container"><span class="nav-number">1.2.1.</span> <span class="nav-text">Running a Container</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Mapping-Ports"><span class="nav-number">1.2.2.</span> <span class="nav-text">Mapping Ports</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Accessing-a-Container"><span class="nav-number">1.2.3.</span> <span class="nav-text">Accessing a Container</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Attaching-a-Shell-to-a-Container"><span class="nav-number">1.2.4.</span> <span class="nav-text">Attaching a Shell to a Container</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Installing-Things-in-Containers"><span class="nav-number">1.2.5.</span> <span class="nav-text">Installing Things in Containers</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Update-the-ENV-in-a-Container"><span class="nav-number">1.2.6.</span> <span class="nav-text">Update the ENV in a Container</span></a></li></ol></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Dockerfiles"><span class="nav-number">2.</span> <span class="nav-text">Dockerfiles</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#Concepts-1"><span class="nav-number">2.1.</span> <span class="nav-text">Concepts</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Commands-1"><span class="nav-number">2.2.</span> <span class="nav-text">Commands</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#Customize-Dockerfile"><span class="nav-number">2.2.1.</span> <span class="nav-text">Customize Dockerfile</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Building-an-Image-From-a-Dockerfile"><span class="nav-number">2.2.2.</span> <span class="nav-text">Building an Image From a Dockerfile</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Running-a-Container-From-a-Custom-Image"><span class="nav-number">2.2.3.</span> <span class="nav-text">Running a Container From a Custom Image</span></a></li></ol></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Volumes"><span class="nav-number">3.</span> <span class="nav-text">Volumes</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#Concepts-2"><span class="nav-number">3.1.</span> <span class="nav-text">Concepts</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Commands-2"><span class="nav-number">3.2.</span> <span class="nav-text">Commands</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#Copying-Files-into-a-Running-Container"><span class="nav-number">3.2.1.</span> <span class="nav-text">Copying Files into a Running Container</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Copying-Files-Through-Dockerfile-Instructions"><span class="nav-number">3.2.2.</span> <span class="nav-text">Copying Files Through Dockerfile Instructions</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Creating-a-Volume"><span class="nav-number">3.2.3.</span> <span class="nav-text">Creating a Volume</span></a></li></ol></li></ol></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright" >
+  
+  &copy;  2016 - 
+  <span itemprop="copyrightYear">2017</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">HYPJUDY</span>
+</div>
+
+
+<div class="powered-by">
+  Powered by <a class="theme-link" href="https://hexo.io">Hexo</a>
+</div>
+
+<div class="theme-info">
+  Theme -
+  <a class="theme-link" href="https://github.com/iissnan/hexo-theme-next">
+    NexT.Mist
+  </a>
+</div>
+
+
+        
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+    
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+  
+  <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+
+  
+  <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+
+  
+  <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+
+  
+  <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.0"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.0"></script>
+
+
+
+  
+  
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.0"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.0"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.0"></script>
+
+
+
+  
+
+
+
+  
+
+    <script type="text/javascript">
+      var disqus_shortname = 'hypjudy';
+      var disqus_identifier = '2017/06/10/try-docker/';
+
+      var disqus_title = "[Web] Try Docker";
+
+
+      function run_disqus_script(disqus_script) {
+        var dsq = document.createElement('script');
+        dsq.type = 'text/javascript';
+        dsq.async = true;
+        dsq.src = '//' + disqus_shortname + '.disqus.com/' + disqus_script;
+        (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+      }
+
+      run_disqus_script('count.js');
+
+      
+        var disqus_config = function () {
+            this.page.url = disqus_url;
+            this.page.identifier = disqus_identifier;
+            this.page.title = disqus_title;
+        };
+        run_disqus_script('embed.js');
+      
+
+    </script>
+  
+
+
+
+
+
+
+
+
+
+
+  
+  
+
+  
+  
+    <script type="text/x-mathjax-config">
+      MathJax.Hub.Config({
+        tex2jax: {
+          inlineMath: [ ['$','$'], ["\\(","\\)"]  ],
+          processEscapes: true,
+          skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+        }
+      });
+    </script>
+
+    <script type="text/x-mathjax-config">
+      MathJax.Hub.Queue(function() {
+        var all = MathJax.Hub.getAllJax(), i;
+        for (i=0; i < all.length; i += 1) {
+          all[i].SourceElement().parentNode.className += ' has-jax';
+        }
+      });
+    </script>
+    <script type="text/javascript" src="//cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+  
+
+
+  
+
+  
+
+  
+
+
+  
+
+</body>
+</html>

@@ -1,0 +1,906 @@
+<!doctype html>
+
+
+
+  
+
+
+<html class="theme-next mist use-motion" lang="en">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
+
+
+
+
+  
+  
+  
+  
+
+  
+    
+    
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+    
+    
+    <link href="//fonts.googleapis.com/css?family=Lato:300,300italic,400,400italic,700,700italic&subset=latin,latin-ext" rel="stylesheet" type="text/css">
+  
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=5.1.0" rel="stylesheet" type="text/css" />
+
+
+  <meta name="keywords" content="Hexo, NexT" />
+
+
+
+
+
+
+
+
+  <link rel="shortcut icon" type="image/x-icon" href="/favicon.png?v=5.1.0" />
+
+
+
+
+
+
+<meta name="description" content="系统分析与设计课程之电影售票与服务系统项目开发实践小结">
+<meta property="og:type" content="article">
+<meta property="og:title" content="系统分析与设计项目实践">
+<meta property="og:url" content="http://yoursite.com/2017/06/11/SSAD-project-practice/index.html">
+<meta property="og:site_name" content="HYPJUDY">
+<meta property="og:description" content="系统分析与设计课程之电影售票与服务系统项目开发实践小结">
+<meta property="og:image" content="http://yoursite.com/images/agile/mindmap-scrum.jpg">
+<meta property="og:image" content="http://yoursite.com/images/agile/mindmap-movie.jpg">
+<meta property="og:updated_time" content="2017-06-11T14:34:09.780Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="系统分析与设计项目实践">
+<meta name="twitter:description" content="系统分析与设计课程之电影售票与服务系统项目开发实践小结">
+<meta name="twitter:image" content="http://yoursite.com/images/agile/mindmap-scrum.jpg">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Mist',
+    sidebar: {"position":"left","display":"hide","offset":12,"offset_float":0,"b2t":false,"scrollpercent":false},
+    fancybox: true,
+    motion: true,
+    duoshuo: {
+      userId: 'undefined',
+      author: 'Author'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":20},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="http://yoursite.com/2017/06/11/SSAD-project-practice/"/>
+
+
+
+
+
+  <title> 系统分析与设计项目实践 | HYPJUDY </title>
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="en">
+
+  
+
+
+
+
+<script>
+  (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+            (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+          m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+  })(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
+  ga('create', 'UA-96132499-1', 'auto');
+  ga('send', 'pageview');
+</script>
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+    
+  
+
+  <div class="container one-collumn sidebar-position-left page-post-detail ">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/"  class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">HYPJUDY</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle">What I cannot create, I do not understand.</p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
+            
+            Home
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
+            
+            Archives
+          </a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2017/06/11/SSAD-project-practice/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="HYPJUDY">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.png">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="HYPJUDY">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                系统分析与设计项目实践
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Posted on</span>
+              
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2017-06-11T16:49:09+08:00">
+                2017-06-11
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+
+          
+            
+              <span class="post-comments-count">
+                <span class="post-meta-divider">|</span>
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-comment-o"></i>
+                </span>
+                <a href="/2017/06/11/SSAD-project-practice/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count disqus-comment-count" data-disqus-identifier="2017/06/11/SSAD-project-practice/" itemprop="commentCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <p><a href="http://ss.sysu.edu.cn/~pml/se305/" target="_blank" rel="external">系统分析与设计课程</a>之<a href="https://github.com/HYPJUDY/movie-ticket-and-service-website" target="_blank" rel="external">电影售票与服务系统项目</a>开发实践小结</p>
+<a id="more"></a>
+<h1 id="Introduction"><a href="#Introduction" class="headerlink" title="Introduction"></a>Introduction</h1><p>敏捷(agile)的面向对象的分析设计方法(OOAD)可以帮助开发者掌握软件开发基本过程，课程倡导的分析设计方法与工具是</p>
+<ul>
+<li>建立<strong>面向客户</strong>、能<strong>快速适应变化</strong>的软件开发迭代过程(iterative process)；</li>
+<li>在系统架构和对象设计中运用<strong>设计模式</strong>(design patterns)，控制并减少软件变化对程序的影响，提升软件的可重用、可维护和可扩展能力。</li>
+<li>使用<strong>软件建模语言</strong>(UML)，提升分析与设计质量，减少团队内部沟通成本；</li>
+</ul>
+<p>基于此，我们尝试进行电影购票与服务网站开发。</p>
+<p>参考书籍<a href="http://www.infoq.com/cn/minibooks/scrum-xp-from-the-trenches" target="_blank" rel="external">Scrum and XP from the Trenches(硝烟中的Scrum和XP)</a>完整地描写了如何进行敏捷软件开发，下图较好地概括了敏捷Scrum项目管理要点：</p>
+<p><img src="/images/agile/mindmap-scrum.jpg" alt="敏捷Scrum项目管理汇总（思维导图）" title="敏捷Scrum项目管理汇总（思维导图）, credit: blog.csdn.net/tantexian" style="margin: auto;"><br><em>注：较大的图片推荐“在新标签页打开图片”，放大阅读。</em></p>
+<p>该书为我们提供了编写产品BACKLOG（产品特性）、制定SPRINT计划等的指导，但我们的项目并不完全按照敏捷Scrum管理。例如在开发初期，我们进行了大量<a href="https://github.com/HYPJUDY/movie-ticket-and-service-website/tree/master/documents" target="_blank" rel="external">UML建模</a>。</p>
+<p>下面就我们的“单身社交与电影智能购票网站”所进行的部分分析设计进行记录。更多关于项目所用技术、迭代周期等可访问<a href="https://github.com/HYPJUDY/movie-ticket-and-service-website" target="_blank" rel="external">GitHub: movie-ticket-and-service-website</a></p>
+<h1 id="项目思维导图"><a href="#项目思维导图" class="headerlink" title="项目思维导图"></a>项目思维导图</h1><p>项目初期通过第一次会议小组成员就项目需求和设计达成共识，现场/会后各自画思维导图，有助于整理思路，相互补充。<br><img src="/images/agile/mindmap-movie.jpg" alt=""></p>
+<h1 id="产品BACKLOG（产品特性）"><a href="#产品BACKLOG（产品特性）" class="headerlink" title="产品BACKLOG（产品特性）"></a>产品BACKLOG（产品特性）</h1><h2 id="我们怎样编写产品BACKLOG"><a href="#我们怎样编写产品BACKLOG" class="headerlink" title="我们怎样编写产品BACKLOG"></a>我们怎样编写产品BACKLOG</h2><p>Reference: <a href="http://www.infoq.com/cn/minibooks/scrum-xp-from-the-trenches" target="_blank" rel="external">硝烟中的Scrum和XP</a></p>
+<p>产品backlog是Scrum的核心，也是一切的起源。从根本上说，它就是一个需求、或故事、或特性等组成的列表，按照重要性的级别进行了排序。它里面包含的是客户想要的东西，并用客户的术语加以描述。我们叫它故事（story），有时候也叫做backlog条目。<br>我们的故事包括这样一些字段：</p>
+<ul>
+<li><strong>ID</strong> 统一标识符。</li>
+<li><strong>Name</strong> 简短的、描述性的故事名。比如“查看你自己的交易明细”。它必须要含义明确，这样开发人员和产品负责人才能大致明白我们说的是什么东西，跟其他故事区分开。它一般由2到10个字组成。</li>
+<li><strong>Importance</strong> 产品负责人评出一个数值，指示这个故事有多重要。例如10或150。分数越高越重要。</li>
+<li><strong>Initial estimate</strong> 团队的初步估算，表示与其他故事相比，完成该故事所需的工作量。最小的单位是故事点（story point），一般大致相当于一个“理想的人天（man-day）”。<ul>
+<li>问一下你的团队，“如果可以投入最适合的人员来完成这个故事（人数要适中，通常为2个），把你们锁到一个屋子里，有很多食物，在完全没有打扰的情况下工作，那么需要几天，才能给出一个经过测试验证，可以交付的完整实现呢？”如果答案是“把3个人关在一起，大约需要4天时间”，那么初始估算的结果就是12个故事点。</li>
+<li>不需要保证这个估值绝对无误（比如两个故事点的故事就应该花两天时间），而是要保证相对的正确性（即，两个点的故事所花费的时间应该是四个点的故事所需的一半）</li>
+</ul>
+</li>
+<li><strong>How to demo</strong> 它大略描述了这个故事应该如何在sprint 演示上进行示范，本质就是一个简单的测试规范。“先这样做，然后那样做，就应该得到……的结果”。</li>
+<li><strong>Notes</strong> 相关信息、解释说明和对其它资料的引用等等。一般都非常简短</li>
+</ul>
+<h2 id="我们的产品BACKLOG"><a href="#我们的产品BACKLOG" class="headerlink" title="我们的产品BACKLOG"></a>我们的产品BACKLOG</h2><table>
+<thead>
+<tr>
+<th style="text-align:center">ID</th>
+<th style="text-align:center">Name</th>
+<th style="text-align:center">Imp</th>
+<th style="text-align:center">Est</th>
+<th>How to demo</th>
+<th>Notes</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:center"><strong>1</strong></td>
+<td style="text-align:center">购票</td>
+<td style="text-align:center">100</td>
+<td style="text-align:center">14</td>
+<td>登录，打开正在上映电影列表，选择想看的电影，选择所在地区，选择影院，转到选择座位界面，选择座位，点击购票，确认付款，跳转至购票成功界面，可点击查看我的电影票详情</td>
+<td>需要UML顺序图。目前不需要考虑付款的问题。要考虑座位表如何呈现和选择</td>
+</tr>
+<tr>
+<td style="text-align:center"><strong>2</strong></td>
+<td style="text-align:center">电影推荐</td>
+<td style="text-align:center">50</td>
+<td style="text-align:center">8</td>
+<td>进入网站首页，点击“发现电影”，看到根据个人口味（如浏览历史、观看记录、兴趣爱好等）生成的个性推荐电影列表。包括不同电影类型、导演、演员、语言、时代等分类</td>
+<td>使用分页技术避免大规模的数据库查询。和看电影资讯的设计相似</td>
+</tr>
+<tr>
+<td style="text-align:center"><strong>3</strong></td>
+<td style="text-align:center">邻座交友</td>
+<td style="text-align:center">40</td>
+<td style="text-align:center">10</td>
+<td>单人购票，进入选座界面，点击购票张数为一张，座位表中自动标识出其他已购单人票且尚未匹配的异性旁边的座位推荐选座，并可点击查看他们主动留下的交友信息。若选择不相邻空位，弹出是否愿意留下交友信息选项，可选择留下社交信息。若选择相邻座位，社交信息自动保存至个人购票记录中。</td>
+<td>暂不考虑复杂的社交信息界面，设计合理的交友模式作为亮点</td>
+</tr>
+<tr>
+<td style="text-align:center"><strong>4</strong></td>
+<td style="text-align:center">看电影资讯</td>
+<td style="text-align:center">45</td>
+<td style="text-align:center">8</td>
+<td>进入电影首页，看到滚动的电影资讯头条画报。下拉看到即将上映和正在热映的电影预告片。再下拉看到经典电影、分类电影的图片和一句简短的介绍。点击后都转入详情页，看到更详细的资讯例如看资讯、预告片、影评、演员资料照片等等</td>
+<td>考虑用豆瓣API获取信息</td>
+</tr>
+</tbody>
+</table>
+<h1 id="Personal-Software-Process-PSP"><a href="#Personal-Software-Process-PSP" class="headerlink" title="Personal Software Process (PSP)"></a>Personal Software Process (PSP)</h1><h2 id="PSP各项指标及技能要求"><a href="#PSP各项指标及技能要求" class="headerlink" title="PSP各项指标及技能要求"></a>PSP各项指标及技能要求</h2><p>PSP软件开发的工作量和质量的衡量工具，通过记录工程师实现需求的时间来计算效率。（具体可参考<a href="http://www.cnblogs.com/xinz/archive/2011/10/22/2220872.html" target="_blank" rel="external">现代软件工程讲义</a>）<br>下表第三列统计了项目全过程的PSP各指标的时间花费比例（第三列）。</p>
+<table>
+<thead>
+<tr>
+<th>PSP2.1</th>
+<th>Personal Software Process Stages</th>
+<th>Time (%)</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>Planning</strong></td>
+<td><strong>计划</strong></td>
+<td><strong>6</strong></td>
+</tr>
+<tr>
+<td>Estimate</td>
+<td>估计这个任务需要多少时间</td>
+<td>6</td>
+</tr>
+<tr>
+<td><strong>Development</strong></td>
+<td><strong>开发</strong></td>
+<td><strong>80</strong></td>
+</tr>
+<tr>
+<td>Analysis</td>
+<td>需求分析</td>
+<td>8</td>
+</tr>
+<tr>
+<td>Design Spec</td>
+<td>生成设计文档</td>
+<td>6</td>
+</tr>
+<tr>
+<td>Design Review</td>
+<td>设计复审 (和同事审核设计文档)</td>
+<td>4</td>
+</tr>
+<tr>
+<td>Coding Standard</td>
+<td>代码规范 (为目前的开发制定合适的规范)</td>
+<td>2</td>
+</tr>
+<tr>
+<td>Design</td>
+<td>具体设计</td>
+<td>10</td>
+</tr>
+<tr>
+<td>Coding</td>
+<td>具体编码</td>
+<td>32</td>
+</tr>
+<tr>
+<td>Code Review</td>
+<td>代码复审</td>
+<td>8</td>
+</tr>
+<tr>
+<td>Test</td>
+<td>测试（自我测试，修改代码，提交修改）</td>
+<td>10</td>
+</tr>
+<tr>
+<td><strong>Reporting</strong></td>
+<td><strong>报告</strong></td>
+<td><strong>14</strong></td>
+</tr>
+<tr>
+<td>Record Time Spent</td>
+<td>记录时间花费</td>
+<td>1</td>
+</tr>
+<tr>
+<td>Test Report</td>
+<td>测试报告</td>
+<td>2</td>
+</tr>
+<tr>
+<td>Size Measurement</td>
+<td>计算工作量</td>
+<td>1</td>
+</tr>
+<tr>
+<td>Postmortem</td>
+<td>事后总结</td>
+<td>8</td>
+</tr>
+<tr>
+<td>Process Improvement Plan</td>
+<td>提出过程改进计划</td>
+<td>2</td>
+</tr>
+</tbody>
+</table>
+<h2 id="如何统计每项数据"><a href="#如何统计每项数据" class="headerlink" title="如何统计每项数据"></a>如何统计每项数据</h2><h3 id="Time-Measures"><a href="#Time-Measures" class="headerlink" title="Time Measures"></a>Time Measures</h3><p>参考<a href="http://www.cnblogs.com/jans2002/archive/2007/07/21/826962.html" target="_blank" rel="external">个体软件过程PSP之时间管理</a></p>
+<ol>
+<li>时间管理的逻辑原理<ul>
+<li>为了制定切实可行的计划，必须<strong>对所用的时间进行跟踪</strong>。</li>
+<li>为了检查时间估计和计划的准确性，必须把它们<strong>写成文档</strong>并在今后与实际情况进行比较。</li>
+<li>为了制定出更准确的计划，需要知道以前的计划中存在哪些错误，哪些地方可以进行改进。当按照计划进行工作时，<strong>记录下所花费的时间</strong>。通过<strong>比较</strong>文档化的计划和实际的结果，就可以发现计划中存在哪些错误以及如何改进做计划的过程。制定准确计划的关键就是要坚持制定计划，并把每个计划与实际结果相比较，然后就会知道如何才能制定出更好的计划。</li>
+<li>为了管理好时间，首先制定<strong>时间分配计划</strong>，然后<strong>按照计划去做</strong>。</li>
+<li>按照计划进行工作有三点好处：<ul>
+<li>了解计划存在哪些问题，有助于更好的计划下一个项目。</li>
+<li>按照好的计划完成工作。这看起来不重要，但是事实上软件工程中的许多错误都是由于考虑不周、粗心大意或是不注意的小细节而造成的，按照好的计划工作是避免这些错误的最好途径。</li>
+<li>改变你的工作方式，有了计划就不用浪费时间去考虑下一步要干什么，它会帮助你把精力集中在所中的事情上，很少分心，从而提高了工作效率。</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>了解时间的使用情况<ul>
+<li><strong>将主要活动分类。</strong></li>
+<li><strong>记录每项主要活动所花费的时间。</strong>坚持记录时间需要很强的自我约束能力，要想进行精确的记录，必须记录下每件主要工作开始和结束的时间。</li>
+<li><strong>用标准的方法记录时间。必须使用标准的时间日志。</strong>因为需要采集的时间数据的数量增加得很快，如果不认真记录和存储这些数据，它们很可能丢失或变得混乱，这样很不利于查找或对它们进行解释。</li>
+<li><strong>以分钟为测量单位。</strong>工程师在完成任务中不间断工作的时间一般都少于1小时，因此以小时为单位对工作时间进行测量不能提供用以计划和管理工作所需要的详细数据，而用分钟跟踪时间容易得多。一旦决定进行时间跟踪，用分钟作为测量单位将比用小时更恰当。</li>
+<li><strong>处理中断时间。</strong>一个常见的问题就是中断。电话、聊天、偶尔的烦恼以及必要的休息打断的次数多得令人吃惊。中断的时间不是有效的工作时间，并且变化幅度很大，如果不对它进行测量，实际上就在时间记录中加入了一个随机数，也就很难使用时间数据来计划和管理时间了。事件日志中的数据能帮助你了解工作被打断的频率。多数中断不仅浪费时间，还会打断你的思路，导致效率降低和错误的产生，因此了解被打断的频率有助于提高工作的质量和效率。</li>
+<li><strong>将时间数据保存在合适的地方。</strong>记录时间花费情况值得推荐的方法就是用工程记事本来记录时间以及其他的事情。对一个软件专业人员，工程记事本用途很多，可以记录时间日志、程序设计方案以及运算结果，可以作为你所遵循正确的工程实施方案的凭证，可以记录下脑子里面一闪而过的想法。推荐的方法是从工程记事本的第一页开始向后记录主要活动及其所花费的时间，最后一页开始向前记录时间日志。</li>
+<li><strong>周活动总结表。</strong>通过采用时间日志收集时间数据后，你就能渐渐明白自己是如何支配时间的。但是时间日志中的数据过于详细，需要用一种更有用的表格来总结这些数据，周活动总结表能够很好的完成这个任务。当然我们关心的时间不会只有一周这么短，还需要一段时间内在各类任务上花费的平均时间、最大时间和最小时间。</li>
+<li><strong>记录时间的提示。</strong>随时准备好工程记事本；当偶尔忘了记录开始时间、结束事件或中断时间，凭记忆尽早作出估计；及时总结记录的时间数据。</li>
+</ul>
+</li>
+</ol>
+<h3 id="Size-Measures"><a href="#Size-Measures" class="headerlink" title="Size Measures"></a>Size Measures</h3><p>表格中还有计算工作量的要求。根据<a href="http://www.sei.cmu.edu/reports/00tr022.pdf" target="_blank" rel="external">PSP文档</a>，首先要计算计划开发的产品的工作量，完成后再估计生产出的产品的工作量。代码行数（LOC）是主要的衡量指标。还可记录LOC的类别（Size Categories）用以跟踪程序工作量是如何随着开发变化的。类别包括基础的、新增的、修改的、删除的、重用的、总的代码行数。</p>
+
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+
+    <footer class="post-footer">
+      
+
+      
+        
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2017/06/10/try-docker/" rel="next" title="[Web] Try Docker">
+                <i class="fa fa-chevron-left"></i> [Web] Try Docker
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+          
+          </div>
+          
+
+
+          
+  <div class="comments" id="comments">
+    
+      <div id="disqus_thread">
+        <noscript>
+          Please enable JavaScript to view the
+          <a href="//disqus.com/?ref_noscript">comments powered by Disqus.</a>
+        </noscript>
+      </div>
+    
+  </div>
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap" >
+            Table of Contents
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview">
+            Overview
+          </li>
+        </ul>
+      
+
+      <section class="site-overview sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+          <img class="site-author-image" itemprop="image"
+               src="/images/avatar.png"
+               alt="HYPJUDY" />
+          <p class="site-author-name" itemprop="name">HYPJUDY</p>
+           
+              <p class="site-description motion-element" itemprop="description">What I cannot create, I do not understand.</p>
+          
+        </div>
+        <nav class="site-state motion-element">
+        
+          
+            <div class="site-state-item site-state-posts">
+              <a href="/archives">
+                <span class="site-state-item-count">18</span>
+                <span class="site-state-item-name">posts</span>
+              </a>
+            </div>
+          
+
+          
+
+          
+
+        </nav>
+
+        
+
+        <div class="links-of-author motion-element">
+          
+            
+              <span class="links-of-author-item">
+                <a href="https://github.com/hypjudy" target="_blank" title="GitHub">
+                  
+                    <i class="fa fa-fw fa-github"></i>
+                  
+                  GitHub
+                </a>
+              </span>
+            
+          
+        </div>
+
+        
+        
+
+        
+        
+
+        
+
+
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#Introduction"><span class="nav-number">1.</span> <span class="nav-text">Introduction</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#项目思维导图"><span class="nav-number">2.</span> <span class="nav-text">项目思维导图</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#产品BACKLOG（产品特性）"><span class="nav-number">3.</span> <span class="nav-text">产品BACKLOG（产品特性）</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#我们怎样编写产品BACKLOG"><span class="nav-number">3.1.</span> <span class="nav-text">我们怎样编写产品BACKLOG</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#我们的产品BACKLOG"><span class="nav-number">3.2.</span> <span class="nav-text">我们的产品BACKLOG</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Personal-Software-Process-PSP"><span class="nav-number">4.</span> <span class="nav-text">Personal Software Process (PSP)</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#PSP各项指标及技能要求"><span class="nav-number">4.1.</span> <span class="nav-text">PSP各项指标及技能要求</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#如何统计每项数据"><span class="nav-number">4.2.</span> <span class="nav-text">如何统计每项数据</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#Time-Measures"><span class="nav-number">4.2.1.</span> <span class="nav-text">Time Measures</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Size-Measures"><span class="nav-number">4.2.2.</span> <span class="nav-text">Size Measures</span></a></li></ol></li></ol></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright" >
+  
+  &copy;  2016 - 
+  <span itemprop="copyrightYear">2017</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">HYPJUDY</span>
+</div>
+
+
+<div class="powered-by">
+  Powered by <a class="theme-link" href="https://hexo.io">Hexo</a>
+</div>
+
+<div class="theme-info">
+  Theme -
+  <a class="theme-link" href="https://github.com/iissnan/hexo-theme-next">
+    NexT.Mist
+  </a>
+</div>
+
+
+        
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+    
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+  
+  <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+
+  
+  <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+
+  
+  <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+
+  
+  <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.0"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.0"></script>
+
+
+
+  
+  
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.0"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.0"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.0"></script>
+
+
+
+  
+
+
+
+  
+
+    <script type="text/javascript">
+      var disqus_shortname = 'hypjudy';
+      var disqus_identifier = '2017/06/11/SSAD-project-practice/';
+
+      var disqus_title = "系统分析与设计项目实践";
+
+
+      function run_disqus_script(disqus_script) {
+        var dsq = document.createElement('script');
+        dsq.type = 'text/javascript';
+        dsq.async = true;
+        dsq.src = '//' + disqus_shortname + '.disqus.com/' + disqus_script;
+        (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+      }
+
+      run_disqus_script('count.js');
+
+      
+        var disqus_config = function () {
+            this.page.url = disqus_url;
+            this.page.identifier = disqus_identifier;
+            this.page.title = disqus_title;
+        };
+        run_disqus_script('embed.js');
+      
+
+    </script>
+  
+
+
+
+
+
+
+
+
+
+
+  
+  
+
+  
+  
+    <script type="text/x-mathjax-config">
+      MathJax.Hub.Config({
+        tex2jax: {
+          inlineMath: [ ['$','$'], ["\\(","\\)"]  ],
+          processEscapes: true,
+          skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+        }
+      });
+    </script>
+
+    <script type="text/x-mathjax-config">
+      MathJax.Hub.Queue(function() {
+        var all = MathJax.Hub.getAllJax(), i;
+        for (i=0; i < all.length; i += 1) {
+          all[i].SourceElement().parentNode.className += ' has-jax';
+        }
+      });
+    </script>
+    <script type="text/javascript" src="//cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+  
+
+
+  
+
+  
+
+  
+
+
+  
+
+</body>
+</html>
