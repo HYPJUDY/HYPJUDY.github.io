@@ -114,7 +114,7 @@
 <meta property="og:image" content="http://yoursite.com/images/reg-classification-kaggle/multiprocess-parallel-time.gif">
 <meta property="og:image" content="http://yoursite.com/images/reg-classification-kaggle/logistic-regression-gradient-ascent-acc.gif">
 <meta property="og:image" content="http://yoursite.com/images/reg-classification-kaggle/logistic-regression-gradient-ascent-time.gif">
-<meta property="og:updated_time" content="2017-06-23T07:55:44.952Z">
+<meta property="og:updated_time" content="2017-06-23T08:28:10.619Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="[数据挖掘] 回归和分类Kaggle实战">
 <meta name="twitter:description" content="详细探讨解决Kaggle上某回归/分类比赛的全过程。包括用线性回归之梯度下降法/正规方程法（MATLAB）、神经网络之多层感知器（TensorFlow）、最近邻（scikit-learn）进行回归预测和用逻辑回归之梯度上升法（Python）、梯度提升决策树（XGBoost）进行分类预测。读者将理解线性回归和逻辑回归的原理/实现、其他框架的使用/调参，以及如何利用Python的多进程对逻辑回归的运算">
@@ -357,10 +357,10 @@
 <p>★<a href="https://github.com/HYPJUDY/regression-classification-kaggle" target="_blank" rel="external"><strong>Source codes</strong></a></p>
 <h1 id="目录-Table-of-Contents"><a href="#目录-Table-of-Contents" class="headerlink" title="目录(Table of Contents)"></a>目录(Table of Contents)</h1><p><em>请点击页面右下角的小图标查看详细目录</em></p>
 <ol>
-<li>目录(Table of Contents)</li>
-<li>回归(Regression)<br>2.1. 数据(Data)<br>2.2. 度量标准(Evaluation)<br>2.3. 线性回归(linear regression)<br>2.3.1. 线性模型(linear model)<br>2.3.2. 线性回归(linear regression)<br>2.3.3. 梯度下降法(Gradient Descent)<br>2.3.4. 正规方程(Normal Equation)<br>2.4. 多层感知器(Multi-layer Perceptron, MLP)<br>2.5. scikit-learn和最近邻(KNN)<br>2.6. 各回归方法对比</li>
-<li>分类(Classification)<br>3.1. 数据(Data)<br>3.2. 度量标准(Evaluation)<br>3.3. 逻辑回归(Logistic Regression)<br>3.3.1. Hypothesis Representation<br>3.3.2. 梯度上升法<br>3.3.3. 梯度下降法<br>3.3.4. 梯度法分类及实现<br>3.3.5. 并行化<br>3.3.6. 结果及比较<br>3.4. GBDT之XGBoost</li>
-<li>Reference &amp; Futher Reading</li>
+<li><a href="#目录-Table-of-Contents">目录(Table of Contents)</a></li>
+<li><a href="#回归-Regression">回归(Regression)</a><br>2.1. <a href="#数据-Data">数据(Data)</a><br>2.2. <a href="#度量标准-Evaluation">度量标准(Evaluation)</a><br>2.3. <a href="#线性回归-linear-regression">线性回归(linear regression)</a><br>2.3.1. <a href="#线性模型-linear-model">线性模型(linear model)</a><br>2.3.2. <a href="#线性回归-linear-regression-1">线性回归(linear regression)</a><br>2.3.3. <a href="#梯度下降法-Gradient-Descent">梯度下降法(Gradient Descent)</a><br>2.3.4. <a href="#正规方程-Normal-Equation">正规方程(Normal Equation)</a><br>2.4. <a href="#多层感知器-Multi-layer-Perceptron-MLP">多层感知器(Multi-layer Perceptron, MLP)</a><br>2.5. <a href="#最近邻之scikit-learn">最近邻之scikit-learn</a><br>2.6. <a href="#各回归方法对比">各回归方法对比</a></li>
+<li><a href="#分类-Classification">分类(Classification)</a><br>3.1. <a href="#数据-Data-1">数据(Data)</a><br>3.2. <a href="#度量标准-Evaluation-1">度量标准(Evaluation)</a><br>3.3. <a href="#逻辑回归-Logistic-Regression">逻辑回归(Logistic Regression)</a><br>3.3.1. <a href="#Hypothesis-Representation">Hypothesis Representation</a><br>3.3.2. <a href="#梯度上升法">梯度上升法</a><br>3.3.3. <a href="#梯度下降法">梯度下降法</a><br>3.3.4. <a href="#梯度法分类及实现">梯度法分类及实现</a><br>3.3.5. <a href="#并行化">并行化</a><br>3.3.6. <a href="#结果及比较">结果及比较</a><br>3.4. <a href="#GBDT之XGBoost">GBDT之XGBoost</a></li>
+<li><a href="#Reference-amp-Futher-Reading">Reference &amp; Futher Reading</a></li>
 </ol>
 <h1 id="回归-Regression"><a href="#回归-Regression" class="headerlink" title="回归(Regression)"></a>回归(Regression)</h1><blockquote>
 <p>Predicting a <strong>continuous-valued</strong> attribute (continuous labels) associated with an object.</p>
@@ -475,28 +475,7 @@
 <figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">X_train, X_test, y_train, y_test = train_test_split(\</div><div class="line">    train_features, train_labels, test_size=<span class="number">0.3</span>, random_state=<span class="number">0</span>)</div><div class="line"><span class="keyword">print</span> knn.fit(X_train, y_train).score(X_test, y_test)</div></pre></td></tr></table></figure>
 <p>在训练集数据量不是很大或者想获得更均匀准确的估测结果的情况下，可以使用交叉验证（缺点是耗时相对长）：</p>
 <figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">scores = cross_val_score(knn, train_features, train_labels, \</div><div class="line">    cv=<span class="number">10</span>, scoring=<span class="string">'neg_mean_squared_error'</span>)</div><div class="line"><span class="keyword">print</span> (scores, np.sqrt(np.abs(scores.mean()))) <span class="comment"># RMSE</span></div></pre></td></tr></table></figure>
-<h3 id="Trick"><a href="#Trick" class="headerlink" title="Trick"></a>Trick</h3><p>从提交结果看，nn(k=1)和2nn(k=2)的结果最好，相差0.01.下面采用的Trick姑且称为杂交优势：</p>
-<table>
-<thead>
-<tr>
-<th><strong>knn</strong></th>
-<th>2nn</th>
-<th>nn</th>
-<th>$0.5*nn+0.5*2nn$</th>
-<th>$0.6*nn+0.4*2nn$</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td><strong>score</strong></td>
-<td>0.27622</td>
-<td>0.26200</td>
-<td>0.24697</td>
-<td>0.24635</td>
-</tr>
-</tbody>
-</table>
-<p>这种方法确实有偶然性，但也是有依据的：赋予不同距离的邻居不同的权重。设最近的邻居为$f$，第二近的邻居为$s$，由于前面采用的是默认的<code>weights=&#39;uniform&#39;</code>即全部邻居全部相同权重，可以看做$2nn=(f+s)*0.5$，因此下面这个例子可以拆分成<br>$$0.6*nn+0.4*2nn=0.6*(f)+0.4*(f+s)*0.5=0.8*f+0.2*s$$ 也就是以4:1的权重来对待$f$和$s$，相当于自定义了<code>weights</code>.</p>
+<h3 id="Trick"><a href="#Trick" class="headerlink" title="Trick"></a>Trick</h3><p>自定义<code>weights</code>.</p>
 <h2 id="各回归方法对比"><a href="#各回归方法对比" class="headerlink" title="各回归方法对比"></a>各回归方法对比</h2><div class="group-picture"><div class="group-picture-container"><div class="group-picture-row"><div class="group-picture-column" style="width: 100%;"><img src="/images/reg-classification-kaggle/regression-score.gif" alt=""></div></div><div class="group-picture-row"></div></div></div>
 <div class="group-picture"><div class="group-picture-container"><div class="group-picture-row"><div class="group-picture-column" style="width: 100%;"><img src="/images/reg-classification-kaggle/regression-time.gif" alt=""></div></div><div class="group-picture-row"></div></div></div>
 <p><strong>结论：</strong>线性回归方法误差过高，淘汰；KNN又快又准，胜出；神经网络再接再厉，兴可推前浪。</p>
